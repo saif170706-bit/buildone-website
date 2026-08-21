@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Studio Blossom – Frisørsalon i Aarhus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--blush:#f3e8e2;--charcoal:#252220;--warm:#faf8f5;--accent:#c4956a;--sage:#8a9e84;--border:#e5dad2;--muted:#8a7d74}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Josefin Sans',sans-serif;background:var(--warm);color:var(--charcoal);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Lora',serif;line-height:1.15}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{cursor:pointer;font-family:'Josefin Sans',sans-serif}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 4rem;transition:background .3s,padding .3s}
+#nav.solid{background:rgba(37,34,32,.97);padding:1rem 4rem}
+.nav-logo{font-family:'Lora',serif;font-size:1.3rem;font-style:italic;color:#fff;cursor:pointer}
+.nav-links{display:flex;gap:2.5rem;align-items:center}
+.nav-link{color:rgba(255,255,255,.8);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:color .2s}
+.nav-link:hover{color:var(--accent)}
+.nav-phone{color:var(--accent);font-size:.78rem;font-weight:600;letter-spacing:.06em}
+.nav-book{background:var(--accent);color:#fff;border:none;padding:.6rem 1.5rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;transition:background .2s}
+.nav-book:hover{background:#a87a52}
+.nav-burger{display:none;background:none;border:none;color:#fff;font-size:1.4rem}
+
+/* HERO — split layout */
+.hero-split{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative}
+.hero-left{background:var(--blush);display:flex;flex-direction:column;justify-content:center;padding:8rem 5rem 6rem;position:relative;z-index:1}
+.hero-left::after{content:'';position:absolute;top:0;right:-80px;bottom:0;width:120px;background:var(--blush);clip-path:polygon(0 0,0 100%,100% 100%);z-index:2}
+.hero-tag{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:2rem}
+h1.hero-h1{font-family:'Lora',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:400;color:var(--charcoal);line-height:1.15;margin-bottom:1.5rem}
+h1.hero-h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{font-size:.9rem;color:var(--muted);line-height:1.8;max-width:360px;margin-bottom:2.5rem;letter-spacing:.02em}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-dark{background:var(--charcoal);color:#fff;border:none;padding:.85rem 2rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;transition:background .2s}
+.btn-dark:hover{background:var(--accent)}
+.btn-outline-dark{background:none;color:var(--charcoal);border:1.5px solid var(--charcoal);padding:.85rem 2rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;transition:all .2s}
+.btn-outline-dark:hover{border-color:var(--accent);color:var(--accent)}
+.hero-right{position:relative;overflow:hidden}
+.hero-right img{width:100%;height:100%;object-fit:cover;min-height:100vh}
+.hero-right::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(243,232,226,.3) 0%,transparent 50%);z-index:1}
+.hero-badge{position:absolute;bottom:3rem;left:3rem;z-index:2;background:rgba(255,255,255,.92);padding:1.25rem 1.75rem;backdrop-filter:blur(8px)}
+.hero-badge-num{font-family:'Lora',serif;font-size:1.8rem;color:var(--accent);display:block}
+.hero-badge-label{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* SERVICES STRIP — diagonal */
+.services-strip{background:var(--charcoal);padding:7rem 4rem;clip-path:polygon(0 3rem,100% 0,100% calc(100% - 3rem),0 100%);margin:-3rem 0;position:relative;z-index:2}
+.services-inner{max-width:1100px;margin:0 auto}
+.strip-heading{text-align:center;margin-bottom:4rem;color:#fff}
+.strip-heading .tag{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.strip-heading h2{font-size:2.5rem;font-weight:400}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.svc-card{background:rgba(255,255,255,.04);padding:2.5rem 2rem;border:1px solid rgba(196,149,106,.15);transition:all .3s;position:relative;overflow:hidden}
+.svc-card::before{content:'';position:absolute;bottom:0;left:0;height:3px;width:0;background:var(--accent);transition:width .4s}
+.svc-card:hover::before{width:100%}
+.svc-card:hover{background:rgba(196,149,106,.08)}
+.svc-num{font-family:'Lora',serif;font-size:3rem;color:rgba(196,149,106,.2);font-style:italic;display:block;margin-bottom:.5rem}
+.svc-name{font-family:'Lora',serif;font-size:1.35rem;color:#fff;margin-bottom:.75rem}
+.svc-desc{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:1.5rem;letter-spacing:.02em}
+.svc-price{color:var(--accent);font-size:.8rem;letter-spacing:.08em}
+.svc-price span{font-family:'Lora',serif;font-size:1.3rem;margin-right:.25rem}
+
+/* GALLERY — overlapping mosaic */
+.gallery-section{background:var(--warm);padding:8rem 4rem}
+.gallery-inner{max-width:1100px;margin:0 auto}
+.gallery-header{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:4rem}
+.gallery-header h2{font-size:2.75rem;font-weight:400;color:var(--charcoal)}
+.gallery-header p{font-size:.88rem;color:var(--muted);line-height:1.8;letter-spacing:.02em}
+.gallery-mosaic{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(3,200px);gap:12px}
+.gp{overflow:hidden}
+.gp img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.gp:hover img{transform:scale(1.04)}
+.gp1{grid-column:1/6;grid-row:1/3}
+.gp2{grid-column:6/9;grid-row:1/2}
+.gp3{grid-column:9/13;grid-row:1/3}
+.gp4{grid-column:6/9;grid-row:2/4}
+.gp5{grid-column:1/5;grid-row:3/4}
+.gp6{grid-column:9/13;grid-row:3/4}
+
+/* TEAM */
+.team-section{background:var(--blush);padding:7rem 4rem;position:relative}
+.team-section::before{content:'';position:absolute;top:0;left:0;right:0;height:60px;background:var(--warm);clip-path:polygon(0 0,100% 0,100% 100%,0 0)}
+.team-inner{max-width:1100px;margin:0 auto}
+.team-header{text-align:center;margin-bottom:4rem}
+.team-header h2{font-size:2.5rem;font-weight:400;color:var(--charcoal);margin-bottom:.75rem}
+.team-header p{font-size:.85rem;color:var(--muted);letter-spacing:.04em}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
+.tc{text-align:center}
+.tc-img{position:relative;margin-bottom:1.5rem}
+.tc-img img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top}
+.tc-tag{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;padding:.35rem 1rem;white-space:nowrap}
+.tc h4{font-family:'Lora',serif;font-size:1.25rem;font-weight:400;color:var(--charcoal);margin-bottom:.25rem}
+.tc p{font-size:.78rem;color:var(--muted);letter-spacing:.06em}
+.tc-spec{font-size:.72rem;color:var(--accent);margin-top:.5rem;letter-spacing:.06em}
+
+/* BOOKING */
+.booking-section{background:var(--warm);padding:7rem 4rem}
+.booking-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.booking-text h2{font-size:2.5rem;font-weight:400;color:var(--charcoal);margin-bottom:1.25rem}
+.booking-text p{font-size:.88rem;color:var(--muted);line-height:1.8;margin-bottom:2rem;letter-spacing:.02em}
+.booking-perks{list-style:none;display:flex;flex-direction:column;gap:.85rem}
+.booking-perks li{display:flex;align-items:center;gap:.75rem;font-size:.82rem;color:var(--charcoal);letter-spacing:.04em}
+.booking-perks li::before{content:'✓';color:var(--accent);font-weight:700;flex-shrink:0}
+.booking-form{background:#fff;padding:2.5rem;border:1px solid var(--border)}
+.booking-form h3{font-family:'Lora',serif;font-size:1.35rem;margin-bottom:1.75rem;color:var(--charcoal)}
+.fg{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.25rem}
+.fg label{font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.fg input,.fg select,.fg textarea{border:1px solid var(--border);background:var(--warm);padding:.8rem 1rem;font-size:.85rem;outline:none;transition:border .2s;font-family:'Josefin Sans',sans-serif;color:var(--charcoal);width:100%}
+.fg input:focus,.fg select:focus{border-color:var(--accent)}
+.form-2col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+#book-thanks{display:none;text-align:center;padding:2rem 0}
+#book-thanks h3{font-family:'Lora',serif;font-size:1.75rem;color:var(--charcoal);margin-bottom:1rem}
+#book-thanks p{font-size:.85rem;color:var(--muted);line-height:1.8}
+
+/* REVIEWS */
+.reviews-section{background:var(--charcoal);padding:7rem 4rem}
+.reviews-inner{max-width:1100px;margin:0 auto}
+.reviews-heading{text-align:center;margin-bottom:4rem;color:#fff}
+.reviews-heading h2{font-size:2.5rem;font-weight:400}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.rv-card{background:rgba(255,255,255,.05);padding:2rem;border-top:2px solid var(--accent)}
+.rv-stars{color:var(--accent);font-size:.9rem;margin-bottom:1rem;letter-spacing:.1em}
+.rv-text{font-size:.85rem;color:rgba(255,255,255,.65);line-height:1.8;font-style:italic;margin-bottom:1.25rem}
+.rv-who{font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:.08em;text-transform:uppercase}
+
+/* FOOTER */
+footer{background:#111;padding:3rem 4rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;align-items:center}
+.footer-brand-col .logo{font-family:'Lora',serif;font-size:1.2rem;font-style:italic;color:#fff;margin-bottom:.5rem}
+.footer-brand-col p{font-size:.75rem;color:rgba(255,255,255,.3);line-height:1.6}
+.footer-nav{display:flex;flex-direction:column;gap:.75rem}
+.footer-nav a{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);transition:color .2s;cursor:pointer}
+.footer-nav a:hover{color:var(--accent)}
+.footer-contact{display:flex;flex-direction:column;gap:.75rem}
+.footer-contact a{font-size:.82rem;color:rgba(255,255,255,.6)}
+.footer-contact a:hover{color:var(--accent)}
+.footer-cvr{font-size:.68rem;color:rgba(255,255,255,.2);margin-top:1rem}
+
+/* COOKIE */
+#ckBanner{position:fixed;bottom:0;left:0;right:0;z-index:900;background:#fff;border-top:1px solid var(--border);transform:translateY(110%);transition:transform .5s cubic-bezier(.4,0,.2,1);box-shadow:0 -4px 30px rgba(0,0,0,.08)}
+#ckBanner.show{transform:translateY(0)}
+.ck-inner{max-width:1200px;margin:0 auto;padding:1.25rem 2rem;display:flex;gap:2rem;align-items:center;flex-wrap:wrap}
+.ck-text{flex:1;font-size:.82rem;color:var(--muted);line-height:1.6;letter-spacing:.02em}
+.ck-acts{display:flex;gap:.75rem;flex-shrink:0;flex-wrap:wrap}
+.ck-btn{padding:.6rem 1.25rem;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;transition:all .2s}
+.ck-btn:hover{border-color:var(--accent);color:var(--accent)}
+.ck-btn.pri{background:var(--charcoal);color:#fff;border-color:var(--charcoal)}
+.ck-btn.pri:hover{background:var(--accent);border-color:var(--accent)}
+#ckPanel{display:none;border-top:1px solid var(--border);padding:1.25rem 2rem;max-width:1200px;margin:0 auto}
+.ck-cats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-bottom:1rem}
+.ck-cat label{font-size:.75rem;font-weight:600;display:flex;align-items:center;gap:.5rem;cursor:pointer}
+.ck-cat p{font-size:.7rem;color:var(--muted);margin-top:.2rem;margin-left:1.6rem}
+
+/* SCROLL-TO-TOP */
+#stt{position:fixed;bottom:2rem;right:2rem;z-index:400;width:44px;height:44px;background:var(--accent);border:none;opacity:0;pointer-events:none;transition:opacity .3s;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem}
+#stt.vis{opacity:1;pointer-events:auto}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.rv.in{opacity:1;transform:none}
+.rv2{transition-delay:.12s}.rv3{transition-delay:.24s}.rv4{transition-delay:.36s}
+
+/* CREDIT */
+.credit{position:fixed;bottom:1rem;left:1rem;z-index:400;background:rgba(37,34,32,.85);color:rgba(255,255,255,.5);font-size:.6rem;letter-spacing:.08em;padding:.3rem .7rem;pointer-events:none}
+
+/* DAY PICKER */
+.day-picker{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:1rem}
+.day-btn{border:1px solid var(--border);background:none;padding:.5rem .2rem;font-size:.65rem;letter-spacing:.06em;text-align:center;cursor:pointer;transition:all .2s;color:var(--charcoal)}
+.day-btn:hover{border-color:var(--accent);color:var(--accent)}
+.day-btn.sel{background:var(--accent);border-color:var(--accent);color:#fff}
+.day-btn.disabled{opacity:.35;pointer-events:none}
+.time-picker{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:1.25rem}
+.time-btn{border:1px solid var(--border);background:none;padding:.5rem;font-size:.72rem;letter-spacing:.06em;cursor:pointer;transition:all .2s;color:var(--charcoal)}
+.time-btn:hover{border-color:var(--accent);color:var(--accent)}
+.time-btn.sel{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* MOBILE */
+@media(max-width:900px){
+  #nav{padding:1.25rem 1.5rem}#nav.solid{padding:1rem 1.5rem}
+  .nav-links{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(37,34,32,.97);padding:1.5rem;gap:1.25rem}
+  .nav-links.open{display:flex}
+  .nav-burger{display:block}
+  .hero-split{grid-template-columns:1fr}
+  .hero-left{padding:7rem 1.5rem 4rem}
+  .hero-left::after{display:none}
+  .hero-right{min-height:50vh}
+  .hero-right img{min-height:50vh}
+  .services-grid,.team-grid,.reviews-grid{grid-template-columns:1fr}
+  .gallery-mosaic{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .gp1,.gp2,.gp3,.gp4,.gp5,.gp6{grid-column:auto;grid-row:auto}
+  .gallery-header,.booking-inner{grid-template-columns:1fr}
+  footer{grid-template-columns:1fr;gap:2rem}
+  .gallery-section,.booking-section,.reviews-section,.team-section{padding-left:1.5rem;padding-right:1.5rem}
+  .ck-cats{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  h1.hero-h1{font-size:2.25rem}
+  .form-2col{grid-template-columns:1fr}
+  .ck-cats{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo" onclick="document.getElementById('hero-section').scrollIntoView({behavior:'smooth'})">Studio Blossom</div>
+  <div class="nav-links" id="navLinks">
+    <span class="nav-link" onclick="scrollTo('services-section')">Behandlinger</span>
+    <span class="nav-link" onclick="scrollTo('gallery-section')">Galleri</span>
+    <span class="nav-link" onclick="scrollTo('team-section')">Holdet</span>
+    <span class="nav-link" onclick="scrollTo('booking-section')">Book tid</span>
+    <a href="tel:+4586121844" class="nav-phone">+45 86 12 18 44</a>
+    <button class="nav-book" onclick="scrollTo('booking-section')">Book nu</button>
+  </div>
+  <button class="nav-burger" id="burger">☰</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero-split" id="hero-section">
+  <div class="hero-left">
+    <div class="hero-tag">Frisørsalon · Aarhus C</div>
+    <h1 class="hero-h1">Dit hår.<br>Din <em>identitet.</em></h1>
+    <p class="hero-sub">Vi skaber look, der holder — og stemninger, man husker. Hos Studio Blossom er du i gode hænder fra første klipt til sidste finpudsning.</p>
+    <div class="hero-ctas">
+      <button class="btn-dark" onclick="scrollTo('booking-section')">Book en tid</button>
+      <button class="btn-outline-dark" onclick="scrollTo('services-section')">Se behandlinger</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1000&q=85" alt="Studio Blossom salon" loading="eager">
+    <div class="hero-badge">
+      <span class="hero-badge-num">4.9</span>
+      <span class="hero-badge-label">★ på Google · 340+ anmeldelser</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-strip" id="services-section">
+  <div class="services-inner">
+    <div class="strip-heading rv">
+      <div class="tag">Det vi gør</div>
+      <h2>Vores behandlinger</h2>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card rv">
+        <span class="svc-num">01</span>
+        <div class="svc-name">Klip & Styling</div>
+        <div class="svc-desc">Fra det enkle hverdagsklip til det store makeover. Vi lytter til, hvad du vil have — og ærter dig, hvis det ikke passer dig.</div>
+        <div class="svc-price"><span>fra 395</span>kr</div>
+      </div>
+      <div class="svc-card rv rv2">
+        <span class="svc-num">02</span>
+        <div class="svc-name">Farve & Highlights</div>
+        <div class="svc-desc">Babylights, balayage, helfarve og alt derimellem. Vi bruger udelukkende Wella Professionals og koldpresset arganolie.</div>
+        <div class="svc-price"><span>fra 695</span>kr</div>
+      </div>
+      <div class="svc-card rv rv3">
+        <span class="svc-num">03</span>
+        <div class="svc-name">Pleje & Behandling</div>
+        <div class="svc-desc">Keratin-glat, dybdekonditionering og hårkure der rent faktisk virker. Mærkbar forskel allerede fra første behandling.</div>
+        <div class="svc-price"><span>fra 495</span>kr</div>
+      </div>
+      <div class="svc-card rv rv2">
+        <span class="svc-num">04</span>
+        <div class="svc-name">Brud & Festfrisure</div>
+        <div class="svc-desc">Vi holder af den store dag. Prøvetid inkluderet. Vi kommer også ud til stedet.</div>
+        <div class="svc-price"><span>fra 1.200</span>kr</div>
+      </div>
+      <div class="svc-card rv rv3">
+        <span class="svc-num">05</span>
+        <div class="svc-name">Herre klip</div>
+        <div class="svc-desc">Klip, skægtrimning og efterbehandling med varm håndklæde. Ingen abonnement, ingen apps — bare et godt klip.</div>
+        <div class="svc-price"><span>fra 295</span>kr</div>
+      </div>
+      <div class="svc-card rv rv4">
+        <span class="svc-num">06</span>
+        <div class="svc-name">Klippepakke (×5)</div>
+        <div class="svc-desc">Køb fem klip og spar 15%. Gælder alle kunder — ikke kun stamkunder. Ingen udløbsdato.</div>
+        <div class="svc-price"><span>fra 1.675</span>kr</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section" id="gallery-section">
+  <div class="gallery-inner">
+    <div class="gallery-header rv">
+      <h2>Resultater<br>der taler for sig selv</h2>
+      <p>Hvert look vi laver er unikt. Her er et lille udvalg fra vores salon — følg os på Instagram for at se mere.</p>
+    </div>
+    <div class="gallery-mosaic">
+      <div class="gp gp1 rv"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80" alt="Hårklip" loading="lazy"></div>
+      <div class="gp gp2 rv rv2"><img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=80" alt="Farvebehandling" loading="lazy"></div>
+      <div class="gp gp3 rv rv3"><img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=800&q=80" alt="Styling" loading="lazy"></div>
+      <div class="gp gp4 rv rv2"><img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&q=80" alt="Styling" loading="lazy"></div>
+      <div class="gp gp5 rv"><img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=700&q=80" alt="Salon" loading="lazy"></div>
+      <div class="gp gp6 rv rv3"><img src="https://images.unsplash.com/photo-1571875257727-256c39da42af?w=600&q=80" alt="Resultat" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section" id="team-section">
+  <div class="team-inner">
+    <div class="team-header rv">
+      <h2>Mød vores frisører</h2>
+      <p>Specialister i det, de gør — og rart at snakke med.</p>
+    </div>
+    <div class="team-grid">
+      <div class="tc rv">
+        <div class="tc-img">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80" alt="Emma" loading="lazy">
+          <div class="tc-tag">Chefstyliste</div>
+        </div>
+        <h4>Emma Blossom</h4>
+        <p>Grundlægger & kreativ direktør</p>
+        <div class="tc-spec">Balayage · Brude · Klip</div>
+      </div>
+      <div class="tc rv rv2">
+        <div class="tc-img">
+          <img src="https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=500&q=80" alt="Mia" loading="lazy">
+          <div class="tc-tag">Senior Frisør</div>
+        </div>
+        <h4>Mia Skovgaard</h4>
+        <p>Farve & Highlights specialist</p>
+        <div class="tc-spec">Keratinbehandling · Farve</div>
+      </div>
+      <div class="tc rv rv3">
+        <div class="tc-img">
+          <img src="https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?w=500&q=80" alt="Ida" loading="lazy">
+          <div class="tc-tag">Frisør</div>
+        </div>
+        <h4>Ida Møller</h4>
+        <p>Klip & Herre specialist</p>
+        <div class="tc-spec">Herre · Klippepakker</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking-section" id="booking-section">
+  <div class="booking-inner">
+    <div class="booking-text rv">
+      <h2>Book en tid</h2>
+      <p>Vi har tid til dig — hverdage kl. 9–18, lørdage kl. 9–15. Vælg en dag og et tidspunkt, og vi bekræfter inden for 2 timer.</p>
+      <ul class="booking-perks">
+        <li>Gratis rådgivning inkluderet</li>
+        <li>Ingen no-show gebyr første gang</li>
+        <li>Afbud op til 24 timer i forvejen</li>
+        <li>Parkering lige foran butikken</li>
+      </ul>
+      <div style="margin-top:2rem;padding:1.5rem;background:var(--blush);border-left:3px solid var(--accent)">
+        <div style="font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem">Eller ring til os</div>
+        <a href="tel:+4586121844" style="font-family:'Lora',serif;font-size:1.5rem;color:var(--charcoal)">+45 86 12 18 44</a>
+      </div>
+    </div>
+    <div class="booking-form rv rv2">
+      <div id="bookForm">
+        <h3>Vælg tidspunkt</h3>
+        <div class="fg"><label>Behandling</label>
+          <select id="bookTreatment">
+            <option>Klip & Styling – fra 395 kr</option>
+            <option>Farve & Highlights – fra 695 kr</option>
+            <option>Pleje & Behandling – fra 495 kr</option>
+            <option>Brud & Festfrisure – fra 1.200 kr</option>
+            <option>Herre klip – fra 295 kr</option>
+          </select>
+        </div>
+        <div class="fg"><label>Frisør</label>
+          <select><option>Ingen præference</option><option>Emma Blossom</option><option>Mia Skovgaard</option><option>Ida Møller</option></select>
+        </div>
+        <div class="fg">
+          <label>Vælg dag</label>
+          <div class="day-picker" id="dayPicker"></div>
+        </div>
+        <div class="fg">
+          <label>Vælg tidspunkt</label>
+          <div class="time-picker" id="timePicker">
+            <button class="time-btn" onclick="selTime(this)">09:00</button>
+            <button class="time-btn" onclick="selTime(this)">09:30</button>
+            <button class="time-btn" onclick="selTime(this)">10:00</button>
+            <button class="time-btn" onclick="selTime(this)">10:30</button>
+            <button class="time-btn" onclick="selTime(this)">11:00</button>
+            <button class="time-btn" onclick="selTime(this)">13:00</button>
+            <button class="time-btn" onclick="selTime(this)">13:30</button>
+            <button class="time-btn" onclick="selTime(this)">14:00</button>
+            <button class="time-btn" onclick="selTime(this)">15:00</button>
+            <button class="time-btn" onclick="selTime(this)">15:30</button>
+            <button class="time-btn" onclick="selTime(this)">16:00</button>
+            <button class="time-btn" onclick="selTime(this)">17:00</button>
+          </div>
+        </div>
+        <div class="form-2col">
+          <div class="fg"><label>Navn</label><input type="text" placeholder="Dit navn"></div>
+          <div class="fg"><label>Telefon</label><input type="tel" placeholder="+45 xx xx xx xx"></div>
+        </div>
+        <div class="fg"><label>E-mail</label><input type="email" placeholder="din@email.dk"></div>
+        <button class="btn-dark" style="width:100%;padding:1rem;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase" onclick="submitBooking()">Bekræft booking</button>
+      </div>
+      <div id="book-thanks">
+        <div style="font-size:2.5rem;margin-bottom:1rem">✂️</div>
+        <h3>Booking modtaget!</h3>
+        <p>Vi bekræfter din tid på e-mail inden for 2 timer.<br>Vi glæder os til at se dig!</p>
+        <button class="btn-dark" style="margin-top:1.5rem;padding:.85rem 2rem;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase" onclick="resetBooking()">Book endnu en tid</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews-section">
+  <div class="reviews-inner">
+    <div class="reviews-heading rv">
+      <div style="font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem">Hvad kunderne siger</div>
+      <h2>Anmeldelser</h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="rv-card rv">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">"Emma forstod præcis, hvad jeg ville — og gav mig noget endnu bedre end det, jeg troede jeg ville have. Salon er hyggelig og professionel på en gang."</p>
+        <div class="rv-who">Katrine J. · Google</div>
+      </div>
+      <div class="rv-card rv rv2">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">"Har fået gjort hår hos Mia tre gange nu. Balayagen er altid perfekt og prisen er fair for den kvalitet man får. Kan varmt anbefales!"</p>
+        <div class="rv-who">Sofie M. · Google</div>
+      </div>
+      <div class="rv-card rv rv3">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">"Endelig en frisør, der tager sig tid til at lytte. Ida gav mig det bedste herreklip i årevis. Bestilt igen allerede."</p>
+        <div class="rv-who">Thomas R. · Google</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand-col">
+    <div class="logo">Studio Blossom</div>
+    <p>Frisørsalon i hjertet af Aarhus C. Åbent mandag til lørdag.</p>
+    <div class="footer-cvr">CVR 41 23 87 06</div>
+  </div>
+  <nav class="footer-nav">
+    <a onclick="scrollTo('services-section')">Behandlinger</a>
+    <a onclick="scrollTo('gallery-section')">Galleri</a>
+    <a onclick="scrollTo('team-section')">Holdet</a>
+    <a onclick="scrollTo('booking-section')">Book tid</a>
+  </nav>
+  <div class="footer-contact">
+    <a href="tel:+4586121844">+45 86 12 18 44</a>
+    <a href="mailto:hej@studioblossom.dk">hej@studioblossom.dk</a>
+    <a>Vestergade 14, 8000 Aarhus C</a>
+    <div style="font-size:.72rem;color:rgba(255,255,255,.3);margin-top:.5rem">Man–Fre 09–18 · Lør 09–15</div>
+  </div>
+</footer>
+
+<button id="stt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<div id="ckBanner">
+  <div class="ck-inner">
+    <p class="ck-text">Vi bruger cookies for at forbedre din oplevelse på sitet. Du kan tilpasse eller acceptere. <a href="#" style="color:var(--accent)">Læs mere</a></p>
+    <div class="ck-acts">
+      <button class="ck-btn" onclick="toggleCkPanel()">Tilpas</button>
+      <button class="ck-btn" onclick="rejectCk()">Afvis alle</button>
+      <button class="ck-btn pri" onclick="acceptCk()">Accepter alle</button>
+    </div>
+  </div>
+  <div id="ckPanel">
+    <div class="ck-cats">
+      <div class="ck-cat"><label><input type="checkbox" checked disabled> Nødvendige</label><p>Altid aktive — grundlæggende funktioner.</p></div>
+      <div class="ck-cat"><label><input type="checkbox" id="ckPref"> Præferencer</label><p>Husker dine valg.</p></div>
+      <div class="ck-cat"><label><input type="checkbox" id="ckStat"> Statistik</label><p>Anonyme besøgsdata.</p></div>
+      <div class="ck-cat"><label><input type="checkbox" id="ckMark"> Marketing</label><p>Relevante annoncer.</p></div>
+    </div>
+    <button class="ck-btn pri" onclick="saveCk()">Gem valg</button>
+  </div>
+</div>
+
+<div class="credit">Standard-plan · BuildOne</div>
+
+<script>
+function scrollTo(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'})}
+var nav=document.getElementById('nav');
+window.addEventListener('scroll',function(){nav.classList.toggle('solid',window.scrollY>80);document.getElementById('stt').classList.toggle('vis',window.scrollY>400)});
+document.getElementById('burger').addEventListener('click',function(){document.getElementById('navLinks').classList.toggle('open')});
+
+// Day picker
+var days=['Man','Tir','Ons','Tor','Fre','Lør'];
+var picker=document.getElementById('dayPicker');
+var today=new Date();
+for(var i=1;i<=12;i++){
+  var d=new Date(today);d.setDate(today.getDate()+i);
+  var dayName=days[d.getDay()===0?6:d.getDay()-1];
+  var dateNum=d.getDate();
+  var btn=document.createElement('button');
+  btn.className='day-btn'+(d.getDay()===0?' disabled':'');
+  btn.innerHTML='<span style="display:block;font-size:.6rem;opacity:.6">'+dayName+'</span>'+dateNum;
+  btn.onclick=function(){document.querySelectorAll('.day-btn').forEach(function(b){b.classList.remove('sel')});this.classList.add('sel')};
+  picker.appendChild(btn);
+}
+
+function selTime(el){document.querySelectorAll('.time-btn').forEach(function(b){b.classList.remove('sel')});el.classList.add('sel')}
+
+function submitBooking(){document.getElementById('bookForm').style.display='none';document.getElementById('book-thanks').style.display='block'}
+function resetBooking(){document.getElementById('bookForm').style.display='block';document.getElementById('book-thanks').style.display='none'}
+
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('in')})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(function(el){obs.observe(el)});
+
+function showBanner(){if(!localStorage.getItem('sb_ck'))setTimeout(function(){document.getElementById('ckBanner').classList.add('show')},700)}
+function toggleCkPanel(){var p=document.getElementById('ckPanel');p.style.display=p.style.display==='block'?'none':'block'}
+function acceptCk(){localStorage.setItem('sb_ck','1');document.getElementById('ckBanner').classList.remove('show')}
+function rejectCk(){localStorage.setItem('sb_ck','0');document.getElementById('ckBanner').classList.remove('show')}
+function saveCk(){localStorage.setItem('sb_ck',JSON.stringify({p:document.getElementById('ckPref').checked,s:document.getElementById('ckStat').checked,m:document.getElementById('ckMark').checked}));document.getElementById('ckBanner').classList.remove('show')}
+showBanner();
+</script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontakt — BuildOne</title>
+<meta name="description" content="Start dit gratis hjemmesideprojekt i dag. Intet kreditkort, ingen forpligtelse.">
+<style>
+:root{
+  --bg:#f7f4ee;--bg-alt:#efe9dc;--surface:#ffffff;--border:#ddd4bf;
+  --text:#1b2430;--muted:#5b6472;--navy:#16263a;--navy-2:#22384f;--accent:#8a6a34;
+  --radius:3px;--maxw:1160px;--serif:Georgia,"Times New Roman",Times,serif;--sans:"Segoe UI",Arial,Helvetica,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+.muted{color:var(--muted)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;color:var(--navy);letter-spacing:-.01em}
+header.site{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--border);}
+nav.wrap{display:flex;align-items:center;justify-content:space-between;height:82px}
+.logo{font-family:var(--serif);font-weight:400;font-size:1.35rem;color:var(--navy);display:flex;align-items:center;gap:10px}
+.logo .mark{width:32px;height:32px;border:1.5px solid var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:.72rem;font-weight:600;letter-spacing:.02em;flex-shrink:0}
+.navlinks{display:flex;gap:38px;align-items:center}
+.navlinks a{color:var(--muted);font-weight:500;font-size:.88rem;letter-spacing:.03em;text-transform:uppercase;transition:color .15s}
+.navlinks a:hover,.navlinks a.active{color:var(--navy)}
+.nav-cta{background:var(--navy);color:#fff !important;padding:11px 22px;border-radius:var(--radius);font-weight:600;font-size:.82rem;}
+.nav-cta:hover{background:var(--navy-2)}
+.burger{display:none;background:none;border:0;color:var(--navy);font-size:1.5rem;cursor:pointer}
+@media (max-width:860px){.navlinks{position:fixed;top:82px;left:0;right:0;background:var(--bg);flex-direction:column;padding:24px 28px;gap:20px;border-bottom:1px solid var(--border);display:none;align-items:flex-start}.navlinks.open{display:flex}.burger{display:block}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 30px;border-radius:var(--radius);font-weight:600;font-size:.92rem;letter-spacing:.02em;cursor:pointer;border:1.5px solid transparent;transition:background .15s,color .15s,border-color .15s;}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-primary:hover{background:var(--navy-2)}
+section{padding:96px 0}
+.page-hero{padding:70px 0 50px;text-align:center;border-bottom:1px solid var(--border)}
+.page-hero .kicker{color:var(--accent);font-weight:700;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;display:block}
+.page-hero h1{font-size:clamp(1.9rem,4vw,2.7rem);margin-bottom:16px}
+.page-hero p{color:var(--muted);max-width:600px;margin:0 auto;font-size:1.05rem}
+.contact-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:start}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr}}
+.form-card{background:var(--surface);border:1px solid var(--border);padding:40px;}
+.field{margin-bottom:20px}
+.field label{display:block;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:9px;color:var(--muted)}
+.field input,.field textarea,.field select{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:2px;padding:12px 14px;color:var(--text);font-family:inherit;font-size:.95rem;}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--navy)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.row2{grid-template-columns:1fr}}
+.info-card{background:var(--bg-alt);border:1px solid var(--border);padding:26px 28px;margin-bottom:14px}
+.info-card h3{font-family:var(--sans);font-weight:700;font-size:.92rem;text-transform:uppercase;letter-spacing:.05em;color:var(--navy);margin-bottom:8px}
+footer.site{border-top:1px solid var(--border);padding:64px 0 28px;background:var(--bg-alt)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:44px}
+@media(max-width:760px){.footer-grid{grid-template-columns:1fr 1fr}}
+.footer-grid h4{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:18px;font-weight:700}
+.footer-grid ul{list-style:none}
+.footer-grid ul li{margin-bottom:11px}
+.footer-grid ul li a{color:var(--muted);font-size:.9rem}
+.footer-grid ul li a:hover{color:var(--navy)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:26px;display:flex;justify-content:space-between;color:var(--muted);font-size:.8rem;flex-wrap:wrap;gap:10px;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="wrap">
+    <a href="index.html" class="logo">BuildOne</a>
+    <div class="navlinks">
+      <a href="index.html">Forside</a>
+      <a href="pricing.html">Priser</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="about.html">Om os</a>
+      <a href="contact.html" class="active">Kontakt</a>
+      <a href="contact.html" class="nav-cta">Kom i gang gratis</a>
+    </div>
+    <button class="burger" aria-label="Menu" onclick="document.querySelector('.navlinks').classList.toggle('open')">☰</button>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <span class="kicker">Kontakt</span>
+    <h1>Lad os bygge din hjemmeside — gratis</h1>
+    <p>Udfyld formularen, så vender vi tilbage inden for 24 timer med næste skridt. Intet kreditkort kræves.</p>
+  </div>
+</div>
+
+<section style="padding-top:80px">
+  <div class="wrap">
+    <div class="contact-grid">
+
+      <div class="form-card">
+        <form id="contact-form" onsubmit="event.preventDefault();var b=this.querySelector('button[type=submit]');b.textContent='Sendt. Vi hører fra os inden for 24 timer.';b.disabled=true;this.reset();">
+          <div class="row2">
+            <div class="field">
+              <label for="name">Navn *</label>
+              <input type="text" id="name" name="name" required placeholder="Dit navn">
+            </div>
+            <div class="field">
+              <label for="company">Virksomhed</label>
+              <input type="text" id="company" name="company" placeholder="Din virksomhed (valgfrit)">
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="email">E-mail *</label>
+              <input type="email" id="email" name="email" required placeholder="dig@eksempel.dk">
+            </div>
+            <div class="field">
+              <label for="phone">Telefon</label>
+              <input type="tel" id="phone" name="phone" placeholder="70 00 00 00">
+            </div>
+          </div>
+          <div class="field">
+            <label for="plan">Hvilken plan er du mest interesseret i?</label>
+            <select id="plan" name="plan">
+              <option>Ved ikke endnu</option>
+              <option>Basis — 249 kr/md</option>
+              <option>Standard — 399 kr/md</option>
+              <option>Premium — 599 kr/md</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="message">Fortæl om dit projekt *</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Hvad skal din hjemmeside indeholde?"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">Send & start gratis</button>
+          <p class="muted" style="font-size:.8rem;margin-top:14px;text-align:center">Ved at sende accepterer du, at vi kontakter dig om dit projekt.</p>
+        </form>
+      </div>
+
+      <div>
+        <div class="info-card">
+          <h3>E-mail</h3>
+          <p class="muted"><a href="mailto:hej@buildone.dk">hej@buildone.dk</a></p>
+        </div>
+        <div class="info-card">
+          <h3>Telefon</h3>
+          <p class="muted"><a href="tel:+4570000000">70 00 00 00</a><br>Hverdage 09:00–17:00</p>
+        </div>
+        <div class="info-card">
+          <h3>Svartid</h3>
+          <p class="muted">Vi vender normalt tilbage inden for 24 timer, ofte hurtigere.</p>
+        </div>
+        <div class="info-card">
+          <h3>Husk</h3>
+          <p class="muted">Det koster ingenting at henvende sig. Du betaler først, når du vælger at gå live.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="logo">BuildOne</a>
+        <p class="muted" style="margin-top:16px;max-width:280px">Vi bygger hjemmesider gratis og tager kun betalt, når du er klar til at gå live.</p>
+      </div>
+      <div>
+        <h4>Sider</h4>
+        <ul><li><a href="index.html">Forside</a></li><li><a href="pricing.html">Priser</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="about.html">Om os</a></li></ul>
+      </div>
+      <div>
+        <h4>Ydelser</h4>
+        <ul><li><a href="pricing.html">Hjemmesider</a></li><li><a href="pricing.html">Webshop</a></li><li><a href="pricing.html">SEO & tilkøb</a></li><li><a href="contact.html">Support</a></li></ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul><li><a href="mailto:hej@buildone.dk">hej@buildone.dk</a></li><li><a href="tel:+4570000000">70 00 00 00</a></li><li><a href="contact.html">Send besked</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 BuildOne. Alle rettigheder forbeholdes.</span>
+      <span>Placeholder-brand — skift navn & logo før lancering.</span>
+    </div>
+  </div>
+</footer>
+
+<div id="cookieBanner" class="cookie-banner" role="dialog" aria-label="Cookiesamtykke">
+  <div class="cookie-inner">
+    <p>Vi bruger cookies til at forbedre din oplevelse, huske dine præferencer og se, hvordan siden bliver brugt. <a href="#" id="cookieMoreLink">Læs mere</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookieCustomize" class="cookie-btn cookie-btn-ghost">Tilpas</button>
+      <button type="button" id="cookieReject" class="cookie-btn cookie-btn-outline">Afvis alle</button>
+      <button type="button" id="cookieAccept" class="cookie-btn cookie-btn-fill">Accepter alle</button>
+    </div>
+  </div>
+  <div class="cookie-panel" id="cookiePanel">
+    <label class="cookie-row"><span><b>Nødvendige</b><br>Kræves for at siden fungerer korrekt.</span><input type="checkbox" checked disabled></label>
+    <label class="cookie-row"><span><b>Præferencer</b><br>Husker dine valg og indstillinger ved næste besøg.</span><input type="checkbox" id="ckPref"></label>
+    <label class="cookie-row"><span><b>Statistik</b><br>Hjælper os med at forstå, hvordan siden bliver brugt.</span><input type="checkbox" id="ckStat"></label>
+    <label class="cookie-row"><span><b>Marketing</b><br>Bruges til at vise dig relevant indhold og annoncer.</span><input type="checkbox" id="ckMkt"></label>
+    <button type="button" id="cookieSave" class="cookie-btn cookie-btn-fill" style="width:100%;margin-top:14px">Gem valg</button>
+  </div>
+</div>
+<style>
+.cookie-banner{position:fixed;left:0;right:0;bottom:0;z-index:999;background:#fff;border-top:1px solid #ddd4bf;box-shadow:0 -10px 30px -14px rgba(0,0,0,.2);transform:translateY(110%);transition:transform .5s ease;font-family:"Segoe UI",Arial,Helvetica,sans-serif}
+.cookie-banner.show{transform:translateY(0)}
+.cookie-inner{max-width:1160px;margin:0 auto;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.cookie-inner p{margin:0;font-size:.85rem;color:#5b6472;max-width:640px;line-height:1.5}
+.cookie-inner a{text-decoration:underline;color:inherit}
+.cookie-actions{display:flex;gap:10px;flex-wrap:wrap}
+.cookie-btn{border-radius:3px;padding:11px 20px;font-size:.8rem;font-weight:600;cursor:pointer;border:1.5px solid transparent;font-family:inherit}
+.cookie-btn-fill{background:#16263a;color:#fff}
+.cookie-btn-fill:hover{background:#22384f}
+.cookie-btn-outline{background:transparent;border-color:#16263a;color:#16263a}
+.cookie-btn-outline:hover{background:#16263a;color:#fff}
+.cookie-btn-ghost{background:transparent;border-color:transparent;color:#5b6472;text-decoration:underline}
+.cookie-panel{display:none;max-width:1160px;margin:0 auto;padding:0 28px 24px}
+.cookie-panel.show{display:block}
+.cookie-row{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:14px 0;border-top:1px solid #ddd4bf;font-size:.82rem;color:#5b6472}
+.cookie-row b{color:#16263a}
+.cookie-row input{margin-top:3px;flex-shrink:0}
+@media(max-width:700px){.cookie-inner{flex-direction:column;align-items:flex-start}}
+</style>
+<script>
+(function(){
+  var KEY='buildone_cookie_consent';
+  var banner=document.getElementById('cookieBanner');
+  var panel=document.getElementById('cookiePanel');
+  function saved(){try{return JSON.parse(localStorage.getItem(KEY))}catch(e){return null}}
+  if(!saved()){ setTimeout(function(){ banner.classList.add('show'); }, 600); }
+  function persist(v){ localStorage.setItem(KEY, JSON.stringify(v)); banner.classList.remove('show'); }
+  document.getElementById('cookieAccept').onclick=function(){ persist({necessary:true,preferences:true,statistics:true,marketing:true}); };
+  document.getElementById('cookieReject').onclick=function(){ persist({necessary:true,preferences:false,statistics:false,marketing:false}); };
+  document.getElementById('cookieCustomize').onclick=function(){ panel.classList.toggle('show'); };
+  document.getElementById('cookieSave').onclick=function(){
+    persist({necessary:true,preferences:document.getElementById('ckPref').checked,statistics:document.getElementById('ckStat').checked,marketing:document.getElementById('ckMkt').checked});
+  };
+  document.getElementById('cookieMoreLink').onclick=function(e){ e.preventDefault(); panel.classList.add('show'); banner.classList.add('show'); };
+})();
+</script>
+
+</body>
+</html>

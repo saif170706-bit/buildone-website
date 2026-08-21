@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bistro Havnen – Frisk fra havet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0d1f2d;--gold:#c9914a;--cream:#f5e2be;--light:#fdfaf5;--text:#1c1a17;--muted:#7a6f60;--border:#e8dece}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--light);color:var(--text);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;line-height:1.1}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{cursor:pointer;font-family:'DM Sans',sans-serif}
+input,select,textarea{font-family:'DM Sans',sans-serif}
+.page{display:none}.page.active{display:block}
+#nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1.75rem 5rem;transition:background .35s,padding .35s,box-shadow .35s}
+#nav.solid{background:var(--navy);padding:1.1rem 5rem;box-shadow:0 4px 30px rgba(0,0,0,.25)}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:#fff;letter-spacing:.05em;cursor:pointer}
+.nav-links{display:flex;align-items:center;gap:2.5rem}
+.nav-link{color:rgba(255,255,255,.8);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:color .2s;position:relative;padding-bottom:3px}
+.nav-link::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .25s}
+.nav-link:hover,.nav-link.active{color:var(--gold)}.nav-link:hover::after,.nav-link.active::after{width:100%}
+.nav-phone{color:var(--gold);font-size:.82rem;font-weight:500}
+.nav-cart{background:none;border:none;color:#fff;position:relative;padding:.25rem .5rem;display:flex;align-items:center;gap:.5rem;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+.cart-badge{background:var(--gold);color:#fff;font-size:.6rem;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.nav-burger{display:none;background:none;border:none;color:#fff;font-size:1.4rem;padding:.25rem}
+#hero{height:100vh;min-height:680px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=85') center/cover no-repeat}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(13,31,45,.65) 0%,rgba(13,31,45,.92) 100%)}
+.hero-content{position:relative;z-index:1;text-align:center;max-width:780px;padding:2rem 1.5rem}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:1rem;color:var(--gold);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:1.75rem}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';height:1px;width:36px;background:var(--gold)}
+h1.htitle{font-size:clamp(3rem,8vw,5.75rem);font-weight:300;color:#fff;letter-spacing:-.01em;margin-bottom:1.25rem}
+h1.htitle em{font-style:italic;color:var(--cream)}
+.hero-sub{color:rgba(255,255,255,.68);font-size:1.05rem;font-weight:300;line-height:1.7;max-width:520px;margin:0 auto 2.5rem}
+.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:#fff;border:none;padding:.9rem 2.5rem;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;transition:background .25s}
+.btn-gold:hover{background:#b07d38}
+.btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);padding:.9rem 2.5rem;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;transition:all .25s}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:1;display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.hero-scroll span{color:rgba(255,255,255,.4);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.4));animation:scrollPulse 2s infinite}
+@keyframes scrollPulse{0%,100%{opacity:.4}50%{opacity:1}}
+.wave-wrap{overflow:hidden;line-height:0;display:block}
+.wave-wrap svg{display:block;width:100%}
+.section-story{background:var(--light);padding:7rem 5rem}
+.story-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.story-img-wrap{position:relative}
+.story-img-wrap img{width:100%;height:560px;object-fit:cover}
+.story-img-wrap::after{content:'';position:absolute;bottom:-16px;right:-16px;width:80%;height:80%;border:2px solid var(--gold);z-index:-1}
+.story-eyebrow{color:var(--gold);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.85rem}
+.story-text h2{font-size:2.75rem;font-weight:400;color:var(--navy);margin-bottom:1.25rem}
+.story-text p{color:var(--muted);line-height:1.85;margin-bottom:1.25rem;font-size:.96rem}
+.story-rule{border:none;border-top:1px solid var(--border);margin:2rem 0}
+.story-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--gold);display:block}
+.stat-label{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.section-menu{background:var(--navy);padding:10rem 5rem;clip-path:polygon(0 4rem,100% 0,100% calc(100% - 4rem),0 100%);margin:-4rem 0}
+.menu-inner{max-width:1100px;margin:0 auto}
+.sec-label{text-align:center;margin-bottom:4rem}
+.sec-label .ey{color:var(--gold);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.4rem}
+.sec-label h2{font-size:2.75rem;font-weight:300;color:#fff}
+.dish-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(201,145,74,.15)}
+.dish-card{padding:2.5rem;border-right:1px solid rgba(201,145,74,.12);transition:background .3s}
+.dish-card:nth-child(3n){border-right:none}
+.dish-card:hover{background:rgba(201,145,74,.07)}
+.dish-cat{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.dish-name{font-family:'Cormorant Garamond',serif;font-size:1.45rem;color:#fff;margin-bottom:.35rem}
+.dish-desc{font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:1.2rem}
+.dish-foot{display:flex;align-items:center;justify-content:space-between}
+.dish-price{color:var(--gold);font-weight:500}
+.dish-btn{background:none;border:1px solid rgba(201,145,74,.4);color:var(--gold);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:.45rem 1rem;transition:all .2s}
+.dish-btn:hover{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.menu-cta{text-align:center;margin-top:3rem}
+.section-quote{background:var(--cream);padding:7rem 5rem;text-align:center}
+.big-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.75rem);font-weight:300;font-style:italic;color:var(--navy);line-height:1.35;max-width:780px;margin:0 auto}
+.quote-author{margin-top:2rem;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.section-reviews{background:var(--light);padding:7rem 5rem}
+.reviews-inner{max-width:1100px;margin:0 auto}
+.reviews-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem}
+.review-card{background:#fff;padding:2.5rem;border-left:3px solid var(--gold)}
+.review-stars{color:var(--gold);margin-bottom:1rem;font-size:1rem}
+.review-text{color:var(--muted);line-height:1.8;font-style:italic;margin-bottom:1.5rem;font-size:.95rem}
+.review-who{font-size:.8rem;font-weight:500;color:var(--navy)}
+.review-where{font-size:.72rem;color:var(--muted)}
+.section-findos{background:var(--navy);padding:6rem 5rem}
+.findos-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.findos-text h2{font-size:2.5rem;font-weight:400;color:#fff;margin-bottom:2rem}
+.info-line{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.25rem;color:rgba(255,255,255,.75);font-size:.9rem}
+.info-line svg{flex-shrink:0;margin-top:2px;width:18px;height:18px}
+.hours-box{margin-top:2rem}
+.hours-title{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.hours-row{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:.85rem}
+.hours-day{color:rgba(255,255,255,.5)}.hours-time{color:rgba(255,255,255,.85)}
+.findos-map{height:320px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:.9rem;text-align:center;padding:2rem}
+footer{background:#060f18;padding:2.5rem 5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff}
+.footer-links{display:flex;gap:2rem}
+.footer-link{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.38);cursor:pointer;transition:color .2s}
+.footer-link:hover{color:var(--gold)}
+.footer-copy{font-size:.75rem;color:rgba(255,255,255,.25)}
+#page-menu{background:var(--light);min-height:100vh;padding-top:80px}
+.mpage-hero{background:var(--navy);padding:5rem 5rem 7rem;position:relative;overflow:hidden}
+.mpage-hero::before{content:'Menu';position:absolute;right:-1rem;top:50%;transform:translateY(-50%);font-family:'Cormorant Garamond',serif;font-size:14rem;color:rgba(255,255,255,.025);font-weight:600;pointer-events:none;white-space:nowrap}
+.mpage-hero h1{font-size:3.5rem;font-weight:300;color:#fff}
+.mpage-hero p{color:rgba(255,255,255,.55);margin-top:.75rem}
+.mpage-wave{overflow:hidden;line-height:0;background:var(--navy);margin-bottom:-1px}
+.mpage-wave svg{display:block;width:100%;height:60px}
+.menu-content{max-width:900px;margin:0 auto;padding:4rem 5rem 6rem}
+.menu-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:3rem;overflow-x:auto}
+.m-tab{padding:.85rem 2rem;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;background:none;border:none;color:var(--muted);transition:all .2s;position:relative;white-space:nowrap}
+.m-tab.active{color:var(--navy)}.m-tab.active::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--gold)}
+.m-cat{display:none}.m-cat.active{display:block}
+.m-item{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start;padding:1.75rem 0;border-bottom:1px solid var(--border)}
+.m-item-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:var(--navy);margin-bottom:.25rem}
+.m-item-desc{font-size:.83rem;color:var(--muted);line-height:1.6}
+.m-item-right{text-align:right;flex-shrink:0}
+.m-item-price{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold);display:block;margin-bottom:.5rem}
+.m-item-add{background:var(--navy);color:#fff;border:none;padding:.5rem 1.25rem;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;transition:background .2s;white-space:nowrap}
+.m-item-add:hover{background:var(--gold)}
+#page-res{background:var(--light);min-height:100vh;padding-top:80px}
+.res-hero{background:var(--cream);padding:5rem 5rem 7rem;text-align:center}
+.res-hero h1{font-size:3.5rem;font-weight:300;color:var(--navy)}
+.res-hero p{color:var(--muted);margin-top:.75rem}
+.res-wave{overflow:hidden;line-height:0;background:var(--cream)}
+.res-wave svg{display:block;width:100%;height:60px}
+.res-form-wrap{max-width:660px;margin:0 auto;padding:4rem 2rem 6rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.fg{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem}
+.fg label{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.fg input,.fg select,.fg textarea{border:1px solid var(--border);background:#fff;padding:.85rem 1rem;font-size:.9rem;outline:none;transition:border .2s;width:100%}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold)}
+.fg textarea{resize:vertical;min-height:90px}
+#res-thanks{display:none;text-align:center;padding:4rem 1rem}
+#res-thanks h2{font-size:2.5rem;color:var(--navy);margin-bottom:1rem}
+#res-thanks p{color:var(--muted);line-height:1.8}
+#page-om{background:var(--light);min-height:100vh;padding-top:80px}
+.om-hero{background:var(--navy);padding:5rem 5rem 7rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:end}
+.om-hero-text h1{font-size:3.5rem;font-weight:300;color:#fff;margin-bottom:1.25rem}
+.om-hero-text p{color:rgba(255,255,255,.6);line-height:1.8;font-size:.95rem}
+.om-hero-img img{width:100%;height:420px;object-fit:cover}
+.om-wave{overflow:hidden;line-height:0;background:var(--navy)}
+.om-wave svg{display:block;width:100%;height:60px}
+.om-content{max-width:1100px;margin:0 auto;padding:5rem}
+.om-story{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-bottom:4rem}
+.om-story-text p{color:var(--muted);line-height:1.85;margin-bottom:1.5rem;font-size:.96rem}
+.om-team-title{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem}
+.om-team{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.team-card img{width:100%;aspect-ratio:4/5;object-fit:cover;margin-bottom:1rem;filter:grayscale(15%)}
+.team-card h4{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--navy)}
+.team-card p{font-size:.8rem;color:var(--muted);margin-top:.25rem}
+#page-acc{background:var(--light);min-height:100vh;padding-top:80px}
+.acc-wrap{max-width:520px;margin:0 auto;padding:5rem 2rem 6rem}
+.acc-wrap>h1{font-size:2.75rem;color:var(--navy);margin-bottom:2rem}
+.acc-tabs{display:flex;border:1px solid var(--border);margin-bottom:2.5rem}
+.at{flex:1;padding:.85rem;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;background:none;border:none;color:var(--muted);transition:all .2s}
+.at.active{background:var(--navy);color:#fff}
+.ap{display:none}.ap.active{display:block}
+.ap h2{font-size:1.75rem;color:var(--navy);margin-bottom:.5rem}
+.ap .sub{color:var(--muted);font-size:.85rem;margin-bottom:2rem}
+#acc-dash{display:none}
+.dash-hello{font-family:'Cormorant Garamond',serif;font-size:2.25rem;color:var(--navy);margin-bottom:2rem}
+.ord-sec-title{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.ord-row{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;border-bottom:1px solid var(--border)}
+.ord-id{font-size:.85rem;font-weight:500;color:var(--navy)}
+.ord-date{font-size:.75rem;color:var(--muted)}
+.ord-status{font-size:.68rem;background:var(--gold);color:#fff;padding:.2rem .7rem;letter-spacing:.05em}
+.ord-amt{font-size:.9rem;font-weight:500;color:var(--navy)}
+#cOverlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:600;opacity:0;pointer-events:none;transition:opacity .3s}
+#cOverlay.open{opacity:1;pointer-events:auto}
+#cDrawer{position:fixed;top:0;right:0;bottom:0;width:420px;background:#fff;z-index:700;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+#cDrawer.open{transform:translateX(0)}
+.cart-head{display:flex;justify-content:space-between;align-items:center;padding:1.75rem 2rem;border-bottom:1px solid var(--border)}
+.cart-head h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--navy)}
+.cart-close{background:none;border:none;font-size:1.5rem;color:var(--muted);line-height:1;padding:.25rem}
+.cart-body{flex:1;overflow-y:auto;padding:1.5rem 2rem}
+.cart-empty{text-align:center;padding:3rem 0;color:var(--muted);font-size:.9rem}
+.ci{display:flex;gap:1rem;align-items:start;padding:1.25rem 0;border-bottom:1px solid var(--border)}
+.ci-info{flex:1}
+.ci-name{font-size:.9rem;font-weight:500;color:var(--navy);margin-bottom:.2rem}
+.ci-price{font-size:.82rem;color:var(--muted)}
+.ci-qty{display:flex;align-items:center;gap:.5rem;margin-top:.5rem}
+.qb{width:24px;height:24px;border:1px solid var(--border);background:none;font-size:.9rem;transition:all .2s}
+.qb:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.qn{font-size:.85rem;min-width:18px;text-align:center}
+.ci-rm{margin-left:auto;background:none;border:none;color:var(--muted);font-size:1.2rem;line-height:1;padding:.25rem;align-self:flex-start}
+.cart-foot{border-top:1px solid var(--border);padding:1.5rem 2rem}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem}
+.cart-total-row span{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--navy)}
+.cart-total-row strong{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold)}
+.btn-full{display:block;width:100%;padding:1rem;text-align:center;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;border:none;margin-bottom:.75rem}
+#chkOverlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:800;display:none;align-items:center;justify-content:center}
+#chkOverlay.open{display:flex}
+.chk-modal{background:#fff;width:min(580px,95vw);max-height:90vh;overflow-y:auto;padding:3rem}
+.chk-modal h2{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--navy);margin-bottom:2rem}
+.chk-summary{background:#faf7f0;padding:1.5rem;margin-bottom:2rem}
+.chk-sum-title{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.chk-sum-row{display:flex;justify-content:space-between;font-size:.88rem;margin-bottom:.5rem}
+.chk-sum-total{display:flex;justify-content:space-between;font-weight:500;font-size:1rem;padding-top:.75rem;border-top:1px solid var(--border);margin-top:.5rem}
+.pay-opts{display:flex;gap:1rem;margin-bottom:2rem}
+.pay-opt{flex:1;border:2px solid var(--border);padding:1.25rem;text-align:center;cursor:pointer;transition:border .2s}
+.pay-opt.sel{border-color:var(--gold)}
+.pay-opt .pay-icon{font-size:1.5rem;margin-bottom:.4rem}
+.pay-opt span{display:block;font-weight:500;font-size:.82rem;color:var(--navy)}
+.pay-opt small{font-size:.72rem;color:var(--muted)}
+#chk-done{display:none;text-align:center;padding:2rem 0}
+#chk-done .ok-icon{font-size:3rem;margin-bottom:1rem}
+#chk-done h2{color:var(--navy);margin-bottom:.75rem}
+#chk-done .ord-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--gold);display:block;margin:.75rem 0}
+#chk-done p{color:var(--muted);font-size:.9rem;line-height:1.7}
+#ckBanner{position:fixed;bottom:0;left:0;right:0;z-index:900;background:#fff;border-top:1px solid var(--border);transform:translateY(110%);transition:transform .5s cubic-bezier(.4,0,.2,1);box-shadow:0 -4px 30px rgba(0,0,0,.08)}
+#ckBanner.show{transform:translateY(0)}
+.ck-inner{max-width:1200px;margin:0 auto;padding:1.5rem 2rem;display:flex;gap:2rem;align-items:center;flex-wrap:wrap}
+.ck-text{flex:1;font-size:.84rem;color:var(--muted);line-height:1.6}
+.ck-acts{display:flex;gap:.75rem;flex-shrink:0;flex-wrap:wrap}
+.ck-btn{padding:.65rem 1.4rem;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;transition:all .2s}
+.ck-btn:hover{border-color:var(--gold);color:var(--gold)}
+.ck-btn.pri{background:var(--navy);color:#fff;border-color:var(--navy)}
+.ck-btn.pri:hover{background:var(--gold);border-color:var(--gold)}
+#ckPanel{display:none;border-top:1px solid var(--border);padding:1.5rem 2rem;max-width:1200px;margin:0 auto}
+.ck-cats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-bottom:1.25rem}
+.ck-cat label{font-size:.78rem;font-weight:500;display:flex;align-items:center;gap:.5rem;cursor:pointer;color:var(--navy)}
+.ck-cat p{font-size:.72rem;color:var(--muted);margin-top:.25rem;margin-left:1.75rem}
+#stt{position:fixed;bottom:2rem;right:2rem;z-index:400;width:44px;height:44px;background:var(--gold);border:none;opacity:0;pointer-events:none;transition:opacity .3s;display:flex;align-items:center;justify-content:center}
+#stt.vis{opacity:1;pointer-events:auto}
+#stt svg{fill:none;stroke:#fff;stroke-width:2;width:16px;height:16px}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .75s,transform .75s}
+.rv.in{opacity:1;transform:none}
+.rv2{transition-delay:.15s}.rv3{transition-delay:.3s}
+.credit{position:fixed;bottom:1rem;left:1rem;z-index:400;background:rgba(13,31,45,.85);color:rgba(255,255,255,.55);font-size:.62rem;letter-spacing:.08em;padding:.3rem .7rem;pointer-events:none}
+@media(max-width:900px){
+  #nav{padding:1.25rem 1.5rem}#nav.solid{padding:1rem 1.5rem}
+  .nav-links{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--navy);padding:1.5rem;gap:1.25rem}
+  .nav-links.open{display:flex}
+  .nav-burger{display:block}
+  .story-grid,.reviews-grid,.findos-inner,.om-hero,.om-story,.om-team,.form-row,.dish-grid{grid-template-columns:1fr}
+  .section-story,.section-reviews,.section-findos,.menu-content,.om-content{padding-left:1.5rem;padding-right:1.5rem}
+  .section-menu{padding:9rem 1.5rem}
+  .mpage-hero,.res-hero,.om-hero{padding-left:1.5rem;padding-right:1.5rem}
+  .dish-card{border-right:none;border-bottom:1px solid rgba(201,145,74,.15)}
+  #cDrawer{width:100vw}
+  .ck-cats{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  h1.htitle{font-size:2.5rem}
+  .acc-wrap,.res-form-wrap{padding:2rem 1rem 4rem}
+  .chk-modal{padding:1.75rem}
+  .pay-opts{flex-direction:column}
+  .ck-cats{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-brand" onclick="goPage('forside')">Bistro Havnen</div>
+  <div class="nav-links" id="navLinks">
+    <span class="nav-link active" data-page="forside">Forside</span>
+    <span class="nav-link" data-page="menu">Menukort</span>
+    <span class="nav-link" data-page="res">Reservation</span>
+    <span class="nav-link" data-page="om">Om os</span>
+    <span class="nav-link" data-page="acc">Min side</span>
+    <a href="tel:+4533241870" class="nav-phone">+45 33 24 18 70</a>
+    <button class="nav-cart" id="cartBtn">🛒 Kurv <span class="cart-badge" id="cartBadge" style="display:none">0</span></button>
+  </div>
+  <button class="nav-burger" id="burger">☰</button>
+</nav>
+
+<div class="page active" id="page-forside">
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Nyhavn · København · Siden 2011</div>
+      <h1 class="htitle">Smagen af<br><em>havet på dit bord</em></h1>
+      <p class="hero-sub">Håndplukket råvarer, enkle tilberedninger og den stemning du kun finder ved vandet.</p>
+      <div class="hero-actions">
+        <button class="btn-gold" onclick="goPage('res')">Reserver bord</button>
+        <button class="btn-ghost" onclick="goPage('menu')">Se menukort</button>
+      </div>
+    </div>
+    <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
+  </section>
+
+  <div class="wave-wrap" style="background:var(--navy)">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" height="90">
+      <path d="M0,45 C300,90 600,0 900,50 C1100,85 1300,20 1440,45 L1440,90 L0,90 Z" fill="var(--light)"/>
+    </svg>
+  </div>
+
+  <section class="section-story">
+    <div class="story-grid">
+      <div class="story-img-wrap rv">
+        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=900&q=80" alt="Bistro Havnen interiør" loading="lazy">
+      </div>
+      <div class="story-text rv rv2">
+        <div class="story-eyebrow">Vores historie</div>
+        <h2>En lille restaurant<br>med en stor sjæl</h2>
+        <p>Bistro Havnen åbnede sine døre i 2011 med én ambition: at servere det allerbedste fra det danske hav — uden unødvendig pynt eller pretentiøse menuer.</p>
+        <p>Vores køkken skifter ugentligt med årstiderne og fiskerlejets fangst. Det er mad, der smager af noget — og et sted, du gerne vil komme tilbage til.</p>
+        <hr class="story-rule">
+        <div class="story-stats">
+          <div><span class="stat-num">14+</span><span class="stat-label">År ved havnen</span></div>
+          <div><span class="stat-num">98%</span><span class="stat-label">Lokale råvarer</span></div>
+          <div><span class="stat-num">4.8</span><span class="stat-label">Google-stjerner</span></div>
+          <div><span class="stat-num">1200+</span><span class="stat-label">Anmeldelser</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-menu">
+    <div class="menu-inner">
+      <div class="sec-label rv">
+        <div class="ey">Udvalgte retter</div>
+        <h2>Hvad er der på kortet?</h2>
+      </div>
+      <div class="dish-grid">
+        <div class="dish-card rv">
+          <div class="dish-cat">Forret</div>
+          <div class="dish-name">Tartare af hornfisk</div>
+          <div class="dish-desc">Syltede kapere, rygeostcreme, rogn og sprød rugbrødscrumble</div>
+          <div class="dish-foot"><span class="dish-price">165 kr</span><button class="dish-btn" onclick="addToCart('Tartare af hornfisk',165)">+ Kurv</button></div>
+        </div>
+        <div class="dish-card rv rv2">
+          <div class="dish-cat">Hovedret</div>
+          <div class="dish-name">Helleflynder med asparges</div>
+          <div class="dish-desc">Badet i beurre blanc med grønne asparges, nye kartofler og dildolie</div>
+          <div class="dish-foot"><span class="dish-price">285 kr</span><button class="dish-btn" onclick="addToCart('Helleflynder',285)">+ Kurv</button></div>
+        </div>
+        <div class="dish-card rv rv3">
+          <div class="dish-cat">Dessert</div>
+          <div class="dish-name">Havtornparfait</div>
+          <div class="dish-desc">Hjemmelavet parfait med havtorngelé, hytteost-mousse og sprødt knæk</div>
+          <div class="dish-foot"><span class="dish-price">115 kr</span><button class="dish-btn" onclick="addToCart('Havtornparfait',115)">+ Kurv</button></div>
+        </div>
+      </div>
+      <div class="menu-cta rv"><button class="btn-ghost" onclick="goPage('menu')">Se hele menukortet</button></div>
+    </div>
+  </section>
+
+  <section class="section-quote">
+    <div class="wave-wrap" style="background:var(--navy);margin-bottom:-1px">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+        <path d="M0,0 C480,60 960,60 1440,0 L1440,60 L0,60 Z" fill="var(--cream)"/>
+      </svg>
+    </div>
+    <p class="big-quote rv">"Havet giver os ingredienserne.<br>Vi giver dem blot en velfortjent scene."</p>
+    <div class="quote-author rv rv2">— Lars Kjeldsen, Køkkenchef</div>
+  </section>
+
+  <div class="wave-wrap" style="background:var(--cream)">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+      <path d="M0,60 C360,0 1080,0 1440,60 L1440,60 L0,60 Z" fill="var(--light)"/>
+    </svg>
+  </div>
+
+  <section class="section-reviews">
+    <div class="reviews-inner">
+      <div class="sec-label rv" style="text-align:center;margin-bottom:0">
+        <div class="ey">Hvad gæsterne siger</div>
+        <h2 style="color:var(--navy)">Anmeldelser</h2>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card rv">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Sjældent har jeg spist fisk, der var så frisk og tilberedt med så meget respekt. Atmosfæren er varm og uformel — vi var ikke klar til at gå hjem."</p>
+          <div class="review-who">Mette Andersen</div>
+          <div class="review-where">Google · Juli 2025</div>
+        </div>
+        <div class="review-card rv rv2">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Hornfisketartaren er uden tvivl den bedste forret jeg har fået i København. Vinkortet er velsammensat og prisen er rimelig for den kvalitet man får."</p>
+          <div class="review-who">Rasmus Holm</div>
+          <div class="review-where">Google · Juni 2025</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-findos">
+    <div class="wave-wrap" style="background:var(--light);margin-bottom:-1px">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+        <path d="M0,0 C360,60 1080,60 1440,0 L1440,60 L0,60 Z" fill="var(--navy)"/>
+      </svg>
+    </div>
+    <div class="findos-inner">
+      <div class="findos-text rv">
+        <h2>Find os</h2>
+        <div class="info-line">
+          <svg viewBox="0 0 24 24" fill="var(--gold)" stroke="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Nyhavn 42, 1051 København K
+        </div>
+        <div class="info-line">
+          <svg viewBox="0 0 24 24" fill="var(--gold)" stroke="none"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <a href="tel:+4533241870">+45 33 24 18 70</a>
+        </div>
+        <div class="info-line">
+          <svg viewBox="0 0 24 24" fill="var(--gold)" stroke="none"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          hej@bistro-havnen.dk
+        </div>
+        <div class="hours-box">
+          <div class="hours-title">Åbningstider</div>
+          <div class="hours-row"><span class="hours-day">Man–Tors</span><span class="hours-time">17:00–22:00</span></div>
+          <div class="hours-row"><span class="hours-day">Fre–Lør</span><span class="hours-time">17:00–23:00</span></div>
+          <div class="hours-row"><span class="hours-day">Søndag</span><span class="hours-time">12:00–21:00</span></div>
+        </div>
+      </div>
+      <div class="findos-map rv rv2">📍 Nyhavn 42, København<br><small style="opacity:.6;margin-top:.5rem;display:block">Åbn i Google Maps</small></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-brand">Bistro Havnen</div>
+    <div class="footer-links">
+      <span class="footer-link" onclick="goPage('menu')">Menukort</span>
+      <span class="footer-link" onclick="goPage('res')">Reservation</span>
+      <span class="footer-link" onclick="goPage('om')">Om os</span>
+    </div>
+    <div class="footer-copy">CVR 38 24 19 07 · © 2025 Bistro Havnen</div>
+  </footer>
+</div>
+
+<div class="page" id="page-menu">
+  <div class="mpage-hero">
+    <h1>Menukort &amp; Bestilling</h1>
+    <p>Bestil til bordet — vi bringer det til dig. Eller takeaway fra kl. 17.</p>
+  </div>
+  <div class="mpage-wave">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+      <path d="M0,0 C360,60 1080,60 1440,0 L1440,60 L0,60 Z" fill="var(--light)"/>
+    </svg>
+  </div>
+  <div class="menu-content">
+    <div class="menu-tabs">
+      <button class="m-tab active" data-cat="forretter">Forretter</button>
+      <button class="m-tab" data-cat="hoved">Hovedretter</button>
+      <button class="m-tab" data-cat="dessert">Dessert</button>
+      <button class="m-tab" data-cat="drikke">Drikkevarer</button>
+    </div>
+    <div class="m-cat active" id="mcat-forretter">
+      <div class="m-item"><div><div class="m-item-name">Tartare af hornfisk</div><div class="m-item-desc">Syltede kapere, rygeostcreme, rogn og sprød rugbrødscrumble</div></div><div class="m-item-right"><span class="m-item-price">165 kr</span><button class="m-item-add" onclick="addToCart('Tartare af hornfisk',165)">Tilføj</button></div></div>
+      <div class="m-item"><div><div class="m-item-name">Kammuslinger</div><div class="m-item-desc">Ristede kammuslinger med blomkålscreme, hasselnødder og brunet smør</div></div><div class="m-item-right"><span class="m-item-price">185 kr</span><button class="m-item-add" onclick="addToCart('Kammuslinger',185)">Tilføj</button></div></div>
+      <div class="m-item"><div><div class="m-item-name">Dagens suppe</div><div class="m-item-desc">Spørg tjeneren — skifter dagligt</div></div><div class="m-item-right"><span class="m-item-price">95 kr</span><button class="m-item-add" onclick="addToCart('Dagens suppe',95)">Tilføj</button></div></div>
+      <div class="m-item"><div><div class="m-item-name">Gravad laks</div><div class="m-item-desc">Hjemmegravad laks, gammeldags sennep, dild og rugbrødstoast</div></div><div class="m-item-right"><span class="m-item-price">145 kr</span><button class="m-item-add" onclick="addToCart('Gravad laks',145)">Tilføj</button></div></div>
+    </div>
+    <div class="m-cat" id="mcat-hoved">
+      <div class="m-item"><div><div class="m-item-name">Helleflynder med asparges</div><div class="m-item-desc">Beurre blanc, grønne asparges, nye kartofler og dildolie</div></div><div class="m-item-right"><span class="m-item-price">285 kr</span><button class="m-item-add" onclick="addToCart('Helleflynder',285)">Tilføj</button></div></div>
+      <div class="m-item"><div><div class="m-item-name">Stegt torsk</div><div class="m-item-desc">Sprødt skind, hvide bønner, bacon og jomfruhummer bisque</div></div><div class="m-item-right"><span class="m-item-price">265 kr</span><button class="m-item-add" onclick="addToCart('Stegt torsk',265)">Tilføj</button></div></div>
+      <div class="m-item"><div><div class="m-item-name">Bøf Stroganoff</div><div class="m-item-desc">Dansk kalv, syltede champignoner, smørristet pasta og cremefraiche</div></div><div class="m-item-right"><span class="m-item-price">245 kr</span><button class="m-item-add" onclick="addToCart('Bøf Stroganoff',245)">Tilføj</button></div></div>
+      <div class="m-item"><div><div class="m-item-name">Vegetarisk risotto</div><div class="m-item-desc">Blomkål, trøffelolie, ærter og revet Vesterhavsost</div></div><div class="m-item-right"><span class="m-item-price">185 kr</span><button class="m-item-add" onclick="addToCart('Vegetarisk risotto',185)">Tilføj</button></div></div>
+    </div>
+    <div class="m-cat" id="mcat-dessert">
+      <div class="m-item"><div><div class="m-item-name">Havtornparfait</div><div class="m-item-desc">Hjemmelavet parfait, havtorngelé, hytteost-mousse og sprødt knæk</div></div><div class="m-item-right"><span class="m-item-price">115 kr</span><button class="m-item-add" onclick="addToCart('Havtornparfait',115)">Tilføj</button></div></div>
+      <div class="m-item"><div><div class="m-item-name">Chokoladeganache</div><div class="m-item-desc">Varm 70% mørk chokoladeganache med flødeskum og kakaonibs</div></div><div class="m-item-right"><span class="m-item-price">125 kr</span><button class="m-item-add" onclick="addToCart('Chokoladeganache',125)">Tilføj</button></div></div>
+      <div class="m-item"><div><div class="m-item-name">Ostetallerken</div><div class="m-item-desc">Tre danske oste, druer, figenkonfiture og knækbrød</div></div><div class="m-item-right"><span class="m-item-price">135 kr</span><button class="m-item-add" onclick="addToCart('Ostetallerken',135)">Tilføj</button></div></div>
+    </div>
+    <div class="m-cat" id="mcat-drikke">
+      <div class="m-item"><div><div class="m-item-name">Husvin (rød/hvid)</div><div class="m-item-desc">Dagens valg fra vores vinhandler</div></div><div class="m-item-right"><span class="m-item-price">55 kr/gl</span><button class="m-item-add" onclick="addToCart('Husvin',55)">Tilføj</button></div></div>
+      <div class="m-item"><div><div class="m-item-name">Øl på fad</div><div class="m-item-desc">Carlsberg Pilsner eller Mikkeller Stout, 40 cl</div></div><div class="m-item-right"><span class="m-item-price">65 kr</span><button class="m-item-add" onclick="addToCart('Øl på fad',65)">Tilføj</button></div></div>
+      <div class="m-item"><div><div class="m-item-name">Mineralvand</div><div class="m-item-desc">Aqua d'Or stille eller brusende, 50 cl</div></div><div class="m-item-right"><span class="m-item-price">35 kr</span><button class="m-item-add" onclick="addToCart('Mineralvand',35)">Tilføj</button></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-res">
+  <div class="res-hero">
+    <h1>Reserver et bord</h1>
+    <p>Ring os på <a href="tel:+4533241870" style="color:var(--gold)">+45 33 24 18 70</a> eller brug formularen herunder.</p>
+  </div>
+  <div class="res-wave">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+      <path d="M0,0 C480,60 960,60 1440,0 L1440,60 L0,60 Z" fill="var(--light)"/>
+    </svg>
+  </div>
+  <div class="res-form-wrap" id="resForm">
+    <div class="form-row"><div class="fg"><label>Dit navn</label><input type="text" placeholder="Lars Kjeldsen"></div><div class="fg"><label>Telefon</label><input type="tel" placeholder="+45 xx xx xx xx"></div></div>
+    <div class="fg"><label>E-mail</label><input type="email" placeholder="din@email.dk"></div>
+    <div class="form-row"><div class="fg"><label>Dato</label><input type="date"></div><div class="fg"><label>Tidspunkt</label><select><option>17:00</option><option>17:30</option><option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option></select></div></div>
+    <div class="fg"><label>Antal gæster</label><select><option>1 person</option><option>2 personer</option><option>3 personer</option><option>4 personer</option><option>5 personer</option><option>6 personer</option></select></div>
+    <div class="fg"><label>Særlige ønsker</label><textarea placeholder="Allergier, anledning, bordarrangement..."></textarea></div>
+    <button class="btn-gold" style="width:100%;padding:1rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase" onclick="submitRes()">Bekræft reservation</button>
+  </div>
+  <div id="res-thanks">
+    <div style="font-size:3rem;margin-bottom:1rem">🎉</div>
+    <h2>Tak for din reservation!</h2>
+    <p>Vi sender en bekræftelse til din e-mail inden for 30 minutter.<br>Vi glæder os til at byde dig velkommen.</p>
+    <button class="btn-gold" style="margin-top:2rem;padding:.85rem 2.5rem;border:none;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase" onclick="goPage('forside')">Tilbage til forsiden</button>
+  </div>
+</div>
+
+<div class="page" id="page-om">
+  <div class="om-hero">
+    <div class="om-hero-text">
+      <h1>En plads<br>ved vandet</h1>
+      <p>Vi lavede Bistro Havnen, fordi vi ville have et sted, man ikke behøvede en anledning til at besøge. Et sted med god mad, gode råvarer og plads til at slappe af.</p>
+    </div>
+    <div class="om-hero-img"><img src="https://images.unsplash.com/photo-1507048331197-7d4ac70811cf?w=700&q=80" alt="Køkkenchef Lars Kjeldsen" loading="lazy"></div>
+  </div>
+  <div class="om-wave">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+      <path d="M0,0 C360,60 1080,60 1440,0 L1440,60 L0,60 Z" fill="var(--light)"/>
+    </svg>
+  </div>
+  <div class="om-content">
+    <div class="om-story">
+      <div class="om-story-text">
+        <p>Lars Kjeldsen åbnede Bistro Havnen i 2011 efter 12 år på Copenhagens gourmetscene. Tanken var enkel: tage de bedste råvarer fra det danske hav og tilberede dem med respekt.</p>
+        <p>I dag bruger vi samme fiskehandler som dengang, og vi skifter menuen ugentligt. Det holder os ærlige og dig nysgerrig.</p>
+      </div>
+      <div class="om-story-text">
+        <p>Vi er et lille hold på syv faste medarbejdere, der alle deler den samme passion for gode råvarer og gæstfrihed.</p>
+        <p>Bistro Havnen er en del af Nyhavn-kvarteret og et fast tilholdssted for både lokale og gæster i København.</p>
+      </div>
+    </div>
+    <div class="om-team-title">Mød holdet</div>
+    <div class="om-team">
+      <div class="team-card"><img src="https://images.unsplash.com/photo-1507048331197-7d4ac70811cf?w=400&q=80" alt="Lars" loading="lazy"><h4>Lars Kjeldsen</h4><p>Køkkenchef &amp; grundlægger</p></div>
+      <div class="team-card"><img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=400&q=80" alt="Sofie" loading="lazy"><h4>Sofie Ravn</h4><p>Souschef</p></div>
+      <div class="team-card"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80" alt="Emma" loading="lazy"><h4>Emma Dahl</h4><p>Restaurant Manager</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-acc">
+  <div class="acc-wrap">
+    <h1>Min side</h1>
+    <div class="acc-tabs">
+      <button class="at active" data-acc="login">Log ind</button>
+      <button class="at" data-acc="signup">Opret konto</button>
+    </div>
+    <div class="ap active" id="ap-login">
+      <h2>Velkommen tilbage</h2>
+      <p class="sub">Log ind for at se dine reservationer og ordrer</p>
+      <div class="fg"><label>E-mail</label><input type="email" placeholder="din@email.dk"></div>
+      <div class="fg"><label>Adgangskode</label><input type="password" placeholder="••••••••"></div>
+      <button class="btn-gold" style="width:100%;padding:1rem;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;margin-top:.5rem" onclick="doLogin()">Log ind</button>
+    </div>
+    <div class="ap" id="ap-signup">
+      <h2>Opret konto</h2>
+      <p class="sub">Gem dine favoritter og få besked om nye menuer</p>
+      <div class="form-row"><div class="fg"><label>Fornavn</label><input type="text" placeholder="Lars"></div><div class="fg"><label>Efternavn</label><input type="text" placeholder="Kjeldsen"></div></div>
+      <div class="fg"><label>E-mail</label><input type="email" placeholder="din@email.dk"></div>
+      <div class="fg"><label>Adgangskode</label><input type="password" placeholder="Min. 8 tegn"></div>
+      <button class="btn-gold" style="width:100%;padding:1rem;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;margin-top:.5rem" onclick="doLogin()">Opret konto</button>
+    </div>
+    <div id="acc-dash">
+      <div class="dash-hello">Velkommen tilbage 👋</div>
+      <div class="ord-sec-title">Seneste ordrer</div>
+      <div class="ord-row"><div><div class="ord-id">#4821</div><div class="ord-date">12. august 2025</div></div><span class="ord-status">Leveret</span><div class="ord-amt">595 kr</div></div>
+      <div class="ord-row"><div><div class="ord-id">#4690</div><div class="ord-date">28. juli 2025</div></div><span class="ord-status">Leveret</span><div class="ord-amt">450 kr</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="cOverlay" onclick="closeCart()"></div>
+<div id="cDrawer">
+  <div class="cart-head"><h3>Din kurv</h3><button class="cart-close" onclick="closeCart()">✕</button></div>
+  <div class="cart-body" id="cartBody"><div class="cart-empty">Kurven er tom</div></div>
+  <div class="cart-foot" id="cartFoot" style="display:none">
+    <div class="cart-total-row"><span>I alt</span><strong id="cartTotal">0 kr</strong></div>
+    <button class="btn-full btn-gold" onclick="openCheckout()">Gå til betaling</button>
+    <button style="display:block;width:100%;padding:.75rem;background:none;border:1px solid var(--border);color:var(--muted);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer" onclick="closeCart()">Fortsæt bestilling</button>
+  </div>
+</div>
+
+<div id="chkOverlay">
+  <div class="chk-modal">
+    <div id="chk-form">
+      <h2>Betaling</h2>
+      <div class="chk-summary"><div class="chk-sum-title">Din ordre</div><div id="chkSumItems"></div><div class="chk-sum-total"><span>I alt</span><span id="chkSumTotal"></span></div></div>
+      <p style="font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem">Vælg betalingsmetode</p>
+      <div class="pay-opts">
+        <div class="pay-opt sel" onclick="selPay(this)"><div class="pay-icon">📱</div><span>MobilePay</span><small>Send til 38241</small></div>
+        <div class="pay-opt" onclick="selPay(this)"><div class="pay-icon">💳</div><span>Betalingskort</span><small>Visa / Mastercard</small></div>
+      </div>
+      <button class="btn-full btn-gold" onclick="confirmOrder()">Bekræft og betal</button>
+      <button style="background:none;border:none;color:var(--muted);font-size:.8rem;margin-top:.75rem;cursor:pointer;display:block;width:100%;text-align:center" onclick="closeCheckout()">← Tilbage til kurven</button>
+    </div>
+    <div id="chk-done">
+      <div class="ok-icon">✅</div>
+      <h2>Ordre bekræftet!</h2>
+      <span class="ord-num" id="ordNum"></span>
+      <p>Vi modtager din ordre og du kan forvente levering om 25–35 minutter.<br><br>Kvittering sendes til din e-mail.</p>
+      <button class="btn-gold" style="margin-top:2rem;padding:.85rem 2.5rem;border:none;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase" onclick="closeCheckout();goPage('forside')">Tilbage til forsiden</button>
+    </div>
+  </div>
+</div>
+
+<button id="stt" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
+
+<div id="ckBanner">
+  <div class="ck-inner">
+    <p class="ck-text">Vi bruger cookies for at give dig den bedste oplevelse. Tilpas dine indstillinger eller accepter alle. <a href="#" style="color:var(--gold)">Læs mere</a></p>
+    <div class="ck-acts">
+      <button class="ck-btn" onclick="toggleCkPanel()">Tilpas</button>
+      <button class="ck-btn" onclick="rejectCookies()">Afvis alle</button>
+      <button class="ck-btn pri" onclick="acceptCookies()">Accepter alle</button>
+    </div>
+  </div>
+  <div id="ckPanel">
+    <div class="ck-cats">
+      <div class="ck-cat"><label><input type="checkbox" checked disabled> Nødvendige</label><p>Altid aktive. Sikrer grundlæggende funktioner.</p></div>
+      <div class="ck-cat"><label><input type="checkbox" id="ckPref"> Præferencer</label><p>Husker dine valg og indstillinger.</p></div>
+      <div class="ck-cat"><label><input type="checkbox" id="ckStat"> Statistik</label><p>Hjælper os med at forbedre sitet anonymt.</p></div>
+      <div class="ck-cat"><label><input type="checkbox" id="ckMark"> Marketing</label><p>Bruges til relevante annoncer.</p></div>
+    </div>
+    <button class="ck-btn pri" onclick="saveCookies()">Gem valg</button>
+  </div>
+</div>
+
+<div class="credit">Premium-plan · BuildOne</div>
+
+<script>
+var pages=document.querySelectorAll('.page'),navLinks=document.querySelectorAll('.nav-link');
+function goPage(n){pages.forEach(function(p){p.classList.toggle('active',p.id==='page-'+n)});navLinks.forEach(function(l){l.classList.toggle('active',l.dataset.page===n)});window.scrollTo({top:0,behavior:'instant'})}
+navLinks.forEach(function(l){l.addEventListener('click',function(){goPage(l.dataset.page)})});
+var nav=document.getElementById('nav');
+window.addEventListener('scroll',function(){nav.classList.toggle('solid',window.scrollY>60);document.getElementById('stt').classList.toggle('vis',window.scrollY>400)});
+document.getElementById('burger').addEventListener('click',function(){document.getElementById('navLinks').classList.toggle('open')});
+var cart=[];
+function addToCart(n,p){var e=cart.find(function(i){return i.name===n});if(e){e.qty++}else{cart.push({name:n,price:p,qty:1})}renderCart();openCart()}
+function renderCart(){var b=document.getElementById('cartBody'),f=document.getElementById('cartFoot'),badge=document.getElementById('cartBadge');if(!cart.length){b.innerHTML='<div class="cart-empty">Kurven er tom</div>';f.style.display='none';badge.style.display='none';return}var tot=cart.reduce(function(s,i){return s+i.price*i.qty},0),cnt=cart.reduce(function(s,i){return s+i.qty},0);badge.textContent=cnt;badge.style.display='flex';b.innerHTML=cart.map(function(item,idx){return'<div class="ci"><div class="ci-info"><div class="ci-name">'+item.name+'</div><div class="ci-price">'+item.price+' kr/stk</div><div class="ci-qty"><button class="qb" onclick="chQty('+idx+',-1)">−</button><span class="qn">'+item.qty+'</span><button class="qb" onclick="chQty('+idx+',1)">+</button></div></div><button class="ci-rm" onclick="rmItem('+idx+')">✕</button></div>'}).join('');document.getElementById('cartTotal').textContent=tot+' kr';f.style.display='block'}
+function chQty(i,d){cart[i].qty+=d;if(cart[i].qty<=0)cart.splice(i,1);renderCart()}
+function rmItem(i){cart.splice(i,1);renderCart()}
+function openCart(){document.getElementById('cDrawer').classList.add('open');document.getElementById('cOverlay').classList.add('open')}
+function closeCart(){document.getElementById('cDrawer').classList.remove('open');document.getElementById('cOverlay').classList.remove('open')}
+document.getElementById('cartBtn').addEventListener('click',openCart);
+function openCheckout(){closeCart();var tot=cart.reduce(function(s,i){return s+i.price*i.qty},0);document.getElementById('chkSumItems').innerHTML=cart.map(function(i){return'<div class="chk-sum-row"><span>'+i.name+' ×'+i.qty+'</span><span>'+(i.price*i.qty)+' kr</span></div>'}).join('');document.getElementById('chkSumTotal').textContent=tot+' kr';document.getElementById('chk-form').style.display='block';document.getElementById('chk-done').style.display='none';document.getElementById('chkOverlay').classList.add('open')}
+function closeCheckout(){document.getElementById('chkOverlay').classList.remove('open')}
+function selPay(el){document.querySelectorAll('.pay-opt').forEach(function(p){p.classList.remove('sel')});el.classList.add('sel')}
+function confirmOrder(){document.getElementById('ordNum').textContent='#'+(Math.floor(Math.random()*9000)+1000);document.getElementById('chk-form').style.display='none';document.getElementById('chk-done').style.display='block';cart=[];renderCart()}
+function submitRes(){document.getElementById('resForm').style.display='none';document.getElementById('res-thanks').style.display='block'}
+document.querySelectorAll('.m-tab').forEach(function(t){t.addEventListener('click',function(){document.querySelectorAll('.m-tab').forEach(function(x){x.classList.remove('active')});document.querySelectorAll('.m-cat').forEach(function(x){x.classList.remove('active')});t.classList.add('active');document.getElementById('mcat-'+t.dataset.cat).classList.add('active')})});
+document.querySelectorAll('.at').forEach(function(t){t.addEventListener('click',function(){document.querySelectorAll('.at').forEach(function(x){x.classList.remove('active')});document.querySelectorAll('.ap').forEach(function(x){x.classList.remove('active')});t.classList.add('active');document.getElementById('ap-'+t.dataset.acc).classList.add('active')})});
+function doLogin(){document.querySelectorAll('.ap').forEach(function(p){p.style.display='none'});document.querySelector('.acc-tabs').style.display='none';document.getElementById('acc-dash').style.display='block'}
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('in')})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(function(el){obs.observe(el)});
+function showBanner(){if(!localStorage.getItem('bh_ck'))setTimeout(function(){document.getElementById('ckBanner').classList.add('show')},700)}
+function toggleCkPanel(){var p=document.getElementById('ckPanel');p.style.display=p.style.display==='block'?'none':'block'}
+function acceptCookies(){localStorage.setItem('bh_ck','1');document.getElementById('ckBanner').classList.remove('show')}
+function rejectCookies(){localStorage.setItem('bh_ck','0');document.getElementById('ckBanner').classList.remove('show')}
+function saveCookies(){localStorage.setItem('bh_ck',JSON.stringify({n:true,p:document.getElementById('ckPref').checked,s:document.getElementById('ckStat').checked,m:document.getElementById('ckMark').checked}));document.getElementById('ckBanner').classList.remove('show')}
+showBanner();
+</script>
+</body>
+</html>

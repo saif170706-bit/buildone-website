@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Priser & planer — BuildOne</title>
+<meta name="description" content="Byg gratis, betal først når du går live. Sammenlign Basis, Standard og Premium — plus tilkøb som webshop, SEO og ekstra sider.">
+<style>
+:root{
+  --bg:#f7f4ee;--bg-alt:#efe9dc;--surface:#ffffff;--border:#ddd4bf;
+  --text:#1b2430;--muted:#5b6472;--navy:#16263a;--navy-2:#22384f;--accent:#8a6a34;
+  --radius:3px;--maxw:1160px;--serif:Georgia,"Times New Roman",Times,serif;--sans:"Segoe UI",Arial,Helvetica,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+.muted{color:var(--muted)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;color:var(--navy);letter-spacing:-.01em}
+header.site{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--border);}
+nav.wrap{display:flex;align-items:center;justify-content:space-between;height:82px}
+.logo{font-family:var(--serif);font-weight:400;font-size:1.35rem;color:var(--navy);display:flex;align-items:center;gap:10px}
+.logo .mark{width:32px;height:32px;border:1.5px solid var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:.95rem;font-weight:700;flex-shrink:0}
+.navlinks{display:flex;gap:38px;align-items:center}
+.navlinks a{color:var(--muted);font-weight:500;font-size:.88rem;letter-spacing:.03em;text-transform:uppercase;transition:color .15s}
+.navlinks a:hover,.navlinks a.active{color:var(--navy)}
+.nav-cta{background:var(--navy);color:#fff !important;padding:11px 22px;border-radius:var(--radius);font-weight:600;font-size:.82rem;}
+.nav-cta:hover{background:var(--navy-2)}
+.burger{display:none;background:none;border:0;color:var(--navy);font-size:1.5rem;cursor:pointer}
+@media (max-width:860px){.navlinks{position:fixed;top:82px;left:0;right:0;background:var(--bg);flex-direction:column;padding:24px 28px;gap:20px;border-bottom:1px solid var(--border);display:none;align-items:flex-start}.navlinks.open{display:flex}.burger{display:block}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 30px;border-radius:var(--radius);font-weight:600;font-size:.92rem;letter-spacing:.02em;cursor:pointer;border:1.5px solid transparent;transition:background .15s,color .15s,border-color .15s;}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-primary:hover{background:var(--navy-2)}
+.btn-outline{background:transparent;border-color:var(--navy);color:var(--navy)}
+.btn-outline:hover{background:var(--navy);color:#fff}
+section{padding:96px 0}
+.section-head{max-width:640px;margin:0 auto 52px;text-align:center}
+.section-head .kicker{color:var(--accent);font-weight:700;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;display:block}
+.section-head h2{font-size:clamp(1.7rem,3vw,2.3rem);margin-bottom:14px}
+.page-hero{padding:70px 0 50px;text-align:center;border-bottom:1px solid var(--border)}
+.page-hero .kicker{color:var(--accent);font-weight:700;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;display:block}
+.page-hero h1{font-size:clamp(1.9rem,4vw,2.7rem);margin-bottom:16px}
+.page-hero p{color:var(--muted);max-width:600px;margin:0 auto;font-size:1.05rem}
+.hero-ctas{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+@media(max-width:1080px){.plans{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.plans{grid-template-columns:1fr;max-width:460px;margin:0 auto}}
+.plan{background:var(--surface);padding:40px 32px;display:flex;flex-direction:column;position:relative;}
+.plan.featured{background:var(--navy);color:#fff}
+.plan.featured h3,.plan.featured .price{color:#fff}
+.plan.featured .price-note,.plan.featured p.muted{color:rgba(255,255,255,.65)}
+.plan.featured ul li{border-top-color:rgba(255,255,255,.15);color:#fff}
+.plan.featured ul li:before{color:#c9a45c}
+.plan.custom{background:var(--bg-alt)}
+.plan .badge{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.plan.featured .badge{color:#c9a45c}
+.plan h3{font-size:1.25rem;margin-bottom:6px}
+.plan .price{font-family:var(--serif);font-size:2.6rem;font-weight:400;margin:16px 0 4px;color:var(--navy)}
+.plan .price small{font-family:var(--sans);font-size:.95rem;font-weight:600;color:var(--muted)}
+.plan .price-note{color:var(--muted);font-size:.85rem;margin-bottom:26px}
+.plan ul{list-style:none;margin:0 0 28px;flex:1}
+.plan ul li{padding:10px 0;border-top:1px solid var(--border);font-size:.92rem;display:flex;align-items:flex-start;gap:10px}
+.plan ul li:first-child{border-top:none}
+.plan ul li:before{content:"✓";color:var(--accent);font-weight:700;flex-shrink:0}
+.plan ul li.no:before{content:"✕";color:var(--muted);font-weight:700;flex-shrink:0}
+.plan ul li.no{color:var(--muted)}
+.plan.featured ul li.no:before{color:rgba(255,255,255,.5)}
+.plan .btn{width:100%}
+.plan.featured .btn-outline{border-color:rgba(255,255,255,.5);color:#fff}
+.plan.featured .btn-outline:hover{background:#fff;color:var(--navy)}
+.free-note{max-width:760px;margin:56px auto 0;display:flex;gap:22px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);padding:30px 34px;}
+.free-note .icon{flex-shrink:0;width:40px;height:40px;border-radius:50%;background:var(--bg-alt);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.2rem;color:var(--accent);}
+.free-note .label{display:block;color:var(--accent);font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.free-note h3{font-family:var(--serif);font-weight:400;font-size:1.2rem;color:var(--navy);margin-bottom:10px}
+.free-note p{color:var(--muted);font-size:.95rem;margin:0}
+@media(max-width:600px){.free-note{flex-direction:column}}
+.addons-table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);}
+.addons-table th,.addons-table td{padding:16px 20px;text-align:left;border-bottom:1px solid var(--border);font-size:.94rem}
+.addons-table th{color:var(--muted);font-weight:700;font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;background:var(--bg-alt)}
+.addons-table tr:last-child td{border-bottom:none}
+.addons-table td.price{color:var(--accent);font-weight:700;white-space:nowrap;font-family:var(--serif)}
+.table-scroll{overflow-x:auto}
+.faq{max-width:760px;margin:0 auto}
+details{background:var(--surface);border:1px solid var(--border);padding:22px 26px;margin-bottom:12px;}
+details summary{font-weight:700;font-size:.98rem;color:var(--navy);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details summary::-webkit-details-marker{display:none}
+details summary:after{content:"+";font-family:var(--serif);font-size:1.5rem;color:var(--accent);transition:transform .2s}
+details[open] summary:after{transform:rotate(45deg)}
+details p{margin-top:14px;color:var(--muted)}
+.cta-band{background:var(--navy);padding:64px 48px;text-align:center;color:#fff;}
+.cta-band h2{color:#fff;font-size:clamp(1.5rem,2.6vw,2rem);margin-bottom:14px}
+.cta-band p{opacity:.82;margin-bottom:30px}
+.cta-band .btn-primary{background:var(--accent)}
+.cta-band .btn-primary:hover{background:#a4813f}
+footer.site{border-top:1px solid var(--border);padding:64px 0 28px;background:var(--bg-alt)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:44px}
+@media(max-width:760px){.footer-grid{grid-template-columns:1fr 1fr}}
+.footer-grid h4{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:18px;font-weight:700}
+.footer-grid ul{list-style:none}
+.footer-grid ul li{margin-bottom:11px}
+.footer-grid ul li a{color:var(--muted);font-size:.9rem}
+.footer-grid ul li a:hover{color:var(--navy)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:26px;display:flex;justify-content:space-between;color:var(--muted);font-size:.8rem;flex-wrap:wrap;gap:10px;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="wrap">
+    <a href="index.html" class="logo">BuildOne</a>
+    <div class="navlinks">
+      <a href="index.html">Forside</a>
+      <a href="pricing.html" class="active">Priser</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="about.html">Om os</a>
+      <a href="contact.html">Kontakt</a>
+      <a href="contact.html" class="nav-cta">Kom i gang gratis</a>
+    </div>
+    <button class="burger" aria-label="Menu" onclick="document.querySelector('.navlinks').classList.toggle('open')">☰</button>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <span class="kicker">Priser</span>
+    <h1>Byggeriet er gratis. Du betaler først, når du går live.</h1>
+    <p>Planer der vokser med din virksomhed — og tydelige tilkøb hvis du har brug for mere. Ingen skjulte gebyrer, ingen binding.</p>
+  </div>
+</div>
+
+<section style="padding-top:80px">
+  <div class="wrap">
+    <div class="plans">
+
+      <div class="plan">
+        <span class="badge">Til nystartede</span>
+        <h3>Basis</h3>
+        <p class="muted">For dig der vil ses online hurtigt.</p>
+        <div class="price">249 kr<small>/md</small></div>
+        <div class="price-note">Faktureres månedligt · ingen binding</div>
+        <ul>
+          <li>Op til 3 sider</li>
+          <li>Skræddersyet design</li>
+          <li>Mobilvenlig</li>
+          <li>Hosting, SSL & domænekobling</li>
+          <li>Kontaktformular</li>
+          <li>E-mail-support (48 timers svartid)</li>
+          <li class="no">Webshop</li>
+          <li class="no">Booking-system</li>
+        </ul>
+        <a href="contact.html" class="btn btn-outline">Kom i gang gratis</a>
+      </div>
+
+      <div class="plan featured">
+        <span class="badge">Mest populær</span>
+        <h3>Standard</h3>
+        <p class="muted">For voksende virksomheder der vil have mere.</p>
+        <div class="price">399 kr<small>/md</small></div>
+        <div class="price-note">Faktureres månedligt · ingen binding</div>
+        <ul>
+          <li>Op til 7 sider</li>
+          <li>Alt i Basis</li>
+          <li>Booking-system eller kalender</li>
+          <li>Grundlæggende SEO-pakke</li>
+          <li>Nyhedsbrevsintegration</li>
+          <li>Egen e-mailadresse (@dinvirksomhed.dk)</li>
+          <li>Prioriteret support (24 timer)</li>
+          <li class="no">Fuld webshop</li>
+        </ul>
+        <a href="contact.html" class="btn btn-outline">Kom i gang gratis</a>
+      </div>
+
+      <div class="plan">
+        <span class="badge">Til e-handel</span>
+        <h3>Premium</h3>
+        <p class="muted">For dig der sælger produkter online.</p>
+        <div class="price">599 kr<small>/md</small></div>
+        <div class="price-note">Faktureres månedligt · ingen binding</div>
+        <ul>
+          <li>Op til 15 sider</li>
+          <li>Alt i Standard</li>
+          <li>Fuld webshop (op til 50 produkter)</li>
+          <li>Betalingsintegration (MobilePay/kort)</li>
+          <li>Avanceret SEO & statistik</li>
+          <li>Flersproget side (2 sprog)</li>
+          <li>Prioriteret support (samme dag)</li>
+          <li>Kvartalsvis designgennemgang</li>
+        </ul>
+        <a href="contact.html" class="btn btn-outline">Kom i gang gratis</a>
+      </div>
+
+      <div class="plan custom">
+        <span class="badge">Til virksomheder med særlige behov</span>
+        <h3>Custom</h3>
+        <p class="muted">Skræddersyet løsning til dine behov.</p>
+        <div class="price">Tilbud</div>
+        <div class="price-note">Pris afhænger af omfang · ingen binding</div>
+        <ul>
+          <li>Egne integrationer</li>
+          <li>Headless / komplekse flows</li>
+          <li>API & systemudvikling</li>
+          <li>Dedikeret projektleder</li>
+          <li>SLA-aftale</li>
+          <li>Onboarding & træning</li>
+        </ul>
+        <a href="contact.html" class="btn btn-outline">Få et tilbud</a>
+      </div>
+
+    </div>
+
+    <div class="free-note">
+      <div class="icon">i</div>
+      <div>
+        <span class="label">Godt at vide</span>
+        <h3>Sådan fungerer "gratis indtil du går live"</h3>
+        <p>Vi designer og bygger hele din hjemmeside uden omkostninger. Du gennemgår, beder om ændringer og tester den i ro og mag. Først når du klikker "gå live", begynder din valgte plan at blive faktureret — måned for måned, uden binding.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Tilkøb</span>
+      <h2>Har du brug for mere? Tilføj efter behov</h2>
+      <p class="muted">Funktioner ud over din plans grænse koster ekstra — men alt er tydeligt prissat på forhånd, ingen overraskelser på fakturaen.</p>
+    </div>
+    <div class="table-scroll">
+      <table class="addons-table">
+        <thead>
+          <tr><th>Tilkøb</th><th>Beskrivelse</th><th>Pris</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Ekstra side</td><td>Yderligere side ud over planens grænse</td><td class="price">99 kr/md</td></tr>
+          <tr><td>Ekstra produkt (webshop)</td><td>Pr. produkt ud over 50-grænsen i Premium</td><td class="price">5 kr/md</td></tr>
+          <tr><td>Logodesign</td><td>Professionelt logo med kildefiler</td><td class="price">1.490 kr engangs</td></tr>
+          <tr><td>Copywriting</td><td>Vi skriver teksten for dig, pr. side</td><td class="price">690 kr/side</td></tr>
+          <tr><td>Ekstra sprog</td><td>Yderligere sprogversion af siden</td><td class="price">149 kr/md</td></tr>
+          <tr><td>Prioriteret support</td><td>Svar inden for 4 timer, hverdage</td><td class="price">99 kr/md</td></tr>
+          <tr><td>Eget domænenavn</td><td>Registrering & fornyelse af .dk/.com</td><td class="price">fra 149 kr/år</td></tr>
+          <tr><td>Business-e-mail</td><td>Ekstra postkasse @dinvirksomhed.dk</td><td class="price">39 kr/md pr. boks</td></tr>
+          <tr><td>Booking-system (selvstændigt)</td><td>Hvis ikke inkluderet i din plan</td><td class="price">149 kr/md</td></tr>
+          <tr><td>Avanceret SEO-pakke</td><td>Søgeordsanalyse, indholdsstrategi, månedsrapport</td><td class="price">399 kr/md</td></tr>
+          <tr><td>Ekspreslevering</td><td>Første udkast inden for 48 timer</td><td class="price">990 kr engangs</td></tr>
+          <tr><td>Engangsdesign (ingen abonnement)</td><td>Fast pris, du står selv for hosting</td><td class="price">6.995 kr engangs</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg-alt);border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Ofte stillede spørgsmål</span>
+      <h2>Prisspørgsmål, besvaret</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>Betaler jeg virkelig ingenting, før jeg går live?</summary>
+        <p>Ja. Design, udvikling og første gennemgangsrunde er helt gratis. Du betaler først, når du vælger at udgive siden og aktivere en plan.</p>
+      </details>
+      <details>
+        <summary>Kan jeg skifte plan senere?</summary>
+        <p>Absolut. Du kan opgradere eller nedgradere når som helst — ændringen træder i kraft fra næste faktureringsperiode.</p>
+      </details>
+      <details>
+        <summary>Er der binding?</summary>
+        <p>Nej, alle planer er månedlige uden binding. Opsig når du vil uden opsigelsesgebyr.</p>
+      </details>
+      <details>
+        <summary>Hvad sker der, hvis jeg ikke vil gå live?</summary>
+        <p>Intet krav. Hvis du ikke er tilfreds eller skifter mening, skal du aldrig betale noget — vi har alligevel lagt arbejdet gratis.</p>
+      </details>
+      <details>
+        <summary>Er hosting og domæne inkluderet i prisen?</summary>
+        <p>Hosting og SSL er inkluderet i alle planer. Et eget domænenavn (f.eks. dinvirksomhed.dk) kan registreres som tilkøb fra 149 kr/år.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta-band">
+      <h2>Se din hjemmeside, før du beslutter dig</h2>
+      <p>Intet kreditkort kræves for at komme i gang.</p>
+      <a href="contact.html" class="btn btn-primary">Kom i gang gratis</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="logo">BuildOne</a>
+        <p class="muted" style="margin-top:16px;max-width:280px">Vi bygger hjemmesider gratis og tager kun betalt, når du er klar til at gå live.</p>
+      </div>
+      <div>
+        <h4>Sider</h4>
+        <ul><li><a href="index.html">Forside</a></li><li><a href="pricing.html">Priser</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="about.html">Om os</a></li></ul>
+      </div>
+      <div>
+        <h4>Ydelser</h4>
+        <ul><li><a href="pricing.html">Hjemmesider</a></li><li><a href="pricing.html">Webshop</a></li><li><a href="pricing.html">SEO & tilkøb</a></li><li><a href="contact.html">Support</a></li></ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul><li><a href="mailto:hej@buildone.dk">hej@buildone.dk</a></li><li><a href="tel:+4570000000">70 00 00 00</a></li><li><a href="contact.html">Send besked</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 BuildOne. Alle rettigheder forbeholdes.</span>
+      <span>Placeholder-brand — skift navn & logo før lancering.</span>
+    </div>
+  </div>
+</footer>
+
+<div id="cookieBanner" class="cookie-banner" role="dialog" aria-label="Cookiesamtykke">
+  <div class="cookie-inner">
+    <p>Vi bruger cookies til at forbedre din oplevelse, huske dine præferencer og se, hvordan siden bliver brugt. <a href="#" id="cookieMoreLink">Læs mere</a></p>
+    <div class="cookie-actions">
+      <button type="button" id="cookieCustomize" class="cookie-btn cookie-btn-ghost">Tilpas</button>
+      <button type="button" id="cookieReject" class="cookie-btn cookie-btn-outline">Afvis alle</button>
+      <button type="button" id="cookieAccept" class="cookie-btn cookie-btn-fill">Accepter alle</button>
+    </div>
+  </div>
+  <div class="cookie-panel" id="cookiePanel">
+    <label class="cookie-row"><span><b>Nødvendige</b><br>Kræves for at siden fungerer korrekt.</span><input type="checkbox" checked disabled></label>
+    <label class="cookie-row"><span><b>Præferencer</b><br>Husker dine valg og indstillinger ved næste besøg.</span><input type="checkbox" id="ckPref"></label>
+    <label class="cookie-row"><span><b>Statistik</b><br>Hjælper os med at forstå, hvordan siden bliver brugt.</span><input type="checkbox" id="ckStat"></label>
+    <label class="cookie-row"><span><b>Marketing</b><br>Bruges til at vise dig relevant indhold og annoncer.</span><input type="checkbox" id="ckMkt"></label>
+    <button type="button" id="cookieSave" class="cookie-btn cookie-btn-fill" style="width:100%;margin-top:14px">Gem valg</button>
+  </div>
+</div>
+<style>
+.cookie-banner{position:fixed;left:0;right:0;bottom:0;z-index:999;background:#fff;border-top:1px solid #ddd4bf;box-shadow:0 -10px 30px -14px rgba(0,0,0,.2);transform:translateY(110%);transition:transform .5s ease;font-family:"Segoe UI",Arial,Helvetica,sans-serif}
+.cookie-banner.show{transform:translateY(0)}
+.cookie-inner{max-width:1160px;margin:0 auto;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.cookie-inner p{margin:0;font-size:.85rem;color:#5b6472;max-width:640px;line-height:1.5}
+.cookie-inner a{text-decoration:underline;color:inherit}
+.cookie-actions{display:flex;gap:10px;flex-wrap:wrap}
+.cookie-btn{border-radius:3px;padding:11px 20px;font-size:.8rem;font-weight:600;cursor:pointer;border:1.5px solid transparent;font-family:inherit}
+.cookie-btn-fill{background:#16263a;color:#fff}
+.cookie-btn-fill:hover{background:#22384f}
+.cookie-btn-outline{background:transparent;border-color:#16263a;color:#16263a}
+.cookie-btn-outline:hover{background:#16263a;color:#fff}
+.cookie-btn-ghost{background:transparent;border-color:transparent;color:#5b6472;text-decoration:underline}
+.cookie-panel{display:none;max-width:1160px;margin:0 auto;padding:0 28px 24px}
+.cookie-panel.show{display:block}
+.cookie-row{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:14px 0;border-top:1px solid #ddd4bf;font-size:.82rem;color:#5b6472}
+.cookie-row b{color:#16263a}
+.cookie-row input{margin-top:3px;flex-shrink:0}
+@media(max-width:700px){.cookie-inner{flex-direction:column;align-items:flex-start}}
+</style>
+<script>
+(function(){
+  var KEY='buildone_cookie_consent';
+  var banner=document.getElementById('cookieBanner');
+  var panel=document.getElementById('cookiePanel');
+  function saved(){try{return JSON.parse(localStorage.getItem(KEY))}catch(e){return null}}
+  if(!saved()){ setTimeout(function(){ banner.classList.add('show'); }, 600); }
+  function persist(v){ localStorage.setItem(KEY, JSON.stringify(v)); banner.classList.remove('show'); }
+  document.getElementById('cookieAccept').onclick=function(){ persist({necessary:true,preferences:true,statistics:true,marketing:true}); };
+  document.getElementById('cookieReject').onclick=function(){ persist({necessary:true,preferences:false,statistics:false,marketing:false}); };
+  document.getElementById('cookieCustomize').onclick=function(){ panel.classList.toggle('show'); };
+  document.getElementById('cookieSave').onclick=function(){
+    persist({necessary:true,preferences:document.getElementById('ckPref').checked,statistics:document.getElementById('ckStat').checked,marketing:document.getElementById('ckMkt').checked});
+  };
+  document.getElementById('cookieMoreLink').onclick=function(e){ e.preventDefault(); panel.classList.add('show'); banner.classList.add('show'); };
+})();
+</script>
+
+</body>
+</html>
