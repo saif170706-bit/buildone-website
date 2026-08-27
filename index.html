@@ -226,6 +226,41 @@ details summary::after{
 details[open] summary::after{transform:rotate(45deg);color:var(--accent)}
 details p{margin-top:14px;color:var(--mid);line-height:1.65;font-size:.93rem;max-width:620px}
 
+/* ---------- HERO PHOTO ---------- */
+.hero-photo{position:relative;border-radius:6px;overflow:hidden;box-shadow:0 32px 72px -20px rgba(0,49,53,.4)}
+.hero-photo img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover}
+
+/* ---------- PHOTO STRIP ---------- */
+.photo-strip{position:relative;height:380px;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.photo-strip img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-strip-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,49,53,.82) 0%,rgba(0,49,53,.3) 60%,rgba(0,49,53,.05) 100%)}
+.photo-strip-inner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;padding:0 28px}
+.photo-strip-quote{font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;color:#fff;max-width:520px;line-height:1.2;letter-spacing:-.02em}
+.photo-strip-sub{margin-top:12px;color:rgba(255,255,255,.6);font-size:.95rem;max-width:380px}
+
+/* ---------- HOW-IT-WORKS SPLIT ---------- */
+.how-split{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
+@media(max-width:800px){.how-split{grid-template-columns:1fr}}
+.how-photo{position:relative;overflow:hidden;min-height:400px}
+.how-photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.how-content{padding:72px 56px;background:var(--white)}
+@media(max-width:800px){.how-content{padding:48px 28px}}
+.steps-v{display:flex;flex-direction:column;gap:36px;margin-top:32px}
+.step-v{display:flex;gap:20px;align-items:flex-start}
+.step-v-num{font-size:1.8rem;font-weight:700;color:var(--border);line-height:1;flex-shrink:0;width:48px}
+.step-v h3{font-size:1rem;font-weight:700;margin-bottom:6px}
+.step-v p{color:var(--mid);font-size:.9rem;line-height:1.6}
+
+/* ---------- FEATURES SPLIT ---------- */
+.feat-split{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border)}
+@media(max-width:800px){.feat-split{grid-template-columns:1fr}}
+.feat-photo-panel{position:relative;overflow:hidden;min-height:500px}
+.feat-photo-panel img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.feat-photo-panel-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,49,53,.7) 0%,rgba(0,49,53,.1) 60%)}
+.feat-photo-caption{position:absolute;bottom:28px;left:28px;right:28px;color:#fff}
+.feat-photo-caption strong{font-size:1.15rem;display:block;margin-bottom:4px}
+.feat-photo-caption span{font-size:.83rem;opacity:.75}
+
 /* ---------- FOOTER ---------- */
 footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:var(--off-white)}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
@@ -271,27 +306,10 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
         </div>
       </div>
 
-      <div class="mockup">
-        <div class="mockup-frame">
-          <div class="mockup-bar">
-            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-            <div class="urlbar"></div>
-          </div>
-          <div class="mockup-body">
-            <div class="mockup-nav">
-              <div class="mockup-logo"></div>
-              <div class="mockup-links"><span></span><span></span><span></span></div>
-            </div>
-            <div class="mockup-hero">
-              <div class="line1"></div>
-              <div class="line2"></div>
-              <div class="cta"></div>
-            </div>
-            <div class="mockup-cols"><div></div><div></div><div></div></div>
-          </div>
-        </div>
-        <div class="mockup-badge"><span class="blink"></span>Live om 3 dage</div>
-        <div class="mockup-tag"><span class="check">✓</span>Godkendt af kunden</div>
+      <div class="hero-photo">
+        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=900&q=85&auto=format&fit=crop" alt="Hjemmeside på MacBook-skærm" loading="lazy">
+        <div class="mockup-badge" style="top:16px;right:16px"><span class="blink"></span>Live om 3 dage</div>
+        <div class="mockup-tag" style="bottom:16px;left:20px"><span class="check">✓</span>Godkendt af kunden</div>
       </div>
     </div>
   </div>
@@ -307,44 +325,72 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
   </div>
 </div>
 
+<!-- EDITORIAL PHOTO STRIP -->
+<div class="photo-strip">
+  <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1600&q=85&auto=format&fit=crop" alt="Moderne kontor" loading="lazy">
+  <div class="photo-strip-overlay"></div>
+  <div class="photo-strip-inner">
+    <div class="wrap">
+      <p class="photo-strip-quote">Vi designer og bygger.<br>Du godkender.</p>
+      <p class="photo-strip-sub">Fra idé til live hjemmeside på 3–7 dage.</p>
+    </div>
+  </div>
+</div>
+
 <!-- SÅDAN FUNGERER DET -->
-<section id="how" style="background:var(--white)">
-  <div class="wrap">
-    <div class="section-head reveal">
+<section id="how" style="background:var(--white);padding:0;border-bottom:1px solid var(--border)">
+  <div class="how-split">
+    <div class="how-photo reveal">
+      <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=900&q=85&auto=format&fit=crop" alt="MacBook på arbejdsbord" loading="lazy">
+    </div>
+    <div class="how-content reveal">
       <span class="section-label">Sådan fungerer det</span>
       <h2>Tre trin — ingen risiko</h2>
-      <p>Du ser resultatet, før du betaler en krone.</p>
-    </div>
-
-    <div class="steps reveal">
-      <div class="step">
-        <div class="step-num">01</div>
-        <h3>Fortæl om dit projekt</h3>
-        <p>Udfyld vores korte formular eller book et opkald. Vi finder ud af, hvad du har brug for.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <h3>Vi bygger — gratis</h3>
-        <p>Vores team designer og bygger en komplet hjemmeside til dig. Du beder om ændringer uden ekstra omkostninger.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <h3>Tilfreds? Gå live.</h3>
-        <p>Vælg en plan fra 249 kr/md og vi udgiver siden med domæne, hosting og support inkluderet.</p>
+      <p class="muted" style="font-size:.95rem">Du ser resultatet, før du betaler en krone.</p>
+      <div class="steps-v">
+        <div class="step-v">
+          <div class="step-v-num">01</div>
+          <div>
+            <h3>Fortæl om dit projekt</h3>
+            <p>Udfyld vores korte formular eller book et opkald. Vi finder ud af, hvad du har brug for.</p>
+          </div>
+        </div>
+        <div class="step-v">
+          <div class="step-v-num">02</div>
+          <div>
+            <h3>Vi bygger — gratis</h3>
+            <p>Vores team designer og bygger en komplet hjemmeside. Du beder om ændringer uden ekstra omkostninger.</p>
+          </div>
+        </div>
+        <div class="step-v">
+          <div class="step-v-num">03</div>
+          <div>
+            <h3>Tilfreds? Gå live.</h3>
+            <p>Vælg en plan fra 249 kr/md og vi udgiver siden med domæne, hosting og support inkluderet.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ALT ER INKLUDERET -->
-<section style="background:var(--off-white);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-  <div class="wrap">
-    <div class="section-head center reveal">
-      <span class="section-label">Alt er inkluderet</span>
-      <h2>Bygget til virksomheder, der vil ses online</h2>
+<section style="background:var(--off-white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0">
+  <div class="feat-split">
+    <div class="feat-photo-panel">
+      <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&q=85&auto=format&fit=crop" alt="Kode på laptop-skærm" loading="lazy">
+      <div class="feat-photo-panel-overlay"></div>
+      <div class="feat-photo-caption">
+        <strong>Skræddersyet fra bunden</strong>
+        <span>Intet copy-paste tema — hver side designes til dit brand</span>
+      </div>
     </div>
-
-    <div class="features-grid reveal">
+    <div style="background:var(--off-white)">
+      <div style="padding:56px 48px 24px">
+        <span class="section-label">Alt er inkluderet</span>
+        <h2 style="font-size:clamp(1.6rem,2.5vw,2.1rem);margin-bottom:0">Bygget til virksomheder, der vil ses online</h2>
+      </div>
+    <div class="features-grid reveal" style="border:none;border-top:1px solid var(--border)">
       <div class="feat">
         <div class="feat-icon">
           <svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>
@@ -399,6 +445,7 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
           <p>Opsig når du vil. Ingen lange aftaler eller opsigelsesgebyrer.</p>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </section>
