@@ -262,27 +262,29 @@ details p{margin-top:14px;color:var(--mid);line-height:1.65;font-size:.93rem;max
 .feat-photo-caption span{font-size:.83rem;opacity:.75}
 
 /* ---------- MOCKUP WEBSITE REDESIGN ---------- */
-.mockup-body{padding:0!important}
-.mk-nav{background:#fff;border-bottom:1px solid #e8e8e8;padding:9px 14px;display:flex;align-items:center;justify-content:space-between}
-.mk-logo{width:44px;height:7px;border-radius:1px;background:#003135}
-.mk-navlinks{display:flex;gap:8px}
-.mk-navlinks span{width:20px;height:5px;border-radius:1px;background:#ccc}
-.mk-navcta{width:36px;height:14px;border-radius:1px;background:#003135}
-.mk-hero{background:#003135;padding:22px 16px 20px}
-.mk-tag{width:44px;height:4px;border-radius:1px;background:#964734;margin-bottom:12px}
-.mk-h1a{width:126px;height:13px;border-radius:1px;background:#fff;margin-bottom:6px}
-.mk-h1b{width:100px;height:13px;border-radius:1px;background:#fff;margin-bottom:6px}
-.mk-h1c{width:68px;height:13px;border-radius:1px;background:#0fa4af;margin-bottom:13px}
-.mk-lead{width:108px;height:4px;border-radius:1px;background:rgba(255,255,255,.3);margin-bottom:4px}
-.mk-lead2{width:88px;height:4px;border-radius:1px;background:rgba(255,255,255,.2);margin-bottom:14px}
-.mk-btns{display:flex;gap:6px}
-.mk-btn-p{width:54px;height:15px;border-radius:1px;background:#0fa4af}
-.mk-btn-o{width:44px;height:15px;border-radius:1px;border:1px solid rgba(255,255,255,.35)}
-.mk-cards{background:#f0f8f9;padding:12px 14px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.mk-card{background:#fff;border-radius:2px;padding:8px;border:1px solid #cde4e6}
-.mk-card-dot{width:16px;height:16px;border-radius:2px;background:#e0f4f5;margin-bottom:7px}
-.mk-card-t{width:42px;height:5px;border-radius:1px;background:#003135;margin-bottom:3px}
-.mk-card-b{width:32px;height:4px;border-radius:1px;background:#cde4e6}
+.mockup-body{padding:0!important;font-family:var(--sans)}
+.mk-nav{background:#fff;border-bottom:1px solid #e8e8e8;padding:7px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.mk-brand{font-weight:700;color:#003135;font-size:8.5px;letter-spacing:-.01em;white-space:nowrap}
+.mk-links{display:flex;gap:9px;color:#6b6b6b;font-size:6.5px}
+.mk-navcta{background:#003135;color:#fff;padding:3px 8px;border-radius:1px;font-size:6.5px;font-weight:600;white-space:nowrap}
+.mk-hero{background:#003135;padding:22px 16px 18px;display:flex;gap:14px;align-items:center}
+.mk-hero-left{flex:1;min-width:0}
+.mk-eyebrow{color:#964734;font-size:5.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px}
+.mk-h1{color:#fff;font-size:13.5px;font-weight:700;line-height:1.2;margin-bottom:7px;letter-spacing:-.02em}
+.mk-h1 span{color:#0fa4af}
+.mk-sub{color:rgba(255,255,255,.55);font-size:6px;line-height:1.6;margin-bottom:11px;max-width:160px}
+.mk-btns{display:flex;gap:5px;flex-wrap:wrap}
+.mk-btn-p{background:#0fa4af;color:#fff;padding:4px 10px;border-radius:1px;font-size:6.5px;font-weight:700;display:inline-block}
+.mk-btn-o{border:1px solid rgba(255,255,255,.35);color:rgba(255,255,255,.8);padding:4px 9px;border-radius:1px;font-size:6.5px;display:inline-block}
+.mk-hero-img{flex:0 0 130px;height:94px;border-radius:4px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);display:flex;flex-direction:column;gap:5px;padding:8px}
+.mk-img-line{height:6px;border-radius:1px;background:rgba(255,255,255,.15)}
+.mk-img-line.accent{background:#0fa4af;width:60%}
+.mk-img-block{flex:1;border-radius:2px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)}
+.mk-feats{background:#f0f8f9;padding:10px 12px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;border-top:1px solid #cde4e6}
+.mk-feat{background:#fff;border:1px solid #cde4e6;border-radius:2px;padding:7px 8px}
+.mk-feat-dot{width:8px;height:8px;border-radius:1px;background:#e0f4f5;margin-bottom:5px}
+.mk-feat-t{font-size:6px;font-weight:700;color:#003135;margin-bottom:2px}
+.mk-feat-s{font-size:5.5px;color:#6b6b6b;line-height:1.4}
 
 /* ---------- HOW FLOATING IMAGE ---------- */
 .how-float{
@@ -348,26 +350,31 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
           </div>
           <div class="mockup-body">
             <div class="mk-nav">
-              <div class="mk-logo"></div>
-              <div class="mk-navlinks"><span></span><span></span><span></span></div>
-              <div class="mk-navcta"></div>
+              <span class="mk-brand">BuildOne</span>
+              <div class="mk-links"><span>Forside</span><span>Priser</span><span>Portfolio</span><span>Om os</span></div>
+              <span class="mk-navcta">Kom i gang</span>
             </div>
             <div class="mk-hero">
-              <div class="mk-tag"></div>
-              <div class="mk-h1a"></div>
-              <div class="mk-h1b"></div>
-              <div class="mk-h1c"></div>
-              <div class="mk-lead"></div>
-              <div class="mk-lead2"></div>
-              <div class="mk-btns">
-                <div class="mk-btn-p"></div>
-                <div class="mk-btn-o"></div>
+              <div class="mk-hero-left">
+                <div class="mk-eyebrow">Gratis at bygge</div>
+                <div class="mk-h1">Din hjemmeside<br>bygget <span>gratis.</span></div>
+                <div class="mk-sub">Vi designer og bygger. Du betaler kun når du er tilfreds og klar til at gå live.</div>
+                <div class="mk-btns">
+                  <span class="mk-btn-p">Kom i gang</span>
+                  <span class="mk-btn-o">Se priser →</span>
+                </div>
+              </div>
+              <div class="mk-hero-img">
+                <div class="mk-img-line accent"></div>
+                <div class="mk-img-line" style="width:80%"></div>
+                <div class="mk-img-line" style="width:50%"></div>
+                <div class="mk-img-block"></div>
               </div>
             </div>
-            <div class="mk-cards">
-              <div class="mk-card"><div class="mk-card-dot"></div><div class="mk-card-t"></div><div class="mk-card-b"></div></div>
-              <div class="mk-card"><div class="mk-card-dot"></div><div class="mk-card-t"></div><div class="mk-card-b"></div></div>
-              <div class="mk-card"><div class="mk-card-dot"></div><div class="mk-card-t"></div><div class="mk-card-b"></div></div>
+            <div class="mk-feats">
+              <div class="mk-feat"><div class="mk-feat-dot"></div><div class="mk-feat-t">Skræddersyet</div><div class="mk-feat-s">Designet til dit brand</div></div>
+              <div class="mk-feat"><div class="mk-feat-dot"></div><div class="mk-feat-t">Mobilvenlig</div><div class="mk-feat-s">Alle skærmstørrelser</div></div>
+              <div class="mk-feat"><div class="mk-feat-dot"></div><div class="mk-feat-t">SEO inkluderet</div><div class="mk-feat-s">Optimeret fra start</div></div>
             </div>
           </div>
         </div>
