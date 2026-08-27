@@ -261,6 +261,17 @@ details p{margin-top:14px;color:var(--mid);line-height:1.65;font-size:.93rem;max
 .feat-photo-caption strong{font-size:1.15rem;display:block;margin-bottom:4px}
 .feat-photo-caption span{font-size:.83rem;opacity:.75}
 
+/* ---------- HOW FLOATING IMAGE ---------- */
+.how-float{
+  position:absolute;bottom:0;right:0;
+  width:44%;max-width:580px;
+  overflow:hidden;border-radius:6px 0 0 6px;
+  box-shadow:-28px -28px 80px -24px rgba(0,49,53,.3);
+  will-change:transform;pointer-events:none;
+}
+.how-float img{width:100%;display:block}
+@media(max-width:900px){.how-float{display:none}}
+
 /* ---------- FOOTER ---------- */
 footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:var(--off-white)}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
@@ -338,39 +349,39 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
 </div>
 
 <!-- SÅDAN FUNGERER DET -->
-<section id="how" style="background:var(--white);padding:0;border-bottom:1px solid var(--border)">
-  <div class="how-split">
-    <div class="how-photo reveal">
-      <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=900&q=85&auto=format&fit=crop" alt="MacBook på arbejdsbord" loading="lazy">
-    </div>
-    <div class="how-content reveal">
+<section id="how" style="background:var(--white);padding:96px 0 120px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;min-height:580px">
+  <div class="wrap">
+    <div class="section-head reveal" style="max-width:480px">
       <span class="section-label">Sådan fungerer det</span>
       <h2>Tre trin — ingen risiko</h2>
       <p class="muted" style="font-size:.95rem">Du ser resultatet, før du betaler en krone.</p>
-      <div class="steps-v">
-        <div class="step-v">
-          <div class="step-v-num">01</div>
-          <div>
-            <h3>Fortæl om dit projekt</h3>
-            <p>Udfyld vores korte formular eller book et opkald. Vi finder ud af, hvad du har brug for.</p>
-          </div>
+    </div>
+    <div class="steps-v reveal" style="max-width:480px">
+      <div class="step-v">
+        <div class="step-v-num">01</div>
+        <div>
+          <h3>Fortæl om dit projekt</h3>
+          <p>Udfyld vores korte formular eller book et opkald. Vi finder ud af, hvad du har brug for.</p>
         </div>
-        <div class="step-v">
-          <div class="step-v-num">02</div>
-          <div>
-            <h3>Vi bygger — gratis</h3>
-            <p>Vores team designer og bygger en komplet hjemmeside. Du beder om ændringer uden ekstra omkostninger.</p>
-          </div>
+      </div>
+      <div class="step-v">
+        <div class="step-v-num">02</div>
+        <div>
+          <h3>Vi bygger — gratis</h3>
+          <p>Vores team designer og bygger en komplet hjemmeside. Du beder om ændringer uden ekstra omkostninger.</p>
         </div>
-        <div class="step-v">
-          <div class="step-v-num">03</div>
-          <div>
-            <h3>Tilfreds? Gå live.</h3>
-            <p>Vælg en plan fra 249 kr/md og vi udgiver siden med domæne, hosting og support inkluderet.</p>
-          </div>
+      </div>
+      <div class="step-v">
+        <div class="step-v-num">03</div>
+        <div>
+          <h3>Tilfreds? Gå live.</h3>
+          <p>Vælg en plan fra 249 kr/md og vi udgiver siden med domæne, hosting og support inkluderet.</p>
         </div>
       </div>
     </div>
+  </div>
+  <div class="how-float" id="howFloat">
+    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=700&q=85&auto=format&fit=crop" alt="Designer arbejder på desktop PC skærm" loading="lazy">
   </div>
 </section>
 
@@ -573,6 +584,26 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
     });
   }, { threshold: 0.12 });
   items.forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+<script>
+(function(){
+  var el = document.getElementById('howFloat');
+  if (!el) return;
+  var section = document.getElementById('how');
+  var maxLeft = 150;
+  var maxUp = 160;
+  function update(){
+    var r = section.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var sh = section.offsetHeight;
+    var raw = (vh - r.top) / (vh + sh);
+    var p = Math.max(0, Math.min(1, raw));
+    el.style.transform = 'translate(' + (-p * maxLeft) + 'px, ' + (-p * maxUp) + 'px)';
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  update();
 })();
 </script>
 
