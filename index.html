@@ -261,6 +261,29 @@ details p{margin-top:14px;color:var(--mid);line-height:1.65;font-size:.93rem;max
 .feat-photo-caption strong{font-size:1.15rem;display:block;margin-bottom:4px}
 .feat-photo-caption span{font-size:.83rem;opacity:.75}
 
+/* ---------- MOCKUP WEBSITE REDESIGN ---------- */
+.mockup-body{padding:0!important}
+.mk-nav{background:#fff;border-bottom:1px solid #e8e8e8;padding:9px 14px;display:flex;align-items:center;justify-content:space-between}
+.mk-logo{width:44px;height:7px;border-radius:1px;background:#003135}
+.mk-navlinks{display:flex;gap:8px}
+.mk-navlinks span{width:20px;height:5px;border-radius:1px;background:#ccc}
+.mk-navcta{width:36px;height:14px;border-radius:1px;background:#003135}
+.mk-hero{background:#003135;padding:22px 16px 20px}
+.mk-tag{width:44px;height:4px;border-radius:1px;background:#964734;margin-bottom:12px}
+.mk-h1a{width:126px;height:13px;border-radius:1px;background:#fff;margin-bottom:6px}
+.mk-h1b{width:100px;height:13px;border-radius:1px;background:#fff;margin-bottom:6px}
+.mk-h1c{width:68px;height:13px;border-radius:1px;background:#0fa4af;margin-bottom:13px}
+.mk-lead{width:108px;height:4px;border-radius:1px;background:rgba(255,255,255,.3);margin-bottom:4px}
+.mk-lead2{width:88px;height:4px;border-radius:1px;background:rgba(255,255,255,.2);margin-bottom:14px}
+.mk-btns{display:flex;gap:6px}
+.mk-btn-p{width:54px;height:15px;border-radius:1px;background:#0fa4af}
+.mk-btn-o{width:44px;height:15px;border-radius:1px;border:1px solid rgba(255,255,255,.35)}
+.mk-cards{background:#f0f8f9;padding:12px 14px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.mk-card{background:#fff;border-radius:2px;padding:8px;border:1px solid #cde4e6}
+.mk-card-dot{width:16px;height:16px;border-radius:2px;background:#e0f4f5;margin-bottom:7px}
+.mk-card-t{width:42px;height:5px;border-radius:1px;background:#003135;margin-bottom:3px}
+.mk-card-b{width:32px;height:4px;border-radius:1px;background:#cde4e6}
+
 /* ---------- HOW FLOATING IMAGE ---------- */
 .how-float{
   position:absolute;bottom:0;right:0;
@@ -317,10 +340,39 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
         </div>
       </div>
 
-      <div class="hero-photo">
-        <img src="https://images.unsplash.com/photo-1634084462412-b54873c0a56d?w=900&q=85&auto=format&fit=crop" alt="Moderne hjemmeside på skærm" loading="lazy">
-        <div class="mockup-badge" style="top:16px;right:16px"><span class="blink"></span>Live om 3 dage</div>
-        <div class="mockup-tag" style="bottom:16px;left:20px"><span class="check">✓</span>Godkendt af kunden</div>
+      <div class="mockup">
+        <div class="mockup-frame">
+          <div class="mockup-bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <div class="urlbar"></div>
+          </div>
+          <div class="mockup-body">
+            <div class="mk-nav">
+              <div class="mk-logo"></div>
+              <div class="mk-navlinks"><span></span><span></span><span></span></div>
+              <div class="mk-navcta"></div>
+            </div>
+            <div class="mk-hero">
+              <div class="mk-tag"></div>
+              <div class="mk-h1a"></div>
+              <div class="mk-h1b"></div>
+              <div class="mk-h1c"></div>
+              <div class="mk-lead"></div>
+              <div class="mk-lead2"></div>
+              <div class="mk-btns">
+                <div class="mk-btn-p"></div>
+                <div class="mk-btn-o"></div>
+              </div>
+            </div>
+            <div class="mk-cards">
+              <div class="mk-card"><div class="mk-card-dot"></div><div class="mk-card-t"></div><div class="mk-card-b"></div></div>
+              <div class="mk-card"><div class="mk-card-dot"></div><div class="mk-card-t"></div><div class="mk-card-b"></div></div>
+              <div class="mk-card"><div class="mk-card-dot"></div><div class="mk-card-t"></div><div class="mk-card-b"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="mockup-badge"><span class="blink"></span>Live om 3 dage</div>
+        <div class="mockup-tag"><span class="check">✓</span>Godkendt af kunden</div>
       </div>
     </div>
   </div>
