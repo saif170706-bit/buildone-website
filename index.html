@@ -57,7 +57,7 @@ nav.wrap{display:flex;align-items:center;justify-content:space-between;height:72
 .hero-label{
   display:inline-flex;align-items:center;gap:8px;
   font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--rust);margin-bottom:24px;
+  color:var(--accent);margin-bottom:24px;
 }
 .hero-label .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 1.6s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
@@ -67,47 +67,44 @@ nav.wrap{display:flex;align-items:center;justify-content:space-between;height:72
 .hero p.lead{max-width:480px;margin:0 0 36px;font-size:1.05rem;color:var(--mid);line-height:1.65}
 .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
 
-/* Browser mockup */
-.mockup{position:relative}
-.mockup-frame{
-  background:var(--off-white);border:1px solid var(--border);
-  border-radius:8px;overflow:hidden;
-  box-shadow:0 24px 60px -16px rgba(0,0,0,.18)
+/* Hero video montage */
+.hero-video{position:relative;border-radius:12px;overflow:hidden;box-shadow:0 28px 64px -18px rgba(0,0,0,.32);aspect-ratio:16/9}
+.vslide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease}
+.vslide.active{opacity:1}
+.hero-video-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(0,49,53,.28) 0%,rgba(0,0,0,.1) 100%);pointer-events:none;z-index:1}
+
+/* Stats overlay — appears during last clip */
+.stats-overlay{
+  position:absolute;inset:0;z-index:3;
+  background:rgba(0,0,0,.68);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .9s ease;
+  pointer-events:none;
 }
-.mockup-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:var(--border);border-bottom:1px solid var(--border)}
-.mockup-bar .dot{width:8px;height:8px;border-radius:50%;background:#ccc}
-.mockup-bar .urlbar{flex:1;margin-left:8px;height:16px;border-radius:8px;background:var(--white);border:1px solid #ddd}
-.mockup-body{padding:20px}
-.mockup-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.mockup-logo{width:60px;height:9px;border-radius:2px;background:var(--black)}
-.mockup-links{display:flex;gap:9px}
-.mockup-links span{width:24px;height:6px;border-radius:2px;background:var(--border)}
-.mockup-hero{height:110px;border-radius:4px;background:var(--black);margin-bottom:14px;position:relative;overflow:hidden}
-.mockup-hero .line1{position:absolute;left:18px;top:24px;width:110px;height:11px;border-radius:2px;background:rgba(255,255,255,.9)}
-.mockup-hero .line2{position:absolute;left:18px;top:43px;width:72px;height:7px;border-radius:2px;background:rgba(255,255,255,.45)}
-.mockup-hero .cta{position:absolute;left:18px;top:66px;width:58px;height:16px;border-radius:2px;background:var(--accent)}
-.mockup-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
-.mockup-cols div{height:42px;border-radius:4px;background:var(--border)}
-.mockup-badge{
-  position:absolute;top:-12px;right:-12px;
-  background:var(--accent);color:#fff;
-  font-size:.7rem;font-weight:700;padding:7px 12px;
-  border-radius:999px;display:flex;align-items:center;gap:5px;
-  box-shadow:0 8px 20px -6px rgba(15,164,175,.5)
+.stats-overlay.visible{opacity:1}
+.montage-stats{
+  display:flex;gap:0;
+  width:100%;max-width:900px;
+  padding:0 clamp(16px,5%,56px);
+  box-sizing:border-box;
 }
-.mockup-badge .blink{width:5px;height:5px;border-radius:50%;background:#fff;animation:blink 1.6s ease-in-out infinite}
-.mockup-tag{
-  position:absolute;bottom:-14px;left:20px;
-  background:var(--white);border:1px solid var(--border);
-  border-radius:6px;padding:9px 14px;
-  box-shadow:0 12px 28px -12px rgba(0,0,0,.22);
-  font-size:.77rem;color:var(--black);font-weight:600;
-  display:flex;align-items:center;gap:8px
+.ms-stat{flex:1;min-width:0;padding:0 clamp(8px,3%,32px)}
+.ms-stat:first-child{padding-left:0}
+.ms-stat:last-child{padding-right:0}
+.ms-sep{width:1px;background:rgba(255,255,255,.14);flex-shrink:0;align-self:stretch;margin:4px 0}
+.ms-top{display:flex;align-items:center;gap:8px;margin-bottom:7px;flex-wrap:nowrap}
+.ms-number{
+  font-family:var(--sans);font-size:clamp(1.1rem,2.4vw,2.2rem);
+  font-weight:700;color:#fff;line-height:1;
+  letter-spacing:-.04em;font-variant-numeric:tabular-nums;
+  white-space:nowrap;
 }
-.mockup-tag .check{
-  width:18px;height:18px;border-radius:50%;
-  background:#e6f4ea;color:#2f6b45;
-  display:flex;align-items:center;justify-content:center;font-size:.65rem
+.ms-spark{width:28px;height:17px;color:rgba(255,255,255,.55);flex-shrink:0}
+.ms-label{
+  font-family:var(--sans);font-size:clamp(.55rem,.65vw,.7rem);
+  color:rgba(255,255,255,.52);
+  text-transform:uppercase;letter-spacing:.08em;line-height:1.35;
+  white-space:nowrap;
 }
 
 /* ---------- BUTTONS ---------- */
@@ -145,7 +142,7 @@ nav.wrap{display:flex;align-items:center;justify-content:space-between;height:72
 section{padding:96px 0}
 .section-label{
   font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--rust);margin-bottom:16px;display:block;
+  color:var(--accent);margin-bottom:16px;display:block;
 }
 .section-head{max-width:600px;margin:0 0 56px}
 .section-head.center{margin-left:auto;margin-right:auto;text-align:center}
@@ -261,26 +258,6 @@ details p{margin-top:14px;color:var(--mid);line-height:1.65;font-size:.93rem;max
 .feat-photo-caption strong{font-size:1.15rem;display:block;margin-bottom:4px}
 .feat-photo-caption span{font-size:.83rem;opacity:.75}
 
-/* ---------- MOCKUP — CLIENT WEBSITE (restaurant style) ---------- */
-.mockup-body{padding:0!important;font-family:var(--sans)}
-.mk-nav{background:#1a2e1a;padding:8px 12px;display:flex;align-items:center;justify-content:space-between}
-.mk-brand{font-weight:700;color:#f5edd6;font-size:9px;letter-spacing:.05em;text-transform:uppercase}
-.mk-links{display:flex;gap:9px;color:rgba(245,237,214,.55);font-size:6px;letter-spacing:.04em;text-transform:uppercase}
-.mk-navcta{background:#c9a45c;color:#1a2e1a;padding:3px 9px;border-radius:999px;font-size:6px;font-weight:700;white-space:nowrap}
-.mk-hero{display:grid;grid-template-columns:1fr 1fr;min-height:130px}
-.mk-hero-left{background:#1a2e1a;padding:16px 14px;display:flex;flex-direction:column;justify-content:center}
-.mk-eyebrow{color:#c9a45c;font-size:5.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
-.mk-h1{color:#f5edd6;font-size:14px;font-weight:700;line-height:1.2;margin-bottom:8px;letter-spacing:-.01em}
-.mk-sub{color:rgba(245,237,214,.5);font-size:6px;line-height:1.6;margin-bottom:11px}
-.mk-btn-p{background:#c9a45c;color:#1a2e1a;padding:5px 11px;border-radius:999px;font-size:6.5px;font-weight:700;display:inline-block}
-.mk-hero-right{background:#2d4a2d;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.mk-hero-right::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 60% 40%,rgba(201,164,92,.18),transparent 70%)}
-.mk-dish{width:60px;height:60px;border-radius:50%;background:#3d5e3d;border:2px solid rgba(201,164,92,.3)}
-.mk-strip{background:#f5edd6;padding:8px 12px;display:flex;gap:0;border-top:1px solid #e8dfc8}
-.mk-strip-item{flex:1;text-align:center;padding:0 6px;border-right:1px solid #ddd0b0;font-size:6px}
-.mk-strip-item:last-child{border-right:none}
-.mk-strip-item b{display:block;font-size:8.5px;font-weight:700;color:#1a2e1a;margin-bottom:1px}
-.mk-strip-item span{color:#888;font-size:5.5px}
 
 /* ---------- HOW FLOATING IMAGE ---------- */
 .how-float{
@@ -315,7 +292,6 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
     <div class="navlinks">
       <a href="index.html" class="active">Forside</a>
       <a href="pricing.html">Priser</a>
-      <a href="portfolio.html">Portfolio</a>
       <a href="about.html">Om os</a>
       <a href="contact.html">Kontakt</a>
       <a href="contact.html" class="nav-cta">Kom i gang gratis</a>
@@ -338,39 +314,51 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
         </div>
       </div>
 
-      <div class="mockup">
-        <div class="mockup-frame">
-          <div class="mockup-bar">
-            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-            <div class="urlbar"></div>
-          </div>
-          <div class="mockup-body">
-            <div class="mk-nav">
-              <span class="mk-brand">Maison&nbsp;Verte</span>
-              <div class="mk-links"><span>Menu</span><span>Om os</span><span>Events</span><span>Galleri</span></div>
-              <span class="mk-navcta">Book bord</span>
-            </div>
-            <div class="mk-hero">
-              <div class="mk-hero-left">
-                <div class="mk-eyebrow">Åbent tirsdag – søndag</div>
-                <div class="mk-h1">Smag &amp;<br>atmosfære.</div>
-                <div class="mk-sub">Autentisk køkken med sæsonens bedste råvarer — midt i byen.</div>
-                <span class="mk-btn-p">Reservér bord →</span>
+      <div class="hero-video">
+        <!-- Clip 1: people busy at work, chosen by user -->
+        <video class="vslide active" autoplay muted loop playsinline>
+          <source src="https://videos.pexels.com/video-files/7652720/7652720-hd_1920_1080_25fps.mp4" type="video/mp4">
+          <source src="https://videos.pexels.com/video-files/7652720/7652720-sd_640_360_25fps.mp4" type="video/mp4">
+        </video>
+        <!-- Clip 2: man looking at computer while talking to colleagues -->
+        <video class="vslide" muted loop playsinline>
+          <source src="https://videos.pexels.com/video-files/8632591/8632591-hd_1920_1080_25fps.mp4" type="video/mp4">
+          <source src="https://videos.pexels.com/video-files/8632591/8632591-sd_640_360_25fps.mp4" type="video/mp4">
+        </video>
+        <!-- Clip 3: closed→open sign flip at flower shop — the "going live" moment -->
+        <video class="vslide" muted loop playsinline>
+          <source src="https://videos.pexels.com/video-files/5399637/5399637-hd_1920_1080_25fps.mp4" type="video/mp4">
+          <source src="https://videos.pexels.com/video-files/5399637/5399637-sd_640_360_25fps.mp4" type="video/mp4">
+        </video>
+        <div class="hero-video-overlay"></div>
+        <!-- Stats overlay — appears only during last clip -->
+        <div class="stats-overlay" id="statsOverlay">
+          <div class="montage-stats">
+            <div class="ms-stat">
+              <div class="ms-top">
+                <span class="ms-number" id="sv-visitors">0</span>
+                <svg class="ms-spark" viewBox="0 0 36 22" fill="none" aria-hidden="true"><polyline points="0,18 9,14 18,9 27,4 36,0" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/><polyline points="30,0 36,0 36,7" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>
               </div>
-              <div class="mk-hero-right">
-                <div class="mk-dish"></div>
-              </div>
+              <div class="ms-label">besøgende denne uge</div>
             </div>
-            <div class="mk-strip">
-              <div class="mk-strip-item"><b>12–22</b><span>Åbningstider</span></div>
-              <div class="mk-strip-item"><b>4.9 ★</b><span>Google rating</span></div>
-              <div class="mk-strip-item"><b>Ø350</b><span>Pr. kuvert</span></div>
-              <div class="mk-strip-item"><b>Privat</b><span>Selskaber</span></div>
+            <div class="ms-sep"></div>
+            <div class="ms-stat">
+              <div class="ms-top">
+                <span class="ms-number" id="sv-revenue">0</span>
+                <svg class="ms-spark" viewBox="0 0 36 22" fill="none" aria-hidden="true"><polyline points="0,18 9,14 18,9 27,4 36,0" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/><polyline points="30,0 36,0 36,7" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>
+              </div>
+              <div class="ms-label">kr ekstra omsætning</div>
+            </div>
+            <div class="ms-sep"></div>
+            <div class="ms-stat">
+              <div class="ms-top">
+                <span class="ms-number" id="sv-clients">0</span>
+                <svg class="ms-spark" viewBox="0 0 36 22" fill="none" aria-hidden="true"><polyline points="0,18 9,14 18,9 27,4 36,0" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/><polyline points="30,0 36,0 36,7" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>
+              </div>
+              <div class="ms-label">nye kunder denne måned</div>
             </div>
           </div>
         </div>
-        <div class="mockup-badge"><span class="blink"></span>Live om 3 dage</div>
-        <div class="mockup-tag"><span class="check">✓</span>Godkendt af kunden</div>
       </div>
     </div>
   </div>
@@ -431,7 +419,7 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
     </div>
   </div>
   <div class="how-float" id="howFloat">
-    <img src="https://images.unsplash.com/photo-1583508915901-b5f84c1dcde1?w=700&q=85&auto=format&fit=crop" alt="Mand i skjorte arbejder ved desktop skærm" loading="lazy">
+    <img src="https://images.pexels.com/photos/5621960/pexels-photo-5621960.jpeg?auto=compress&cs=tinysrgb&w=700&q=85" alt="Mand og kvinde samarbejder ved computer" loading="lazy">
   </div>
 </section>
 
@@ -583,14 +571,15 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
       <div>
         <a href="index.html" class="footer-logo">BuildOne</a>
         <p class="footer-desc">Vi bygger hjemmesider gratis og tager kun betalt, når du er klar til at gå live.</p>
+        <p class="footer-desc" style="margin-top:12px">CVR 46716639</p>
       </div>
       <div>
         <h4>Sider</h4>
         <ul>
           <li><a href="index.html">Forside</a></li>
           <li><a href="pricing.html">Priser</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
           <li><a href="about.html">Om os</a></li>
+          <li><a href="contact.html">Kontakt</a></li>
         </ul>
       </div>
       <div>
@@ -617,6 +606,74 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
     </div>
   </div>
 </footer>
+
+<script>
+/* ---------- VIDEO MONTAGE + TIMED STATS ---------- */
+(function(){
+  var slides = Array.from(document.querySelectorAll('.vslide'));
+  if (slides.length < 2) return;
+  var overlay = document.getElementById('statsOverlay');
+  var CLIP_MS  = 7000;   // each clip shows for 7s
+  var SHOW_MS  = 1800;   // stats appear 1.8s into last clip
+  var cur = 0;
+  var statsTimer = null;
+
+  slides.forEach(function(v, i){ if (i > 0) v.load(); });
+
+  /* --- counters (run once per cycle, no loop) --- */
+  function dk(n){ return n.toLocaleString('da-DK'); }
+  function runCounter(id, target, duration, fmt) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var val = 0, step = target / (duration / 16);
+    function tick(){
+      val = Math.min(val + step, target);
+      el.textContent = fmt(Math.floor(val));
+      if (val < target) requestAnimationFrame(tick);
+    }
+    el.textContent = fmt(0);
+    requestAnimationFrame(tick);
+  }
+  function startCounters(){
+    runCounter('sv-visitors', 1247,  2000, function(n){ return dk(n); });
+    setTimeout(function(){ runCounter('sv-revenue', 34850, 2400, function(n){ return dk(n); }); }, 180);
+    setTimeout(function(){ runCounter('sv-clients',    23, 1400, function(n){ return dk(n); }); }, 360);
+  }
+
+  /* --- show / hide overlay --- */
+  function showStats(){
+    if (!overlay) return;
+    /* reset displays to 0 first */
+    ['sv-visitors','sv-revenue','sv-clients'].forEach(function(id){
+      var el = document.getElementById(id);
+      if (el) el.textContent = '0';
+    });
+    overlay.classList.add('visible');
+    setTimeout(startCounters, 700); /* let overlay fade in before counting */
+  }
+  function hideStats(){
+    if (overlay) overlay.classList.remove('visible');
+  }
+
+  /* --- slide cycling --- */
+  function nextSlide(){
+    clearTimeout(statsTimer);
+    /* hide stats when leaving last clip */
+    if (cur === slides.length - 1) hideStats();
+
+    slides[cur].classList.remove('active');
+    cur = (cur + 1) % slides.length;
+    slides[cur].classList.add('active');
+    slides[cur].currentTime = 0;
+    slides[cur].play().catch(function(){});
+
+    /* schedule stats on last clip */
+    if (cur === slides.length - 1) statsTimer = setTimeout(showStats, SHOW_MS);
+  }
+
+  setInterval(nextSlide, CLIP_MS);
+})();
+</script>
 
 <script>
 (function(){
