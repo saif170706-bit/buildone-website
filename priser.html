@@ -106,10 +106,15 @@ section{padding:96px 0}
 .price-amount{font-size:2.4rem;font-weight:700;color:var(--black);line-height:1;letter-spacing:-.03em}
 .price-amount small{font-size:.95rem;font-weight:500;letter-spacing:0}
 .price-note{color:var(--mid);font-size:.82rem;margin-bottom:28px}
-.price-was{font-size:.88rem;color:var(--mid);text-decoration:line-through;margin-bottom:2px}
-.price-discount-badge{display:inline-block;background:var(--accent);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:2px;margin-bottom:8px}
-.plan.featured .price-was{color:rgba(255,255,255,.5)}
+.price-after{color:var(--mid);font-size:.82rem;margin-top:4px;margin-bottom:20px}
+.plan.featured .price-after{color:rgba(255,255,255,.5)}
 .plan.featured .price-amount{color:var(--white)}
+.price-block{position:relative;padding-top:28px;margin-bottom:4px}
+.price-old-wrap{position:absolute;top:0;right:0}
+.price-old{display:inline-block;position:relative;font-size:.95rem;font-weight:600;color:var(--mid);line-height:1;padding:0 2px}
+.price-old::after{content:'';position:absolute;left:-2px;right:-2px;top:50%;height:1.5px;background:var(--accent);transform:rotate(-10deg);border-radius:2px}
+.plan.featured .price-old{color:rgba(255,255,255,.4)}
+.plan.featured .price-old::after{background:var(--accent)}
 .plan ul{list-style:none;margin:0 0 28px;flex:1}
 .plan ul li{padding:10px 0;border-top:1px solid var(--border);font-size:.9rem;display:flex;align-items:flex-start;gap:10px;line-height:1.45}
 .plan ul li:first-child{border-top:none}
@@ -202,10 +207,11 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
         <span class="plan-badge">Til nystartede</span>
         <h3>Basis</h3>
         <p class="plan-desc">For dig der vil ses online hurtigt.</p>
-        <span class="price-discount-badge">🎉 Tilbud — første 2 måneder</span>
-        <div class="price-was">Normalpris 349 kr/md</div>
-        <div class="price-row"><span class="price-amount">249 kr<small>/md</small></span></div>
-        <div class="price-note">Herefter 349 kr/md · ingen binding · ekskl. moms</div>
+        <div class="price-block">
+          <div class="price-old-wrap"><span class="price-old">349 kr/md</span></div>
+          <span class="price-amount">249 kr<small>/md</small></span>
+        </div>
+        <div class="price-after">Herefter 349 kr/md &nbsp;·&nbsp; ingen binding &nbsp;·&nbsp; ekskl. moms</div>
         <ul>
           <li>Op til 3 sider</li>
           <li>Skræddersyet design</li>
@@ -224,10 +230,11 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
         <span class="plan-badge">Mest populær</span>
         <h3>Standard</h3>
         <p class="plan-desc">For voksende virksomheder der vil have mere.</p>
-        <span class="price-discount-badge">🎉 Tilbud — første 2 måneder</span>
-        <div class="price-was">Normalpris 499 kr/md</div>
-        <div class="price-row"><span class="price-amount">349 kr<small>/md</small></span></div>
-        <div class="price-note">Herefter 499 kr/md · ingen binding · ekskl. moms</div>
+        <div class="price-block">
+          <div class="price-old-wrap"><span class="price-old">499 kr/md</span></div>
+          <span class="price-amount">349 kr<small>/md</small></span>
+        </div>
+        <div class="price-after">Herefter 499 kr/md &nbsp;·&nbsp; ingen binding &nbsp;·&nbsp; ekskl. moms</div>
         <ul>
           <li>Op til 7 sider</li>
           <li>Alt i Basis</li>
@@ -245,10 +252,11 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
         <span class="plan-badge">Til e-handel</span>
         <h3>Premium</h3>
         <p class="plan-desc">For dig der sælger produkter online.</p>
-        <span class="price-discount-badge">🎉 Tilbud — første 2 måneder</span>
-        <div class="price-was">Normalpris 699 kr/md</div>
-        <div class="price-row"><span class="price-amount">499 kr<small>/md</small></span></div>
-        <div class="price-note">Herefter 699 kr/md · ingen binding · ekskl. moms</div>
+        <div class="price-block">
+          <div class="price-old-wrap"><span class="price-old">699 kr/md</span></div>
+          <span class="price-amount">499 kr<small>/md</small></span>
+        </div>
+        <div class="price-after">Herefter 699 kr/md &nbsp;·&nbsp; ingen binding &nbsp;·&nbsp; ekskl. moms</div>
         <ul>
           <li>Op til 15 sider</li>
           <li>Alt i Standard</li>
