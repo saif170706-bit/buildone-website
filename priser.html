@@ -109,14 +109,18 @@ section{padding:96px 0}
 .price-after{color:var(--mid);font-size:.82rem;margin-top:4px;margin-bottom:20px}
 .plan.featured .price-after{color:rgba(255,255,255,.5)}
 .plan.featured .price-amount{color:var(--white)}
-.price-block{position:relative;padding-top:28px;margin-bottom:4px}
-.price-old-wrap{position:absolute;top:0;right:0;text-align:right}
-.price-old{display:inline-block;position:relative;font-size:.95rem;font-weight:600;color:var(--mid);line-height:1;padding:0 2px}
-.price-old::after{content:'';position:absolute;left:-2px;right:-2px;top:50%;height:1.5px;background:var(--accent);transform:rotate(-10deg);border-radius:2px}
-.price-old-label{display:block;font-size:.68rem;color:var(--accent);font-weight:600;letter-spacing:.04em;margin-top:3px}
-.plan.featured .price-old{color:rgba(255,255,255,.4)}
+.price-block{position:relative;margin-bottom:12px}
+.price-old-wrap{margin-bottom:8px}
+.price-old{display:inline-block;position:relative;font-size:2.4rem;font-weight:700;color:var(--black);line-height:1;letter-spacing:-.03em;padding:0 3px}
+.price-old small{font-size:.95rem;font-weight:500;letter-spacing:0}
+.price-old::after{content:'';position:absolute;left:-4px;right:-4px;top:52%;height:2.5px;background:var(--accent);transform:rotate(-6deg);border-radius:2px}
+.price-deal{display:inline-flex;align-items:baseline;gap:6px;background:var(--accent);color:#fff;padding:8px 16px;border-radius:3px;margin-bottom:6px}
+.price-deal-amount{font-size:1.5rem;font-weight:800;line-height:1;letter-spacing:-.02em}
+.price-deal-sub{font-size:.78rem;font-weight:600;opacity:.9}
+.price-deal-note{font-size:.72rem;color:var(--accent);font-weight:600;letter-spacing:.03em;margin-bottom:4px}
+.plan.featured .price-old{color:rgba(255,255,255,.55)}
 .plan.featured .price-old::after{background:var(--accent)}
-.plan.featured .price-old-label{color:var(--accent)}
+.plan.featured .price-deal-note{color:var(--accent)}
 .plan ul{list-style:none;margin:0 0 28px;flex:1}
 .plan ul li{padding:10px 0;border-top:1px solid var(--border);font-size:.9rem;display:flex;align-items:flex-start;gap:10px;line-height:1.45}
 .plan ul li:first-child{border-top:none}
@@ -210,8 +214,9 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
         <h3>Basis</h3>
         <p class="plan-desc">For dig der vil ses online hurtigt.</p>
         <div class="price-block">
-          <div class="price-old-wrap"><span class="price-old">349 kr/md</span><span class="price-old-label">første 2 mdr.</span></div>
-          <span class="price-amount">249 kr<small>/md</small></span>
+          <div class="price-old-wrap"><span class="price-old">349 kr<small>/md</small></span></div>
+          <div class="price-deal"><span class="price-deal-amount">249 kr</span><span class="price-deal-sub">/md</span></div>
+          <div class="price-deal-note">de første 2 måneder</div>
         </div>
         <div class="price-after">Herefter 349 kr/md &nbsp;·&nbsp; ingen binding &nbsp;·&nbsp; ekskl. moms</div>
         <ul>
@@ -233,8 +238,9 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
         <h3>Standard</h3>
         <p class="plan-desc">For voksende virksomheder der vil have mere.</p>
         <div class="price-block">
-          <div class="price-old-wrap"><span class="price-old">499 kr/md</span><span class="price-old-label">første 2 mdr.</span></div>
-          <span class="price-amount">349 kr<small>/md</small></span>
+          <div class="price-old-wrap"><span class="price-old">499 kr<small>/md</small></span></div>
+          <div class="price-deal"><span class="price-deal-amount">349 kr</span><span class="price-deal-sub">/md</span></div>
+          <div class="price-deal-note">de første 2 måneder</div>
         </div>
         <div class="price-after">Herefter 499 kr/md &nbsp;·&nbsp; ingen binding &nbsp;·&nbsp; ekskl. moms</div>
         <ul>
@@ -255,8 +261,9 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
         <h3>Premium</h3>
         <p class="plan-desc">For dig der sælger produkter online.</p>
         <div class="price-block">
-          <div class="price-old-wrap"><span class="price-old">699 kr/md</span><span class="price-old-label">første 2 mdr.</span></div>
-          <span class="price-amount">499 kr<small>/md</small></span>
+          <div class="price-old-wrap"><span class="price-old">699 kr<small>/md</small></span></div>
+          <div class="price-deal"><span class="price-deal-amount">499 kr</span><span class="price-deal-sub">/md</span></div>
+          <div class="price-deal-note">de første 2 måneder</div>
         </div>
         <div class="price-after">Herefter 699 kr/md &nbsp;·&nbsp; ingen binding &nbsp;·&nbsp; ekskl. moms</div>
         <ul>
