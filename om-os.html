@@ -82,15 +82,18 @@ nav.wrap{display:flex;align-items:center;justify-content:space-between;height:72
 .about-intro p{color:var(--mid);font-size:1rem;line-height:1.7;margin-bottom:16px}
 .about-intro p:last-child{margin-bottom:0}
 .about-img-block{
-  background:var(--black);
-  color:rgba(255,255,255,.7);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:48px 36px;
+  border-radius:4px;
+  overflow:hidden;
   min-height:320px;
+  position:relative;
+}
+.about-img-block img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
   border-radius:4px;
 }
-.about-img-block .year{font-size:3.2rem;font-weight:700;color:var(--accent);line-height:1;letter-spacing:-.04em;margin-bottom:8px}
-.about-img-block .sub{font-size:.82rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.45)}
 .about-img-block .name{font-size:1.4rem;font-weight:700;color:var(--white);margin-bottom:6px}
 
 /* ---------- SECTIONS ---------- */
@@ -166,9 +169,7 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
         <p>Så vi vendte modellen om. Vi bygger din hjemmeside helt gratis, du ser og tester den i ro og mag, og du betaler først den dag, du er klar til at gå live — fra 349 kr om måneden.</p>
       </div>
       <div class="about-img-block">
-        <div class="year">2021</div>
-        <div class="name">BuildOne</div>
-        <div class="sub">Grundlagt i Danmark</div>
+        <img src="/office.jpg" alt="BuildOne kontor" />
       </div>
     </div>
 
