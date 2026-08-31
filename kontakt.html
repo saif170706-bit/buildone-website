@@ -167,7 +167,7 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
 
       <div class="form-card">
         <h2>Fortæl os om dit projekt</h2>
-        <form id="contact-form" onsubmit="event.preventDefault();var b=this.querySelector('button[type=submit]');b.textContent='Sendt ✓ Vi hører fra os inden for 24 timer.';b.style.background='var(--accent)';b.disabled=true;this.reset();">
+        <form id="contact-form">
           <div class="row2">
             <div class="field">
               <label for="name">Navn *</label>
@@ -202,9 +202,52 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
             <label for="message">Fortæl om dit projekt *</label>
             <textarea id="message" name="message" rows="5" required placeholder="Hvad skal din hjemmeside indeholde?"></textarea>
           </div>
-          <button type="submit" class="submit-btn">Send & start gratis</button>
+          <button type="submit" class="submit-btn" id="submit-btn">Send & start gratis</button>
           <p class="form-note">Ved at sende accepterer du, at vi kontakter dig om dit projekt.</p>
         </form>
+        <script>
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+          e.preventDefault();
+          var btn = document.getElementById('submit-btn');
+          btn.textContent = 'Sender…';
+          btn.disabled = true;
+
+          var plan = document.getElementById('plan').value;
+          var company = document.getElementById('company').value.trim();
+          var besked = document.getElementById('message').value.trim();
+          if (plan !== 'Ved ikke endnu') {
+            besked = 'Plan: ' + plan + '\n\n' + besked;
+          }
+          if (company) {
+            besked = 'Virksomhed: ' + company + '\n' + besked;
+          }
+
+          try {
+            var res = await fetch('https://admin.buildone.dk/api/inquiries', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                navn: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                telefon: document.getElementById('phone').value.trim(),
+                besked: besked,
+                kilde: 'buildone.dk/kontakt'
+              })
+            });
+            if (res.ok) {
+              btn.textContent = 'Sendt ✓ Vi hører fra os inden for 24 timer.';
+              btn.style.background = 'var(--accent)';
+              document.getElementById('contact-form').reset();
+            } else {
+              throw new Error('server-fejl');
+            }
+          } catch(err) {
+            btn.textContent = 'Noget gik galt — prøv igen eller ring til os.';
+            btn.style.background = 'var(--rust)';
+            btn.disabled = false;
+          }
+        });
+        </script>
       </div>
 
       <div class="info-sidebar">
