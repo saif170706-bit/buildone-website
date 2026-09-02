@@ -76,8 +76,8 @@ nav.wrap{display:flex;align-items:center;justify-content:space-between;height:72
 .flip-word{
   display:inline-block;
   color:var(--black);
-  overflow:hidden;
-  vertical-align:bottom;
+  vertical-align:baseline;
+  min-width:4px;
 }
 .hero .grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
 @media(max-width:900px){.hero .grid{grid-template-columns:1fr;gap:48px}}
@@ -399,7 +399,7 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
     <div class="grid">
       <div class="inner hero-inner" id="heroInner">
         <span class="hero-label"><span class="dot"></span>Ingen forudbetaling krævet</span>
-        <h1>En hjemmeside til din <span class="flip-word" id="flipWord">virksomhed</span> —<br><strong>gratis at prøve.</strong></h1>
+        <h1>En hjemmeside til din<br><span class="flip-word" id="flipWord">virksomhed</span> — <strong>gratis at prøve.</strong></h1>
         <p class="lead">Vi bygger siden. Du ser resultatet. Betaler kun hvis du er tilfreds og vil gå live — fra 349 kr/md.</p>
         <div class="hero-ctas">
           <a href="/kontakt" class="btn btn-primary">Start dit gratisprojekt</a>
