@@ -7,345 +7,227 @@
 <title>3D-test — BuildOne</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --black:#003135; --off-black:#024950; --white:#fff;
-  --accent:#0fa4af; --mid:#5a7a7d;
+  --black:#003135; --accent:#0fa4af;
   --sans:"Space Grotesk","Segoe UI",Arial,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
 body{font-family:var(--sans);background:var(--black);color:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
-.intro,.outro{
-  min-height:70vh;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;text-align:center;padding:60px 24px;
-}
-.intro h1{font-size:clamp(1.8rem,5vw,3rem);line-height:1.1;letter-spacing:-.02em;max-width:16ch}
-.intro p,.outro p{color:rgba(255,255,255,.55);margin-top:14px;max-width:44ch;font-size:.98rem;line-height:1.6}
+.intro,.outro{min-height:66vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px}
+.intro h1{font-size:clamp(1.8rem,5vw,3rem);line-height:1.1;letter-spacing:-.02em;max-width:17ch}
+.intro p,.outro p{color:rgba(255,255,255,.55);margin-top:14px;max-width:46ch;line-height:1.65}
 .hint{margin-top:34px;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
 .hint span{display:block;margin-top:10px;font-size:1.2rem;animation:bob 1.8s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
 
-/* --- 3D-scenen --- */
-#stage{position:relative;background:var(--black)}
-#stageVp{height:100vh;position:relative;overflow:hidden}
-#gl{position:absolute;inset:0;width:100%;height:100%;display:block}
+#stage{position:relative;background:radial-gradient(120% 90% at 50% 22%,#02434a 0%,var(--black) 62%)}
+#vp{height:100vh;position:relative;overflow:hidden}
+/* Ingen transform-style:preserve-3d nogen steder: en iframe inde i en
+   preserve-3d-kæde render'er tomt i Chrome. I stedet får hvert lag sin
+   egen perspective, og flippet laves ved at dreje laptop og telefon
+   uafhængigt af hinanden. */
+.scene{position:absolute;inset:0;perspective:1600px;perspective-origin:50% 46%}
+.flip{position:absolute;inset:0;will-change:transform}
+.stack{position:absolute;left:50%;top:50%;perspective:1400px}
 
-.caption{
-  position:absolute;left:0;right:0;bottom:clamp(24px,5vh,54px);
-  text-align:center;pointer-events:none;padding:0 24px;z-index:2;
-}
-.caption-label{
-  font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:8px;
-}
-.caption-text{font-size:clamp(1.05rem,2.6vw,1.7rem);font-weight:700;letter-spacing:-.01em}
-.cap{opacity:0;transition:opacity .45s ease}
+.pt{position:absolute;will-change:transform,opacity}
+
+/* ---------- laptop ---------- */
+.laptop{position:absolute;left:50%;top:50%}
+.lp-back{inset:-14px;border-radius:16px;background:linear-gradient(160deg,#eef4f4,#c6d9da);
+  box-shadow:0 46px 92px -34px rgba(0,0,0,.78)}
+.lp-foot{left:-56px;right:-56px;bottom:-30px;height:14px;border-radius:0 0 14px 14px;
+  background:linear-gradient(180deg,#d9e6e7,#a9c2c4)}
+.lp-chrome{left:0;right:0;top:0;height:38px;background:linear-gradient(180deg,#f5f9f9,#e3ecec);
+  border-radius:11px 11px 0 0;display:flex;align-items:center;gap:7px;padding:0 14px}
+.dot{width:10px;height:10px;border-radius:50%}
+.lp-url{top:9px;left:76px;right:16px;height:20px;border-radius:10px;background:#fff;
+  box-shadow:inset 0 0 0 1px #dbe7e8;font-size:10px;color:#7b9698;display:flex;align-items:center;padding:0 10px}
+.lp-screen{left:0;right:0;top:38px;bottom:0;overflow:hidden;background:#fdf9f4;border-radius:0 0 11px 11px}
+.lp-screen iframe{border:0;display:block;transform-origin:top left;pointer-events:none}
+
+/* ---------- telefon (bagsiden af flippet) ---------- */
+.phone{position:absolute;left:50%;top:50%}
+.ph-body{position:relative;border-radius:36px;padding:11px;
+  background:linear-gradient(160deg,#eaf2f2,#b4cccf);box-shadow:0 42px 84px -30px rgba(0,0,0,.78)}
+.ph-screen{overflow:hidden;border-radius:26px;background:#fdf9f4;position:relative}
+.ph-screen iframe{border:0;display:block;transform-origin:top left;pointer-events:none}
+
+.caps{position:absolute;left:0;right:0;bottom:clamp(18px,4vh,44px);text-align:center;pointer-events:none;z-index:5;height:68px}
+.cap{position:absolute;left:0;right:0;bottom:0;opacity:0;transition:opacity .4s ease;padding:0 22px}
 .cap.on{opacity:1}
-.cap{position:absolute;left:0;right:0;bottom:0;padding:0 24px}
-
-.bar{position:absolute;left:6vw;right:6vw;bottom:16px;height:2px;background:rgba(255,255,255,.12);z-index:2}
+.cap b{display:block;font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
+.cap span{font-size:clamp(1rem,2.5vw,1.55rem);font-weight:700;letter-spacing:-.01em}
+.bar{position:absolute;left:6vw;right:6vw;bottom:13px;height:2px;background:rgba(255,255,255,.12);z-index:5}
 .bar i{display:block;height:100%;width:0;background:var(--accent)}
-
-.loading{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  color:rgba(255,255,255,.4);font-size:.85rem;letter-spacing:.1em;z-index:3;
-}
-.fallback{display:none;position:absolute;inset:0;align-items:center;justify-content:center;padding:32px;text-align:center;color:rgba(255,255,255,.55);font-size:.9rem;line-height:1.6}
 </style>
 </head>
 <body>
 
 <div class="intro">
-  <h1>Sådan bygger vi din hjemmeside</h1>
-  <p>Scroll ned. Delene samler sig, én ad gangen, til en færdig side.</p>
+  <h1>Én side. Bygget til begge skærme.</h1>
+  <p>Scroll ned. Siden samler sig af sine dele — og vender så om og viser sig selv på en telefon.</p>
   <div class="hint">Scroll<span>↓</span></div>
 </div>
 
 <section id="stage">
-  <div id="stageVp">
-    <canvas id="gl"></canvas>
-    <div class="loading" id="loading">Indlæser 3D…</div>
-    <div class="fallback" id="fallback">
-      Din browser understøtter ikke 3D-grafik.<br>Alt andet på siden fungerer som normalt.
+  <div id="vp">
+    <div class="scene">
+      <div class="flip" id="flipL">
+        <div class="stack" id="laptop">
+          <div class="pt lp-back"   data-p="0"></div>
+          <div class="pt lp-foot"   data-p="0"></div>
+          <div class="pt lp-chrome" data-p="1">
+            <span class="dot" style="background:#f0685f"></span>
+            <span class="dot" style="background:#f5bd4f"></span>
+            <span class="dot" style="background:#61c454"></span>
+          </div>
+          <div class="pt lp-url"    data-p="1">poteogpels.dk</div>
+          <div class="pt lp-screen" data-p="2">
+            <iframe id="fDesk" title="Demosiden på computer" scrolling="no" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip" id="flipP">
+        <div class="phone" id="phone">
+          <div class="ph-body">
+            <div class="ph-screen" id="phScreen">
+              <iframe id="fPhone" title="Samme side på telefon" scrolling="no" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="caption" style="height:74px">
-      <div class="cap" data-cap="0"><div class="caption-label">Trin 01</div><div class="caption-text">Vi lægger fundamentet</div></div>
-      <div class="cap" data-cap="1"><div class="caption-label">Trin 02</div><div class="caption-text">Navigation og struktur</div></div>
-      <div class="cap" data-cap="2"><div class="caption-label">Trin 03</div><div class="caption-text">Indhold og billeder</div></div>
-      <div class="cap" data-cap="3"><div class="caption-label">Trin 04</div><div class="caption-text">Din side er klar</div></div>
+
+    <div class="caps">
+      <div class="cap" data-c="0"><b>Trin 01</b><span>Vi sætter rammen op</span></div>
+      <div class="cap" data-c="1"><b>Trin 02</b><span>Adresse og navigation</span></div>
+      <div class="cap" data-c="2"><b>Trin 03</b><span>Indholdet falder på plads</span></div>
+      <div class="cap" data-c="3"><b>Trin 04</b><span>Samme side på mobilen</span></div>
     </div>
     <div class="bar"><i id="bar"></i></div>
   </div>
 </section>
 
 <div class="outro">
-  <p>Det er nogenlunde sådan det foregår i virkeligheden — bare uden at du skal betale for at se resultatet.</p>
+  <p>Samme kode, to skærme. Det er ikke to hjemmesider — det er én, der lægger sig om efter pladsen.</p>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
-/* ==========================================================
-   3D-SAMLING AF EN HJEMMESIDE
-   Three.js hentes først når sektionen nærmer sig, så den
-   ikke belaster den første indlæsning.
-   ========================================================== */
 (function(){
-  var stage = document.getElementById('stage');
-  var loading = document.getElementById('fallback') && document.getElementById('loading');
-  var started = false;
+  var DEMO = '/demo.html';
+  var stage=document.getElementById('stage');
+  var flipL=document.getElementById('flipL'), flipP=document.getElementById('flipP');
+  var laptop=document.getElementById('laptop'), phone=document.getElementById('phone');
+  var fDesk=document.getElementById('fDesk'), fPhone=document.getElementById('fPhone');
+  var phScreen=document.getElementById('phScreen'), bar=document.getElementById('bar');
+  var caps=document.querySelectorAll('.cap'), parts=document.querySelectorAll('.pt');
 
-  function webglOk(){
-    try{
-      var c = document.createElement('canvas');
-      return !!(window.WebGLRenderingContext && (c.getContext('webgl') || c.getContext('experimental-webgl')));
-    }catch(e){ return false; }
+  // Størrelserne iframene rendres i. Skaleres bagefter ned, så layoutet
+  // er ægte desktop/mobil og ikke bare et smalt vindue.
+  var DESK_W=1400, DESK_H=900, PH_W=390, PH_H=830, CHROME=38;
+
+  function layout(){
+    var vw=window.innerWidth, vh=window.innerHeight, small=vw<760;
+
+    var maxW=Math.min(vw*(small?0.88:0.68), 960);
+    var maxH=vh*(small?0.46:0.60);
+    var w=maxW, h=w*(DESK_H/DESK_W)+CHROME;
+    if(h>maxH){ h=maxH; w=(h-CHROME)*(DESK_W/DESK_H); }
+
+    laptop.style.width=w+'px'; laptop.style.height=h+'px';
+    laptop.style.marginLeft=(-w/2)+'px'; laptop.style.marginTop=(-h/2)+'px';
+    var s=w/DESK_W;
+    fDesk.style.width=DESK_W+'px'; fDesk.style.height=DESK_H+'px';
+    fDesk.style.transform='scale('+s+')';
+
+    var phH=Math.min(vh*(small?0.60:0.66), 600);
+    var phW=phH*(PH_W/PH_H);
+    phScreen.style.width=phW+'px'; phScreen.style.height=phH+'px';
+    var ps=phW/PH_W;
+    fPhone.style.width=PH_W+'px'; fPhone.style.height=PH_H+'px';
+    fPhone.style.transform='scale('+ps+')';
+    phone.style.marginLeft=(-(phW+22)/2)+'px';
+    phone.style.marginTop=(-(phH+22)/2)+'px';
   }
 
-  function loadThree(cb){
-    var s = document.createElement('script');
-    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-    s.onload = cb;
-    s.onerror = function(){ showFallback(); };
-    document.head.appendChild(s);
-  }
-
-  function showFallback(){
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('fallback').style.display = 'flex';
-  }
-
-  // Start indlæsningen når sektionen er indenfor to skærmhøjder
-  function maybeStart(){
-    if(started) return;
-    var r = stage.getBoundingClientRect();
-    if(r.top < window.innerHeight * 2){
-      started = true;
-      window.removeEventListener('scroll', maybeStart);
-      if(!webglOk()){ showFallback(); return; }
-      loadThree(build);
+  var loaded=false;
+  function maybeLoad(){
+    if(loaded) return;
+    if(stage.getBoundingClientRect().top < window.innerHeight*1.6){
+      loaded=true; fDesk.src=DEMO; fPhone.src=DEMO;
+      window.removeEventListener('scroll', maybeLoad);
     }
   }
-  window.addEventListener('scroll', maybeStart, {passive:true});
-  maybeStart();
+  window.addEventListener('scroll', maybeLoad, {passive:true});
 
-  function build(){
-    if(typeof THREE === 'undefined'){ showFallback(); return; }
-    document.getElementById('loading').style.display = 'none';
+  function rnd(i){ var x=Math.sin(i*127.1)*43758.5453; return x-Math.floor(x); }
+  var starts=[];
+  parts.forEach(function(el,i){
+    var a=rnd(i+1)*Math.PI*2;
+    starts.push({
+      x: Math.cos(a)*(240+rnd(i+4)*420),
+      y: (rnd(i+7)-0.5)*600,
+      z: -400-rnd(i+9)*720,
+      rx:(rnd(i+11)-0.5)*110, ry:(rnd(i+13)-0.5)*130, rz:(rnd(i+17)-0.5)*60
+    });
+  });
 
-    var canvas = document.getElementById('gl');
-    var vp = document.getElementById('stageVp');
-    var isSmall = window.innerWidth < 760;
+  var PHASES=4;
+  function easeOut(t){ return 1-Math.pow(1-t,3); }
 
-    var renderer = new THREE.WebGLRenderer({canvas:canvas, antialias:!isSmall, alpha:false});
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isSmall ? 1.5 : 2));
-    renderer.setClearColor(0x003135, 1);
-    renderer.shadowMap.enabled = !isSmall;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    // Uden disse to regnes farverne i lineært rum og vises som sRGB,
-    // hvilket brænder alt hvidt ud.
-    renderer.outputEncoding = THREE.sRGBEncoding;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.0;
-
-    var scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0x003135, 14, 34);
-
-    var camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
-
-    /* ---------- lys ---------- */
-    scene.add(new THREE.HemisphereLight(0x9fd8de, 0x00181a, 0.42));
-    var key = new THREE.DirectionalLight(0xfff6ea, 1.6);
-    key.position.set(5, 8, 7);
-    if(!isSmall){
-      key.castShadow = true;
-      key.shadow.mapSize.set(1024,1024);
-      key.shadow.camera.near = 1; key.shadow.camera.far = 30;
-      key.shadow.camera.left = -9; key.shadow.camera.right = 9;
-      key.shadow.camera.top = 9; key.shadow.camera.bottom = -9;
-      key.shadow.bias = -0.0012;
-    }
-    scene.add(key);
-    var rim = new THREE.PointLight(0x0fa4af, 1.1, 26);
-    rim.position.set(-6, 2, 5);
-    scene.add(rim);
-
-    /* ---------- materialer ---------- */
-    function mat(color, opts){
-      opts = opts || {};
-      return new THREE.MeshStandardMaterial({
-        color: color,
-        roughness: opts.rough !== undefined ? opts.rough : 0.55,
-        metalness: opts.metal !== undefined ? opts.metal : 0.1,
-        emissive: opts.emissive || 0x000000,
-        emissiveIntensity: opts.emissiveIntensity || 1
-      });
-    }
-    var M = {
-      frame:  mat(0xe8eff0, {rough:0.68}),
-      panel:  mat(0xf6fafa, {rough:0.74}),
-      accent: mat(0x0fa4af, {rough:0.42, metal:0.15}),
-      dark:   mat(0x003a42, {rough:0.55}),
-      grey:   mat(0xb9d3d6, {rough:0.8})
-    };
-
-    /* ---------- delene ---------- */
-    var group = new THREE.Group();
-    scene.add(group);
-
-    var parts = [];
-    function add(w,h,d,x,y,z,material,phase){
-      var g = new THREE.BoxGeometry(w,h,d);
-      var m = new THREE.Mesh(g, material);
-      m.position.set(x,y,z);
-      m.castShadow = !isSmall; m.receiveShadow = !isSmall;
-      m.userData.home = {x:x,y:y,z:z};
-      m.userData.phase = phase;
-      group.add(m);
-      parts.push(m);
-      return m;
-    }
-
-    var W = 8.2, H = 5.2;
-
-    // Fase 0 — fundament: bagplade
-    add(W, H, 0.16, 0, 0, -0.12, M.frame, 0);
-
-    // Fase 1 — browserlinje + navigation
-    add(W, 0.52, 0.1, 0, H/2 - 0.26, 0.02, M.grey, 1);
-    for(var i=0;i<3;i++) add(0.16,0.16,0.1, -W/2+0.42+i*0.3, H/2-0.26, 0.09, M.dark, 1);
-    add(2.4, 0.24, 0.08, -W/2+2.6, H/2-0.26, 0.08, M.panel, 1);
-    for(var n=0;n<4;n++) add(0.62,0.13,0.07, 0.5+n*0.8, H/2-0.95, 0.06, M.grey, 1);
-    add(0.95, 0.3, 0.09, W/2-0.85, H/2-0.95, 0.07, M.accent, 1);
-
-    // Fase 2 — indhold: overskrift, tekst, billede, kort
-    add(3.0, 0.42, 0.09, -W/2+2.05, 0.95, 0.06, M.dark, 2);
-    add(2.3, 0.42, 0.09, -W/2+1.7, 0.42, 0.06, M.accent, 2);
-    add(2.6, 0.12, 0.06, -W/2+1.85, -0.15, 0.05, M.grey, 2);
-    add(2.1, 0.12, 0.06, -W/2+1.6, -0.42, 0.05, M.grey, 2);
-    add(3.05, 2.0, 0.14, W/2-2.05, 0.35, 0.08, M.accent, 2);
-
-    // Fase 3 — kort og footer
-    for(var c=0;c<3;c++){
-      add(2.3, 1.05, 0.12, -W/2+1.6+c*2.6, -1.75, 0.07, M.panel, 3);
-    }
-    add(W-0.6, 0.16, 0.06, 0, -H/2+0.4, 0.05, M.grey, 3);
-
-    // Gulv til skygge
-    if(!isSmall){
-      var floor = new THREE.Mesh(
-        new THREE.PlaneGeometry(40,40),
-        new THREE.ShadowMaterial({opacity:0.28})
-      );
-      floor.rotation.x = -Math.PI/2;
-      floor.position.y = -H/2 - 1.4;
-      floor.receiveShadow = true;
-      scene.add(floor);
-    }
-
-    /* ---------- startpositioner: spredt i rummet ---------- */
-    function rand(seed){ var x = Math.sin(seed*127.1)*43758.5453; return x - Math.floor(x); }
-    parts.forEach(function(p, i){
-      var a = rand(i+1)*Math.PI*2;
-      var dist = 9 + rand(i+7)*11;
-      p.userData.start = {
-        x: p.userData.home.x + Math.cos(a)*dist,
-        y: p.userData.home.y + (rand(i+3)-0.5)*16,
-        z: p.userData.home.z + (rand(i+5)-0.2)*16 - 4,
-        rx: (rand(i+11)-0.5)*3.4,
-        ry: (rand(i+13)-0.5)*3.4,
-        rz: (rand(i+17)-0.5)*2.2
-      };
+  function apply(p){
+    parts.forEach(function(el,i){
+      var ph=+el.dataset.p, a=ph/PHASES, b=(ph+1.2)/PHASES;
+      var t=Math.max(0,Math.min(1,(p-a)/(b-a))), e=easeOut(t), s=starts[i];
+      el.style.transform =
+        'translate3d('+(s.x*(1-e))+'px,'+(s.y*(1-e))+'px,'+(s.z*(1-e))+'px)'+
+        ' rotateX('+(s.rx*(1-e))+'deg) rotateY('+(s.ry*(1-e))+'deg) rotateZ('+(s.rz*(1-e))+'deg)';
+      el.style.opacity = Math.min(1, 0.04 + e*1.5);
     });
 
-    /* ---------- opsætning af størrelse ---------- */
-    function resize(){
-      var w = vp.clientWidth, h = vp.clientHeight;
-      renderer.setSize(w,h,false);
-      camera.aspect = w/h;
-      // zoom ud på smalle skærme så hele siden er i billedet
-      var fit = Math.min(1, (w/h) / 1.55);
-      camera.fov = 42 / Math.max(0.62, fit);
-      camera.updateProjectionMatrix();
-    }
-    resize();
-    window.addEventListener('resize', function(){ resize(); ScrollTrigger.refresh(); });
+    // Flippet: laptoppen drejer ud til 90 grader, hvor den står på kant og
+    // er usynlig. Præcis dér overtager telefonen og drejer ind fra -90.
+    // De to deler ikke et 3D-rum, netop for at holde iframene renderbare.
+    var fs = Math.max(0, Math.min(1, (p-0.74)/0.24));
+    var settle = easeOut(Math.min(1, p/0.70));
+    function easeIO(t){ return t<0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2; }
 
-    /* ---------- animation drevet af scroll ---------- */
-    var PHASES = 4;
-    var caps = document.querySelectorAll('.cap');
-    var bar = document.getElementById('bar');
-    var progress = 0;
+    var half1 = Math.min(1, fs/0.5);
+    var half2 = Math.max(0, (fs-0.5)/0.5);
 
-    function easeOutCubic(t){ return 1 - Math.pow(1-t, 3); }
+    flipL.style.transform =
+      'rotateX('+((1-settle)*15)+'deg)'+
+      ' rotateY('+((1-settle)*-26 + easeIO(half1)*90)+'deg)'+
+      ' scale('+(0.90 + settle*0.10)+')';
+    flipL.style.visibility = fs < 0.5 ? 'visible' : 'hidden';
 
-    function apply(p){
-      // hver fase får sit eget vindue, med overlap så det flyder
-      parts.forEach(function(part){
-        var ph = part.userData.phase;
-        var startP = ph / PHASES;
-        var endP = (ph + 1.15) / PHASES;
-        var t = (p - startP) / (endP - startP);
-        t = Math.max(0, Math.min(1, t));
-        var e = easeOutCubic(t);
-        var s = part.userData.start, hme = part.userData.home;
-        part.position.set(
-          s.x + (hme.x - s.x)*e,
-          s.y + (hme.y - s.y)*e,
-          s.z + (hme.z - s.z)*e
-        );
-        part.rotation.set(s.rx*(1-e), s.ry*(1-e), s.rz*(1-e));
-        var sc = 0.5 + 0.5*e;
-        part.scale.setScalar(sc);
-        part.material.transparent = e < 1;
-        part.material.opacity = Math.min(1, 0.15 + e*1.2);
-      });
+    flipP.style.transform =
+      'rotateY('+(-90 + easeIO(half2)*90)+'deg)'+
+      ' scale('+(0.94 + easeIO(half2)*0.06)+')';
+    flipP.style.visibility = fs >= 0.5 ? 'visible' : 'hidden';
 
-      // kameraet kommer nærmere og retter sig op
-      var ce = easeOutCubic(Math.min(1, p*1.05));
-      var radius = 16 - 5.2*ce;
-      var ang = (1-ce) * 0.55;
-      camera.position.set(Math.sin(ang)*radius, 3.4 - 2.6*ce, Math.cos(ang)*radius);
-      camera.lookAt(0, 0.45, 0);
-
-      // Retter sig næsten ud, men beholder en let vinkel. Helt frontalt
-      // mister den dybden og kunne lige så godt have været et fladt billede.
-      group.rotation.x = 0.055 + (1-ce) * 0.26;
-      group.rotation.y = -0.10 + (1-ce) * -0.34;
-
-      // undertekst pr. fase
-      var idx = Math.min(PHASES-1, Math.floor(p * PHASES));
-      caps.forEach(function(c,i){ c.classList.toggle('on', i === idx); });
-      if(bar) bar.style.width = (p*100).toFixed(1) + '%';
-    }
-
-    apply(0);
-
-    gsap.registerPlugin(ScrollTrigger);
-    ScrollTrigger.create({
-      trigger: stage,
-      start: 'top top',
-      end: '+=' + (PHASES * 90) + '%',
-      pin: true,
-      scrub: true,
-      invalidateOnRefresh: true,
-      onUpdate: function(self){ progress = self.progress; }
-    });
-
-    /* ---------- render-loop ---------- */
-    var idle = 0;
-    function tick(){
-      idle += 0.006;
-      apply(progress);
-      // svag svæven så scenen lever når man står stille
-      group.position.y = 0.55 + Math.sin(idle)*0.06;
-      renderer.render(scene, camera);
-      requestAnimationFrame(tick);
-    }
-    tick();
+    var idx=Math.min(PHASES-1, Math.floor(p*PHASES));
+    caps.forEach(function(c,i){ c.classList.toggle('on', i===idx); });
+    bar.style.width=(p*100).toFixed(1)+'%';
   }
+
+  layout(); apply(0); maybeLoad();
+  window.addEventListener('resize', function(){ layout(); ScrollTrigger.refresh(); });
+
+  gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.create({
+    trigger: stage, start:'top top', end:'+='+(PHASES*105)+'%',
+    pin:true, scrub:true, invalidateOnRefresh:true,
+    onUpdate:function(self){ apply(self.progress); }
+  });
 })();
 </script>
 
