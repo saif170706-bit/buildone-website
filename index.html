@@ -916,14 +916,25 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
     }
     activate(0);
 
-    // Hvor meget kolonnen mangler i plads inden for det pinnede vindue
+    // Hvor meget sidste trin stikker ud under skærmen når sektionen er pinnet.
+    // Måles på de faktiske positioner i stedet for beregnede højder, fordi
+    // menuen og centreringen flytter kolonnen på måder som regnestykket ikke
+    // fanger. Når sektionen er pinnet ligger .how-pin-vp i top, så afstanden
+    // fra dens top til sidste trins bund er dér trinnet ender.
     var overflow = 0;
+    var BOTTOM_GAP = 28;
     function measure(){
       col.style.transform = '';
-      var avail = window.innerHeight - 2 * parseFloat(getComputedStyle(vpEl).paddingTop);
-      overflow = Math.max(0, col.scrollHeight - avail);
+      var vpTop = vpEl.getBoundingClientRect().top;
+      var lastBottom = steps[steps.length - 1].getBoundingClientRect().bottom;
+      var endsAt = lastBottom - vpTop;
+      overflow = Math.max(0, endsAt - (window.innerHeight - BOTTOM_GAP));
     }
     measure();
+
+    // Forskydningen skal være færdig når sidste trin bliver aktivt — ikke
+    // først når hele sekvensen er kørt til ende.
+    var SHIFT_DONE_AT = (steps.length - 1) / steps.length;
 
     var st = ScrollTrigger.create({
       trigger: section,
@@ -944,7 +955,10 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
         activate(Math.min(steps.length - 1, Math.floor(p * steps.length)));
         // Er kolonnen højere end der er plads til, skydes den opad i takt
         // med scrollet, så det aktive trin altid er inde i billedet.
-        if(overflow > 0) col.style.transform = 'translateY(' + (-overflow * p).toFixed(1) + 'px)';
+        if(overflow > 0){
+          var sp = Math.min(1, p / SHIFT_DONE_AT);
+          col.style.transform = 'translateY(' + (-overflow * sp).toFixed(1) + 'px)';
+        }
       }
     });
 
