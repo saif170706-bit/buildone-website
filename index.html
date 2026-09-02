@@ -13,6 +13,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
 :root{
   --black:#003135;
@@ -55,7 +57,14 @@ nav.wrap{display:flex;align-items:center;justify-content:space-between;height:72
 }
 
 /* ---------- HERO ---------- */
-.hero{padding:80px 0 72px;border-bottom:1px solid var(--border)}
+.hero{padding:80px 0 72px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.13;animation:orb-drift ease-in-out infinite alternate}
+.orb-1{width:700px;height:700px;background:var(--accent);top:-260px;left:-180px;animation-duration:9s}
+.orb-2{width:500px;height:500px;background:var(--off-black);top:80px;right:-120px;animation-duration:13s;animation-delay:-4s}
+.orb-3{width:350px;height:350px;background:var(--accent);bottom:-120px;left:38%;animation-duration:11s;animation-delay:-7s}
+@keyframes orb-drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(40px,-40px) scale(1.12)}}
+.hero>.wrap{position:relative;z-index:1}
 .hero .grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
 @media(max-width:900px){.hero .grid{grid-template-columns:1fr;gap:48px}}
 
@@ -264,16 +273,45 @@ details p{margin-top:14px;color:var(--mid);line-height:1.65;font-size:.93rem;max
 .feat-photo-caption span{font-size:.83rem;opacity:.75}
 
 
-/* ---------- HOW FLOATING IMAGE ---------- */
-.how-float{
-  position:absolute;bottom:0;right:0;
-  width:44%;max-width:580px;
-  overflow:hidden;border-radius:6px 0 0 6px;
-  box-shadow:-28px -28px 80px -24px rgba(0,49,53,.3);
-  will-change:transform;pointer-events:none;
+/* ================================================
+   SÅDAN FUNGERER DET — pinnet trin-sekvens
+   ================================================ */
+.how-pin{position:relative;background:var(--white);border-bottom:1px solid var(--border)}
+.how-pin-vp{min-height:100vh;display:flex;align-items:center;overflow:hidden;padding:44px 0}
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,4.5vw,68px);align-items:center;width:100%}
+.how-rail{position:relative;padding-left:36px;margin-top:18px}
+.how-rail-line{position:absolute;left:0;top:8px;bottom:8px;width:2px;background:var(--border)}
+.how-rail-fill{position:absolute;left:0;top:8px;width:2px;height:0;background:var(--accent);will-change:height}
+.hstep{position:relative;padding:11px 0;opacity:.34;transition:opacity .45s ease}
+.hstep.is-active{opacity:1}
+.hstep-dot{
+  position:absolute;left:-42px;top:22px;width:10px;height:10px;border-radius:50%;
+  background:var(--border);box-shadow:0 0 0 4px var(--white);
+  transition:background .4s ease,transform .4s ease;
 }
-.how-float img{width:100%;display:block}
-@media(max-width:900px){.how-float{display:none}}
+.hstep.is-active .hstep-dot{background:var(--accent);transform:scale(1.45)}
+.hstep-num{display:block;font-size:.68rem;font-weight:700;letter-spacing:.14em;color:var(--accent);margin-bottom:5px}
+.hstep h3{font-size:1.08rem;margin-bottom:5px}
+.hstep p{color:var(--mid);font-size:.89rem;line-height:1.5;max-width:420px}
+/* Lave skærme: stram sekvensen så alle tre trin altid er synlige */
+@media(min-width:861px) and (max-height:780px){
+  .how-pin-vp{padding:28px 0}
+  .how-rail{margin-top:12px}
+  .hstep{padding:8px 0}
+  .hstep p{font-size:.85rem}
+  .how-visual{aspect-ratio:1/1}
+}
+.how-visual{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 30px 70px -28px rgba(0,49,53,.42);background:var(--off-white)}
+.how-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s ease}
+.how-shot.is-on{opacity:1}
+.how-visual-tint{position:absolute;inset:0;background:linear-gradient(150deg,rgba(0,49,53,.28),rgba(0,49,53,0) 62%);pointer-events:none}
+@media(max-width:860px){
+  .how-pin-vp{min-height:0;padding:76px 0}
+  .how-grid{grid-template-columns:1fr;gap:34px}
+  .hstep{opacity:1 !important}
+  .how-visual{order:-1}
+  .how-shot:first-of-type{opacity:1}
+}
 
 /* ---------- FOOTER ---------- */
 footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:var(--off-white)}
@@ -307,6 +345,7 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-bg"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
   <div class="wrap">
     <div class="grid">
       <div class="inner">
@@ -389,39 +428,48 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
 </div>
 
 <!-- SÅDAN FUNGERER DET -->
-<section id="how" style="background:var(--white);padding:96px 0 120px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;min-height:580px">
-  <div class="wrap">
-    <div class="section-head reveal" style="max-width:480px">
-      <span class="section-label">Sådan fungerer det</span>
-      <h2>Tre trin uden risiko</h2>
-      <p class="muted" style="font-size:.95rem">Du ser resultatet, før du betaler en krone.</p>
+<section class="how-pin" id="how">
+  <div class="how-pin-vp">
+    <div class="wrap">
+      <div class="how-grid">
+        <div>
+          <span class="section-label">Sådan fungerer det</span>
+          <h2 style="font-size:clamp(1.7rem,2.9vw,2.4rem);line-height:1.12">Tre trin uden risiko</h2>
+          <p class="muted" style="font-size:.94rem;margin-top:9px">Du ser resultatet, før du betaler en krone.</p>
+
+          <div class="how-rail" id="howRail">
+            <div class="how-rail-line"></div>
+            <div class="how-rail-fill" id="howRailFill"></div>
+
+            <div class="hstep">
+              <span class="hstep-dot"></span>
+              <span class="hstep-num">TRIN 01</span>
+              <h3>Fortæl om dit projekt</h3>
+              <p>Udfyld formularen eller ring til os. Vi finder hurtigt ud af, hvad din virksomhed har brug for.</p>
+            </div>
+            <div class="hstep">
+              <span class="hstep-dot"></span>
+              <span class="hstep-num">TRIN 02</span>
+              <h3>Vi bygger siden</h3>
+              <p>Vi designer og bygger den færdige hjemmeside. Du beder om de rettelser du vil have, uden at det koster ekstra.</p>
+            </div>
+            <div class="hstep">
+              <span class="hstep-dot"></span>
+              <span class="hstep-num">TRIN 03</span>
+              <h3>Du siger ja, vi går live</h3>
+              <p>Vælg en plan fra 349 kr/md, så udgiver vi siden med domæne, hosting og support inkluderet.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="how-visual" id="howVisual">
+          <video class="how-shot is-on" muted loop playsinline preload="metadata"><source src="/assets/videos/video1.mp4" type="video/mp4"></video>
+          <video class="how-shot" muted loop playsinline preload="none"><source src="/assets/videos/video2.mp4" type="video/mp4"></video>
+          <video class="how-shot" muted loop playsinline preload="none"><source src="/assets/videos/video3.mp4" type="video/mp4"></video>
+          <div class="how-visual-tint"></div>
+        </div>
+      </div>
     </div>
-    <div class="steps-v reveal" style="max-width:480px">
-      <div class="step-v">
-        <div class="step-v-num">01</div>
-        <div>
-          <h3>Fortæl om dit projekt</h3>
-          <p>Udfyld formularen eller ring til os. Vi finder hurtigt ud af, hvad din virksomhed har brug for.</p>
-        </div>
-      </div>
-      <div class="step-v">
-        <div class="step-v-num">02</div>
-        <div>
-          <h3>Vi bygger siden</h3>
-          <p>Vi designer og bygger den færdige hjemmeside. Du beder om de rettelser du vil have, uden at det koster ekstra.</p>
-        </div>
-      </div>
-      <div class="step-v">
-        <div class="step-v-num">03</div>
-        <div>
-          <h3>Du siger ja, vi går live</h3>
-          <p>Vælg en plan fra 349 kr/md, så udgiver vi siden med domæne, hosting og support inkluderet.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="how-float" id="howFloat">
-    <img src="/assets/images/how.jpg" alt="Mand og kvinde samarbejder ved computer" loading="lazy">
   </div>
 </section>
 
@@ -696,25 +744,7 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
 })();
 </script>
 
-<script>
-(function(){
-  var el = document.getElementById('howFloat');
-  if (!el) return;
-  var section = document.getElementById('how');
-  var maxLeft = 150;
-  var maxUp = 160;
-  function update(){
-    var r = section.getBoundingClientRect();
-    var vh = window.innerHeight;
-    var sh = section.offsetHeight;
-    var raw = (vh - r.top) / (vh + sh);
-    var p = Math.max(0, Math.min(1, raw));
-    el.style.transform = 'translate(' + (-p * maxLeft) + 'px, ' + (-p * maxUp) + 'px)';
-  }
-  window.addEventListener('scroll', update, {passive:true});
-  update();
-})();
-</script>
+
 
 <div id="cookieBanner" class="cookie-banner" role="dialog" aria-label="Cookiesamtykke">
   <div class="cookie-inner">
@@ -763,6 +793,61 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
     localStorage.setItem('cookie-consent',JSON.stringify(v));b.classList.remove('show');
   };
   document.getElementById('cookieMoreLink').onclick=function(e){e.preventDefault();document.getElementById('cookiePanel').classList.toggle('open')};
+})();
+</script>
+
+<script>
+/* ========== SÅDAN FUNGERER DET — pinnet trin-sekvens ========== */
+(function(){
+  if(typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  var section = document.getElementById('how');
+  var fill    = document.getElementById('howRailFill');
+  var visual  = document.getElementById('howVisual');
+  if(!section || !fill || !visual) return;
+  var steps = section.querySelectorAll('.hstep');
+  var shots = visual.querySelectorAll('.how-shot');
+  if(!steps.length) return;
+
+  gsap.matchMedia().add('(min-width: 861px)', function(){
+    var current = -1;
+    function activate(idx){
+      if(idx === current) return;
+      current = idx;
+      steps.forEach(function(el,i){ el.classList.toggle('is-active', i === idx); });
+      shots.forEach(function(v,i){
+        var on = i === idx;
+        v.classList.toggle('is-on', on);
+        if(on){ v.play().catch(function(){}); } else { v.pause(); }
+      });
+    }
+    activate(0);
+
+    var st = ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: '+=' + (steps.length * 75) + '%',
+      pin: true,
+      // scrub 1 giver animationen inerti, så farten glider ind og ud
+      // i stedet for at skifte brat når pinnen tager fat
+      scrub: 1,
+      // anticipatePin fjerner hoppet når man rammer sektionen i fart
+      anticipatePin: 1,
+      refreshPriority: 2,
+      invalidateOnRefresh: true,
+      onUpdate: function(self){
+        var p = self.progress;
+        fill.style.height = (p * 100).toFixed(1) + '%';
+        activate(Math.min(steps.length - 1, Math.floor(p * steps.length)));
+      }
+    });
+
+    return function(){
+      st.kill();
+      steps.forEach(function(el){ el.classList.add('is-active'); });
+      shots.forEach(function(v,i){ v.classList.toggle('is-on', i === 0); });
+      fill.style.height = '';
+    };
+  });
 })();
 </script>
 
