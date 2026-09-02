@@ -333,9 +333,8 @@ details p{margin-top:14px;color:var(--mid);line-height:1.65;font-size:.93rem;max
   .how-rail{margin-top:12px}
   .hstep{padding:8px 0}
   .hstep p{font-size:.85rem}
-  .how-visual{aspect-ratio:1/1}
 }
-.how-visual{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 30px 70px -28px rgba(0,49,53,.42);background:var(--off-white)}
+.how-visual{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:16/9;box-shadow:0 30px 70px -28px rgba(0,49,53,.42);background:var(--off-white)}
 .how-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s ease}
 .how-shot.is-on{opacity:1}
 .how-visual-tint{position:absolute;inset:0;background:linear-gradient(150deg,rgba(0,49,53,.28),rgba(0,49,53,0) 62%);pointer-events:none}
@@ -497,10 +496,11 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
         </div>
 
         <div class="how-visual" id="howVisual">
-          <video class="how-shot is-on" muted loop playsinline preload="metadata"><source src="/assets/videos/video1.mp4" type="video/mp4"></video>
-          <video class="how-shot" muted loop playsinline preload="none"><source src="/assets/videos/video2.mp4" type="video/mp4"></video>
-          <video class="how-shot" muted loop playsinline preload="none"><source src="/assets/videos/video3.mp4" type="video/mp4"></video>
+          <img class="how-shot is-on" src="/assets/images/step-1.jpg" width="1600" height="900" alt="To personer giver high five over en bærbar under et møde">
+          <img class="how-shot" src="/assets/images/step-2.jpg" width="700" height="394" alt="To kolleger bygger en hjemmeside ved computeren">
+          <img class="how-shot" src="/assets/images/step-3.jpg" width="640" height="360" alt="Butiksskilt vendt til Come in, we're open">
           <div class="how-visual-tint"></div>
+        </div>
         </div>
       </div>
     </div>
@@ -882,24 +882,18 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
       if(idx === current) return;
       current = idx;
       steps.forEach(function(el,i){ el.classList.toggle('is-active', i === idx); });
-      shots.forEach(function(v,i){
-        var on = i === idx;
-        v.classList.toggle('is-on', on);
-        if(on){ v.play().catch(function(){}); } else { v.pause(); }
-      });
+      shots.forEach(function(v,i){ v.classList.toggle('is-on', i === idx); });
     }
     activate(0);
 
     var st = ScrollTrigger.create({
       trigger: section,
       start: 'top top',
-      end: '+=' + (steps.length * 75) + '%',
+      end: '+=' + (steps.length * 110) + '%',
       pin: true,
       // scrub 1 giver animationen inerti, så farten glider ind og ud
       // i stedet for at skifte brat når pinnen tager fat
-      scrub: 1,
-      // anticipatePin fjerner hoppet når man rammer sektionen i fart
-      anticipatePin: 1,
+      scrub: 0.8,
       refreshPriority: 2,
       invalidateOnRefresh: true,
       onUpdate: function(self){
@@ -936,7 +930,7 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
       scrollTrigger:{
         trigger:section, start:'top top',
         end:function(){ return '+=' + distance(); },
-        pin:true, scrub:1, anticipatePin:1, refreshPriority:1,
+        pin:true, scrub:0.8, refreshPriority:1,
         invalidateOnRefresh:true,
         onUpdate:function(self){ if(bar) bar.style.width=(self.progress*100).toFixed(1)+'%'; }
       }
