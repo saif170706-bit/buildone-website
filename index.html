@@ -287,17 +287,6 @@ details p{margin-top:14px;color:var(--mid);line-height:1.65;font-size:.93rem;max
 .feat-photo-caption span{font-size:.83rem;opacity:.75}
 
 
-/* ---------- HOW FLOATING IMAGE ---------- */
-.how-float{
-  position:absolute;bottom:0;right:0;
-  width:44%;max-width:580px;
-  overflow:hidden;border-radius:6px 0 0 6px;
-  box-shadow:-28px -28px 80px -24px rgba(0,49,53,.3);
-  will-change:transform;pointer-events:none;
-}
-.how-float img{width:100%;display:block}
-@media(max-width:900px){.how-float{display:none}}
-
 /* ================================================
    HORIZONTAL SCROLL SHOWCASE
    ================================================ */
@@ -404,6 +393,36 @@ body:has(button:hover) .cursor-ring{
 
 /* ---------- SPLIT ACCENT ---------- */
 .hero h1 strong{color:var(--accent)}
+
+/* ================================================
+   SÅDAN FUNGERER DET — pinnet trin-sekvens
+   ================================================ */
+.how-pin{position:relative;background:var(--white);border-bottom:1px solid var(--border)}
+.how-pin-viewport{height:100vh;display:flex;align-items:center;overflow:hidden}
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,5vw,76px);align-items:center;width:100%}
+.how-rail{position:relative;padding-left:38px;margin-top:26px}
+.how-rail-line{position:absolute;left:0;top:10px;bottom:10px;width:2px;background:var(--border)}
+.how-rail-fill{position:absolute;left:0;top:10px;width:2px;height:0;background:var(--accent);will-change:height}
+.hstep{position:relative;padding:19px 0;opacity:.3;transition:opacity .4s ease}
+.hstep.is-active{opacity:1}
+.hstep-dot{
+  position:absolute;left:-44px;top:27px;width:11px;height:11px;border-radius:50%;
+  background:var(--border);box-shadow:0 0 0 4px var(--white);
+  transition:background .35s ease,transform .35s ease;
+}
+.hstep.is-active .hstep-dot{background:var(--accent);transform:scale(1.4)}
+.hstep-num{display:block;font-size:.71rem;font-weight:700;letter-spacing:.14em;color:var(--accent);margin-bottom:7px}
+.hstep h3{font-size:1.16rem;margin-bottom:7px}
+.hstep p{color:var(--mid);font-size:.92rem;line-height:1.62;max-width:430px}
+.how-visual{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 32px 74px -28px rgba(0,49,53,.45)}
+.how-visual img{width:100%;height:100%;object-fit:cover;display:block;will-change:transform}
+.how-visual-tint{position:absolute;inset:0;background:linear-gradient(150deg,rgba(0,49,53,.32),rgba(0,49,53,0) 60%);pointer-events:none}
+@media(max-width:860px){
+  .how-pin-viewport{height:auto;padding:76px 0}
+  .how-grid{grid-template-columns:1fr;gap:38px}
+  .hstep{opacity:1 !important}
+  .how-visual{order:-1}
+}
 
 /* ================================================
    BILLED-SAMLING — skiver der samles ved scroll
@@ -607,40 +626,47 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
   </div>
 </section>
 
-<!-- SÅDAN FUNGERER DET -->
-<section id="how" style="background:var(--white);padding:96px 0 120px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;min-height:580px">
-  <div class="wrap">
-    <div class="section-head reveal" style="max-width:480px">
-      <span class="section-label">Sådan fungerer det</span>
-      <h2>Tre trin — ingen risiko</h2>
-      <p class="muted" style="font-size:.95rem">Du ser resultatet, før du betaler en krone.</p>
+<!-- SÅDAN FUNGERER DET — pinnet -->
+<section class="how-pin" id="how">
+  <div class="how-pin-viewport">
+    <div class="wrap">
+      <div class="how-grid">
+        <div>
+          <span class="section-label">Sådan fungerer det</span>
+          <h2 style="font-size:clamp(1.8rem,3vw,2.5rem);line-height:1.12">Tre trin — ingen risiko</h2>
+          <p class="muted" style="font-size:.95rem;margin-top:10px">Du ser resultatet, før du betaler en krone.</p>
+
+          <div class="how-rail" id="howRail">
+            <div class="how-rail-line"></div>
+            <div class="how-rail-fill" id="howRailFill"></div>
+
+            <div class="hstep" data-step="0">
+              <span class="hstep-dot"></span>
+              <span class="hstep-num">TRIN 01</span>
+              <h3>Fortæl om dit projekt</h3>
+              <p>Udfyld vores korte formular eller book et opkald. Vi finder ud af, hvad du har brug for.</p>
+            </div>
+            <div class="hstep" data-step="1">
+              <span class="hstep-dot"></span>
+              <span class="hstep-num">TRIN 02</span>
+              <h3>Vi bygger — gratis</h3>
+              <p>Vores team designer og bygger en komplet hjemmeside. Du beder om ændringer uden ekstra omkostninger.</p>
+            </div>
+            <div class="hstep" data-step="2">
+              <span class="hstep-dot"></span>
+              <span class="hstep-num">TRIN 03</span>
+              <h3>Tilfreds? Gå live.</h3>
+              <p>Vælg en plan fra 349 kr/md og vi udgiver siden med domæne, hosting og support inkluderet.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="how-visual">
+          <img id="howVisualImg" src="/assets/images/how.jpg" alt="Mand og kvinde samarbejder ved computer" loading="lazy">
+          <div class="how-visual-tint"></div>
+        </div>
+      </div>
     </div>
-    <div class="steps-v reveal" style="max-width:480px">
-      <div class="step-v">
-        <div class="step-v-num">01</div>
-        <div>
-          <h3>Fortæl om dit projekt</h3>
-          <p>Udfyld vores korte formular eller book et opkald. Vi finder ud af, hvad du har brug for.</p>
-        </div>
-      </div>
-      <div class="step-v">
-        <div class="step-v-num">02</div>
-        <div>
-          <h3>Vi bygger — gratis</h3>
-          <p>Vores team designer og bygger en komplet hjemmeside. Du beder om ændringer uden ekstra omkostninger.</p>
-        </div>
-      </div>
-      <div class="step-v">
-        <div class="step-v-num">03</div>
-        <div>
-          <h3>Tilfreds? Gå live.</h3>
-          <p>Vælg en plan fra 349 kr/md og vi udgiver siden med domæne, hosting og support inkluderet.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="how-float" id="howFloat">
-    <img src="/assets/images/how.jpg" alt="Mand og kvinde samarbejder ved computer" loading="lazy">
   </div>
 </section>
 
@@ -1049,6 +1075,55 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
 </script>
 
 <script>
+/* ========== SÅDAN FUNGERER DET — pinnet trin-sekvens ========== */
+(function(){
+  if(typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  var section = document.getElementById('how');
+  var fill    = document.getElementById('howRailFill');
+  var img     = document.getElementById('howVisualImg');
+  if(!section || !fill) return;
+  var steps = section.querySelectorAll('.hstep');
+  if(!steps.length) return;
+
+  var mm = gsap.matchMedia();
+
+  mm.add('(min-width: 861px)', function(){
+    function setActive(idx){
+      steps.forEach(function(el,i){ el.classList.toggle('is-active', i === idx); });
+    }
+    setActive(0);
+
+    var st = ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: '+=' + (steps.length * 62) + '%',
+      pin: true,
+      scrub: 0.5,
+      refreshPriority: 2,
+      invalidateOnRefresh: true,
+      onUpdate: function(self){
+        var p = self.progress;
+        // Rail fyldes jævnt med scrollet
+        fill.style.height = (p * 100).toFixed(1) + '%';
+        // Aktivt trin — sidste trin skal også kunne nå at blive aktivt
+        var idx = Math.min(steps.length - 1, Math.floor(p * steps.length));
+        setActive(idx);
+        // Billedet ånder let gennem forløbet
+        if(img) img.style.transform = 'scale(' + (1.09 - p * 0.09).toFixed(4) + ')';
+      }
+    });
+
+    return function(){
+      st.kill();
+      steps.forEach(function(el){ el.classList.add('is-active'); });
+      fill.style.height = '';
+      if(img) img.style.transform = '';
+    };
+  });
+})();
+</script>
+
+<script>
 /* ========== BILLED-SAMLING ========== */
 (function(){
   if(typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
@@ -1072,6 +1147,7 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
         end: '+=150%',
         pin: true,
         scrub: 0.6,
+        refreshPriority: 3,
         invalidateOnRefresh: true
       }
     });
@@ -1126,6 +1202,7 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
         end: function(){ return '+=' + distance(); },
         pin: true,
         scrub: 0.7,
+        refreshPriority: 1,
         invalidateOnRefresh: true,
         onUpdate: function(self){
           if(bar) bar.style.width = (self.progress * 100).toFixed(1) + '%';
@@ -1275,25 +1352,7 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
 </script>
 
 
-<script>
-(function(){
-  var el = document.getElementById('howFloat');
-  if (!el) return;
-  var section = document.getElementById('how');
-  var maxLeft = 150;
-  var maxUp = 160;
-  function update(){
-    var r = section.getBoundingClientRect();
-    var vh = window.innerHeight;
-    var sh = section.offsetHeight;
-    var raw = (vh - r.top) / (vh + sh);
-    var p = Math.max(0, Math.min(1, raw));
-    el.style.transform = 'translate(' + (-p * maxLeft) + 'px, ' + (-p * maxUp) + 'px)';
-  }
-  window.addEventListener('scroll', update, {passive:true});
-  update();
-})();
-</script>
+
 
 <!-- Custom cursor -->
 <div class="cursor-dot" id="cursorDot"></div>
