@@ -868,21 +868,17 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
 
 <script>
 /* ========== BLØD SIDESCROLL ==========
-   Gør den almindelige scroll langsommere, så farten ikke springer når
-   man forlader en pinnet sektion. WHEEL styrer hvor langt ét hjulklik
-   flytter (lavere = langsommere). LERP styrer blødheden — for lavt
-   giver forsinkelse, hvilket var problemet sidst.                    */
+   Én sammenhængende scroll-følelse på hele siden, også gennem de
+   pinnede sektioner. Hjulet flytter den normale afstand — opgaven er
+   at gøre bevægelsen jævn, ikke at gøre den kort.                    */
 (function(){
   if(typeof Lenis === 'undefined' || typeof gsap === 'undefined') return;
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  var WHEEL = 0.45;   // 0.45 = under det halve af normal scrollafstand
-  var LERP  = 0.13;   // højt nok til at føles responsivt
-
   var lenis = new Lenis({
-    lerp: LERP,
-    wheelMultiplier: WHEEL,
-    touchMultiplier: 1.1,
+    lerp: 0.1,            // udjævning; Lenis' egen standard
+    wheelMultiplier: 1,   // normal afstand pr. hjulklik
+    touchMultiplier: 1.5,
     smoothWheel: true
   });
 
@@ -988,7 +984,7 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
     // Hvor meget lodret scroll det koster. Højere tal = langsommere kort.
     // Ved 1 flytter kortene sig lige så hurtigt som du scroller, hvilket
     // føles jappet — sporet skal bevæge sig mindre end fingeren.
-    var PACE = 3;
+    var PACE = 2;
     var tween=gsap.to(track,{
       x:function(){ return -distance(); },
       ease:'none',
