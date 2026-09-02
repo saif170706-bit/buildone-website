@@ -223,7 +223,7 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
           }
 
           try {
-            var res = await fetch('https://admin.buildone.dk/api/inquiries', {
+            var res = await fetch('https://track.buildone.dk/api/inquiries', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
@@ -235,14 +235,14 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
               })
             });
             if (res.ok) {
-              btn.textContent = 'Sendt ✓ Vi hører fra os inden for 24 timer.';
+              btn.textContent = 'Tak — du hører fra os inden for et døgn.';
               btn.style.background = 'var(--accent)';
               document.getElementById('contact-form').reset();
             } else {
               throw new Error('server-fejl');
             }
           } catch(err) {
-            btn.textContent = 'Noget gik galt — prøv igen eller ring til os.';
+            btn.textContent = 'Noget gik galt. Prøv igen, eller ring til os.';
             btn.style.background = 'var(--rust)';
             btn.disabled = false;
           }
