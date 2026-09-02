@@ -298,6 +298,212 @@ details p{margin-top:14px;color:var(--mid);line-height:1.65;font-size:.93rem;max
 .how-float img{width:100%;display:block}
 @media(max-width:900px){.how-float{display:none}}
 
+/* ================================================
+   BEFORE / AFTER COMPARISON SLIDER
+   ================================================ */
+.compare{
+  position:relative;width:100%;aspect-ratio:16/10;
+  border:1px solid var(--border);border-radius:6px;overflow:hidden;
+  cursor:ew-resize;user-select:none;
+  box-shadow:0 32px 72px -28px rgba(0,49,53,.35);
+  background:#fff;
+}
+@media(max-width:700px){.compare{aspect-ratio:4/5}}
+.compare-pane{position:absolute;inset:0;overflow:hidden}
+.compare-pane-before{z-index:2;clip-path:inset(0 50% 0 0);will-change:clip-path}
+.compare-site{position:absolute;inset:0;width:100%;height:100%;overflow:hidden}
+
+/* --- FØR: 2005-agtig side --- */
+.old-site{background:#e8e8e0;font-family:"Times New Roman",Times,serif;padding:0;height:100%;display:flex;flex-direction:column}
+.old-top{background:#000080;color:#fff;padding:10px 14px;font-size:clamp(.75rem,1.6vw,1.15rem);font-weight:700;letter-spacing:.5px;border-bottom:3px solid #ffcc00}
+.old-nav{background:#c0c0c0;padding:5px 14px;display:flex;gap:14px;flex-wrap:wrap;border-bottom:2px solid #808080}
+.old-nav a{color:#0000ee;text-decoration:underline;font-size:clamp(.6rem,1.2vw,.82rem)}
+.old-body{flex:1;padding:14px;display:flex;gap:14px;min-height:0}
+.old-main{flex:1;min-width:0}
+.old-main h3{font-family:"Times New Roman",serif;color:#cc0000;font-size:clamp(.85rem,1.9vw,1.35rem);margin-bottom:8px;font-weight:700;letter-spacing:0}
+.old-main p{font-size:clamp(.6rem,1.15vw,.8rem);color:#222;line-height:1.45;margin-bottom:8px}
+.old-blink{display:inline-block;background:#ffff00;color:#cc0000;font-weight:700;padding:2px 6px;font-size:clamp(.55rem,1.1vw,.75rem);animation:oldblink 1s steps(1) infinite;border:1px solid #cc0000}
+@keyframes oldblink{0%,49%{opacity:1}50%,100%{opacity:.25}}
+.old-side{width:30%;background:#d4d0c8;border:2px inset #fff;padding:8px;font-size:clamp(.5rem,1vw,.7rem);color:#333}
+.old-side b{display:block;margin-bottom:5px;color:#000080;font-size:clamp(.55rem,1.05vw,.75rem)}
+.old-hr{height:2px;background:linear-gradient(90deg,#808080,#fff);margin:8px 0;border:0}
+.old-btn{background:#c0c0c0;border:2px outset #fff;padding:3px 12px;font-family:"Times New Roman",serif;font-size:clamp(.55rem,1.05vw,.75rem);color:#000;margin-top:6px;display:inline-block}
+.old-foot{background:#c0c0c0;border-top:2px solid #808080;padding:6px 14px;font-size:clamp(.5rem,.95vw,.68rem);color:#444;text-align:center}
+
+/* --- EFTER: moderne side --- */
+.new-site{background:#fff;height:100%;display:flex;flex-direction:column;font-family:var(--sans)}
+.new-top{padding:clamp(10px,2vw,18px) clamp(12px,2.5vw,26px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.new-logo{display:flex;align-items:center;gap:7px;font-weight:700;font-size:clamp(.7rem,1.5vw,1rem);color:var(--black);letter-spacing:-.01em}
+.new-logo i{width:clamp(14px,2.2vw,22px);height:clamp(14px,2.2vw,22px);border-radius:5px;background:var(--black);display:block;flex-shrink:0}
+.new-nav{display:flex;gap:clamp(8px,1.8vw,20px)}
+.new-nav span{font-size:clamp(.48rem,1vw,.72rem);color:var(--mid);font-weight:500}
+.new-cta{background:var(--black);color:#fff;font-size:clamp(.45rem,.95vw,.68rem);font-weight:600;padding:clamp(4px,.9vw,8px) clamp(8px,1.6vw,16px);border-radius:2px}
+.new-hero{padding:clamp(16px,3.2vw,40px) clamp(12px,2.5vw,26px);flex:1;display:flex;gap:clamp(12px,2.5vw,28px);align-items:center;min-height:0}
+.new-hero-txt{flex:1;min-width:0}
+.new-hero-txt h3{font-size:clamp(.9rem,2.4vw,1.85rem);line-height:1.12;color:var(--black);margin-bottom:clamp(5px,1vw,10px);letter-spacing:-.025em;font-weight:700}
+.new-hero-txt h3 em{color:var(--accent);font-style:normal}
+.new-hero-txt p{font-size:clamp(.5rem,1.05vw,.78rem);color:var(--mid);line-height:1.55;margin-bottom:clamp(8px,1.6vw,16px)}
+.new-btns{display:flex;gap:7px}
+.new-btn-a{background:var(--black);color:#fff;font-size:clamp(.45rem,.92vw,.68rem);font-weight:600;padding:clamp(5px,1vw,9px) clamp(9px,1.8vw,18px);border-radius:2px}
+.new-btn-b{border:1.5px solid var(--border);color:var(--black);font-size:clamp(.45rem,.92vw,.68rem);font-weight:600;padding:clamp(5px,1vw,9px) clamp(9px,1.8vw,18px);border-radius:2px}
+.new-hero-img{width:42%;aspect-ratio:4/3;border-radius:4px;background:linear-gradient(135deg,var(--accent) 0%,var(--black) 100%);position:relative;overflow:hidden;flex-shrink:0}
+.new-hero-img::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.28),transparent 62%)}
+.new-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-top:1px solid var(--border)}
+.new-card{background:#fff;padding:clamp(8px,1.8vw,18px) clamp(8px,1.6vw,16px)}
+.new-card i{width:clamp(12px,2vw,20px);height:clamp(12px,2vw,20px);border-radius:3px;background:var(--off-white);border:1px solid var(--border);display:block;margin-bottom:clamp(4px,.9vw,8px)}
+.new-card b{display:block;font-size:clamp(.48rem,.98vw,.72rem);color:var(--black);margin-bottom:3px;font-weight:700}
+.new-card span{font-size:clamp(.4rem,.85vw,.62rem);color:var(--mid);line-height:1.4;display:block}
+
+/* --- Handle + badges --- */
+.compare-handle{
+  position:absolute;top:0;bottom:0;left:50%;width:2px;
+  background:var(--accent);z-index:5;transform:translateX(-1px);
+  pointer-events:none;box-shadow:0 0 0 1px rgba(255,255,255,.5);
+}
+.compare-grip{
+  position:absolute;top:50%;left:50%;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--accent);border:3px solid #fff;
+  transform:translate(-50%,-50%);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 20px -4px rgba(0,49,53,.45);
+  transition:transform .2s;
+}
+.compare:hover .compare-grip{transform:translate(-50%,-50%) scale(1.1)}
+.compare-grip svg{width:20px;height:20px;stroke:#fff;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.compare-badge{
+  position:absolute;top:14px;z-index:6;
+  font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 11px;border-radius:2px;pointer-events:none;
+}
+.badge-before{left:14px;background:rgba(0,0,0,.72);color:#fff}
+.badge-after{right:14px;background:var(--accent);color:#fff}
+.compare-hint{
+  text-align:center;margin-top:16px;font-size:.8rem;color:var(--mid);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.compare-hint svg{width:16px;height:16px;stroke:var(--accent);stroke-width:2;fill:none}
+
+/* ================================================
+   SELF-BUILDING BROWSER MOCKUP
+   ================================================ */
+.build-browser{
+  border-radius:10px;overflow:hidden;background:#fff;
+  border:1px solid var(--border);
+  box-shadow:0 40px 90px -30px rgba(0,49,53,.4);
+  max-width:900px;margin:0 auto;
+}
+.build-chrome{
+  background:var(--off-white);border-bottom:1px solid var(--border);
+  padding:11px 16px;display:flex;align-items:center;gap:10px;
+}
+.build-dots{display:flex;gap:6px}
+.build-dots i{width:11px;height:11px;border-radius:50%;display:block}
+.build-dots i:nth-child(1){background:#ff5f57}
+.build-dots i:nth-child(2){background:#febc2e}
+.build-dots i:nth-child(3){background:#28c840}
+.build-url{
+  flex:1;background:#fff;border:1px solid var(--border);border-radius:20px;
+  padding:5px 14px;font-size:.7rem;color:var(--mid);
+  display:flex;align-items:center;gap:7px;max-width:340px;margin:0 auto;
+}
+.build-url svg{width:11px;height:11px;stroke:#28c840;stroke-width:2.4;fill:none}
+.build-stage{min-height:400px;position:relative;padding:0}
+@media(max-width:640px){.build-stage{min-height:320px}}
+
+.bp{opacity:0}
+.bp-nav{padding:16px 26px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.bp-logo{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--black);font-size:.92rem}
+.bp-logo i{width:20px;height:20px;border-radius:5px;background:var(--black);display:block}
+.bp-links{display:flex;gap:18px}
+.bp-links span{font-size:.72rem;color:var(--mid);font-weight:500}
+.bp-hero{padding:38px 26px 26px;text-align:center}
+.bp-hero h4{font-size:clamp(1.1rem,2.6vw,1.85rem);color:var(--black);letter-spacing:-.025em;margin-bottom:9px;line-height:1.15;font-weight:700}
+.bp-hero h4 em{color:var(--accent);font-style:normal}
+.bp-hero p{font-size:.82rem;color:var(--mid);max-width:400px;margin:0 auto 18px;line-height:1.5}
+.bp-hero-btn{display:inline-block;background:var(--black);color:#fff;font-size:.75rem;font-weight:600;padding:9px 22px;border-radius:2px}
+.bp-img{height:150px;margin:0 26px 24px;border-radius:5px;background:linear-gradient(135deg,var(--accent),var(--black));position:relative;overflow:hidden}
+.bp-img::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 28% 22%,rgba(255,255,255,.26),transparent 60%)}
+.bp-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-top:1px solid var(--border)}
+@media(max-width:560px){.bp-cards{grid-template-columns:1fr}}
+.bp-card{background:#fff;padding:18px 20px}
+.bp-card i{width:22px;height:22px;border-radius:4px;background:var(--off-white);border:1px solid var(--border);display:block;margin-bottom:9px}
+.bp-card b{display:block;font-size:.76rem;color:var(--black);margin-bottom:4px}
+.bp-card span{font-size:.66rem;color:var(--mid);line-height:1.45;display:block}
+
+/* Build progress readout */
+.build-steps{
+  display:flex;justify-content:center;gap:0;flex-wrap:wrap;
+  margin-top:32px;max-width:900px;margin-left:auto;margin-right:auto;
+  border:1px solid var(--border);
+}
+.build-step{
+  flex:1;min-width:150px;padding:16px 18px;
+  border-right:1px solid var(--border);
+  transition:background .35s,border-color .35s;
+  background:#fff;
+}
+.build-step:last-child{border-right:none}
+.build-step.done{background:var(--off-white)}
+.build-step-top{display:flex;align-items:center;gap:9px;margin-bottom:5px}
+.build-tick{
+  width:17px;height:17px;border-radius:50%;flex-shrink:0;
+  border:1.5px solid var(--border);background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;font-weight:900;color:#fff;
+  transition:background .35s,border-color .35s;
+}
+.build-step.done .build-tick{background:var(--accent);border-color:var(--accent)}
+.build-step b{font-size:.76rem;color:var(--black);font-weight:700}
+.build-step span{font-size:.68rem;color:var(--mid);display:block;line-height:1.45}
+
+/* ================================================
+   HORIZONTAL SCROLL SHOWCASE
+   ================================================ */
+.hs-section{position:relative;background:var(--black);overflow:hidden}
+.hs-viewport{height:100vh;display:flex;align-items:center;overflow:hidden}
+.hs-track{display:flex;gap:28px;padding:0 6vw;will-change:transform}
+.hs-intro{
+  flex-shrink:0;width:min(400px,74vw);
+  display:flex;flex-direction:column;justify-content:center;
+}
+.hs-intro .section-label{color:var(--accent)}
+.hs-intro h2{color:#fff;font-size:clamp(1.7rem,3.4vw,2.7rem);line-height:1.1;margin-bottom:14px}
+.hs-intro p{color:rgba(255,255,255,.55);font-size:.95rem;line-height:1.6}
+.hs-card{
+  flex-shrink:0;width:min(340px,72vw);
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:8px;padding:34px 30px;
+  display:flex;flex-direction:column;
+  transition:background .3s,border-color .3s,transform .3s;
+}
+.hs-card:hover{background:rgba(255,255,255,.075);border-color:rgba(15,164,175,.5);transform:translateY(-5px)}
+.hs-num{
+  font-size:.7rem;font-weight:700;letter-spacing:.16em;
+  color:var(--accent);margin-bottom:20px;
+}
+.hs-card h3{color:#fff;font-size:1.28rem;margin-bottom:11px;line-height:1.2}
+.hs-card p{color:rgba(255,255,255,.55);font-size:.88rem;line-height:1.62;flex:1}
+.hs-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:22px}
+.hs-tag{
+  font-size:.63rem;font-weight:600;letter-spacing:.05em;
+  color:rgba(255,255,255,.62);
+  border:1px solid rgba(255,255,255,.16);
+  padding:4px 10px;border-radius:20px;
+}
+.hs-progress{
+  position:absolute;bottom:38px;left:6vw;right:6vw;
+  height:2px;background:rgba(255,255,255,.11);
+}
+.hs-progress-bar{height:100%;width:0%;background:var(--accent)}
+@media(max-width:760px){
+  .hs-viewport{height:auto;padding:80px 0}
+  .hs-track{flex-direction:column;gap:20px;padding:0 24px;transform:none !important}
+  .hs-intro,.hs-card{width:100%}
+  .hs-progress{display:none}
+}
+
 /* ---------- CURSOR ---------- */
 .cursor-dot{
   position:fixed;top:0;left:0;width:8px;height:8px;
@@ -621,6 +827,187 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
   </div>
 </section>
 
+<!-- ============ FØR / EFTER SLIDER ============ -->
+<section style="background:var(--white);border-bottom:1px solid var(--border)">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="section-label">Se forskellen</span>
+      <h2>Fra forældet til fremragende</h2>
+      <p class="muted">Træk i håndtaget og se hvad et redesign gør ved en hjemmeside.</p>
+    </div>
+
+    <div class="compare reveal" id="compare">
+      <!-- EFTER (nederste lag) -->
+      <div class="compare-pane">
+        <div class="compare-site">
+          <div class="new-site">
+            <div class="new-top">
+              <div class="new-logo"><i></i>Nordbo VVS</div>
+              <div class="new-nav"><span>Ydelser</span><span>Om os</span><span>Kontakt</span></div>
+              <div class="new-cta">Book tid</div>
+            </div>
+            <div class="new-hero">
+              <div class="new-hero-txt">
+                <h3>VVS du kan <em>regne med</em></h3>
+                <p>Døgnvagt i hele Nordsjælland. Fast pris før vi begynder — ingen overraskelser på regningen.</p>
+                <div class="new-btns">
+                  <span class="new-btn-a">Book tid</span>
+                  <span class="new-btn-b">Se priser</span>
+                </div>
+              </div>
+              <div class="new-hero-img"></div>
+            </div>
+            <div class="new-cards">
+              <div class="new-card"><i></i><b>Døgnvagt</b><span>Akut hjælp 24/7</span></div>
+              <div class="new-card"><i></i><b>Fast pris</b><span>Aftalt på forhånd</span></div>
+              <div class="new-card"><i></i><b>5 års garanti</b><span>På alt arbejde</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FØR (øverste lag, klippes væk) -->
+      <div class="compare-pane compare-pane-before" id="comparePaneBefore">
+        <div class="compare-site">
+          <div class="old-site">
+            <div class="old-top">~*~ NORDBO VVS &amp; BLIKKENSLAGER ~*~</div>
+            <div class="old-nav">
+              <a>Forside</a><a>Om os</a><a>Priser</a><a>Gaestebog</a><a>Links</a><a>E-mail os!</a>
+            </div>
+            <div class="old-body">
+              <div class="old-main">
+                <h3>VELKOMMEN TIL VORES HJEMMESIDE!!!</h3>
+                <p><span class="old-blink">NYHED!</span> Vi har nu ogsaa doegnvagt!</p>
+                <hr class="old-hr">
+                <p>Vi udfoerer alt indenfor VVS. Ring paa telefon 12 34 56 78 mellem kl. 8-16 paa hverdage. Vi svarer ikke paa e-mail i weekenden.</p>
+                <p>Denne side er bedst set i Internet Explorer 6 ved 800x600.</p>
+                <span class="old-btn">Klik her!</span>
+              </div>
+              <div class="old-side">
+                <b>BESOEGENDE:</b>
+                000247
+                <hr class="old-hr">
+                <b>SIDST OPDATERET:</b>
+                14. marts 2007
+              </div>
+            </div>
+            <div class="old-foot">Copyright 2007 &middot; Designet af min nevoe</div>
+          </div>
+        </div>
+      </div>
+
+      <span class="compare-badge badge-before">Før</span>
+      <span class="compare-badge badge-after">Efter</span>
+
+      <div class="compare-handle" id="compareHandle">
+        <div class="compare-grip">
+          <svg viewBox="0 0 24 24"><polyline points="9 6 4 12 9 18"/><polyline points="15 6 20 12 15 18"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <p class="compare-hint">
+      <svg viewBox="0 0 24 24"><polyline points="9 6 4 12 9 18"/><polyline points="15 6 20 12 15 18"/></svg>
+      Træk håndtaget til venstre og højre
+    </p>
+  </div>
+</section>
+
+<!-- ============ SELVBYGGENDE BROWSER ============ -->
+<section style="background:var(--off-white);border-bottom:1px solid var(--border);overflow:hidden">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="section-label">Sådan bygger vi</span>
+      <h2>Din side, bygget for øjnene af dig</h2>
+      <p class="muted">Scroll videre — så bygger den sig selv.</p>
+    </div>
+
+    <div class="build-browser" id="buildBrowser">
+      <div class="build-chrome">
+        <div class="build-dots"><i></i><i></i><i></i></div>
+        <div class="build-url">
+          <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          dinvirksomhed.dk
+        </div>
+      </div>
+      <div class="build-stage">
+        <div class="bp bp-nav" data-bp="0">
+          <div class="bp-logo"><i></i>Dit Firma</div>
+          <div class="bp-links"><span>Ydelser</span><span>Om os</span><span>Kontakt</span></div>
+        </div>
+        <div class="bp bp-hero" data-bp="1">
+          <h4>Velkommen til <em>dit firma</em></h4>
+          <p>Din tekst, dit brand, dine kunder — skrevet så folk faktisk ringer.</p>
+          <span class="bp-hero-btn">Kontakt os</span>
+        </div>
+        <div class="bp bp-img" data-bp="2"></div>
+        <div class="bp bp-cards" data-bp="3">
+          <div class="bp-card"><i></i><b>Hurtig</b><span>Loader på under et sekund</span></div>
+          <div class="bp-card"><i></i><b>Mobilvenlig</b><span>Perfekt på alle skærme</span></div>
+          <div class="bp-card"><i></i><b>Synlig</b><span>Findes på Google</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="build-steps" id="buildSteps">
+      <div class="build-step" data-step="0">
+        <div class="build-step-top"><span class="build-tick">✓</span><b>Struktur</b></div>
+        <span>Navigation og opbygning</span>
+      </div>
+      <div class="build-step" data-step="1">
+        <div class="build-step-top"><span class="build-tick">✓</span><b>Indhold</b></div>
+        <span>Tekst der sælger</span>
+      </div>
+      <div class="build-step" data-step="2">
+        <div class="build-step-top"><span class="build-tick">✓</span><b>Design</b></div>
+        <span>Billeder og farver</span>
+      </div>
+      <div class="build-step" data-step="3">
+        <div class="build-step-top"><span class="build-tick">✓</span><b>Live</b></div>
+        <span>Klar til dine kunder</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HORISONTAL SCROLL ============ -->
+<section class="hs-section" id="hsSection">
+  <div class="hs-viewport">
+    <div class="hs-track" id="hsTrack">
+      <div class="hs-intro">
+        <span class="section-label">Hvad du får</span>
+        <h2>Mere end bare en hjemmeside</h2>
+        <p>Vi bygger ikke bare en side og forsvinder. Du får en partner der holder den kørende.</p>
+      </div>
+      <div class="hs-card">
+        <div class="hs-num">01</div>
+        <h3>Design der passer dig</h3>
+        <p>Ingen skabeloner. Vi starter fra bunden med dit brand, din branche og dine kunder for øje.</p>
+        <div class="hs-tags"><span class="hs-tag">Unikt</span><span class="hs-tag">Brandet</span></div>
+      </div>
+      <div class="hs-card">
+        <div class="hs-num">02</div>
+        <h3>Bygget til at findes</h3>
+        <p>Teknisk SEO fra dag ét. Hurtige sider, korrekt struktur og indhold der rammer det folk søger på.</p>
+        <div class="hs-tags"><span class="hs-tag">SEO</span><span class="hs-tag">Hastighed</span></div>
+      </div>
+      <div class="hs-card">
+        <div class="hs-num">03</div>
+        <h3>Drift uden bøvl</h3>
+        <p>Hosting, SSL, backup og overvågning. Går noget galt, opdager og fikser vi det — ofte før du opdager det.</p>
+        <div class="hs-tags"><span class="hs-tag">Hosting</span><span class="hs-tag">Sikkerhed</span></div>
+      </div>
+      <div class="hs-card">
+        <div class="hs-num">04</div>
+        <h3>Support samme dag</h3>
+        <p>Skal en tekst rettes eller et billede skiftes? Skriv til os — vi klarer det, du behøver ikke røre en finger.</p>
+        <div class="hs-tags"><span class="hs-tag">Support</span><span class="hs-tag">Løbende</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="hs-progress"><div class="hs-progress-bar" id="hsBar"></div></div>
+</section>
+
 <!-- DARK SECTION — PRICING TEASER -->
 <section class="dark-section">
   <div class="wrap">
@@ -918,6 +1305,140 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
       scrollTrigger:{ trigger:'.price-card', start:'top 85%', toggleActions:'play none none none' }
     }
   );
+})();
+</script>
+
+<script>
+/* ========== BEFORE / AFTER SLIDER ========== */
+(function(){
+  var box    = document.getElementById('compare');
+  var before = document.getElementById('comparePaneBefore');
+  var handle = document.getElementById('compareHandle');
+  if(!box || !before || !handle) return;
+
+  var pct = 50;
+  var dragging = false;
+
+  function paint(p){
+    pct = Math.max(2, Math.min(98, p));
+    before.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+    handle.style.left = pct + '%';
+  }
+  function fromEvent(e){
+    var r = box.getBoundingClientRect();
+    var x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+    paint((x / r.width) * 100);
+  }
+
+  box.addEventListener('mousedown', function(e){ dragging = true; fromEvent(e); e.preventDefault(); });
+  window.addEventListener('mousemove', function(e){ if(dragging) fromEvent(e); });
+  window.addEventListener('mouseup',  function(){ dragging = false; });
+
+  box.addEventListener('touchstart', function(e){ dragging = true; fromEvent(e); }, {passive:true});
+  window.addEventListener('touchmove', function(e){ if(dragging) fromEvent(e); }, {passive:true});
+  window.addEventListener('touchend',  function(){ dragging = false; });
+
+  // Hover-to-scrub on desktop when not dragging
+  box.addEventListener('mousemove', function(e){ if(!dragging) fromEvent(e); });
+
+  paint(50);
+
+  // Auto-demo once when scrolled into view: sweep across so people notice it
+  if(typeof ScrollTrigger !== 'undefined'){
+    ScrollTrigger.create({
+      trigger: box, start: 'top 72%', once: true,
+      onEnter: function(){
+        var o = {v:50};
+        gsap.timeline()
+          .to(o, {v:86, duration:1.05, ease:'power2.inOut', onUpdate:function(){ paint(o.v); }})
+          .to(o, {v:18, duration:1.25, ease:'power2.inOut', onUpdate:function(){ paint(o.v); }})
+          .to(o, {v:50, duration:0.85, ease:'power2.out',   onUpdate:function(){ paint(o.v); }});
+      }
+    });
+  }
+})();
+</script>
+
+<script>
+/* ========== SELF-BUILDING BROWSER ========== */
+(function(){
+  if(typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  var browser = document.getElementById('buildBrowser');
+  if(!browser) return;
+
+  var parts = gsap.utils.toArray('.bp');
+  var steps = gsap.utils.toArray('.build-step');
+
+  // Entry animation per part, tied to scroll position
+  var tl = gsap.timeline({
+    scrollTrigger:{
+      trigger: browser,
+      start: 'top 74%',
+      end: 'bottom 62%',
+      scrub: 0.5,
+    }
+  });
+
+  parts.forEach(function(part, i){
+    var from = {opacity:0, y:26};
+    if(part.classList.contains('bp-img'))   from = {opacity:0, scale:0.9, y:20};
+    if(part.classList.contains('bp-cards')) from = {opacity:0, y:34};
+
+    tl.fromTo(part, from, {opacity:1, y:0, scale:1, duration:1, ease:'power2.out'}, i * 0.85);
+
+    // Light up matching step
+    tl.call(function(){
+      if(steps[i]) steps[i].classList.add('done');
+    }, null, i * 0.85 + 0.4);
+  });
+
+  // Un-light steps when scrubbing backwards
+  ScrollTrigger.create({
+    trigger: browser, start:'top 74%', end:'bottom 62%',
+    onUpdate: function(self){
+      var reached = Math.floor(self.progress * (steps.length + 0.4));
+      steps.forEach(function(s, i){
+        if(i < reached) s.classList.add('done'); else s.classList.remove('done');
+      });
+    }
+  });
+})();
+</script>
+
+<script>
+/* ========== HORIZONTAL SCROLL SHOWCASE ========== */
+(function(){
+  if(typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  var section = document.getElementById('hsSection');
+  var track   = document.getElementById('hsTrack');
+  var bar     = document.getElementById('hsBar');
+  if(!section || !track) return;
+
+  var mm = gsap.matchMedia();
+
+  mm.add('(min-width: 761px)', function(){
+    function distance(){
+      return Math.max(0, track.scrollWidth - window.innerWidth + window.innerWidth * 0.12);
+    }
+
+    var tween = gsap.to(track, {
+      x: function(){ return -distance(); },
+      ease: 'none',
+      scrollTrigger:{
+        trigger: section,
+        start: 'top top',
+        end: function(){ return '+=' + distance(); },
+        pin: true,
+        scrub: 0.7,
+        invalidateOnRefresh: true,
+        onUpdate: function(self){
+          if(bar) bar.style.width = (self.progress * 100).toFixed(1) + '%';
+        }
+      }
+    });
+
+    return function(){ tween.scrollTrigger && tween.scrollTrigger.kill(); tween.kill(); };
+  });
 })();
 </script>
 
