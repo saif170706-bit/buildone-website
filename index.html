@@ -13,6 +13,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
 :root{
   --black:#003135;
@@ -275,6 +278,72 @@ details p{margin-top:14px;color:var(--mid);line-height:1.65;font-size:.93rem;max
 .how-float img{width:100%;display:block}
 @media(max-width:900px){.how-float{display:none}}
 
+/* ---------- CURSOR ---------- */
+.cursor-dot{
+  position:fixed;top:0;left:0;width:8px;height:8px;
+  border-radius:50%;background:var(--accent);
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:width .15s,height .15s,background .15s;
+}
+.cursor-ring{
+  position:fixed;top:0;left:0;width:36px;height:36px;
+  border-radius:50%;border:1.5px solid var(--accent);
+  pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  opacity:0.4;
+  transition:width .3s,height .3s,opacity .3s;
+}
+body:has(a:hover) .cursor-ring,
+body:has(button:hover) .cursor-ring{
+  width:56px;height:56px;opacity:0.7;
+}
+@media(hover:none){ .cursor-dot,.cursor-ring{display:none} }
+
+/* ---------- MARQUEE ---------- */
+.marquee-wrap{
+  overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  background:var(--black);padding:14px 0;
+  user-select:none;
+}
+.marquee-track{
+  display:flex;gap:0;
+  animation:marquee-scroll 24s linear infinite;
+  width:max-content;
+}
+.marquee-track:hover{animation-play-state:paused}
+.marquee-item{
+  white-space:nowrap;padding:0 28px;
+  font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);
+}
+.marquee-item strong{color:var(--accent)}
+@keyframes marquee-scroll{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+
+/* ---------- MAGNETIC BUTTONS ---------- */
+.btn-magnetic{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:var(--radius);
+  font-family:var(--sans);font-weight:600;font-size:.9rem;
+  letter-spacing:.01em;cursor:pointer;
+  border:1.5px solid transparent;
+  transition:background .15s,color .15s,border-color .15s,transform .3s cubic-bezier(.23,1,.32,1);
+  will-change:transform;
+}
+
+/* ---------- HERO WORD ANIMATION ---------- */
+.hero-word{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(30px);
+}
+
+/* ---------- SPLIT ACCENT ---------- */
+.hero h1 strong{color:var(--accent)}
+
 /* ---------- FOOTER ---------- */
 footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:var(--off-white)}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
@@ -373,6 +442,48 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
     <div class="trust-item"><b>349 kr/md</b><span>basispris når du går live</span></div>
     <div class="trust-item"><b>3–7 dage</b><span>til første udkast</span></div>
     <div class="trust-item"><b>Ingen binding</b><span>opsig når du vil</span></div>
+  </div>
+</div>
+
+<!-- MARQUEE TICKER -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item"><strong>Design</strong></span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">Hosting</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item"><strong>Gratis at starte</strong></span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">SEO-venlig</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item"><strong>Mobiloptimeret</strong></span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">Ingen binding</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item"><strong>Support inkluderet</strong></span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">SSL & sikkerhed</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item"><strong>3–7 dages levering</strong></span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">Design</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">Hosting</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item"><strong>Gratis at starte</strong></span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">SEO-venlig</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item"><strong>Mobiloptimeret</strong></span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">Ingen binding</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item"><strong>Support inkluderet</strong></span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item">SSL & sikkerhed</span>
+    <span class="marquee-item">·</span>
+    <span class="marquee-item"><strong>3–7 dages levering</strong></span>
+    <span class="marquee-item">·</span>
   </div>
 </div>
 
@@ -610,6 +721,216 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
 </footer>
 
 <script>
+/* ========== LENIS SMOOTH SCROLL ========== */
+(function(){
+  if(typeof Lenis === 'undefined') return;
+  var lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
+  function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+  if(typeof ScrollTrigger !== 'undefined'){
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function(time){ lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+  }
+})();
+</script>
+
+<script>
+/* ========== HERO TITLE WORD ANIMATION ========== */
+(function(){
+  var h1 = document.querySelector('.hero h1');
+  if(!h1) return;
+  // Split into words, preserve <strong> styling
+  var html = h1.innerHTML;
+  // Replace words with wrapped spans
+  h1.innerHTML = html.replace(/(<strong>[\s\S]*?<\/strong>|[^\s<]+)/g, function(m){
+    if(m.startsWith('<')) return '<strong><span class="hero-word">' + m.replace(/<\/?strong>/g,'') + '</span></strong>';
+    return '<span class="hero-word">' + m + '</span>';
+  }).replace(/\s+/g,' ');
+
+  // Animate in with GSAP
+  gsap.to('.hero-word', {
+    opacity: 1,
+    y: 0,
+    duration: 0.7,
+    stagger: 0.07,
+    ease: 'power3.out',
+    delay: 0.2,
+  });
+})();
+</script>
+
+<script>
+/* ========== GSAP SCROLL REVEAL ========== */
+(function(){
+  if(typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    // Fallback: use old IntersectionObserver
+    var items = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(function(el){ el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry, i){
+        if (entry.isIntersecting) {
+          setTimeout(function(){ entry.target.classList.add('in'); }, i % 3 * 80);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    items.forEach(function(el){ io.observe(el); });
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Reveal elements
+  gsap.utils.toArray('.reveal').forEach(function(el){
+    gsap.fromTo(el,
+      { opacity: 0, y: 32 },
+      {
+        opacity: 1, y: 0, duration: 0.75, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+  // Feature cards stagger
+  gsap.utils.toArray('.feat').forEach(function(el, i){
+    gsap.fromTo(el,
+      { opacity: 0, y: 24, scale: 0.97 },
+      {
+        opacity: 1, y: 0, scale: 1, duration: 0.55, ease: 'power2.out',
+        delay: (i % 2) * 0.1,
+        scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+  // Steps stagger
+  gsap.utils.toArray('.step-v').forEach(function(el, i){
+    gsap.fromTo(el,
+      { opacity: 0, x: -24 },
+      {
+        opacity: 1, x: 0, duration: 0.6, ease: 'power2.out', delay: i * 0.12,
+        scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+  // Trust bar numbers count up
+  function countUp(el, target, duration){
+    var start = 0;
+    var startTime = null;
+    var suffix = el.dataset.suffix || '';
+    var prefix = el.dataset.prefix || '';
+    function step(ts){
+      if(!startTime) startTime = ts;
+      var p = Math.min((ts - startTime) / duration, 1);
+      var ease = 1 - Math.pow(1 - p, 3);
+      var val = Math.round(start + (target - start) * ease);
+      el.textContent = prefix + val.toLocaleString('da-DK') + suffix;
+      if(p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  // Trust bar
+  var trustItems = document.querySelectorAll('.trust-item b');
+  if(trustItems.length){
+    ScrollTrigger.create({
+      trigger: '.trust',
+      start: 'top 90%',
+      once: true,
+      onEnter: function(){
+        // Animate each item
+        gsap.fromTo('.trust-item',
+          { opacity:0, y:16 },
+          { opacity:1, y:0, duration:0.5, stagger:0.1, ease:'power2.out' }
+        );
+      }
+    });
+  }
+
+  // Price card highlight
+  gsap.fromTo('.price-card',
+    { opacity:0, y:40, scale:0.95 },
+    {
+      opacity:1, y:0, scale:1, duration:0.8, ease:'back.out(1.4)',
+      scrollTrigger:{ trigger:'.price-card', start:'top 85%', toggleActions:'play none none none' }
+    }
+  );
+})();
+</script>
+
+<script>
+/* ========== MAGNETIC BUTTONS ========== */
+(function(){
+  var btns = document.querySelectorAll('.btn-primary, .btn-outline, .btn');
+  btns.forEach(function(btn){
+    btn.addEventListener('mousemove', function(e){
+      var r = btn.getBoundingClientRect();
+      var cx = r.left + r.width / 2;
+      var cy = r.top + r.height / 2;
+      var dx = (e.clientX - cx) * 0.28;
+      var dy = (e.clientY - cy) * 0.28;
+      btn.style.transform = 'translate(' + dx + 'px,' + dy + 'px)';
+    });
+    btn.addEventListener('mouseleave', function(){
+      btn.style.transform = '';
+    });
+  });
+})();
+</script>
+
+<script>
+/* ========== CURSOR FOLLOWER ========== */
+(function(){
+  var dot = document.getElementById('cursorDot');
+  var ring = document.getElementById('cursorRing');
+  if(!dot || !ring) return;
+  if(!window.matchMedia('(hover:hover)').matches) return;
+
+  var mx = window.innerWidth/2, my = window.innerHeight/2;
+  var rx = mx, ry = my;
+  var visible = false;
+
+  document.addEventListener('mousemove', function(e){
+    mx = e.clientX; my = e.clientY;
+    if(!visible){
+      dot.style.opacity = '1'; ring.style.opacity = '0.4';
+      visible = true;
+    }
+  });
+
+  // Dot follows instantly, ring lerps
+  function loop(){
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    dot.style.left = mx + 'px';
+    dot.style.top = my + 'px';
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(loop);
+  }
+  dot.style.opacity = '0'; ring.style.opacity = '0';
+  loop();
+
+  // Scale up on links/buttons
+  var interactives = document.querySelectorAll('a, button');
+  interactives.forEach(function(el){
+    el.addEventListener('mouseenter', function(){
+      dot.style.transform = 'translate(-50%,-50%) scale(0.3)';
+      ring.style.width = '56px'; ring.style.height = '56px'; ring.style.opacity = '0.7';
+    });
+    el.addEventListener('mouseleave', function(){
+      dot.style.transform = 'translate(-50%,-50%) scale(1)';
+      ring.style.width = '36px'; ring.style.height = '36px'; ring.style.opacity = '0.4';
+    });
+  });
+})();
+</script>
+
+<script>
 /* ---------- VIDEO MONTAGE + TIMED STATS ---------- */
 (function(){
   var slides = Array.from(document.querySelectorAll('.vslide'));
@@ -677,24 +998,6 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
 })();
 </script>
 
-<script>
-(function(){
-  var items = document.querySelectorAll('.reveal');
-  if (!('IntersectionObserver' in window)) {
-    items.forEach(function(el){ el.classList.add('in'); });
-    return;
-  }
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry, i){
-      if (entry.isIntersecting) {
-        setTimeout(function(){ entry.target.classList.add('in'); }, i % 3 * 80);
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  items.forEach(function(el){ io.observe(el); });
-})();
-</script>
 
 <script>
 (function(){
@@ -715,6 +1018,10 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
   update();
 })();
 </script>
+
+<!-- Custom cursor -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
 <div id="cookieBanner" class="cookie-banner" role="dialog" aria-label="Cookiesamtykke">
   <div class="cookie-inner">
