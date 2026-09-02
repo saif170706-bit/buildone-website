@@ -57,7 +57,28 @@ nav.wrap{display:flex;align-items:center;justify-content:space-between;height:72
 }
 
 /* ---------- HERO ---------- */
-.hero{padding:80px 0 72px;border-bottom:1px solid var(--border)}
+.hero{padding:80px 0 72px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+
+/* Gradient orbs */
+.hero-bg{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.13;animation:orb-drift ease-in-out infinite alternate}
+.orb-1{width:700px;height:700px;background:var(--accent);top:-260px;left:-180px;animation-duration:9s}
+.orb-2{width:500px;height:500px;background:var(--off-black);top:80px;right:-120px;animation-duration:13s;animation-delay:-4s}
+.orb-3{width:350px;height:350px;background:var(--accent);bottom:-120px;left:38%;animation-duration:11s;animation-delay:-7s}
+@keyframes orb-drift{
+  0%{transform:translate(0,0) scale(1)}
+  100%{transform:translate(40px,-40px) scale(1.12)}
+}
+
+/* Hero content layers */
+.hero>.wrap{position:relative;z-index:1}
+.hero-inner{will-change:transform}
+.flip-word{
+  display:inline-block;
+  color:var(--black);
+  overflow:hidden;
+  vertical-align:bottom;
+}
 .hero .grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
 @media(max-width:900px){.hero .grid{grid-template-columns:1fr;gap:48px}}
 
@@ -375,11 +396,16 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
   <div class="wrap">
     <div class="grid">
-      <div class="inner">
+      <div class="inner hero-inner" id="heroInner">
         <span class="hero-label"><span class="dot"></span>Ingen forudbetaling krævet</span>
-        <h1>En hjemmeside til din virksomhed — <strong>gratis at prøve.</strong></h1>
+        <h1>En hjemmeside til din <span class="flip-word" id="flipWord">virksomhed</span> —<br><strong>gratis at prøve.</strong></h1>
         <p class="lead">Vi bygger siden. Du ser resultatet. Betaler kun hvis du er tilfreds og vil gå live — fra 349 kr/md.</p>
         <div class="hero-ctas">
           <a href="/kontakt" class="btn btn-primary">Start dit gratisprojekt</a>
@@ -387,7 +413,7 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
         </div>
       </div>
 
-      <div class="hero-video">
+      <div class="hero-video" id="heroVideo">
         <!-- Clip 1: people busy at work, chosen by user -->
         <video class="vslide active" autoplay muted loop playsinline>
           <source src="/assets/videos/video1.mp4" type="video/mp4">
@@ -718,6 +744,74 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
     </div>
   </div>
 </footer>
+
+<script>
+/* ========== WORD FLIPPER ========== */
+(function(){
+  var el = document.getElementById('flipWord');
+  if(!el) return;
+  var words = ['virksomhed','restaurant','klinik','butik','webshop','frisør'];
+  var i = 0;
+  setInterval(function(){
+    gsap.to(el, {
+      y: -28, opacity: 0, duration: 0.28, ease: 'power2.in',
+      onComplete: function(){
+        i = (i+1) % words.length;
+        el.textContent = words[i];
+        gsap.fromTo(el, {y:28,opacity:0},{y:0,opacity:1,duration:0.3,ease:'power2.out'});
+      }
+    });
+  }, 2400);
+})();
+</script>
+
+<script>
+/* ========== MOUSE PARALLAX ON HERO ========== */
+(function(){
+  var inner = document.getElementById('heroInner');
+  var video = document.getElementById('heroVideo');
+  var orb1 = document.querySelector('.orb-1');
+  var orb2 = document.querySelector('.orb-2');
+  if(!inner || !video) return;
+  var cx = window.innerWidth/2, cy = window.innerHeight/2;
+
+  document.addEventListener('mousemove', function(e){
+    var dx = (e.clientX - cx) / cx;  // -1 to 1
+    var dy = (e.clientY - cy) / cy;
+    gsap.to(inner, {x: dx*-12, y: dy*-8, duration:1.2, ease:'power2.out'});
+    gsap.to(video, {x: dx*18, y: dy*12, duration:1.6, ease:'power2.out'});
+    if(orb1) gsap.to(orb1, {x: dx*60, y: dy*40, duration:3, ease:'power2.out'});
+    if(orb2) gsap.to(orb2, {x: dx*-40, y: dy*-30, duration:4, ease:'power2.out'});
+  });
+
+  window.addEventListener('resize', function(){
+    cx = window.innerWidth/2; cy = window.innerHeight/2;
+  });
+})();
+</script>
+
+<script>
+/* ========== SCROLL PARALLAX EXIT (hero) ========== */
+(function(){
+  if(typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  var inner = document.getElementById('heroInner');
+  var video = document.getElementById('heroVideo');
+  if(!inner || !video) return;
+
+  var heroSection = document.querySelector('.hero');
+
+  gsap.timeline({
+    scrollTrigger:{
+      trigger: heroSection,
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 0.6,
+    }
+  })
+  .to(inner, {y: -90, opacity: 0, scale: 0.96, ease:'none'}, 0)
+  .to(video, {y: -40, scale: 1.06, ease:'none'}, 0);
+})();
+</script>
 
 <script>
 /* ========== HERO TITLE WORD ANIMATION ========== */
