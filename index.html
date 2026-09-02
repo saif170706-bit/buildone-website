@@ -191,6 +191,40 @@ section{padding:96px 0}
 .feat h3{font-size:.98rem;font-weight:700;margin-bottom:5px}
 .feat p{color:var(--mid);font-size:.88rem;line-height:1.55}
 
+/* ================================================
+   VANDRET SCROLL — hvad du får
+   ================================================ */
+.hs-section{position:relative;background:var(--black);overflow:hidden}
+.hs-viewport{height:100vh;display:flex;align-items:center;overflow:hidden}
+.hs-track{display:flex;gap:24px;padding:0 6vw;will-change:transform}
+.hs-intro{flex-shrink:0;width:min(400px,74vw);display:flex;flex-direction:column;justify-content:center}
+.hs-intro .section-label{color:var(--accent)}
+.hs-intro h2{color:#fff;font-size:clamp(1.7rem,3.3vw,2.6rem);line-height:1.1;margin-bottom:14px}
+.hs-intro p{color:rgba(255,255,255,.55);font-size:.95rem;line-height:1.62}
+.hs-card{
+  flex-shrink:0;width:min(330px,72vw);
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:3px;padding:32px 28px;
+  display:flex;flex-direction:column;
+  transition:background .3s ease,border-color .3s ease;
+}
+.hs-card:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.16)}
+.hs-num{
+  font-size:.8rem;font-weight:500;color:rgba(255,255,255,.3);
+  margin-bottom:18px;font-variant-numeric:tabular-nums;
+}
+.hs-card h3{color:#fff;font-size:1.2rem;margin-bottom:10px;line-height:1.22}
+.hs-card p{color:rgba(255,255,255,.56);font-size:.89rem;line-height:1.65;flex:1}
+.hs-progress{position:absolute;bottom:38px;left:6vw;right:6vw;height:2px;background:rgba(255,255,255,.1)}
+.hs-progress-bar{height:100%;width:0%;background:var(--accent)}
+@media(max-width:760px){
+  .hs-viewport{height:auto;padding:76px 0}
+  .hs-track{flex-direction:column;gap:18px;padding:0 24px;transform:none !important}
+  .hs-intro,.hs-card{width:100%}
+  .hs-progress{display:none}
+}
+
 /* ---------- DARK SECTION (pricing CTA) ---------- */
 .dark-section{background:var(--black);color:var(--white);padding:96px 0}
 .dark-section h2{color:var(--white);font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:14px}
@@ -539,6 +573,40 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
   </div>
 </section>
 
+<!-- VANDRET SCROLL -->
+<section class="hs-section" id="hsSection">
+  <div class="hs-viewport">
+    <div class="hs-track" id="hsTrack">
+      <div class="hs-intro">
+        <span class="section-label">Hvad du får</span>
+        <h2>Mere end bare en hjemmeside</h2>
+        <p>Vi bygger ikke en side og forsvinder. Du får en partner der holder den kørende bagefter.</p>
+      </div>
+      <div class="hs-card">
+        <div class="hs-num">01</div>
+        <h3>Designet fra bunden</h3>
+        <p>Ingen skabeloner. Vi tegner siden efter dit brand og den branche du arbejder i.</p>
+      </div>
+      <div class="hs-card">
+        <div class="hs-num">02</div>
+        <h3>Bygget til at findes</h3>
+        <p>Teknisk SEO fra første dag: hurtige sider, korrekt struktur og indhold der rammer det folk faktisk søger på.</p>
+      </div>
+      <div class="hs-card">
+        <div class="hs-num">03</div>
+        <h3>Driften er vores</h3>
+        <p>Hosting, SSL, backup og overvågning følger med. Går noget ned, opdager vi det som regel før du gør.</p>
+      </div>
+      <div class="hs-card">
+        <div class="hs-num">04</div>
+        <h3>Support samme dag</h3>
+        <p>Skal en tekst rettes eller et billede skiftes, skriver du bare til os. Så er det ordnet.</p>
+      </div>
+    </div>
+  </div>
+  <div class="hs-progress"><div class="hs-progress-bar" id="hsBar"></div></div>
+</section>
+
 <!-- DARK SECTION — PRICING TEASER -->
 <section class="dark-section">
   <div class="wrap">
@@ -847,6 +915,33 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
       shots.forEach(function(v,i){ v.classList.toggle('is-on', i === 0); });
       fill.style.height = '';
     };
+  });
+})();
+</script>
+
+<script>
+/* ========== VANDRET SCROLL ========== */
+(function(){
+  if(typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  var section=document.getElementById('hsSection');
+  var track=document.getElementById('hsTrack');
+  var bar=document.getElementById('hsBar');
+  if(!section||!track) return;
+
+  gsap.matchMedia().add('(min-width: 761px)', function(){
+    function distance(){ return Math.max(0, track.scrollWidth - window.innerWidth + window.innerWidth*0.12); }
+    var tween=gsap.to(track,{
+      x:function(){ return -distance(); },
+      ease:'none',
+      scrollTrigger:{
+        trigger:section, start:'top top',
+        end:function(){ return '+=' + distance(); },
+        pin:true, scrub:1, anticipatePin:1, refreshPriority:1,
+        invalidateOnRefresh:true,
+        onUpdate:function(self){ if(bar) bar.style.width=(self.progress*100).toFixed(1)+'%'; }
+      }
+    });
+    return function(){ if(tween.scrollTrigger) tween.scrollTrigger.kill(); tween.kill(); };
   });
 })();
 </script>
