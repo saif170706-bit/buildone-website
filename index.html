@@ -405,6 +405,40 @@ body:has(button:hover) .cursor-ring{
 /* ---------- SPLIT ACCENT ---------- */
 .hero h1 strong{color:var(--accent)}
 
+/* ================================================
+   BILLED-SAMLING — skiver der samles ved scroll
+   ================================================ */
+.assemble{position:relative;background:var(--black)}
+.assemble-viewport{height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.assemble-frame{
+  position:relative;width:min(1120px,88vw);aspect-ratio:16/8;
+  border-radius:6px;overflow:hidden;
+  box-shadow:0 40px 90px -30px rgba(0,0,0,.6);
+}
+.aslice{
+  position:absolute;top:0;height:100%;width:20%;
+  background-image:url('/assets/images/team.jpg');
+  background-size:500% 100%;background-repeat:no-repeat;
+  will-change:transform,opacity;backface-visibility:hidden;
+}
+.aslice:nth-child(1){left:0;background-position:0% center}
+.aslice:nth-child(2){left:20%;background-position:25% center}
+.aslice:nth-child(3){left:40%;background-position:50% center}
+.aslice:nth-child(4){left:60%;background-position:75% center}
+.aslice:nth-child(5){left:80%;background-position:100% center}
+.assemble-veil{
+  position:absolute;inset:0;z-index:2;
+  background:linear-gradient(to right,rgba(0,49,53,.88) 0%,rgba(0,49,53,.45) 55%,rgba(0,49,53,.06) 100%);
+}
+.assemble-caption{position:absolute;inset:0;z-index:3;display:flex;align-items:center;pointer-events:none}
+.assemble-caption .inner{padding:0 clamp(26px,5vw,66px);max-width:640px}
+.assemble-caption h2{color:#fff;font-size:clamp(1.6rem,3.4vw,2.7rem);line-height:1.14;margin-bottom:12px}
+.assemble-caption p{color:rgba(255,255,255,.62);font-size:.98rem;max-width:400px}
+@media(max-width:760px){
+  .assemble-viewport{height:auto;padding:70px 0}
+  .aslice{transform:none !important;opacity:1 !important}
+}
+
 /* ---------- FOOTER ---------- */
 footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:var(--off-white)}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
@@ -554,16 +588,24 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
 </div>
 
 <!-- EDITORIAL PHOTO STRIP -->
-<div class="photo-strip">
-  <img src="/assets/images/team.jpg" alt="Team der bygger hjemmesider" loading="lazy">
-  <div class="photo-strip-overlay"></div>
-  <div class="photo-strip-inner">
-    <div class="wrap">
-      <p class="photo-strip-quote">Vi designer og bygger.<br>Du godkender.</p>
-      <p class="photo-strip-sub">Fra idé til live hjemmeside på 3–7 dage.</p>
+<section class="assemble" id="assembleSection">
+  <div class="assemble-viewport">
+    <div class="assemble-frame" id="assembleFrame">
+      <div class="aslice"></div>
+      <div class="aslice"></div>
+      <div class="aslice"></div>
+      <div class="aslice"></div>
+      <div class="aslice"></div>
+      <div class="assemble-veil" id="assembleVeil"></div>
+      <div class="assemble-caption" id="assembleCaption">
+        <div class="inner">
+          <h2>Vi designer og bygger.<br>Du godkender.</h2>
+          <p>Fra idé til live hjemmeside på 3–7 dage.</p>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- SÅDAN FUNGERER DET -->
 <section id="how" style="background:var(--white);padding:96px 0 120px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;min-height:580px">
@@ -1003,6 +1045,59 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
       scrollTrigger:{ trigger:'.price-card', start:'top 85%', toggleActions:'play none none none' }
     }
   );
+})();
+</script>
+
+<script>
+/* ========== BILLED-SAMLING ========== */
+(function(){
+  if(typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  var section = document.getElementById('assembleSection');
+  var frame   = document.getElementById('assembleFrame');
+  if(!section || !frame) return;
+  var slices  = frame.querySelectorAll('.aslice');
+  var veil    = document.getElementById('assembleVeil');
+  var caption = document.getElementById('assembleCaption');
+
+  var mm = gsap.matchMedia();
+
+  mm.add('(min-width: 761px)', function(){
+    // Skjul slør og tekst indtil billedet er samlet
+    gsap.set([veil, caption], {opacity: 0});
+
+    var tl = gsap.timeline({
+      scrollTrigger:{
+        trigger: section,
+        start: 'top top',
+        end: '+=150%',
+        pin: true,
+        scrub: 0.6,
+        invalidateOnRefresh: true
+      }
+    });
+
+    var mid = (slices.length - 1) / 2;
+    slices.forEach(function(sl, i){
+      var offset = i - mid;
+      tl.fromTo(sl,
+        { x: offset * 78, y: (i % 2 ? 1 : -1) * (120 + Math.abs(offset) * 34),
+          rotate: offset * 2.6, scale: 1.07, opacity: 0.22 },
+        { x: 0, y: 0, rotate: 0, scale: 1, opacity: 1,
+          duration: 1, ease: 'none' },
+        0
+      );
+    });
+
+    tl.fromTo(veil,    {opacity:0},        {opacity:1, duration:.45, ease:'none'},        0.62);
+    tl.fromTo(caption, {opacity:0, y:26},  {opacity:1, y:0, duration:.5, ease:'power2.out'}, 0.72);
+
+    return function(){
+      if(tl.scrollTrigger) tl.scrollTrigger.kill();
+      tl.kill();
+      gsap.set([veil, caption], {clearProps:'all'});
+      slices.forEach(function(sl){ gsap.set(sl, {clearProps:'all'}); });
+    };
+  });
 })();
 </script>
 
