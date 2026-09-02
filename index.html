@@ -891,9 +891,11 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
       start: 'top top',
       end: '+=' + (steps.length * 110) + '%',
       pin: true,
-      // scrub 1 giver animationen inerti, så farten glider ind og ud
-      // i stedet for at skifte brat når pinnen tager fat
-      scrub: 0.8,
+      // scrub:true låser animationen 1:1 til scrollet. Et talværdi giver
+      // indhentnings-forsinkelse, og så er animationen stadig i gang når
+      // pinnen slipper — siden ruller videre mens den bliver færdig,
+      // hvilket læses som at den flyver væk fra animationen.
+      scrub: true,
       refreshPriority: 2,
       invalidateOnRefresh: true,
       onUpdate: function(self){
@@ -935,7 +937,7 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
       scrollTrigger:{
         trigger:section, start:'top top',
         end:function(){ return '+=' + (distance() * PACE); },
-        pin:true, scrub:0.8, refreshPriority:1,
+        pin:true, scrub:true, refreshPriority:1,
         invalidateOnRefresh:true,
         onUpdate:function(self){ if(bar) bar.style.width=(self.progress*100).toFixed(1)+'%'; }
       }
