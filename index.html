@@ -923,13 +923,18 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
   if(!section||!track) return;
 
   gsap.matchMedia().add('(min-width: 761px)', function(){
+    // Hvor langt sporet skal flyttes vandret
     function distance(){ return Math.max(0, track.scrollWidth - window.innerWidth + window.innerWidth*0.12); }
+    // Hvor meget lodret scroll det koster. Højere tal = langsommere kort.
+    // Ved 1 flytter kortene sig lige så hurtigt som du scroller, hvilket
+    // føles jappet — sporet skal bevæge sig mindre end fingeren.
+    var PACE = 2.4;
     var tween=gsap.to(track,{
       x:function(){ return -distance(); },
       ease:'none',
       scrollTrigger:{
         trigger:section, start:'top top',
-        end:function(){ return '+=' + distance(); },
+        end:function(){ return '+=' + (distance() * PACE); },
         pin:true, scrub:0.8, refreshPriority:1,
         invalidateOnRefresh:true,
         onUpdate:function(self){ if(bar) bar.style.width=(self.progress*100).toFixed(1)+'%'; }
