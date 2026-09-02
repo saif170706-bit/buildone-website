@@ -923,21 +923,14 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
     }
     activate(0);
 
-    // Hvor meget sidste trin stikker ud under skærmen når sektionen er pinnet.
-    // Måles på de faktiske positioner i stedet for beregnede højder, fordi
-    // menuen og centreringen flytter kolonnen på måder som regnestykket ikke
-    // fanger. Når sektionen er pinnet ligger .how-pin-vp i top, så afstanden
-    // fra dens top til sidste trins bund er dér trinnet ender.
-    var overflow = 0;
+    // Hvor meget sidste trin stikker ud under skærmen.
+    // Måles løbende mens sektionen er pinnet, ikke på forhånd: ScrollTrigger
+    // sætter elementet til fixed når den låser, og centreringen lander derfor
+    // et andet sted end før. Målt på forhånd gav det 519px, i virkeligheden
+    // 615px — 96px forkert, og så udeblev forskydningen.
+    var overflow = 0, measured = false;
     var BOTTOM_GAP = 28;
-    function measure(){
-      col.style.transform = '';
-      var vpTop = vpEl.getBoundingClientRect().top;
-      var lastBottom = steps[steps.length - 1].getBoundingClientRect().bottom;
-      var endsAt = lastBottom - vpTop;
-      overflow = Math.max(0, endsAt - (window.innerHeight - BOTTOM_GAP));
-    }
-    measure();
+    function measure(){ col.style.transform = ''; overflow = 0; measured = false; }
 
     // Forskydningen skal være færdig når sidste trin bliver aktivt — ikke
     // først når hele sekvensen er kørt til ende.
@@ -962,10 +955,20 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
         activate(Math.min(steps.length - 1, Math.floor(p * steps.length)));
         // Er kolonnen højere end der er plads til, skydes den opad i takt
         // med scrollet, så det aktive trin altid er inde i billedet.
-        if(overflow > 0){
-          var sp = Math.min(1, p / SHIFT_DONE_AT);
-          col.style.transform = 'translateY(' + (-overflow * sp).toFixed(1) + 'px)';
+        // Læg den forskydning vi allerede har lagt på tilbage, så vi altid
+        // måler trinnets uforskudte plads. Så retter tallet sig selv med det
+        // samme, uanset hvordan pinningen har flyttet layoutet.
+        var sp = Math.min(1, p / SHIFT_DONE_AT);
+        // Mål én gang, første gang sektionen faktisk er pinnet. Måler man
+        // hver frame, fodrer forskydningen sin egen måling og tallet svinger.
+        if(!measured){
+          var rawBottom = steps[steps.length - 1].getBoundingClientRect().bottom + overflow * sp;
+          overflow = Math.max(0, rawBottom - (window.innerHeight - BOTTOM_GAP));
+          measured = true;
         }
+        col.style.transform = overflow > 0
+          ? 'translateY(' + (-overflow * sp).toFixed(1) + 'px)'
+          : '';
       }
     });
 
