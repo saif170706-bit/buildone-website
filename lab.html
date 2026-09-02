@@ -30,44 +30,54 @@ body{font-family:var(--sans);background:var(--black);color:#fff;-webkit-font-smo
 .scene{position:absolute;inset:0;display:grid;place-items:center;perspective:1700px}
 .box{position:relative;width:620px;height:440px;transform-origin:50% 50%}
 .dev{position:absolute;left:50%;top:50%;perspective:1300px;will-change:transform;backface-visibility:hidden}
-.pt{position:absolute;inset:0;will-change:transform,opacity}
+.pt{position:absolute;will-change:transform,opacity}
 
-.frame{position:absolute;inset:0;border-radius:15px;background:linear-gradient(158deg,#f2f7f7,#c1d6d8);
+.shell{position:absolute;inset:0;border-radius:15px;background:linear-gradient(158deg,#f4f8f8,#c0d5d7);
   box-shadow:0 44px 88px -32px rgba(0,0,0,.82)}
-.glass{position:absolute;overflow:hidden;background:#fdfaf6}
+.glass{position:absolute;overflow:hidden;background:#fff}
 .glass iframe{border:0;display:block;transform-origin:top left;pointer-events:none}
 
-/* laptop */
-#laptop{width:560px;height:366px;margin-left:-280px;margin-top:-183px}
-#laptop .chrome{position:absolute;left:11px;right:11px;top:11px;height:28px;border-radius:8px 8px 0 0;
-  background:linear-gradient(180deg,#f8fbfb,#e6eeee);display:flex;align-items:center;gap:6px;padding:0 10px}
-#laptop .dot{width:8px;height:8px;border-radius:50%}
-#laptop .glass{left:11px;right:11px;top:39px;bottom:11px;border-radius:0 0 8px 8px}
-#laptop .base{position:absolute;left:-62px;right:-62px;bottom:-16px;height:16px;border-radius:0 0 10px 10px;
-  background:linear-gradient(180deg,#dcebec,#a4bfc1)}
-/* tablet */
-#tablet{width:300px;height:412px;margin-left:-150px;margin-top:-206px}
-#tablet .frame{border-radius:20px}
-#tablet .glass{inset:13px;border-radius:11px}
-/* telefon */
-#phone{width:196px;height:400px;margin-left:-98px;margin-top:-200px}
-#phone .frame{border-radius:28px}
-#phone .glass{inset:10px;border-radius:20px}
+/* ---------- laptop ---------- */
+#laptop{width:600px;height:388px;margin-left:-300px;margin-top:-194px}
+#laptop .bar{position:absolute;left:11px;right:11px;top:11px;height:30px;border-radius:9px 9px 0 0;
+  background:linear-gradient(180deg,#fafcfc,#e7efef)}
+#laptop .dots{position:absolute;left:20px;top:22px;width:9px;height:9px;border-radius:50%}
+#laptop .tab{position:absolute;left:62px;top:16px;width:132px;height:20px;border-radius:6px 6px 0 0;
+  background:#fff;box-shadow:0 -1px 0 #dde9ea inset;display:flex;align-items:center;gap:5px;padding:0 8px;
+  font-size:8.5px;color:#4d6a6c;font-weight:600;overflow:hidden;white-space:nowrap}
+#laptop .tab i{width:8px;height:8px;border-radius:2px;background:#1a7b6d;flex:0 0 8px}
+#laptop .url{position:absolute;left:62px;top:41px;right:18px;height:0;overflow:hidden}
+#laptop .urlbar{position:absolute;left:11px;right:11px;top:41px;height:24px;border-radius:12px;
+  background:#f2f7f7;box-shadow:inset 0 0 0 1px #dde9ea;display:flex;align-items:center;gap:6px;
+  padding:0 11px;font-size:9.5px;color:#415f61;font-weight:500}
+#laptop .urlbar b{color:#0d5f55;font-weight:600}
+#laptop .lock{font-size:8px;opacity:.65}
+#laptop .glass{left:11px;right:11px;top:71px;bottom:11px;border-radius:0 0 9px 9px}
+#laptop .foot{position:absolute;left:-64px;right:-64px;bottom:-17px;height:17px;border-radius:0 0 11px 11px;
+  background:linear-gradient(180deg,#dcebec,#a2bdbf)}
+/* ---------- tablet ---------- */
+#tablet{width:310px;height:424px;margin-left:-155px;margin-top:-212px}
+#tablet .shell{border-radius:22px}
+#tablet .glass{inset:14px;border-radius:12px}
+/* ---------- telefon ---------- */
+#phone{width:200px;height:410px;margin-left:-100px;margin-top:-205px}
+#phone .shell{border-radius:30px}
+#phone .glass{inset:10px;border-radius:21px}
 
 .caps{position:absolute;left:0;right:0;bottom:clamp(18px,4vh,44px);text-align:center;pointer-events:none;z-index:5;height:66px}
 .cap{position:absolute;left:0;right:0;bottom:0;opacity:0;transition:opacity .4s ease;padding:0 22px}
 .cap.on{opacity:1}
 .cap b{display:block;font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
 .cap span{font-size:clamp(1rem,2.5vw,1.55rem);font-weight:700;letter-spacing:-.01em}
-.bar{position:absolute;left:6vw;right:6vw;bottom:13px;height:2px;background:rgba(255,255,255,.12);z-index:5}
-.bar i{display:block;height:100%;width:0;background:var(--accent)}
+.prog{position:absolute;left:6vw;right:6vw;bottom:13px;height:2px;background:rgba(255,255,255,.12);z-index:5}
+.prog i{display:block;height:100%;width:0;background:var(--accent)}
 </style>
 </head>
 <body>
 
 <div class="intro">
   <h1>Én side. Hver skærm.</h1>
-  <p>Scroll ned. Skærmen samler sig af sine dele — og vender så om og bliver til den næste enhed med præcis den samme side.</p>
+  <p>Scroll ned. Browseren bygges op stykke for stykke, siden ruller — og hver gang skærmen vender, er det den næste enhed der står tilbage.</p>
   <div class="hint">Scroll<span>↓</span></div>
 </div>
 
@@ -77,63 +87,68 @@ body{font-family:var(--sans);background:var(--black);color:#fff;-webkit-font-smo
       <div class="box" id="box">
 
         <div class="dev" id="laptop">
-          <div class="pt" data-p="0"><div class="frame"></div><div class="base"></div></div>
-          <div class="pt" data-p="1">
-            <div class="chrome">
-              <span class="dot" style="background:#f0685f"></span>
-              <span class="dot" style="background:#f5bd4f"></span>
-              <span class="dot" style="background:#61c454"></span>
-            </div>
+          <div class="pt" data-p="0" style="inset:0"><div class="shell"></div><div class="foot"></div></div>
+          <div class="pt" data-p="1" style="inset:0"><div class="bar"></div></div>
+          <div class="pt" data-p="2" style="left:20px;top:22px;width:9px;height:9px"><div class="dots" style="background:#f0685f;left:0;top:0"></div></div>
+          <div class="pt" data-p="2" style="left:34px;top:22px;width:9px;height:9px"><div class="dots" style="background:#f5bd4f;left:0;top:0"></div></div>
+          <div class="pt" data-p="2" style="left:48px;top:22px;width:9px;height:9px"><div class="dots" style="background:#61c454;left:0;top:0"></div></div>
+          <div class="pt" data-p="3" style="inset:0"><div class="tab"><i></i>Dyreklinikken Velfærd</div></div>
+          <div class="pt" data-p="4" style="inset:0">
+            <div class="urlbar"><span class="lock">🔒</span><span>https://<b>dyreklinikken-velfaerd.dk</b></span></div>
           </div>
-          <div class="pt" data-p="2">
-            <div class="glass"><iframe id="fDesk" title="Demosiden på computer" scrolling="no" loading="lazy"></iframe></div>
+          <div class="pt" data-p="5" style="inset:0">
+            <div class="glass"><iframe id="fDesk" title="Kundeside på computer" loading="lazy"></iframe></div>
           </div>
         </div>
 
         <div class="dev" id="tablet">
-          <div class="frame"></div>
-          <div class="glass"><iframe id="fTab" title="Demosiden på tablet" scrolling="no" loading="lazy"></iframe></div>
+          <div class="shell"></div>
+          <div class="glass"><iframe id="fTab" title="Kundeside på tablet" loading="lazy"></iframe></div>
         </div>
 
         <div class="dev" id="phone">
-          <div class="frame"></div>
-          <div class="glass"><iframe id="fPhone" title="Demosiden på telefon" scrolling="no" loading="lazy"></iframe></div>
+          <div class="shell"></div>
+          <div class="glass"><iframe id="fPhone" title="Kundeside på telefon" loading="lazy"></iframe></div>
         </div>
 
       </div>
     </div>
 
     <div class="caps">
-      <div class="cap" data-c="0"><b>Trin 01</b><span>Vi sætter skærmen op</span></div>
-      <div class="cap" data-c="1"><b>Trin 02</b><span>Browseren tager form</span></div>
-      <div class="cap" data-c="2"><b>Trin 03</b><span>Forsiden falder på plads</span></div>
-      <div class="cap" data-c="3"><b>Trin 04</b><span>Samme side på tablet</span></div>
-      <div class="cap" data-c="4"><b>Trin 05</b><span>Og på telefonen</span></div>
+      <div class="cap"><b>Trin 01</b><span>Vi sætter skærmen op</span></div>
+      <div class="cap"><b>Trin 02</b><span>Browseren tager form</span></div>
+      <div class="cap"><b>Trin 03</b><span>Knapperne kommer på</span></div>
+      <div class="cap"><b>Trin 04</b><span>Fanen får sit navn</span></div>
+      <div class="cap"><b>Trin 05</b><span>Adressen er din egen</span></div>
+      <div class="cap"><b>Trin 06</b><span>Siden er live</span></div>
+      <div class="cap"><b>Trin 07</b><span>Samme side på tablet</span></div>
+      <div class="cap"><b>Trin 08</b><span>Og på telefonen</span></div>
     </div>
-    <div class="bar"><i id="bar"></i></div>
+    <div class="prog"><i id="bar"></i></div>
   </div>
 </section>
 
 <div class="outro">
-  <p>Samme kode hele vejen. Det er ikke tre hjemmesider — det er én, der lægger sig om efter pladsen.</p>
+  <p>Samme kode hele vejen. Det er ikke tre hjemmesider — det er én, der er sat op til hver skærm den lander på.</p>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 (function(){
-  var DEMO='/demo.html';
+  var DEMO='/portfolio/dyrlaege.html?embed=1';
   var stage=document.getElementById('stage'), box=document.getElementById('box');
   var laptop=document.getElementById('laptop'), tablet=document.getElementById('tablet'), phone=document.getElementById('phone');
   var bar=document.getElementById('bar');
   var caps=document.querySelectorAll('.cap'), parts=document.querySelectorAll('.pt');
 
-  // Hver iframe rendres i sin aegte skaermbredde og skaleres bagefter ned,
-  // saa layoutet er rigtigt desktop/tablet/mobil, ikke bare et smalt vindue.
+  // Hver iframe rendres i sin aegte skaermbredde og skaleres ned bagefter,
+  // saa sidens egne breakpoints slaar til. Det er derfor de tre ser
+  // forskellige ud og ikke bare er den samme side i mindre.
   var SRC=[
-    {el:'fDesk',  sel:'#laptop .glass', w:1440, h:900},
-    {el:'fTab',   sel:'#tablet .glass', w:820,  h:1180},
-    {el:'fPhone', sel:'#phone .glass',  w:390,  h:830}
+    {el:'fDesk', sel:'#laptop .glass', w:1440, h:900},
+    {el:'fTab',  sel:'#tablet .glass', w:820,  h:1180},
+    {el:'fPhone',sel:'#phone .glass',  w:390,  h:830}
   ];
 
   function baseScale(){
@@ -144,7 +159,7 @@ body{font-family:var(--sans);background:var(--black);color:#fff;-webkit-font-smo
     SRC.forEach(function(s){
       var b=document.querySelector(s.sel), f=document.getElementById(s.el);
       var w=b.clientWidth, h=b.clientHeight;
-      if(!w || !h) return;
+      if(!w||!h) return;
       var k=Math.max(w/s.w, h/s.h);
       f.style.width=s.w+'px'; f.style.height=s.h+'px';
       f.style.transform='scale('+k+')';
@@ -157,66 +172,87 @@ body{font-family:var(--sans);background:var(--black);color:#fff;-webkit-font-smo
     if(stage.getBoundingClientRect().top < window.innerHeight*1.6){
       loaded=true;
       SRC.forEach(function(s){ document.getElementById(s.el).src=DEMO; });
-      setTimeout(fit, 80);
+      setTimeout(fit,90);
       window.removeEventListener('scroll', maybeLoad);
     }
   }
   window.addEventListener('scroll', maybeLoad, {passive:true});
+
+  // Ruller siden inde i en ramme. Der scrolles paa en broekdel af sidens
+  // hoejde, ikke i pixels: de tre layouts er forskellig hoejde, saa kun en
+  // broekdel lander samme sted i indholdet paa tvaers af enhederne.
+  function scrollTo(id, frac){
+    var f=document.getElementById(id);
+    try{
+      var d=f.contentDocument; if(!d||!d.body) return;
+      var max=Math.max(0, d.body.scrollHeight - f.clientHeight);
+      f.contentWindow.scrollTo(0, max*frac);
+    }catch(e){}
+  }
 
   function rnd(i){ var x=Math.sin(i*127.1)*43758.5453; return x-Math.floor(x); }
   var starts=[];
   parts.forEach(function(el,i){
     var a=rnd(i+1)*Math.PI*2;
     starts.push({
-      x:Math.cos(a)*(280+rnd(i+4)*430), y:(rnd(i+7)-0.5)*580, z:-380-rnd(i+9)*700,
-      rx:(rnd(i+11)-0.5)*110, ry:(rnd(i+13)-0.5)*130, rz:(rnd(i+17)-0.5)*60
+      x:Math.cos(a)*(260+rnd(i+4)*440), y:(rnd(i+7)-0.5)*560, z:-360-rnd(i+9)*680,
+      rx:(rnd(i+11)-0.5)*115, ry:(rnd(i+13)-0.5)*135, rz:(rnd(i+17)-0.5)*65
     });
   });
 
-  function clamp(v){ return Math.max(0, Math.min(1, v)); }
+  function clamp(v){ return Math.max(0,Math.min(1,v)); }
   function easeOut(t){ return 1-Math.pow(1-t,3); }
   function easeIO(t){ return t<0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2; }
 
-  // Et flip: den gaaende enhed drejer ud til 90 grader hvor den staar paa
-  // kant og er usynlig. Praecis dér overtager den naeste og drejer ind fra -90.
   function pair(p,a,b){
     var f=clamp((p-a)/(b-a));
     return { out: easeIO(Math.min(1,f/0.5))*90,
-             into: -90 + easeIO(Math.max(0,(f-0.5)/0.5))*90,
-             past: f>=0.5, done: f>=1 };
+             into:-90 + easeIO(Math.max(0,(f-0.5)/0.5))*90,
+             past: f>=0.5 };
   }
 
-  var ASSEMBLE_END=0.55, F1=[0.58,0.76], F2=[0.80,0.98];
+  // Forloeb: seks samle-trin, saa rul, flip, rul, flip, rul.
+  var PARTS_END=0.42;          // delene er paa plads
+  var ROLL1=[0.42,0.54];       // laptoppen ruller ned
+  var F1   =[0.54,0.64];       // flip til tablet
+  var ROLL2=[0.64,0.78];       // tabletten ruller videre
+  var F2   =[0.78,0.88];       // flip til telefon
+  var ROLL3=[0.88,1.00];       // telefonen ruller resten
+  var S0=0, S1=0.20, S2=0.44, S3=0.70;   // hvor langt nede i siden vi er
 
   function apply(p){
-    // delene til laptoppen flyver ind i de tre foerste faser
+    var step=PARTS_END/6;
     parts.forEach(function(el,i){
-      var ph=+el.dataset.p, a=ph*(ASSEMBLE_END/3), b=a+(ASSEMBLE_END/3)*1.5;
+      var ph=+el.dataset.p, a=ph*step, b=a+step*1.6;
       var t=clamp((p-a)/(b-a)), e=easeOut(t), s=starts[i];
       el.style.transform=
         'translate3d('+(s.x*(1-e))+'px,'+(s.y*(1-e))+'px,'+(s.z*(1-e))+'px)'+
         ' rotateX('+(s.rx*(1-e))+'deg) rotateY('+(s.ry*(1-e))+'deg) rotateZ('+(s.rz*(1-e))+'deg)';
-      el.style.opacity=Math.min(1, 0.04+e*1.5);
+      el.style.opacity=Math.min(1, 0.04+e*1.6);
     });
 
     var f1=pair(p,F1[0],F1[1]), f2=pair(p,F2[0],F2[1]);
-    var settle=easeOut(Math.min(1, p/ASSEMBLE_END));
+    var settle=easeOut(Math.min(1, p/PARTS_END));
     var tilt=(1-settle)*13, turn=(1-settle)*-22;
 
     laptop.style.transform='rotateY('+(turn+f1.out)+'deg) rotateX('+tilt+'deg)';
-    laptop.style.visibility = !f1.past ? 'visible' : 'hidden';
-
+    laptop.style.visibility = !f1.past ? 'visible':'hidden';
     tablet.style.transform='rotateY('+(f1.into+f2.out)+'deg)';
-    tablet.style.visibility = (f1.past && !f2.past) ? 'visible' : 'hidden';
-
+    tablet.style.visibility = (f1.past && !f2.past) ? 'visible':'hidden';
     phone.style.transform='rotateY('+f2.into+'deg)';
-    phone.style.visibility = f2.past ? 'visible' : 'hidden';
+    phone.style.visibility = f2.past ? 'visible':'hidden';
 
     box.style.transform='rotateX('+(tilt*0.4)+'deg) scale('+baseScale()+')';
 
-    // undertekst: tre samle-trin, saa et pr. enhed
-    var idx = p<ASSEMBLE_END ? Math.min(2, Math.floor(p/(ASSEMBLE_END/3)))
-            : (!f1.past ? 2 : (!f2.past ? 3 : 4));
+    // sidens egen scroll, videreført fra enhed til enhed
+    if(loaded){
+      scrollTo('fDesk',  S0 + (S1-S0)*clamp((p-ROLL1[0])/(ROLL1[1]-ROLL1[0])));
+      scrollTo('fTab',   S1 + (S2-S1)*clamp((p-ROLL2[0])/(ROLL2[1]-ROLL2[0])));
+      scrollTo('fPhone', S2 + (S3-S2)*clamp((p-ROLL3[0])/(ROLL3[1]-ROLL3[0])));
+    }
+
+    var idx = p<PARTS_END ? Math.min(5, Math.floor(p/step))
+            : (!f1.past ? 5 : (!f2.past ? 6 : 7));
     caps.forEach(function(c,i){ c.classList.toggle('on', i===idx); });
     bar.style.width=(p*100).toFixed(1)+'%';
   }
@@ -226,7 +262,7 @@ body{font-family:var(--sans);background:var(--black);color:#fff;-webkit-font-smo
 
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.create({
-    trigger:stage, start:'top top', end:'+=520%',
+    trigger:stage, start:'top top', end:'+=700%',
     pin:true, scrub:true, invalidateOnRefresh:true,
     onUpdate:function(self){ apply(self.progress); }
   });
