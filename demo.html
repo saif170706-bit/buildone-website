@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Pote &amp; Pels Dyreklinik — demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#12988a; --teal-d:#0c6f66; --ink:#123b3a; --deep:#0d4744;
+  --orange:#f4794a; --cream:#fdf9f4; --yellow:#fbcf5f;
+  --peach:#fbdac9; --sky:#cfe6f5; --mint:#d7f0e6;
+  --grey:#6d8180; --line:#e8eeec;
+  --f:"Poppins",system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+body{font-family:var(--f);background:var(--cream);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+h1,h2,h3{line-height:1.15;letter-spacing:-.02em;font-weight:800}
+.eyebrow{font-size:.82rem;font-weight:700;color:var(--teal);letter-spacing:.01em}
+.muted{color:var(--grey);font-size:.95rem}
+
+/* ---------- knapper ---------- */
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.9rem;
+  padding:12px 22px;border-radius:999px;cursor:pointer;border:0;transition:transform .18s ease,box-shadow .18s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn-o{background:var(--orange);color:#fff;box-shadow:0 8px 20px -8px rgba(244,121,74,.7)}
+.btn-t{background:var(--teal);color:#fff;box-shadow:0 8px 20px -8px rgba(18,152,138,.65)}
+.btn-w{background:#fff;color:var(--ink);box-shadow:0 6px 18px -8px rgba(0,0,0,.25)}
+.btn-ghost{background:transparent;color:var(--ink);font-weight:700;display:inline-flex;align-items:center;gap:10px}
+.play{width:34px;height:34px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;flex:0 0 34px}
+
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:50;background:rgba(253,249,244,.92);backdrop-filter:blur(8px)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:18px;height:72px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800}
+.logo .mark{width:34px;height:34px;border-radius:50%;background:var(--peach);display:grid;place-items:center;font-size:1rem}
+.logo b{display:block;font-size:1rem;line-height:1.05}
+.logo span{display:block;font-size:.7rem;color:var(--teal);font-weight:600}
+.links{display:flex;gap:24px;align-items:center;font-size:.87rem;font-weight:600}
+.links a{color:#4a5f5e}
+.links a.on{color:var(--ink);position:relative}
+.links a.on::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:3px;border-radius:2px;background:var(--orange)}
+.navr{display:flex;align-items:center;gap:12px}
+.iconbtn{width:34px;height:34px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 3px 10px -4px rgba(0,0,0,.25)}
+.burger{display:none;background:none;border:0;font-size:1.3rem;cursor:pointer}
+@media(max-width:900px){
+  .links{display:none;position:absolute;top:72px;left:0;right:0;background:var(--cream);flex-direction:column;
+    align-items:flex-start;padding:18px 22px;gap:14px;border-bottom:1px solid var(--line)}
+  .links.open{display:flex}
+  .burger{display:block}
+}
+
+/* ---------- hero ---------- */
+.hero{position:relative;padding:26px 0 0;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:34px;align-items:center}
+.hero h1{font-size:clamp(2rem,4.6vw,3.2rem);margin:12px 0 14px}
+.hero h1 em{font-style:normal;color:var(--teal)}
+.hero p{max-width:40ch;color:var(--grey);font-size:.97rem}
+.hero-cta{display:flex;align-items:center;gap:16px;margin-top:24px;flex-wrap:wrap}
+.hero-art{position:relative}
+.blob{position:absolute;inset:-14% -22% -10% 6%;background:var(--teal);border-radius:48% 52% 44% 56%/56% 44% 56% 44%}
+.hero-art img{position:relative;border-radius:26px;width:100%;aspect-ratio:4/3;object-fit:cover;max-height:400px;box-shadow:0 26px 50px -26px rgba(12,71,68,.55)}
+@media(max-width:820px){
+  .hero-grid{grid-template-columns:1fr;gap:26px}
+  .hero p{max-width:none}
+}
+
+/* ---------- service-kort ---------- */
+.cards4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:-46px 0 0;position:relative;z-index:3}
+.card{background:#fff;border-radius:18px;padding:22px 18px;text-align:center;box-shadow:0 14px 30px -20px rgba(12,71,68,.45)}
+.card .ic{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;margin:0 auto 12px}
+.card h3{font-size:.98rem;margin-bottom:5px}
+.card p{font-size:.8rem;color:var(--grey);line-height:1.5}
+@media(max-width:820px){.cards4{grid-template-columns:repeat(2,1fr);margin-top:26px}}
+@media(max-width:420px){.cards4{grid-template-columns:1fr}}
+
+section{padding:66px 0}
+.sec-head{text-align:center;margin-bottom:34px}
+.sec-head h2{font-size:clamp(1.5rem,3.2vw,2.15rem);margin-top:6px}
+
+/* ---------- om ---------- */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.about-art{position:relative}
+.about-art .b1{position:absolute;width:74%;height:78%;left:-6%;top:8%;background:var(--yellow);opacity:.55;border-radius:52% 48% 40% 60%/48% 56% 44% 52%}
+.about-art img{position:relative;border-radius:24px;width:100%;aspect-ratio:5/4;object-fit:cover;max-height:380px}
+.about h2{font-size:clamp(1.5rem,3.2vw,2.15rem);margin:6px 0 12px}
+.about h2 em{font-style:normal;color:var(--teal)}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;margin:20px 0 24px}
+.chk{display:flex;align-items:center;gap:9px;font-size:.87rem;font-weight:600}
+.chk i{width:22px;height:22px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;font-style:normal;font-size:.7rem;flex:0 0 22px}
+.chk.blue i{background:var(--sky)}
+@media(max-width:820px){.about{grid-template-columns:1fr;gap:28px}.checks{grid-template-columns:1fr}}
+
+/* ---------- hjælp ---------- */
+.help{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.help-i{flex:1;min-width:112px;text-align:center}
+.help-i .ring{width:74px;height:74px;border-radius:50%;margin:0 auto 10px;display:grid;place-items:center;border:2px solid var(--line);background:#fff}
+.help-i span{font-size:.8rem;font-weight:600;display:block;line-height:1.3}
+
+/* ---------- shop ---------- */
+.shop{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.prod{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 12px 26px -20px rgba(12,71,68,.4)}
+.prod .ph{height:132px;display:grid;place-items:center}
+.prod .meta{padding:12px 14px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.prod h4{font-size:.86rem;font-weight:700}
+.prod .pr{font-size:.8rem;color:var(--grey);font-weight:600}
+.cart{width:30px;height:30px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;flex:0 0 30px}
+@media(max-width:820px){.shop{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:420px){.shop{grid-template-columns:1fr}}
+
+/* ---------- banner ---------- */
+.banner{background:var(--teal);border-radius:24px;padding:34px;display:grid;grid-template-columns:1.25fr .75fr;
+  gap:24px;align-items:center;color:#fff;position:relative;overflow:hidden}
+.banner h2{color:#fff;font-size:clamp(1.25rem,2.8vw,1.8rem)}
+.banner p{color:rgba(255,255,255,.82);font-size:.9rem;margin:10px 0 18px;max-width:38ch}
+.banner-art{display:grid;place-items:center}
+.banner-art img{width:190px;height:190px;border-radius:50%;border:5px solid rgba(255,255,255,.85);object-fit:cover}
+@media(max-width:820px){.banner{grid-template-columns:1fr;text-align:center}.banner p{margin-inline:auto}.banner-art img{width:150px;height:150px}}
+
+/* ---------- udtalelser ---------- */
+.quote{text-align:center;max-width:520px;margin:0 auto}
+.quote p{font-size:1rem;color:#3f5453;line-height:1.7}
+.stars{color:var(--yellow);margin-top:12px;letter-spacing:2px}
+.who{font-size:.85rem;color:var(--grey);margin-top:6px;font-weight:600}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:16px}
+.dots i{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.dots i:first-child{background:var(--teal)}
+
+/* ---------- footer ---------- */
+footer{background:var(--deep);color:#cfe0de;padding:46px 0 0;margin-top:20px}
+.fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 1.1fr;gap:26px}
+footer h5{color:#fff;font-size:.85rem;margin-bottom:12px;font-weight:700}
+footer ul{list-style:none;font-size:.8rem;display:grid;gap:7px;color:#a9c4c1}
+footer .flogo{display:flex;align-items:center;gap:9px;margin-bottom:10px;color:#fff}
+footer .fdesc{font-size:.8rem;color:#a9c4c1;max-width:24ch}
+.social{display:flex;gap:8px;margin-top:14px}
+.social i{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center;font-style:normal;font-size:.72rem}
+.fbot{border-top:1px solid rgba(255,255,255,.12);margin-top:32px;padding:14px 0;text-align:center;font-size:.72rem;color:#8fadaa}
+@media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.fgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo">
+      <span class="mark">🐾</span>
+      <span><b>Pote &amp; Pels</b><span>Dyreklinik</span></span>
+    </a>
+    <nav class="links" id="links">
+      <a href="#" class="on">Forside</a>
+      <a href="#">Behandlinger</a>
+      <a href="#">Butik</a>
+      <a href="#">Viden</a>
+      <a href="#">Om os</a>
+      <a href="#">Kontakt</a>
+    </nav>
+    <div class="navr">
+      <span class="iconbtn">🔍</span>
+      <a href="#" class="btn btn-o">🐶 Book tid</a>
+      <button class="burger" onclick="document.getElementById('links').classList.toggle('open')">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Glade dyr, sunde liv 🧡</span>
+      <h1>God behandling til <em>dine bedste venner</em></h1>
+      <p>Dyrlægehjælp, pleje og kvalitetsprodukter til hund og kat — samlet ét sted, af folk der holder af dyr.</p>
+      <div class="hero-cta">
+        <a href="#" class="btn btn-o">Book et besøg 🐾</a>
+        <a href="#" class="btn-ghost"><span class="play">▶</span> Se vores historie</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="blob"></div>
+      <img src="/assets/demo/hero-pets.jpg" alt="Hund og kat sidder sammen i græsset" width="1100" height="825">
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="cards4">
+      <div class="card"><div class="ic" style="background:var(--mint)">🩺</div><h3>Dyrlæge</h3><p>Undersøgelse og behandling af dit dyr.</p></div>
+      <div class="card"><div class="ic" style="background:var(--peach)">✂️</div><h3>Pelspleje</h3><p>Klip, bad og trimning af en rolig hånd.</p></div>
+      <div class="card"><div class="ic" style="background:var(--sky)">🏠</div><h3>Pasning</h3><p>Trygge rammer når I er på ferie.</p></div>
+      <div class="card"><div class="ic" style="background:#fdeec2">🛍️</div><h3>Butik</h3><p>Foder og udstyr vi selv ville bruge.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- OM -->
+<section>
+  <div class="wrap about">
+    <div class="about-art">
+      <div class="b1"></div>
+      <img src="/assets/demo/about-woman.jpg" alt="Kvinde der holder sin hund" width="900" height="702">
+    </div>
+    <div>
+      <span class="eyebrow">Om os</span>
+      <h2>Fordi de fortjener <em>det bedste</em> 🧡</h2>
+      <p class="muted">Vi er et lille hold af dyrlæger og dyreplejere. Vi tager os god tid, forklarer hvad vi gør, og lader være med at sælge dig noget dit dyr ikke har brug for.</p>
+      <div class="checks">
+        <div class="chk"><i>✓</i> Erfarne dyrlæger</div>
+        <div class="chk blue"><i>✓</i> Døgnvagt</div>
+        <div class="chk"><i>✓</i> Moderne udstyr</div>
+        <div class="chk blue"><i>✓</i> Akuthjælp</div>
+      </div>
+      <a href="#" class="btn btn-t">Læs mere 🐾</a>
+    </div>
+  </div>
+</section>
+
+<!-- HJÆLP -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Behandlinger</span>
+      <h2>Sådan hjælper vi</h2>
+    </div>
+    <div class="help">
+      <div class="help-i"><div class="ring" style="background:var(--teal);color:#fff;border-color:var(--teal)">💚</div><span>Sundheds&shy;tjek</span></div>
+      <div class="help-i"><div class="ring" style="background:var(--peach)">💉</div><span>Vaccination</span></div>
+      <div class="help-i"><div class="ring" style="background:#fdeec2">🦷</div><span>Tandpleje</span></div>
+      <div class="help-i"><div class="ring" style="background:var(--sky)">🥣</div><span>Foder&shy;rådgivning</span></div>
+      <div class="help-i"><div class="ring" style="background:var(--mint)">🐕</div><span>Adfærd</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Butik</span>
+      <h2>Det kunderne tager med hjem</h2>
+    </div>
+    <div class="shop">
+      <div class="prod">
+        <div class="ph" style="background:var(--mint)">
+          <svg width="86" height="64" viewBox="0 0 86 64" fill="none"><path d="M20 20a9 9 0 1 1 8 13h30a9 9 0 1 1 8 13 9 9 0 1 1-8-13H28a9 9 0 1 1-8-13Z" fill="#7cc9a8"/><rect x="24" y="27" width="38" height="12" rx="6" fill="#5fb894"/></svg>
+        </div>
+        <div class="meta"><div><h4>Tyggeben</h4><div class="pr">89 kr</div></div><span class="cart">+</span></div>
+      </div>
+      <div class="prod">
+        <div class="ph" style="background:var(--peach)">
+          <svg width="86" height="64" viewBox="0 0 86 64" fill="none"><ellipse cx="43" cy="30" rx="26" ry="9" fill="#e8a883"/><path d="M17 30c0 10 6 18 26 18s26-8 26-18" fill="#f2c4a6"/><circle cx="35" cy="27" r="4" fill="#a9673f"/><circle cx="46" cy="25" r="3.5" fill="#a9673f"/><circle cx="53" cy="29" r="3" fill="#a9673f"/></svg>
+        </div>
+        <div class="meta"><div><h4>Kvalitetsfoder</h4><div class="pr">199 kr</div></div><span class="cart">+</span></div>
+      </div>
+      <div class="prod">
+        <div class="ph" style="background:#fdeec2">
+          <svg width="86" height="64" viewBox="0 0 86 64" fill="none"><rect x="31" y="14" width="24" height="38" rx="6" fill="#f0d07a"/><rect x="35" y="8" width="16" height="8" rx="3" fill="#d9b459"/><rect x="35" y="24" width="16" height="18" rx="3" fill="#fff8e2"/></svg>
+        </div>
+        <div class="meta"><div><h4>Omega-tilskud</h4><div class="pr">149 kr</div></div><span class="cart">+</span></div>
+      </div>
+      <div class="prod">
+        <div class="ph" style="background:var(--sky)">
+          <svg width="86" height="64" viewBox="0 0 86 64" fill="none"><rect x="14" y="26" width="58" height="22" rx="11" fill="#8fb9d6"/><rect x="20" y="32" width="46" height="14" rx="7" fill="#e6f2fa"/></svg>
+        </div>
+        <div class="meta"><div><h4>Hundekurv</h4><div class="pr">399 kr</div></div><span class="cart">+</span></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:26px"><a href="#" class="btn btn-t">Se hele butikken 🏷️</a></div>
+  </div>
+</section>
+
+<!-- BANNER -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="banner">
+      <div>
+        <h2>Hold styr på dit dyrs<br>sundhed</h2>
+        <p>Book en tid i dag, så tager vi os af resten. Du får en påmindelse, når næste tjek nærmer sig.</p>
+        <a href="#" class="btn btn-w">Book nu 🐾</a>
+      </div>
+      <div class="banner-art">
+        <img src="/assets/demo/cta-man.jpg" alt="Mand med sin hund i køkkenet" width="760" height="760">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UDTALELSER -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Glade dyreejere</span>
+      <h2>Hvad kunderne siger</h2>
+    </div>
+    <div class="quote">
+      <p>“De tog sig tid til at forklare alting, og de behandlede min hund som deres egen. Jeg kører gerne en omvej for at komme her.”</p>
+      <div class="stars">★★★★★</div>
+      <div class="who">— Sarah M.</div>
+      <div class="dots"><i></i><i></i><i></i></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <div class="flogo"><span class="mark" style="background:var(--peach);width:30px;height:30px;border-radius:50%;display:grid;place-items:center">🐾</span><b>Pote &amp; Pels</b></div>
+        <p class="fdesc">Din klinik når det gælder pels, poter og pjaskvådt humør.</p>
+        <div class="social"><i>f</i><i>ig</i><i>▶</i><i>♪</i></div>
+      </div>
+      <div><h5>Kontakt</h5><ul><li>Dyrlægevej 12</li><li>8000 Aarhus C</li><li>86 12 34 56</li><li>hej@poteogpels.dk</li></ul></div>
+      <div><h5>Genveje</h5><ul><li>Forside</li><li>Behandlinger</li><li>Butik</li><li>Om os</li></ul></div>
+      <div><h5>Behandlinger</h5><ul><li>Dyrlæge</li><li>Pelspleje</li><li>Pasning</li><li>Akuthjælp</li></ul></div>
+      <div><h5>Åbningstider</h5><ul><li>Man–fre &nbsp; 9–17</li><li>Lørdag &nbsp; 9–14</li><li>Søndag &nbsp; lukket</li></ul></div>
+    </div>
+    <div class="fbot">© 2026 Pote &amp; Pels Dyreklinik · Demoside bygget af BuildOne</div>
+  </div>
+</footer>
+
+</body>
+</html>
