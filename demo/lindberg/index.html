@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Forslag, ikke klinikkens officielle side. Må ikke indekseres. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Tandlæge i Lyngby | TandlægeTeam Lindberg</title>
+<meta name="description" content="Tandlægeklinik i Lyngby med mere end 20 års erfaring. Book tid online, også aften og weekend. Særlig erfaring med tandlægeskræk.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo"><b>TandlægeTeam</b><span>LINDBERG</span></a>
+    <nav class="menu" id="menu">
+      <a href="#behandlinger">Behandlinger</a>
+      <a href="tandlaegeskraek.html">Tandlægeskræk</a>
+      <a href="akut.html">Akut tandpine</a>
+      <a href="#priser">Priser</a>
+      <a href="#klinikken">Om klinikken</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <button class="burger" id="burger" aria-expanded="false" aria-label="Menu" aria-controls="menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <div class="nav-right">
+      <a class="tel" href="tel:+4545879935">45 87 99 35</a>
+      <button class="btn btn-cta" onclick="openBooking()">Book tid</button>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="status" id="status"><span class="dot"></span><span id="statusText">Henter åbningstider…</span></div>
+      <h1 style="margin-top:18px">Din tandlæge i Lyngby gennem mere end 20 år.</h1>
+      <p class="lead">TandlægeTeam Lindberg ledes af tandlæge Sofie Lindberg, som har mere end 20 års
+        erfaring fra både danske og udenlandske klinikker. Vi tager os særligt af patienter,
+        der er utrygge ved at gå til tandlæge.</p>
+      <div class="hero-actions">
+        <button class="btn btn-cta" onclick="openBooking()">Book tid online</button>
+        <a class="btn btn-ghost" href="tandlaegeskraek.html">Er du nervøs? Læs her</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="img/klinik.webp" alt="Receptionen hos TandlægeTeam Lindberg i Lyngby" width="1366" height="768">
+      <div class="hero-card">
+        <div><span class="k">Adresse</span>Lundtofteparken 83, st. th.<br>2800 Kgs. Lyngby</div>
+        <div><span class="k">Telefon</span><a href="tel:+4545879935">45 87 99 35</a></div>
+        <div><span class="k">Find vej</span><a href="https://maps.google.com/?q=Lundtofteparken+83,+2800+Kgs.+Lyngby" target="_blank" rel="noopener">Åbn i Google Maps →</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="entries">
+      <a class="entry akut" href="akut.html">
+        <div class="ico">⚡</div>
+        <h3>Har du ondt lige nu?</h3>
+        <p>Vi holder tid fri til akutte patienter hver dag. Ring, så finder vi som regel plads samme dag.</p>
+        <span class="go">Se hvad du gør →</span>
+      </a>
+      <a class="entry" href="tandlaegeskraek.html">
+        <div class="ico">◔</div>
+        <h3>Tandlægeskræk</h3>
+        <p>Har du udsat tandlægen i årevis? Du er ikke den eneste, og du bliver ikke dømt her.</p>
+        <span class="go">Sådan hjælper vi →</span>
+      </a>
+      <a class="entry" href="#ny-patient">
+        <div class="ico">✓</div>
+        <h3>Ny patient</h3>
+        <p>Flyttet til Lyngby eller skal du bare skifte klinik? Sådan kommer du i gang hos os.</p>
+        <span class="go">Bliv patient →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="behandlinger" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Behandlinger</div>
+      <h2>Det vi laver</h2>
+      <p>Fra almindeligt eftersyn til implantater og tandretning. Priserne står på forhånd — se dem længere nede.</p>
+    </div>
+    <div class="treat">
+      <a href="#priser">Tandeftersyn <span>fra 345 kr.</span></a>
+      <a href="#priser">Fyldninger <span>fra 963 kr.</span></a>
+      <a href="#priser">Rodbehandling <span>fra 1.359 kr.</span></a>
+      <a href="#priser">Kroner og broer <span>fra 6.250 kr.</span></a>
+      <a href="#priser">Tandimplantater <span>fra 18.100 kr.</span></a>
+      <a href="#priser">Tandblegning <span>3.640 kr.</span></a>
+      <a href="#priser">Invisalign <span>tandretning</span></a>
+      <a href="akut.html">Akut behandling <span>samme dag</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap split">
+    <div>
+      <div class="eyebrow">Tandlægeskræk</div>
+      <h2>Det er længere siden, end du tør sige højt.</h2>
+      <p>Mange af vores patienter har ventet i fem, ti eller femten år. De er nervøse for at blive
+        skældt ud, og for at det gør ondt. Ingen af delene sker her.</p>
+      <ul>
+        <li>Vi bruger den første tid på at snakke — ikke på at bore</li>
+        <li>Du bestemmer tempoet og kan stoppe når som helst</li>
+        <li>Vi fortæller hvad der sker, før det sker</li>
+        <li>Du får en samlet plan og en pris, før vi går i gang</li>
+      </ul>
+      <div style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn btn-cta" href="tandlaegeskraek.html">Læs hvordan vi gør</a>
+        <button class="btn btn-ghost" onclick="openBooking()">Book en snak</button>
+      </div>
+    </div>
+    <img src="img/behandling.png" alt="Tandlæge taler med en patient i stolen" width="800" height="533">
+  </div>
+</section>
+
+<section id="klinikken">
+  <div class="wrap split tall">
+    <img src="img/sofie.png" alt="Tandlæge Sofie Lindberg" width="600" height="600"
+         style="aspect-ratio:1/1;max-width:420px;border-radius:20px">
+    <div>
+      <div class="eyebrow">Om klinikken</div>
+      <h2>Sofie Lindberg</h2>
+      <p style="font-weight:600;color:var(--brand);margin-top:6px">Tandlæge og indehaver</p>
+      <p>Jeg har arbejdet som tandlæge i mere end 20 år, både i Danmark og i udlandet. Det har givet mig
+        én overbevisning frem for alle andre: det vigtigste ved en tandlæge er ikke udstyret, men om du
+        tør sætte dig i stolen.</p>
+      <p>Derfor tager vi os tid. Du skal vide hvad der skal ske, hvad det koster, og hvorfor — før vi
+        begynder. Og siger du stop undervejs, så stopper vi.</p>
+      <p style="margin-top:20px;font-size:.9rem">
+        <strong style="color:var(--ink)">We speak English.</strong> Klinikken ligger tæt på DTU, og vi tager
+        imod internationale patienter hver uge.</p>
+    </div>
+  </div>
+</section>
+
+<section id="ny-patient" style="padding-top:0">
+  <div class="wrap split">
+    <div>
+      <div class="eyebrow">Ny patient</div>
+      <h2>Sådan bliver du patient hos os</h2>
+      <ul style="list-style:none;padding:0;margin-top:20px">
+        <li style="margin-bottom:16px"><strong>1. Book et eftersyn</strong><br>
+          <span style="color:var(--mid)">Online herunder, eller ring på 45 87 99 35.</span></li>
+        <li style="margin-bottom:16px"><strong>2. Vi gennemgår dine tænder</strong><br>
+          <span style="color:var(--mid)">Eftersyn, røntgen hvis der er brug for det, og en snak om hvad du ønsker.</span></li>
+        <li style="margin-bottom:16px"><strong>3. Du får en plan og en pris</strong><br>
+          <span style="color:var(--mid)">Skriftligt, før noget sættes i gang. Ingen regninger du ikke kender.</span></li>
+      </ul>
+      <p style="font-size:.9rem">Er du under 22, skal du først meldes ud af den kommunale
+        børnetandpleje. Ring til os, så hjælper vi med det.</p>
+      <button class="btn btn-cta" style="margin-top:22px" onclick="openBooking()">Book dit første eftersyn</button>
+    </div>
+    <img src="img/born.webp" alt="Tandlæge viser et barn korrekt tandbørstning" width="600" height="900">
+  </div>
+</section>
+
+<section id="priser" style="background:#f6f2ec">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Priser</div>
+      <h2>Hvad koster det?</h2>
+      <p>Priserne herunder er klinikkens faste priser. De to sidste kolonner viser, hvad du selv
+        betaler, hvis du er medlem af Sygeforsikringen "danmark" — beløbet afhænger af hvilken
+        gruppe du er i.</p>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Behandling</th><th class="num">Pris</th><th class="num">"danmark" gr. 1+2</th><th class="num">"danmark" gr. 5</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Flerfladet fyldning</td><td class="num">963 kr.</td><td class="num">280 kr.</td><td class="num">280 kr.</td></tr>
+          <tr><td>Plastfyldning</td><td class="num">1.099–1.500 kr.</td><td class="num">280 kr.</td><td class="num">280 kr.</td></tr>
+          <tr><td>Rodbehandling</td><td class="num">1.359–1.500 kr.</td><td class="num">185 kr.</td><td class="num">185 kr.</td></tr>
+          <tr><td>Rodbehandling, 3 kanaler</td><td class="num">2.009–2.233 kr.</td><td class="num">555 kr.</td><td class="num">555 kr.</td></tr>
+          <tr><td>Porcelænskrone</td><td class="num">6.250–7.250 kr.</td><td class="num">1.200 kr.<br><small>over 5 år: 1.650 kr.</small></td><td class="num">280 kr.<br><small>over 5 år: 420 kr.</small></td></tr>
+          <tr><td>Bro med 3 led</td><td class="num">18.750–21.750 kr.</td><td class="num">3.600 kr.<br><small>over 5 år: 5.400 kr.</small></td><td class="num">—</td></tr>
+          <tr><td>Implantat m. metalkrone med påbrændt porcelæn</td><td class="num">18.100 kr.</td><td class="num">3.400 kr.<br><small>over 5 år: 5.100 kr.</small></td><td class="num">840 kr.<br><small>over 5 år: 1.260 kr.</small></td></tr>
+          <tr><td>Operativ fjernelse af tand</td><td class="num">1.776 kr.</td><td class="num">400 kr.</td><td class="num">400 kr.</td></tr>
+          <tr><td>Lokalbedøvelse</td><td class="num">345 kr.</td><td class="num">75 kr.</td><td class="num">75 kr.</td></tr>
+          <tr><td>Blegning, begge kæber</td><td class="num">3.640 kr.</td><td class="num">—</td><td class="num">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Du får altid et skriftligt overslag, før en større behandling går i gang.
+      Skal beløbet deles op, samarbejder vi med Sundhed+ om finansiering over op til 72 måneder.</p>
+  </div>
+</section>
+
+<section id="kontakt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Åbningstider</div>
+      <h2>Hvornår har vi åbent?</h2>
+      <p>Vores tider skifter mellem lige og ulige uger. Den uge vi er i nu, er fremhævet.</p>
+    </div>
+    <div class="hours">
+      <div class="hcard" id="cardLige">
+        <h3>Lige uger</h3>
+        <div class="sub" id="subLige">Uge 2, 4, 6 …</div>
+        <div id="rowsLige"></div>
+      </div>
+      <div class="hcard" id="cardUlige">
+        <h3>Ulige uger</h3>
+        <div class="sub" id="subUlige">Uge 1, 3, 5 …</div>
+        <div id="rowsUlige"></div>
+      </div>
+    </div>
+
+    <div class="split" style="margin-top:46px">
+      <div>
+        <div class="eyebrow">Find vej</div>
+        <h2>Lundtofteparken 83</h2>
+        <p>Klinikken ligger i stueetagen, til højre. Der er gratis parkering foran bygningen,
+          og bus 300S og 150S holder få minutters gang væk. Vi ligger tæt på DTU.</p>
+        <p style="margin-top:18px">
+          <strong style="color:var(--ink)">Telefon</strong> · <a href="tel:+4545879935" style="color:var(--brand);font-weight:600">45 87 99 35</a><br>
+          <strong style="color:var(--ink)">E-mail</strong> · <a href="mailto:hej@sofielindberg.dk" style="color:var(--brand);font-weight:600">hej@sofielindberg.dk</a>
+        </p>
+        <a class="btn btn-ghost" style="margin-top:22px" target="_blank" rel="noopener"
+           href="https://maps.google.com/?q=Lundtofteparken+83,+2800+Kgs.+Lyngby">Åbn i Google Maps</a>
+      </div>
+      <iframe title="Kort over klinikkens placering" loading="lazy" style="border:0;width:100%;height:340px;border-radius:18px"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=12.5192%2C55.7909%2C12.5392%2C55.8009&layer=mapnik&marker=55.7959%2C12.5292"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <div class="logo" style="color:#fff"><b>TandlægeTeam</b><span style="color:#8ba5a1">LINDBERG</span></div>
+        <p style="margin-top:14px">Lundtofteparken 83, st. th.<br>2800 Kgs. Lyngby</p>
+        <p style="margin-top:10px"><a href="tel:+4545879935">45 87 99 35</a><br><a href="mailto:hej@sofielindberg.dk">hej@sofielindberg.dk</a></p>
+      </div>
+      <div>
+        <h4>Genveje</h4>
+        <p><a href="#behandlinger">Behandlinger</a><br>
+           <a href="#priser">Priser</a><br>
+           <a href="tandlaegeskraek.html">Tandlægeskræk</a><br>
+           <a href="akut.html">Akut tandpine</a><br>
+           <a href="#ny-patient">Ny patient</a></p>
+      </div>
+      <div>
+        <h4>Book tid</h4>
+        <p>Online hele døgnet, eller ring i åbningstiden.</p>
+        <button class="btn btn-cta" style="margin-top:14px" onclick="openBooking()">Book tid</button>
+      </div>
+    </div>
+    <div class="disclaimer">
+      <span>Forslag til ny hjemmeside, udarbejdet af BuildOne. Ikke klinikkens officielle side.</span>
+      <span>buildone.dk</span>
+    </div>
+  </div>
+</footer>
+
+<div class="dock">
+  <button onclick="openBooking()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 11h18"/></svg>
+    Book tid</button>
+  <a href="tel:+4545879935">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+    Ring til os</a>
+  <a target="_blank" rel="noopener" href="https://maps.google.com/?q=Lundtofteparken+83,+2800+Kgs.+Lyngby">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Find vej</a>
+</div>
+
+<!-- ─────────── booking ─────────── -->
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Tandlægeskræk i Lyngby — du bliver ikke dømt her | TandlægeTeam Lindberg</title>
+<meta name="description" content="Har du udsat tandlægen i årevis? Vi er vant til patienter med tandlægeskræk. Du bestemmer tempoet, og vi begynder med en snak — ikke med et bor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.pagehero{background:var(--brand);color:#fff;padding:clamp(48px,7vw,90px) 0}
+.pagehero .crumb{font-size:.83rem;color:#9fd4cb;margin-bottom:14px}
+.pagehero .crumb a:hover{color:#fff}
+.pagehero p{color:#cfe6e2;font-size:1.1rem;max-width:34em;margin-top:16px}
+.badge{display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);
+  border-radius:100px;padding:.5em 1.2em;font-size:.83rem;font-weight:600;margin-bottom:20px}
+.reasons{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:8px}
+.reason{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+.reason h3{font-size:1.02rem;margin-bottom:8px}
+.reason p{color:var(--mid);font-size:.93rem}
+.steps{counter-reset:s;margin-top:10px}
+.stepitem{display:flex;gap:20px;padding:22px 0;border-bottom:1px solid var(--line)}
+.stepitem:last-child{border-bottom:0}
+.stepitem .n{counter-increment:s;flex:0 0 40px;height:40px;border-radius:50%;background:var(--brand-soft);
+  color:var(--brand);display:grid;place-items:center;font-weight:700;font-family:var(--serif)}
+.stepitem .n::before{content:counter(s)}
+.stepitem h3{margin-bottom:5px}
+.stepitem p{color:var(--mid);font-size:.95rem}
+.quote{background:var(--card);border-left:3px solid var(--cta);border-radius:0 14px 14px 0;
+  padding:26px 30px;font-family:var(--serif);font-size:1.22rem;line-height:1.5;max-width:44em}
+.quote span{display:block;font-family:var(--sans);font-size:.85rem;color:var(--mid);margin-top:14px;font-style:normal}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo"><b>TandlægeTeam</b><span>LINDBERG</span></a>
+    <nav class="menu" id="menu">
+      <a href="index.html#behandlinger">Behandlinger</a>
+      <a href="tandlaegeskraek.html" style="color:var(--brand)">Tandlægeskræk</a>
+      <a href="akut.html">Akut tandpine</a>
+      <a href="index.html#priser">Priser</a>
+      <a href="index.html#klinikken">Om klinikken</a>
+      <a href="index.html#kontakt">Kontakt</a>
+    </nav>
+    <button class="burger" id="burger" aria-expanded="false" aria-label="Menu" aria-controls="menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <div class="nav-right">
+      <a class="tel" href="tel:+4545879935">45 87 99 35</a>
+      <button class="btn btn-cta" onclick="openBooking()">Book tid</button>
+    </div>
+  </div>
+</header>
+
+<div class="pagehero">
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">Forside</a> / Tandlægeskræk</div>
+    <div class="badge">Du bliver ikke skældt ud her</div>
+    <h1>Det er længere siden,<br>end du tør sige højt.</h1>
+    <p>Fem år. Ti år. Femten. Vi hører det hver uge, og vi løfter ikke et øjenbryn.
+      Det eneste der betyder noget er, at du sidder her nu.</p>
+    <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn btn-cta" onclick="openBooking()">Book en uforpligtende snak</button>
+      <a class="btn btn-ghost" href="tel:+4545879935">Ring: 45 87 99 35</a>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Du er langt fra den eneste</h2>
+      <p>Omkring hver tiende dansker har så stor angst for tandlægen, at de undgår at komme.
+        Mange flere er utrygge uden at kalde det skræk. Det er en helt almindelig reaktion —
+        ikke noget at skamme sig over.</p>
+    </div>
+    <div class="reasons">
+      <div class="reason">
+        <h3>En dårlig oplevelse</h3>
+        <p>Noget der gjorde ondt engang, ofte i barndommen. Kroppen husker det, også selvom
+          tandlægefaget har ændret sig fuldstændig siden.</p>
+      </div>
+      <div class="reason">
+        <h3>Frygt for at miste kontrollen</h3>
+        <p>At ligge ned, ikke kunne sige noget, ikke vide hvad der sker. For mange er det
+          selve situationen, ikke smerten.</p>
+      </div>
+      <div class="reason">
+        <h3>Skam over sine tænder</h3>
+        <p>Den mest udbredte — og den vi aldrig hører nogen sige højt først. Frygten for at
+          blive dømt holder flere væk end frygten for boret.</p>
+      </div>
+      <div class="reason">
+        <h3>Angst for det ukendte</h3>
+        <p>Hvad vil det koste? Hvor lang tid tager det? Hvor slemt står det til?
+          Uvished fylder mere end fakta.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#f6f2ec;padding-top:clamp(46px,6vw,80px)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Sådan gør vi</div>
+      <h2>Første gang rører vi ikke dine tænder</h2>
+      <p>Medmindre du selv beder om det. Vi har fundet ud af, at det virker bedst sådan.</p>
+    </div>
+    <div class="steps">
+      <div class="stepitem">
+        <div class="n"></div>
+        <div>
+          <h3>Vi snakker først</h3>
+          <p>Du sidder oprejst i en stol, ikke i behandlerstolen. Fortæl hvad der gør dig utryg,
+            og hvor længe det er siden. Der er ingen rigtige eller forkerte svar.</p>
+        </div>
+      </div>
+      <div class="stepitem">
+        <div class="n"></div>
+        <div>
+          <h3>Vi kigger, når du er klar</h3>
+          <p>Et kig med spejl og lys. Ingen instrumenter, ingen boring. Du bestemmer, hvornår vi
+            stopper, og vi stopper med det samme du siger til.</p>
+        </div>
+      </div>
+      <div class="stepitem">
+        <div class="n"></div>
+        <div>
+          <h3>Du får hele billedet — og prisen</h3>
+          <p>Hvad der skal gøres, i hvilken rækkefølge, og hvad det koster. Skriftligt.
+            Du tager det med hjem og tænker over det.</p>
+        </div>
+      </div>
+      <div class="stepitem">
+        <div class="n"></div>
+        <div>
+          <h3>Vi tager det i dit tempo</h3>
+          <p>Nogle vil have det hele overstået. Andre vil have én ting ad gangen med flere måneders
+            mellemrum. Begge dele er i orden.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split">
+    <img src="img/behandling.png" alt="Tandlæge i samtale med en patient" width="800" height="533">
+    <div>
+      <div class="eyebrow">Under behandlingen</div>
+      <h2>Du har hånden på bremsen</h2>
+      <ul>
+        <li><strong style="color:var(--ink)">Aftalt stopsignal.</strong> Løfter du hånden, stopper vi. Hver gang, uden diskussion.</li>
+        <li><strong style="color:var(--ink)">Vi siger hvad der sker,</strong> før det sker — eller lader være, hvis du helst ikke vil vide det.</li>
+        <li><strong style="color:var(--ink)">Bedøvelse i god tid,</strong> og vi venter til den virker helt. Der er ingen grund til at skynde sig.</li>
+        <li><strong style="color:var(--ink)">Længere tider.</strong> Vi sætter ekstra tid af, så du ikke mærker at nogen har travlt.</li>
+        <li><strong style="color:var(--ink)">Musik eller podcast</strong> i dine egne høretelefoner, hvis det hjælper.</li>
+        <li><strong style="color:var(--ink)">Første eller sidste tid på dagen,</strong> hvis du helst vil undgå et fyldt venteværelse.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="quote">
+      «Det vigtigste ved en tandlæge er ikke udstyret. Det er, om du tør sætte dig i stolen.
+      Alt andet kan vi finde ud af bagefter.»
+      <span>Sofie Lindberg, tandlæge og indehaver</span>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap" style="text-align:center">
+    <h2>Book en snak — ikke en behandling</h2>
+    <p style="max-width:34em;margin:14px auto 0">Femten minutter, ingen instrumenter, ingen regning.
+      Du finder ud af, om du har det godt med os, før du beslutter noget som helst.</p>
+    <div style="margin-top:28px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-cta" onclick="openBooking()">Book en uforpligtende snak</button>
+      <a class="btn btn-ghost" href="tel:+4545879935">Eller ring: 45 87 99 35</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <div class="logo" style="color:#fff"><b>TandlægeTeam</b><span style="color:#8ba5a1">LINDBERG</span></div>
+        <p style="margin-top:14px">Lundtofteparken 83, st. th.<br>2800 Kgs. Lyngby</p>
+        <p style="margin-top:10px"><a href="tel:+4545879935">45 87 99 35</a><br><a href="mailto:hej@sofielindberg.dk">hej@sofielindberg.dk</a></p>
+      </div>
+      <div>
+        <h4>Genveje</h4>
+        <p><a href="index.html#behandlinger">Behandlinger</a><br>
+           <a href="index.html#priser">Priser</a><br>
+           <a href="tandlaegeskraek.html">Tandlægeskræk</a><br>
+           <a href="akut.html">Akut tandpine</a><br>
+           <a href="index.html#ny-patient">Ny patient</a></p>
+      </div>
+      <div>
+        <h4>Book tid</h4>
+        <p>Online hele døgnet, eller ring i åbningstiden.</p>
+        <button class="btn btn-cta" style="margin-top:14px" onclick="openBooking()">Book tid</button>
+      </div>
+    </div>
+    <div class="disclaimer">
+      <span>Forslag til ny hjemmeside, udarbejdet af BuildOne. Ikke klinikkens officielle side.</span>
+      <span>buildone.dk</span>
+    </div>
+  </div>
+</footer>
+
+<div class="dock">
+  <button onclick="openBooking()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 11h18"/></svg>
+    Book tid</button>
+  <a href="tel:+4545879935">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+    Ring til os</a>
+  <a target="_blank" rel="noopener" href="https://maps.google.com/?q=Lundtofteparken+83,+2800+Kgs.+Lyngby">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Find vej</a>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
