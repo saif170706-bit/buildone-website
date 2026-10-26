@@ -25,7 +25,7 @@
   --brand:#15699f;             /* samme kulör, moerknet saa tekst kan staa paa den */
   --brand-deep:#0a3b5e;        /* til dybe flader og gradienter */
   --brand-soft:#e9f3fa;
-  --cta:#e06b45; --cta-dark:#c85832;
+  --radius:8px;                /* samme hjoerne overalt */
   --sans:"Plus Jakarta Sans",-apple-system,Segoe UI,Arial,sans-serif;
   --serif:"Plus Jakarta Sans",-apple-system,Segoe UI,Arial,sans-serif;
   --wrap:1180px;
@@ -43,12 +43,18 @@ h3{font-size:1.1rem;font-weight:700;letter-spacing:-.018em}
 .eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
 
 /* knapper */
+/* Firkantede hjoerner frem for piller. Pilleknapper er blevet skabelonernes
+   kendetegn, og de faar en side til at ligne alle andre. */
 .btn{display:inline-flex;align-items:center;gap:.5em;border:0;cursor:pointer;font-family:var(--sans);
-  font-weight:600;font-size:.95rem;padding:.85em 1.6em;border-radius:100px;transition:.18s}
-.btn-cta{background:var(--cta);color:#fff;box-shadow:0 6px 18px -8px rgba(224,107,69,.8)}
-.btn-cta:hover{background:var(--cta-dark)}
-.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+  font-weight:600;font-size:.94rem;padding:.8em 1.5em;border-radius:var(--radius);transition:.16s;
+  letter-spacing:-.005em}
+.btn-cta{background:var(--brand);color:#fff}
+.btn-cta:hover{background:var(--brand-deep)}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
 .btn-ghost:hover{border-color:var(--brand);color:var(--brand)}
+/* Paa de blaa flader byttes der om: hvid er den kraftigste knap der findes */
+.hero .btn-cta,.band .btn-cta,.pagehero .btn-cta,.akuthero .btn-cta{background:#fff;color:var(--brand-deep)}
+.hero .btn-cta:hover,.band .btn-cta:hover,.pagehero .btn-cta:hover,.akuthero .btn-cta:hover{background:#dbeaf6}
 
 /* header */
 header{position:sticky;top:0;z-index:50;background:rgba(249,251,253,.92);backdrop-filter:blur(10px);
@@ -96,11 +102,10 @@ body.has-hero header.solid .burger span{background:var(--ink)}
 }
 
 /* status: åbent nu */
-.status{display:inline-flex;align-items:center;gap:.5em;font-size:.83rem;font-weight:600;
-  background:var(--brand-soft);color:var(--brand);padding:.45em 1em;border-radius:100px}
-.dot{width:8px;height:8px;border-radius:50%;background:#2fa36b}
-.status.lukket{background:#fdeee9;color:#a8452a}
-.status.lukket .dot{background:#d1603f}
+.status{display:inline-flex;align-items:center;gap:.55em;font-size:.86rem;font-weight:600;color:var(--brand)}
+.dot{width:7px;height:7px;border-radius:50%;background:#2fa36b;flex:0 0 auto}
+.status.lukket{color:var(--mid)}
+.status.lukket .dot{background:#c2703f}
 
 /* hero — fylder skaermen, loeber ind under headeren, og har billedet som
    baggrund med en blaa tone over. Det loeser tre ting paa en gang: ingen
@@ -113,10 +118,10 @@ body.has-hero header.solid .burger span{background:var(--ink)}
 /* To lag: en vandret gradient der goer venstre side laeselig, og en dyb
    blaa tone der binder billedet sammen med logoets farve. */
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(100deg,rgba(8,50,80,.985) 0%,rgba(9,55,88,.97) 34%,rgba(11,66,106,.82) 52%,rgba(14,84,133,.46) 74%,rgba(18,100,156,.26) 100%)}
-.hero::after{content:"";position:absolute;inset:0;z-index:-1;mix-blend-mode:multiply;
-  background:radial-gradient(110% 85% at 6% 4%,rgba(39,145,207,.55) 0%,transparent 60%),
-             linear-gradient(to top,rgba(8,45,72,.55) 0%,transparent 26%)}
+  background:linear-gradient(98deg,rgba(9,53,84,.97) 0%,rgba(10,58,92,.93) 40%,rgba(12,70,110,.74) 62%,rgba(15,88,138,.42) 100%)}
+/* Kun en svag fordybning forneden, saa kanten mod indholdet er ren */
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(to top,rgba(8,45,72,.42) 0%,transparent 22%)}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(30px,5vw,70px);
   align-items:start;width:100%}
 @media(max-width:980px){.hero-grid{grid-template-columns:1fr}}
@@ -125,14 +130,13 @@ body.has-hero header.solid .burger span{background:var(--ink)}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .hero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.45)}
 .hero .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.12);color:#fff}
-.hero .status{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.26);
-  backdrop-filter:blur(6px)}
-.hero .status.lukket{background:rgba(255,255,255,.14);color:#fff}
+.hero .status{color:#b9d6ec}
+.hero .status.lukket{color:#b9d6ec}
 
 /* Kortet med adresse og telefon ligger i hoejre spalte i stedet for at
    haenge under billedet. Saa er det praktiske tilgaengeligt med det samme. */
-.hero-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(14px);
-  border-radius:16px;padding:22px 24px;display:grid;gap:16px;color:#fff;max-width:340px;margin-left:auto}
+.hero-card{background:rgba(6,38,62,.42);border:1px solid rgba(255,255,255,.16);
+  border-radius:var(--radius);padding:22px 24px;display:grid;gap:16px;color:#fff;max-width:330px;margin-left:auto}
 @media(max-width:980px){.hero-card{margin-left:0;max-width:none;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}}
 .hero-card div{font-size:.9rem;line-height:1.5}
 .hero-card .k{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:#a9cfe9;
@@ -141,8 +145,7 @@ body.has-hero header.solid .burger span{background:var(--ink)}
 .hero-card a:hover{border-color:#fff}
 
 /* Boelgen binder hero sammen med indholdet nedenunder i stedet for en kant */
-.hero-wave{position:absolute;left:0;right:0;bottom:-1px;z-index:1;width:100%;height:clamp(40px,6vw,80px);display:block}
-.hero-wave path{fill:var(--bg)}
+
 
 section{padding:clamp(56px,8vw,104px) 0}
 .sec-head{max-width:40em;margin-bottom:38px}
@@ -151,18 +154,18 @@ section{padding:clamp(56px,8vw,104px) 0}
 /* tre indgange */
 .entries{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 @media(max-width:860px){.entries{grid-template-columns:1fr}}
-.entry{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px;transition:.18s}
+.entry{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:28px;display:flex;flex-direction:column;gap:10px;transition:.18s}
 .entry:hover{border-color:var(--brand);transform:translateY(-3px)}
-.entry .ico{width:42px;height:42px;border-radius:12px;background:var(--brand-soft);color:var(--brand);
+.entry .ico{width:42px;height:42px;border-radius:8px;background:var(--brand-soft);color:var(--brand);
   display:grid;place-items:center;font-size:1.2rem;margin-bottom:6px}
 .entry p{color:var(--mid);font-size:.94rem;flex:1}
 .entry .go{color:var(--brand);font-weight:600;font-size:.9rem}
-.entry.akut{background:#fdeee9;border-color:#f3cfc2}
-.entry.akut .ico{background:#f8d9cd;color:#a8452a}
+.entry.akut{background:#fbf0ec;border-color:#eedbd4}
+.entry.akut .ico{background:#f3ded6;color:#b2402a}
 
 /* behandlinger */
 .treat{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:14px}
-.treat a{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;
+.treat a{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:20px 22px;
   font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:14px;transition:.15s}
 .treat a:hover{border-color:var(--brand);color:var(--brand)}
 .treat span{color:var(--mid);font-weight:400;font-size:.85rem;white-space:nowrap;flex:0 0 auto}
@@ -170,7 +173,7 @@ section{padding:clamp(56px,8vw,104px) 0}
 /* split */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:center}
 @media(max-width:860px){.split{grid-template-columns:1fr}}
-.split img{border-radius:18px;width:100%;object-fit:cover;aspect-ratio:4/3}
+.split img{border-radius:10px;width:100%;object-fit:cover;aspect-ratio:4/3}
 .split.tall img{aspect-ratio:3/4;max-height:520px}
 .split p{color:var(--mid);margin-top:14px}
 .split ul{margin:18px 0 0;padding-left:1.1em;color:var(--mid)}
@@ -184,7 +187,7 @@ section{padding:clamp(56px,8vw,104px) 0}
 
 /* priser */
 table{width:100%;border-collapse:collapse;font-size:.93rem;background:var(--card);
-  border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
 th,td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line)}
 th{background:#eef4f9;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);font-weight:700}
 td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -195,7 +198,7 @@ tr:last-child td{border-bottom:0}
 /* åbningstider */
 .hours{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 @media(max-width:700px){.hours{grid-template-columns:1fr}}
-.hcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+.hcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:24px}
 .hcard.now{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
 .hcard h3{margin-bottom:4px}
 .hcard .sub{font-size:.8rem;color:var(--mid);margin-bottom:14px}
@@ -215,27 +218,27 @@ footer a:hover{color:#fff}
 /* flydende handlingsbjælke */
 .dock{position:fixed;z-index:60;right:20px;bottom:20px;display:flex;background:var(--brand-deep);
   border:1px solid rgba(255,255,255,.18);
-  border-radius:100px;overflow:hidden;box-shadow:0 16px 38px -14px rgba(5,30,50,.9)}
+  border-radius:10px;overflow:hidden;box-shadow:0 16px 38px -14px rgba(5,30,50,.9)}
 .dock a,.dock button{background:none;border:0;color:#fff;font-family:var(--sans);font-size:.76rem;font-weight:600;
   padding:11px 18px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;
   border-right:1px solid rgba(255,255,255,.2)}
 .dock >*:last-child{border-right:0}
 .dock svg{width:17px;height:17px}
 .dock a:hover,.dock button:hover{background:rgba(255,255,255,.12)}
-@media(max-width:600px){.dock{left:12px;right:12px;bottom:12px;border-radius:14px}.dock a,.dock button{flex:1}}
+@media(max-width:600px){.dock{left:12px;right:12px;bottom:12px;border-radius:10px}.dock a,.dock button{flex:1}}
 
 /* booking */
 .modal{position:fixed;inset:0;z-index:100;background:rgba(10,59,94,.58);display:none;
   align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto}
 .modal.open{display:flex}
-.sheet{background:var(--card);border-radius:20px;width:100%;max-width:760px;padding:30px clamp(20px,4vw,40px) 34px;position:relative}
-.close{position:absolute;top:18px;right:18px;width:36px;height:36px;border-radius:50%;border:0;background:#e6eef5;
+.sheet{background:var(--card);border-radius:12px;width:100%;max-width:760px;padding:30px clamp(20px,4vw,40px) 34px;position:relative}
+.close{position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:8px;border:0;background:#e6eef5;
   cursor:pointer;font-size:1.1rem;color:var(--mid)}
 .close:hover{background:#d8e4ee}
 .sheet .klinik{color:var(--brand);font-weight:600;font-size:.88rem}
 .sheet h2{margin:2px 0 18px}
 .pills{display:flex;gap:10px;margin-bottom:8px}
-.pill{border:1.5px solid var(--line);background:none;border-radius:100px;padding:.55em 1.3em;
+.pill{border:1px solid var(--line);background:none;border-radius:var(--radius);padding:.55em 1.3em;
   font-family:var(--sans);font-weight:600;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;
   color:var(--mid);cursor:pointer}
 .pill[aria-pressed="true"]{border-color:var(--brand);color:var(--brand)}
@@ -244,7 +247,7 @@ footer a:hover{color:#fff}
 .step h3{text-align:center;color:var(--brand);font-size:1.5rem;margin-bottom:6px}
 .recap{text-align:center;color:var(--mid);font-size:.93rem;margin-bottom:22px}
 .choices{display:flex;flex-direction:column;gap:10px}
-.choice{background:var(--brand);color:#fff;border:0;border-radius:12px;padding:16px 20px;cursor:pointer;
+.choice{background:var(--brand);color:#fff;border:0;border-radius:8px;padding:16px 20px;cursor:pointer;
   display:flex;justify-content:space-between;align-items:center;gap:14px;text-align:left;font-family:var(--sans)}
 .choice:hover{background:#0f5582}
 .choice b{font-size:1rem;font-weight:600;display:block}
@@ -253,7 +256,7 @@ footer a:hover{color:#fff}
 .picker{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:6px}
 @media(max-width:620px){.picker{grid-template-columns:1fr}}
 .picker h4{font-size:.9rem;font-weight:600;margin-bottom:10px}
-.cal{background:#eef4f9;border-radius:12px;padding:12px}
+.cal{background:#eef4f9;border-radius:8px;padding:12px}
 .calhead{background:var(--brand);color:#fff;border-radius:8px;padding:9px;text-align:center;font-weight:600;font-size:.93rem;margin-bottom:10px}
 .caldays{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;font-size:.8rem}
 .caldays .dn{color:var(--mid);font-weight:700;font-size:.68rem;padding:4px 0}
@@ -265,7 +268,7 @@ footer a:hover{color:#fff}
 .slot{background:var(--brand);color:#fff;border:0;border-radius:10px;padding:13px;font-family:var(--sans);
   font-weight:600;cursor:pointer;font-size:.95rem}
 .slot:hover{background:#0f5582}
-.slot.sel{background:#0a3b5e;outline:2px solid var(--cta)}
+.slot.sel{background:#0a3b5e;outline:2px solid var(--logo);outline-offset:1px}
 .empty{color:var(--mid);font-size:.9rem;padding:10px 0}
 .field{margin-bottom:14px}
 .field label{display:block;font-size:.82rem;font-weight:600;margin-bottom:5px}
