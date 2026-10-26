@@ -36,10 +36,10 @@ body{font-family:var(--sans);font-size:1rem;background:var(--bg);color:var(--ink
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
-h1,h2,h3{font-family:var(--serif);font-weight:800;line-height:1.1;letter-spacing:-.03em}
-h1{font-size:clamp(1.9rem,3.7vw,2.95rem);text-wrap:balance}
+h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.2;letter-spacing:-.018em}
+h1{font-size:clamp(1.85rem,3.4vw,2.7rem);text-wrap:balance;max-width:16ch}
 h2{font-size:clamp(1.6rem,3.2vw,2.5rem)}
-h3{font-size:1.1rem;font-weight:700;letter-spacing:-.018em}
+h3{font-size:1.08rem;font-weight:700;letter-spacing:-.01em;line-height:1.35}
 .eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
 
 /* knapper */
@@ -111,22 +111,25 @@ body.has-hero header.solid .burger span{background:var(--ink)}
    baggrund med en blaa tone over. Det loeser tre ting paa en gang: ingen
    streg mellem menu og forside, ingen flad baggrund, og teksten kan staa
    hoejt oppe i stedet for at svaeve midt i et tomt felt. */
-.hero{position:relative;isolation:isolate;min-height:clamp(560px,82vh,780px);display:flex;align-items:flex-start;
+.hero{position:relative;isolation:isolate;min-height:clamp(580px,84vh,800px);display:flex;align-items:flex-start;
   padding:clamp(104px,13vh,150px) 0 clamp(40px,6vh,70px);overflow:hidden;background:var(--brand-deep)}
 .hero-bg{position:absolute;inset:0;z-index:-2}
-.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:84% 64%;transform:scale(1.08)}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:80% 86%;transform:scale(1.12)}
 /* To lag: en vandret gradient der goer venstre side laeselig, og en dyb
    blaa tone der binder billedet sammen med logoets farve. */
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;
   background:linear-gradient(98deg,rgba(9,53,84,.97) 0%,rgba(10,58,92,.93) 40%,rgba(12,70,110,.74) 62%,rgba(15,88,138,.42) 100%)}
-/* Kun en svag fordybning forneden, saa kanten mod indholdet er ren */
+/* Moerkning foroven, saa den hvide menu altid staar rent, og forneden saa
+   kanten mod indholdet er ren. */
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(to top,rgba(8,45,72,.42) 0%,transparent 22%)}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(30px,5vw,70px);
+  background:linear-gradient(to bottom,rgba(7,40,66,.58) 0%,transparent 16%),
+             linear-gradient(to top,rgba(8,45,72,.4) 0%,transparent 20%)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.78fr);gap:clamp(30px,6vw,86px);
   align-items:start;width:100%}
 @media(max-width:980px){.hero-grid{grid-template-columns:1fr}}
-.hero h1{color:#fff;margin-top:20px}
-.hero p.lead{font-size:clamp(1.02rem,1.5vw,1.15rem);color:#d6e8f6;margin:18px 0 28px;max-width:30em}
+.hero h1{color:#fff;margin-top:26px}
+.hero p.lead{font-size:clamp(1rem,1.3vw,1.08rem);color:#cfe3f3;line-height:1.68;
+  margin:22px 0 36px;max-width:27em}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .hero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.45)}
 .hero .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.12);color:#fff}
