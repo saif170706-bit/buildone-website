@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Tandlæge i Lyngby | TandlægeTeam Lindberg</title>
 <meta name="description" content="Tandlægeklinik i Lyngby med mere end 20 års erfaring. Book tid online, også aften og weekend. Særlig erfaring med tandlægeskræk.">
-<link rel="stylesheet" href="style.css?v=20">
+<link rel="stylesheet" href="style.css?v=22">
 </head>
 <body class="has-hero">
 
@@ -56,23 +56,23 @@
 <section>
   <div class="wrap">
     <div class="entries">
-      <a class="entry akut" href="akut.html">
-        <div class="ico">⚡</div>
+      <a class="entry" href="akut.html">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5-6 4 13L16 12h5"/></svg></div>
         <h3>Har du ondt lige nu?</h3>
         <p>Vi holder tid fri til akutte patienter hver dag. Ring, så finder vi som regel plads samme dag.</p>
-        <span class="go">Se hvad du gør →</span>
+        <span class="go">Se hvad du gør</span>
       </a>
       <a class="entry" href="tandlaegeskraek.html">
-        <div class="ico">◔</div>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.4-7.5-9.7A4.3 4.3 0 0 1 12 8a4.3 4.3 0 0 1 7.5 2.8c0 5.3-7.5 9.7-7.5 9.7z"/></svg></div>
         <h3>Tandlægeskræk</h3>
         <p>Har du udsat tandlægen i årevis? Du er ikke den eneste, og du bliver ikke dømt her.</p>
-        <span class="go">Sådan hjælper vi →</span>
+        <span class="go">Sådan hjælper vi</span>
       </a>
       <a class="entry" href="#ny-patient">
-        <div class="ico">✓</div>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.2 12.3l2.6 2.6 5-5.4"/></svg></div>
         <h3>Ny patient</h3>
         <p>Flyttet til Lyngby eller skal du bare skifte klinik? Sådan kommer du i gang hos os.</p>
-        <span class="go">Bliv patient →</span>
+        <span class="go">Bliv patient</span>
       </a>
     </div>
   </div>
@@ -98,7 +98,7 @@
   </div>
 </section>
 
-<section class="band">
+<section class="band arc-t arc-b">
   <div class="wrap split">
     <div>
       <div class="eyebrow">Tandlægeskræk</div>
@@ -123,7 +123,7 @@
 <section id="klinikken">
   <div class="wrap split tall">
     <img src="img/sofie.png" alt="Tandlæge Sofie Lindberg" width="600" height="600"
-         style="aspect-ratio:1/1;max-width:420px;border-radius:20px">
+         style="aspect-ratio:1/1;max-width:420px">
     <div>
       <div class="eyebrow">Om klinikken</div>
       <h2>Sofie Lindberg</h2>
@@ -145,15 +145,15 @@
     <div>
       <div class="eyebrow">Ny patient</div>
       <h2>Sådan bliver du patient hos os</h2>
-      <ul style="list-style:none;padding:0;margin-top:20px">
-        <li style="margin-bottom:16px"><strong>1. Book et eftersyn</strong><br>
-          <span style="color:var(--mid)">Online herunder, eller ring på 45 87 99 35.</span></li>
-        <li style="margin-bottom:16px"><strong>2. Vi gennemgår dine tænder</strong><br>
-          <span style="color:var(--mid)">Eftersyn, røntgen hvis der er brug for det, og en snak om hvad du ønsker.</span></li>
-        <li style="margin-bottom:16px"><strong>3. Du får en plan og en pris</strong><br>
-          <span style="color:var(--mid)">Skriftligt, før noget sættes i gang. Ingen regninger du ikke kender.</span></li>
-      </ul>
-      <p style="font-size:.9rem">Er du under 22, skal du først meldes ud af den kommunale
+      <ol class="steps">
+        <li><strong>Book et eftersyn</strong>
+          <span>Online herunder, eller ring på 45 87 99 35.</span></li>
+        <li><strong>Vi gennemgår dine tænder</strong>
+          <span>Eftersyn, røntgen hvis der er brug for det, og en snak om hvad du ønsker.</span></li>
+        <li><strong>Du får en plan og en pris</strong>
+          <span>Skriftligt, før noget sættes i gang. Ingen regninger du ikke kender.</span></li>
+      </ol>
+      <p style="font-size:.9rem;margin-top:24px">Er du under 22, skal du først meldes ud af den kommunale
         børnetandpleje. Ring til os, så hjælper vi med det.</p>
       <button class="btn btn-cta" style="margin-top:22px" onclick="openBooking()">Book dit første eftersyn</button>
     </div>
@@ -161,7 +161,7 @@
   </div>
 </section>
 
-<section id="priser" style="background:#f6f2ec">
+<section id="priser" class="arc-t arc-b" style="background:#eef5fb">
   <div class="wrap">
     <div class="sec-head">
       <div class="eyebrow">Priser</div>
@@ -214,7 +214,9 @@
       </div>
     </div>
 
-    <div class="split" style="margin-top:46px">
+    <hr class="rule">
+
+    <div class="split">
       <div>
         <div class="eyebrow">Find vej</div>
         <h2>Lundtofteparken 83</h2>
@@ -233,7 +235,7 @@
   </div>
 </section>
 
-<footer>
+<footer class="arc-t">
   <div class="wrap">
     <div class="fgrid">
       <div>
@@ -275,6 +277,6 @@
 </div>
 
 <!-- ─────────── booking ─────────── -->
-<script src="app.js?v=20"></script>
+<script src="app.js?v=22"></script>
 </body>
 </html>
