@@ -91,7 +91,6 @@ const weekKey = d => isoWeek(d) % 2 === 0 ? "lige" : "ulige";
 const dayIdx  = d => (d.getDay() + 6) % 7;          // mandag = 0
 
 function renderHours(){
-  if (!document.getElementById("status")) return;
   const now = new Date(), key = weekKey(now), di = dayIdx(now);
   for (const k of ["lige","ulige"]) {
     const box = document.getElementById("rows" + k[0].toUpperCase() + k.slice(1));
@@ -107,8 +106,10 @@ function renderHours(){
     document.getElementById("sub" + key[0].toUpperCase() + key.slice(1)).textContent = "Vi er i en " + key + " uge nu";
   }
 
-  const today = HOURS[key][di], t = now.getHours() + now.getMinutes()/60;
+  // Statuslinjen findes kun nogle steder; tabellen ovenfor skal tegnes uanset.
   const el = document.getElementById("status"), txt = document.getElementById("statusText");
+  if (!el || !txt) return;
+  const today = HOURS[key][di], t = now.getHours() + now.getMinutes()/60;
   if (today && t >= today[0] && t < today[1]) {
     txt.textContent = "Åbent nu — lukker " + hhmm(today[1]);
   } else if (today && t < today[0]) {
