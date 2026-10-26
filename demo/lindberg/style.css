@@ -28,9 +28,12 @@ h3{font-size:1.15rem}
 /* header */
 header{position:sticky;top:0;z-index:50;background:rgba(251,249,246,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 0}
-.logo{font-family:var(--serif);font-size:1.05rem;letter-spacing:.02em;line-height:1.1}
-.logo b{display:block;font-weight:600}
-.logo span{font-size:.62rem;letter-spacing:.34em;color:var(--mid);font-family:var(--sans);font-weight:600}
+.logo{display:block;flex:0 0 auto}
+.logo img{width:auto;height:38px}
+@media(max-width:520px){.logo img{height:30px}}
+/* Samme logofil i bunden. Den er bla og gra, saa den gores hvid med et
+   filter — bedre end at vedligeholde to versioner af samme fil. */
+.logo-footer{height:40px;width:auto;filter:brightness(0) invert(1);opacity:.92}
 .menu{display:flex;gap:26px;font-size:.92rem;font-weight:500}
 .menu a:hover{color:var(--brand)}
 .nav-right{display:flex;align-items:center;gap:14px}
