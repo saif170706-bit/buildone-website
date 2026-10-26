@@ -20,8 +20,12 @@
 }
 
 :root{
-  --bg:#fbf9f6; --card:#ffffff; --ink:#13302c; --mid:#5d7370; --line:#e4ded6;
-  --brand:#0e5c54; --brand-soft:#e7f1ef; --cta:#e06b45; --cta-dark:#c85832;
+  --bg:#f9fbfd; --card:#ffffff; --ink:#122a3d; --mid:#5c7183; --line:#dde6ee;
+  --logo:#2791CF;              /* logoets egen blaa */
+  --brand:#15699f;             /* samme kulör, moerknet saa tekst kan staa paa den */
+  --brand-deep:#0a3b5e;        /* til dybe flader og gradienter */
+  --brand-soft:#e9f3fa;
+  --cta:#e06b45; --cta-dark:#c85832;
   --sans:"Plus Jakarta Sans",-apple-system,Segoe UI,Arial,sans-serif;
   --serif:"Plus Jakarta Sans",-apple-system,Segoe UI,Arial,sans-serif;
   --wrap:1180px;
@@ -47,7 +51,23 @@ h3{font-size:1.1rem;font-weight:700;letter-spacing:-.018em}
 .btn-ghost:hover{border-color:var(--brand);color:var(--brand)}
 
 /* header */
-header{position:sticky;top:0;z-index:50;background:rgba(251,249,246,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header{position:sticky;top:0;z-index:50;background:rgba(249,251,253,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);transition:background .25s,border-color .25s}
+/* Paa forsiden ligger headeren oven paa hero-billedet uden sin egen flade,
+   saa der ikke er en vandret streg mellem menu og forside. Foerst naar man
+   scroller forbi hero, faar den baggrund. */
+body.has-hero header{position:fixed;left:0;right:0;background:transparent;backdrop-filter:none;border-color:transparent}
+body.has-hero header .menu a,body.has-hero header .tel{color:#fff}
+body.has-hero header .menu a:hover{color:#bfe0f6}
+body.has-hero header .logo img{filter:brightness(0) invert(1)}
+body.has-hero header .burger{border-color:rgba(255,255,255,.45)}
+body.has-hero header .burger span{background:#fff}
+body.has-hero header.solid{position:fixed;background:rgba(249,251,253,.94);backdrop-filter:blur(12px);border-color:var(--line)}
+body.has-hero header.solid .menu a,body.has-hero header.solid .tel{color:var(--ink)}
+body.has-hero header.solid .menu a:hover{color:var(--brand)}
+body.has-hero header.solid .logo img{filter:none}
+body.has-hero header.solid .burger{border-color:var(--line)}
+body.has-hero header.solid .burger span{background:var(--ink)}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 0}
 .logo{display:block;flex:0 0 auto}
 .logo img{width:auto;height:38px}
@@ -82,20 +102,47 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,249,246,.92);backdro
 .status.lukket{background:#fdeee9;color:#a8452a}
 .status.lukket .dot{background:#d1603f}
 
-/* hero */
-.hero{padding:clamp(40px,7vw,86px) 0 0}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,64px);align-items:center}
-@media(max-width:920px){.hero-grid{grid-template-columns:1fr}}
-.hero p.lead{font-size:1.1rem;color:var(--mid);margin:18px 0 26px;max-width:36em}
+/* hero — fylder skaermen, loeber ind under headeren, og har billedet som
+   baggrund med en blaa tone over. Det loeser tre ting paa en gang: ingen
+   streg mellem menu og forside, ingen flad baggrund, og teksten kan staa
+   hoejt oppe i stedet for at svaeve midt i et tomt felt. */
+.hero{position:relative;isolation:isolate;min-height:clamp(560px,82vh,780px);display:flex;align-items:flex-start;
+  padding:clamp(104px,13vh,150px) 0 clamp(40px,6vh,70px);overflow:hidden;background:var(--brand-deep)}
+.hero-bg{position:absolute;inset:0;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:84% 64%;transform:scale(1.08)}
+/* To lag: en vandret gradient der goer venstre side laeselig, og en dyb
+   blaa tone der binder billedet sammen med logoets farve. */
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(100deg,rgba(8,50,80,.985) 0%,rgba(9,55,88,.97) 34%,rgba(11,66,106,.82) 52%,rgba(14,84,133,.46) 74%,rgba(18,100,156,.26) 100%)}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;mix-blend-mode:multiply;
+  background:radial-gradient(110% 85% at 6% 4%,rgba(39,145,207,.55) 0%,transparent 60%),
+             linear-gradient(to top,rgba(8,45,72,.55) 0%,transparent 26%)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(30px,5vw,70px);
+  align-items:start;width:100%}
+@media(max-width:980px){.hero-grid{grid-template-columns:1fr}}
+.hero h1{color:#fff;margin-top:20px}
+.hero p.lead{font-size:clamp(1.02rem,1.5vw,1.15rem);color:#d6e8f6;margin:18px 0 28px;max-width:30em}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.hero-photo{position:relative}
-.hero-photo img{border-radius:18px;width:100%;aspect-ratio:4/3;object-fit:cover}
-.hero-card{position:absolute;left:18px;right:18px;bottom:-30px;background:var(--card);border:1px solid var(--line);
-  border-radius:14px;padding:16px 20px;display:flex;flex-wrap:wrap;gap:18px 30px;box-shadow:0 18px 40px -28px rgba(19,48,44,.5)}
-.hero-card div{font-size:.88rem;line-height:1.45}
-.hero-card .k{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);font-weight:700;display:block;margin-bottom:2px}
-.hero-card a{color:var(--brand);font-weight:600}
-@media(max-width:920px){.hero-card{position:static;margin-top:14px}}
+.hero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.45)}
+.hero .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.12);color:#fff}
+.hero .status{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.26);
+  backdrop-filter:blur(6px)}
+.hero .status.lukket{background:rgba(255,255,255,.14);color:#fff}
+
+/* Kortet med adresse og telefon ligger i hoejre spalte i stedet for at
+   haenge under billedet. Saa er det praktiske tilgaengeligt med det samme. */
+.hero-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(14px);
+  border-radius:16px;padding:22px 24px;display:grid;gap:16px;color:#fff;max-width:340px;margin-left:auto}
+@media(max-width:980px){.hero-card{margin-left:0;max-width:none;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}}
+.hero-card div{font-size:.9rem;line-height:1.5}
+.hero-card .k{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:#a9cfe9;
+  font-weight:700;display:block;margin-bottom:4px}
+.hero-card a{color:#fff;font-weight:600;border-bottom:1px solid rgba(255,255,255,.4)}
+.hero-card a:hover{border-color:#fff}
+
+/* Boelgen binder hero sammen med indholdet nedenunder i stedet for en kant */
+.hero-wave{position:absolute;left:0;right:0;bottom:-1px;z-index:1;width:100%;height:clamp(40px,6vw,80px);display:block}
+.hero-wave path{fill:var(--bg)}
 
 section{padding:clamp(56px,8vw,104px) 0}
 .sec-head{max-width:40em;margin-bottom:38px}
@@ -114,11 +161,11 @@ section{padding:clamp(56px,8vw,104px) 0}
 .entry.akut .ico{background:#f8d9cd;color:#a8452a}
 
 /* behandlinger */
-.treat{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.treat{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:14px}
 .treat a{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;
-  font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:10px;transition:.15s}
+  font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:14px;transition:.15s}
 .treat a:hover{border-color:var(--brand);color:var(--brand)}
-.treat span{color:var(--mid);font-weight:400;font-size:.85rem}
+.treat span{color:var(--mid);font-weight:400;font-size:.85rem;white-space:nowrap;flex:0 0 auto}
 
 /* split */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:center}
@@ -130,8 +177,8 @@ section{padding:clamp(56px,8vw,104px) 0}
 .split li{margin-bottom:8px}
 
 .band{background:var(--brand);color:#fff}
-.band .eyebrow{color:#9fd4cb}
-.band p{color:#cfe6e2}
+.band .eyebrow{color:#9dcdee}
+.band p{color:#d3e7f5}
 .band .btn-ghost,.pagehero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.35)}
 .band .btn-ghost:hover,.pagehero .btn-ghost:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.1)}
 
@@ -139,7 +186,7 @@ section{padding:clamp(56px,8vw,104px) 0}
 table{width:100%;border-collapse:collapse;font-size:.93rem;background:var(--card);
   border:1px solid var(--line);border-radius:14px;overflow:hidden}
 th,td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line)}
-th{background:#f6f2ec;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);font-weight:700}
+th{background:#eef4f9;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);font-weight:700}
 td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 tr:last-child td{border-bottom:0}
 .tablewrap{overflow-x:auto}
@@ -157,17 +204,18 @@ tr:last-child td{border-bottom:0}
 .hrow.today{font-weight:700;color:var(--brand)}
 .hrow .c{color:var(--mid)}
 
-footer{background:var(--ink);color:#c3d3d0;padding:60px 0 0;font-size:.92rem}
+footer{background:var(--brand-deep);color:#b8cfe2;padding:60px 0 0;font-size:.92rem}
 .fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px}
 @media(max-width:800px){.fgrid{grid-template-columns:1fr}}
 footer h4{color:#fff;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
 footer a:hover{color:#fff}
 .disclaimer{margin-top:46px;border-top:1px solid rgba(255,255,255,.14);padding:18px 0 26px;
-  font-size:.82rem;color:#8ba5a1;display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between}
+  font-size:.82rem;color:#8fb0c9;display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between}
 
 /* flydende handlingsbjælke */
-.dock{position:fixed;z-index:60;right:20px;bottom:20px;display:flex;background:var(--brand);
-  border-radius:100px;overflow:hidden;box-shadow:0 14px 34px -14px rgba(14,92,84,.85)}
+.dock{position:fixed;z-index:60;right:20px;bottom:20px;display:flex;background:var(--brand-deep);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:100px;overflow:hidden;box-shadow:0 16px 38px -14px rgba(5,30,50,.9)}
 .dock a,.dock button{background:none;border:0;color:#fff;font-family:var(--sans);font-size:.76rem;font-weight:600;
   padding:11px 18px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;
   border-right:1px solid rgba(255,255,255,.2)}
@@ -177,13 +225,13 @@ footer a:hover{color:#fff}
 @media(max-width:600px){.dock{left:12px;right:12px;bottom:12px;border-radius:14px}.dock a,.dock button{flex:1}}
 
 /* booking */
-.modal{position:fixed;inset:0;z-index:100;background:rgba(19,48,44,.55);display:none;
+.modal{position:fixed;inset:0;z-index:100;background:rgba(10,59,94,.58);display:none;
   align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto}
 .modal.open{display:flex}
 .sheet{background:var(--card);border-radius:20px;width:100%;max-width:760px;padding:30px clamp(20px,4vw,40px) 34px;position:relative}
-.close{position:absolute;top:18px;right:18px;width:36px;height:36px;border-radius:50%;border:0;background:#f1ece5;
+.close{position:absolute;top:18px;right:18px;width:36px;height:36px;border-radius:50%;border:0;background:#e6eef5;
   cursor:pointer;font-size:1.1rem;color:var(--mid)}
-.close:hover{background:#e6ded4}
+.close:hover{background:#d8e4ee}
 .sheet .klinik{color:var(--brand);font-weight:600;font-size:.88rem}
 .sheet h2{margin:2px 0 18px}
 .pills{display:flex;gap:10px;margin-bottom:8px}
@@ -198,14 +246,14 @@ footer a:hover{color:#fff}
 .choices{display:flex;flex-direction:column;gap:10px}
 .choice{background:var(--brand);color:#fff;border:0;border-radius:12px;padding:16px 20px;cursor:pointer;
   display:flex;justify-content:space-between;align-items:center;gap:14px;text-align:left;font-family:var(--sans)}
-.choice:hover{background:#0b4a44}
+.choice:hover{background:#0f5582}
 .choice b{font-size:1rem;font-weight:600;display:block}
 .choice small{opacity:.85;font-size:.8rem}
 .choice .kr{font-weight:700;white-space:nowrap}
 .picker{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:6px}
 @media(max-width:620px){.picker{grid-template-columns:1fr}}
 .picker h4{font-size:.9rem;font-weight:600;margin-bottom:10px}
-.cal{background:#f6f2ec;border-radius:12px;padding:12px}
+.cal{background:#eef4f9;border-radius:12px;padding:12px}
 .calhead{background:var(--brand);color:#fff;border-radius:8px;padding:9px;text-align:center;font-weight:600;font-size:.93rem;margin-bottom:10px}
 .caldays{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;font-size:.8rem}
 .caldays .dn{color:var(--mid);font-weight:700;font-size:.68rem;padding:4px 0}
@@ -216,8 +264,8 @@ footer a:hover{color:#fff}
 .slots{display:flex;flex-direction:column;gap:8px;max-height:260px;overflow-y:auto}
 .slot{background:var(--brand);color:#fff;border:0;border-radius:10px;padding:13px;font-family:var(--sans);
   font-weight:600;cursor:pointer;font-size:.95rem}
-.slot:hover{background:#0b4a44}
-.slot.sel{background:#083a35;outline:2px solid var(--cta)}
+.slot:hover{background:#0f5582}
+.slot.sel{background:#0a3b5e;outline:2px solid var(--cta)}
 .empty{color:var(--mid);font-size:.9rem;padding:10px 0}
 .field{margin-bottom:14px}
 .field label{display:block;font-size:.82rem;font-weight:600;margin-bottom:5px}

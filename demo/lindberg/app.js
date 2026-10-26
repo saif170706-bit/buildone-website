@@ -238,3 +238,16 @@ function toggleMenu(){
 document.getElementById("menu")?.addEventListener("click", e => {
   if (e.target.tagName === "A") toggleMenu();
 });
+
+/* Headeren er gennemsigtig oven paa hero og faar foerst sin egen flade,
+   naar man har scrollet forbi billedet. Uden det ville den hvide menu
+   staa paa hvid baggrund. */
+(function(){
+  const hero = document.querySelector(".hero"), head = document.querySelector("header");
+  if (!hero || !head || !document.body.classList.contains("has-hero")) return;
+  const io = new IntersectionObserver(
+    ([e]) => head.classList.toggle("solid", !e.isIntersecting),
+    { rootMargin: "-72px 0px 0px 0px", threshold: 0 }
+  );
+  io.observe(hero);
+})();
