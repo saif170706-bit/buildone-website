@@ -1,17 +1,17 @@
 :root{
   --bg:#fbf9f6; --card:#ffffff; --ink:#13302c; --mid:#5d7370; --line:#e4ded6;
   --brand:#0e5c54; --brand-soft:#e7f1ef; --cta:#e06b45; --cta-dark:#c85832;
-  --sans:"Inter",-apple-system,Segoe UI,Arial,sans-serif;
-  --serif:"Fraunces",Georgia,serif;
+  --sans:"Source Sans 3",-apple-system,Segoe UI,Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
   --wrap:1180px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+body{font-family:var(--sans);font-size:1.03rem;background:var(--bg);color:var(--ink);line-height:1.62;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
-h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.15;letter-spacing:-.01em}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.16;letter-spacing:-.012em}
 h1{font-size:clamp(1.95rem,3.9vw,3.1rem);text-wrap:balance}
 h2{font-size:clamp(1.6rem,3.2vw,2.5rem)}
 h3{font-size:1.15rem}
