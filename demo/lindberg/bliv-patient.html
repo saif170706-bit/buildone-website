@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Bliv patient online | TandlægeTeam Lindberg</title>
+<meta name="description" content="Opret dig som patient hos TandlægeTeam Lindberg i Lyngby. Udfyld formularen online — så er du klar til din første tid.">
+<link rel="stylesheet" href="style.css?v=28">
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo" aria-label="TandlægeTeam Lindberg — forside"><img src="img/logo.svg" alt="TandlægeTeam Lindberg" width="227" height="48"></a>
+    <nav class="menu" id="menu">
+      <a href="index.html#behandlinger">Behandlinger</a>
+      <a href="tandlaegeskraek.html">Tandlægeskræk</a>
+      <a href="akut.html">Akut tandpine</a>
+      <a href="index.html#priser">Priser</a>
+      <a href="index.html#klinikken">Om klinikken</a>
+      <a href="index.html#kontakt">Kontakt</a>
+    </nav>
+    <button class="burger" id="burger" aria-expanded="false" aria-label="Menu" aria-controls="menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <div class="nav-right">
+      <a class="tel" href="tel:+4545879935">45 87 99 35</a>
+      <button class="btn btn-cta" onclick="openBooking()">Book tid</button>
+    </div>
+  </div>
+</header>
+
+<div class="pagehero arc-b">
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">Forside</a> / Bliv patient</div>
+    <h1>Bliv patient hos os</h1>
+    <p>Udfyld formularen herunder, så er du oprettet i klinikken og klar til at booke din
+      første tid. Det tager et par minutter, og du kan gøre det når som helst.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <form class="formcard" id="patientform" novalidate autocomplete="on">
+      <div class="progress" aria-hidden="true">
+        <div class="on" id="p1"></div><div id="p2"></div><div id="p3"></div>
+      </div>
+
+      <!-- 1: navn og adresse -->
+      <div class="fstep on" id="fs1">
+        <h3>Navn og adresse</h3>
+        <p class="hint">Trin 1 af 3 — vi bruger adressen til din journal og til at sende dig indkaldelser.</p>
+
+        <div class="frow two">
+          <div class="field">
+            <label for="fornavn">Fornavn <span class="req">*</span></label>
+            <input id="fornavn" name="fornavn" autocomplete="given-name">
+            <span class="err">Skriv dit fornavn.</span>
+          </div>
+          <div class="field">
+            <label for="efternavn">Efternavn <span class="req">*</span></label>
+            <input id="efternavn" name="efternavn" autocomplete="family-name">
+            <span class="err">Skriv dit efternavn.</span>
+          </div>
+        </div>
+
+        <div class="frow adr">
+          <div class="field">
+            <label for="vej">Vejnavn <span class="req">*</span></label>
+            <input id="vej" name="vej" autocomplete="address-line1">
+            <span class="err">Skriv vejnavnet.</span>
+          </div>
+          <div class="field">
+            <label for="husnr">Nummer <span class="req">*</span></label>
+            <input id="husnr" name="husnr">
+            <span class="err">Mangler.</span>
+          </div>
+          <div class="field">
+            <label for="etage">Etage</label>
+            <input id="etage" name="etage" placeholder="st.">
+          </div>
+          <div class="field">
+            <label for="doer">Dør</label>
+            <input id="doer" name="doer" placeholder="th.">
+          </div>
+        </div>
+
+        <div class="frow two">
+          <div class="field">
+            <label for="postnr">Postnummer <span class="req">*</span></label>
+            <input id="postnr" name="postnr" inputmode="numeric" maxlength="4" autocomplete="postal-code">
+            <span class="err">Fire cifre, fx 2800.</span>
+          </div>
+          <div class="field">
+            <label for="by">By <span class="req">*</span></label>
+            <input id="by" name="by" autocomplete="address-level2">
+            <span class="err">Skriv byen.</span>
+          </div>
+        </div>
+
+        <div class="stepnav">
+          <a class="btn btn-ghost" href="index.html#ny-patient">Fortryd</a>
+          <button type="button" class="btn btn-cta" onclick="fgo(2)">Fortsæt</button>
+        </div>
+      </div>
+
+      <!-- 2: kontakt og cpr -->
+      <div class="fstep" id="fs2">
+        <h3>Kontakt og personnummer</h3>
+        <p class="hint">Trin 2 af 3 — vi skriver eller ringer kun om dine egne tider.</p>
+
+        <div class="frow two">
+          <div class="field">
+            <label for="mobil">Mobilnummer <span class="req">*</span></label>
+            <input id="mobil" name="mobil" type="tel" inputmode="tel" autocomplete="tel">
+            <span class="note">Vi sender en påmindelse på sms dagen før din tid.</span>
+            <span class="err">Skriv et dansk mobilnummer på otte cifre.</span>
+          </div>
+          <div class="field">
+            <label for="mail">E-mail <span class="req">*</span></label>
+            <input id="mail" name="mail" type="email" autocomplete="email">
+            <span class="err">Skriv en gyldig e-mailadresse.</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="cpr">CPR-nummer <span class="req">*</span></label>
+          <input id="cpr" name="cpr" inputmode="numeric" maxlength="11" placeholder="ddmmåå-xxxx" autocomplete="off">
+          <span class="note">Vi skal bruge det for at kunne afregne tilskuddet fra den offentlige
+            sygesikring. Det bliver gemt i klinikkens journalsystem og deles ikke med andre.</span>
+          <span class="err">Skriv ti cifre, fx 010190-1234.</span>
+        </div>
+
+        <div class="field">
+          <label for="tidligere">Hvor gik du til tandlæge før? (valgfrit)</label>
+          <input id="tidligere" name="tidligere" placeholder="Klinikkens navn og by">
+          <span class="note">Så kan vi bede om din journal, og du slipper for nye røntgenbilleder.</span>
+        </div>
+
+        <div class="stepnav">
+          <button type="button" class="btn btn-ghost" onclick="fgo(1)">Tilbage</button>
+          <button type="button" class="btn btn-cta" onclick="fgo(3)">Fortsæt</button>
+        </div>
+      </div>
+
+      <!-- 3: tilskud og behandler -->
+      <div class="fstep" id="fs3">
+        <h3>Tilskud og ønsker</h3>
+        <p class="hint">Trin 3 af 3 — sidste del, og det meste af den er valgfrit.</p>
+
+        <div class="frow two">
+          <div class="field">
+            <label for="gruppe">Sygeforsikringen &quot;danmark&quot;</label>
+            <select id="gruppe" name="gruppe">
+              <option value="nej">Jeg er ikke medlem</option>
+              <option value="1">Gruppe 1</option>
+              <option value="2">Gruppe 2</option>
+              <option value="5">Gruppe 5</option>
+              <option value="8">Gruppe 8</option>
+              <option value="ved-ikke">Jeg er medlem, men ved ikke hvilken gruppe</option>
+            </select>
+            <span class="note">Er du medlem, trækkes tilskuddet automatisk fra din regning.</span>
+          </div>
+          <div class="field">
+            <label for="behandler">Ønsker du en bestemt behandler?</label>
+            <select id="behandler" name="behandler">
+              <option value="nej">Nej — den der har tid først</option>
+              <option value="sofie">Sofie Lindberg</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="besked">Er der noget vi skal vide? (valgfrit)</label>
+          <textarea id="besked" name="besked" rows="3"
+            placeholder="Fx at du er nervøs, hvornår du sidst var til tandlæge, eller om du tager fast medicin."></textarea>
+        </div>
+
+        <label class="consent" id="consentwrap">
+          <input type="checkbox" id="samtykke">
+          <span>Jeg giver samtykke til, at klinikken må oprette en journal på mig og kontakte mig
+            om mine tider. <span class="req">*</span></span>
+        </label>
+
+        <div class="stepnav">
+          <button type="button" class="btn btn-ghost" onclick="fgo(2)">Tilbage</button>
+          <button type="submit" class="btn btn-cta">Opret mig som patient</button>
+        </div>
+      </div>
+
+      <!-- 4: kvittering -->
+      <div class="fstep" id="fs4">
+        <div class="done">
+          <div class="tick">✓</div>
+          <h3 style="color:var(--ink)">Velkommen — du er oprettet</h3>
+          <p class="recap" id="fkvit" style="margin-top:8px"></p>
+          <p style="color:var(--mid);font-size:.92rem">Du hører fra os inden for én hverdag.
+            Vil du allerede nu vælge en tid, kan du booke den herunder.</p>
+          <div class="demo-tag">
+            <strong>Dette er en demo.</strong> Der er ikke sendt noget, og intet er gemt — heller
+            ikke CPR-nummeret. I den færdige løsning sendes oplysningerne krypteret direkte ind i
+            klinikkens journalsystem.
+          </div>
+          <div style="margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+            <button type="button" class="btn btn-cta" onclick="openBooking()">Book din første tid</button>
+            <a class="btn btn-ghost" href="index.html">Tilbage til forsiden</a>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <p class="note" style="max-width:760px;margin-top:18px">Er du under 22 år, skal du først meldes
+      ud af den kommunale børnetandpleje. Ring til os på
+      <a href="tel:+4545879935" style="color:var(--brand);font-weight:600">45 87 99 35</a>, så
+      hjælper vi med det.</p>
+  </div>
+</section>
+
+<section class="band arc-t">
+  <div class="wrap" style="text-align:center">
+    <h2>Hellere ringe?</h2>
+    <p style="max-width:32em;margin:14px auto 0">Du kan også blive oprettet over telefonen.
+      Vi har åbent fra klokken 8 på hverdage.</p>
+    <div style="margin-top:28px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a class="btn btn-cta" href="tel:+4545879935">Ring 45 87 99 35</a>
+      <a class="btn btn-ghost" href="index.html#kontakt">Se åbningstider</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <img class="logo-footer" src="img/logo.svg" alt="TandlægeTeam Lindberg" width="227" height="48">
+        <p style="margin-top:14px">Lundtofteparken 83, st. th.<br>2800 Kgs. Lyngby</p>
+        <p style="margin-top:10px"><a href="tel:+4545879935">45 87 99 35</a><br><a href="mailto:hej@sofielindberg.dk">hej@sofielindberg.dk</a></p>
+      </div>
+      <div>
+        <h4>Genveje</h4>
+        <p><a href="index.html#behandlinger">Behandlinger</a><br>
+           <a href="index.html#priser">Priser</a><br>
+           <a href="tandlaegeskraek.html">Tandlægeskræk</a><br>
+           <a href="akut.html">Akut tandpine</a><br>
+           <a href="bliv-patient.html">Bliv patient</a></p>
+      </div>
+      <div>
+        <h4>Book tid</h4>
+        <p>Online hele døgnet, eller ring i åbningstiden.</p>
+        <button class="btn btn-cta" style="margin-top:14px" onclick="openBooking()">Book tid</button>
+      </div>
+    </div>
+    <div class="disclaimer">
+      <span>Forslag til ny hjemmeside, udarbejdet af BuildOne. Ikke klinikkens officielle side.</span>
+      <span>buildone.dk</span>
+    </div>
+  </div>
+</footer>
+
+<div class="dock">
+  <button onclick="openBooking()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 11h18"/></svg>
+    Book tid</button>
+  <a href="tel:+4545879935">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+    Ring til os</a>
+  <a data-maps target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Tandl%C3%A6geTeam%20Lindberg%2C%20Lundtofteparken%2083%2C%202800%20Kgs.%20Lyngby">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Find vej</a>
+</div>
+
+<script src="app.js?v=28"></script>
+<script src="patient.js?v=28"></script>
+</body>
+</html>
