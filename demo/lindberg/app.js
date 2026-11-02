@@ -280,17 +280,13 @@ document.querySelectorAll("[data-maps]").forEach(function (el) {
   el.rel = "noopener";
 });
 
-/* Kort eller satellit. Begge lag ligger allerede i siden; der skiftes kun
-   hvilket der er synligt, saa skiftet sker uden ventetid. */
+/* Kort eller satellit. t=m er vejkortet, t=k er luftfotoet. */
 function visKort(hvilket) {
   var sat = hvilket === "sat";
-  document.getElementById("lagKort").hidden = sat;
-  document.getElementById("lagSat").hidden = !sat;
+  var ramme = document.getElementById("gmap");
+  ramme.src = ramme.src.replace(/&t=[mk]/, "&t=" + (sat ? "k" : "m"));
   document.getElementById("knapKort").classList.toggle("on", !sat);
   document.getElementById("knapSat").classList.toggle("on", sat);
   document.getElementById("knapKort").setAttribute("aria-pressed", String(!sat));
   document.getElementById("knapSat").setAttribute("aria-pressed", String(sat));
-  document.getElementById("mapkredit").textContent = sat
-    ? "Luftfoto: Esri, Maxar, Earthstar Geographics"
-    : "Kort: Esri, HERE, Garmin, © OpenStreetMap";
 }
