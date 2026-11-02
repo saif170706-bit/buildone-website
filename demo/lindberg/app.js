@@ -29,7 +29,7 @@ const MODAL_HTML = `<div class="modal" id="modal" role="dialog" aria-modal="true
         </div>
         <div>
           <h4 id="slotHead">Ledige tider</h4>
-          <div class="slots" id="slots"><p class="empty">Vælg en dag til venstre.</p></div>
+          <div class="slots" id="slots"><p class="empty">Vælg først en dag i kalenderen.</p></div>
         </div>
       </div>
       <div class="stepnav">
@@ -170,7 +170,7 @@ function pickTreat(i){
   state.treat = TREATMENTS[state.patient][i];
   state.date = null; state.time = null;
   document.getElementById("toStep3").disabled = true;
-  document.getElementById("slots").innerHTML = '<p class="empty">Vælg en dag til venstre.</p>';
+  document.getElementById("slots").innerHTML = '<p class="empty">Vælg først en dag i kalenderen.</p>';
   buildCalendar(); goStep(2);
 }
 
@@ -250,7 +250,7 @@ document.getElementById("menu")?.addEventListener("click", e => {
     ([e]) => head.classList.toggle("solid", !e.isIntersecting),
     { rootMargin: "-72px 0px 0px 0px", threshold: 0 }
   );
-  io.observe(hero);
+  io.observe(hero.querySelector(".heroguard") || hero);
 })();
 
 /* ─────────── kortlinks ───────────

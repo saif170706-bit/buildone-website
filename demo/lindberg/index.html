@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Tandlæge i Lyngby | TandlægeTeam Lindberg</title>
 <meta name="description" content="Tandlægeklinik i Lyngby med mere end 20 års erfaring. Book tid online, også aften og weekend. Særlig erfaring med tandlægeskræk.">
-<link rel="stylesheet" href="style.css?v=38">
+<link rel="stylesheet" href="style.css?v=44">
 </head>
 <body class="has-hero">
 
@@ -31,6 +31,7 @@
 </header>
 
 <div class="hero">
+  <div class="heroguard" aria-hidden="true"></div>
   <div class="hero-bg">
     <img src="img/klinik.webp" alt="Receptionen hos TandlægeTeam Lindberg i Lyngby" width="1360" height="765" fetchpriority="high">
   </div>
@@ -42,7 +43,7 @@
         der er utrygge ved at gå til tandlæge.</p>
       <div class="hero-actions">
         <button class="btn btn-cta" onclick="openBooking()">Book tid online</button>
-        <a class="btn btn-ghost" href="tandlaegeskraek.html">Er du nervøs? Læs her</a>
+        <a class="btn btn-ghost" href="tandlaegeskraek.html">Er du nervøs?<span class="hide-xs"> Læs her</span></a>
       </div>
     </div>
     <div class="hero-card">
@@ -111,7 +112,7 @@
         <li>Vi fortæller hvad der sker, før det sker</li>
         <li>Du får en samlet plan og en pris, før vi går i gang</li>
       </ul>
-      <div style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap">
+      <div class="btnrow">
         <a class="btn btn-cta" href="tandlaegeskraek.html">Læs hvordan vi gør</a>
         <button class="btn btn-ghost" onclick="openBooking()">Book en snak</button>
       </div>
@@ -215,7 +216,7 @@
       </ol>
       <p style="font-size:.9rem;margin-top:24px">Er du under 22, skal du først meldes ud af den kommunale
         børnetandpleje. Ring til os, så hjælper vi med det.</p>
-      <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+      <div class="btnrow">
         <a class="btn btn-cta" href="bliv-patient.html">Bliv patient online</a>
         <button class="btn btn-ghost" onclick="openBooking()">Book et eftersyn</button>
       </div>
@@ -239,16 +240,16 @@
           <tr><th>Behandling</th><th class="num">Pris</th><th class="num">"danmark" gr. 1+2</th><th class="num">"danmark" gr. 5</th></tr>
         </thead>
         <tbody>
-          <tr><td>Flerfladet fyldning</td><td class="num">963 kr.</td><td class="num">280 kr.</td><td class="num">280 kr.</td></tr>
-          <tr><td>Plastfyldning</td><td class="num">1.099–1.500 kr.</td><td class="num">280 kr.</td><td class="num">280 kr.</td></tr>
-          <tr><td>Rodbehandling</td><td class="num">1.359–1.500 kr.</td><td class="num">185 kr.</td><td class="num">185 kr.</td></tr>
-          <tr><td>Rodbehandling, 3 kanaler</td><td class="num">2.009–2.233 kr.</td><td class="num">555 kr.</td><td class="num">555 kr.</td></tr>
-          <tr><td>Porcelænskrone</td><td class="num">6.250–7.250 kr.</td><td class="num">1.200 kr.<br><small>over 5 år: 1.650 kr.</small></td><td class="num">280 kr.<br><small>over 5 år: 420 kr.</small></td></tr>
-          <tr><td>Bro med 3 led</td><td class="num">18.750–21.750 kr.</td><td class="num">3.600 kr.<br><small>over 5 år: 5.400 kr.</small></td><td class="num">—</td></tr>
-          <tr><td>Implantat m. metalkrone med påbrændt porcelæn</td><td class="num">18.100 kr.</td><td class="num">3.400 kr.<br><small>over 5 år: 5.100 kr.</small></td><td class="num">840 kr.<br><small>over 5 år: 1.260 kr.</small></td></tr>
-          <tr><td>Operativ fjernelse af tand</td><td class="num">1.776 kr.</td><td class="num">400 kr.</td><td class="num">400 kr.</td></tr>
-          <tr><td>Lokalbedøvelse</td><td class="num">345 kr.</td><td class="num">75 kr.</td><td class="num">75 kr.</td></tr>
-          <tr><td>Blegning, begge kæber</td><td class="num">3.640 kr.</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr><td>Flerfladet fyldning</td><td data-k="Pris" class="num">963 kr.</td><td data-k="&quot;danmark&quot; gr. 1+2" class="num">280 kr.</td><td data-k="&quot;danmark&quot; gr. 5" class="num">280 kr.</td></tr>
+          <tr><td>Plastfyldning</td><td data-k="Pris" class="num">1.099–1.500 kr.</td><td data-k="&quot;danmark&quot; gr. 1+2" class="num">280 kr.</td><td data-k="&quot;danmark&quot; gr. 5" class="num">280 kr.</td></tr>
+          <tr><td>Rodbehandling</td><td data-k="Pris" class="num">1.359–1.500 kr.</td><td data-k="&quot;danmark&quot; gr. 1+2" class="num">185 kr.</td><td data-k="&quot;danmark&quot; gr. 5" class="num">185 kr.</td></tr>
+          <tr><td>Rodbehandling, 3 kanaler</td><td data-k="Pris" class="num">2.009–2.233 kr.</td><td data-k="&quot;danmark&quot; gr. 1+2" class="num">555 kr.</td><td data-k="&quot;danmark&quot; gr. 5" class="num">555 kr.</td></tr>
+          <tr><td>Porcelænskrone</td><td data-k="Pris" class="num">6.250–7.250 kr.</td><td data-k="&quot;danmark&quot; gr. 1+2" class="num">1.200 kr.<br><small>over 5 år: 1.650 kr.</small></td><td data-k="&quot;danmark&quot; gr. 5" class="num">280 kr.<br><small>over 5 år: 420 kr.</small></td></tr>
+          <tr><td>Bro med 3 led</td><td data-k="Pris" class="num">18.750–21.750 kr.</td><td data-k="&quot;danmark&quot; gr. 1+2" class="num">3.600 kr.<br><small>over 5 år: 5.400 kr.</small></td><td data-k="&quot;danmark&quot; gr. 5" class="num">—</td></tr>
+          <tr><td>Implantat m. metalkrone med påbrændt porcelæn</td><td data-k="Pris" class="num">18.100 kr.</td><td data-k="&quot;danmark&quot; gr. 1+2" class="num">3.400 kr.<br><small>over 5 år: 5.100 kr.</small></td><td data-k="&quot;danmark&quot; gr. 5" class="num">840 kr.<br><small>over 5 år: 1.260 kr.</small></td></tr>
+          <tr><td>Operativ fjernelse af tand</td><td data-k="Pris" class="num">1.776 kr.</td><td data-k="&quot;danmark&quot; gr. 1+2" class="num">400 kr.</td><td data-k="&quot;danmark&quot; gr. 5" class="num">400 kr.</td></tr>
+          <tr><td>Lokalbedøvelse</td><td data-k="Pris" class="num">345 kr.</td><td data-k="&quot;danmark&quot; gr. 1+2" class="num">75 kr.</td><td data-k="&quot;danmark&quot; gr. 5" class="num">75 kr.</td></tr>
+          <tr><td>Blegning, begge kæber</td><td data-k="Pris" class="num">3.640 kr.</td><td data-k="&quot;danmark&quot; gr. 1+2" class="num">—</td><td data-k="&quot;danmark&quot; gr. 5" class="num">—</td></tr>
         </tbody>
       </table>
     </div>
@@ -347,6 +348,6 @@
 </div>
 
 <!-- ─────────── booking ─────────── -->
-<script src="app.js?v=38"></script>
+<script src="app.js?v=44"></script>
 </body>
 </html>

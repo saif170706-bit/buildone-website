@@ -36,7 +36,10 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--sans);font-size:1rem;background:var(--bg);color:var(--ink);line-height:1.62;-webkit-font-smoothing:antialiased}
-img{display:block;max-width:100%}
+/* height:auto er noedvendig: et height-attribut i HTML taeller som en
+   hoejde og slaar ellers aspect-ratio ud, saa billederne blev staaende i
+   deres fulde naturlige hoejde paa smalle skaerme. */
+img{display:block;max-width:100%;height:auto}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
 h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.2;letter-spacing:-.018em}
@@ -63,6 +66,21 @@ h3{font-size:1.08rem;font-weight:700;letter-spacing:-.01em;line-height:1.35}
 .hero .btn-cta,.band .btn-cta,.pagehero .btn-cta,.akuthero .btn-cta{background:#fff;color:var(--brand-deep)}
 .hero .btn-cta:hover,.band .btn-cta:hover,.pagehero .btn-cta:hover,.akuthero .btn-cta:hover{background:#dbeaf6}
 
+/* Raekker af knapper. Paa smalle skaerme deler de bredden i stedet for at
+   stable sig — to halve knapper laeses som ét valg, to stablede ser ud
+   som to adskilte afsnit. */
+.btnrow{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btnrow.midt{justify-content:center}
+/* Knap plus aabningsstatus er ikke to knapper: knappen beholder sin bredde,
+   og statussen falder ned under den, naar der ikke er plads. */
+.callrow{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+@media(max-width:560px){
+  .btnrow,.hero-actions{flex-wrap:nowrap;align-items:stretch}
+  .hide-xs{display:none}
+  .btnrow>.btn,.hero-actions>.btn{flex:1 1 0;justify-content:center;
+    padding:.85em .7em;font-size:.86rem;text-align:center}
+}
+
 /* header */
 header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.74);backdrop-filter:blur(16px);
   border-bottom:1px solid var(--line);transition:background .25s,border-color .25s}
@@ -73,13 +91,11 @@ body.has-hero header{position:fixed;left:0;right:0;background:transparent;backdr
 body.has-hero header .menu a,body.has-hero header .tel{color:#fff}
 body.has-hero header .menu a:hover{color:#bfe0f6}
 body.has-hero header .logo img{filter:brightness(0) invert(1)}
-body.has-hero header .burger{border-color:rgba(255,255,255,.45)}
 body.has-hero header .burger span{background:#fff}
 body.has-hero header.solid{position:fixed;background:rgba(255,255,255,.74);backdrop-filter:blur(16px);border-color:var(--line)}
 body.has-hero header.solid .menu a,body.has-hero header.solid .tel{color:var(--ink)}
 body.has-hero header.solid .menu a:hover{color:var(--brand)}
 body.has-hero header.solid .logo img{filter:none}
-body.has-hero header.solid .burger{border-color:var(--line)}
 body.has-hero header.solid .burger span{background:var(--ink)}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 0}
 .logo{display:block;flex:0 0 auto}
@@ -92,13 +108,18 @@ body.has-hero header.solid .burger span{background:var(--ink)}
 .menu a:hover{color:var(--brand)}
 .nav-right{display:flex;align-items:center;gap:14px}
 .tel{font-weight:600;font-size:.92rem;white-space:nowrap}
-.burger{display:none;background:none;border:1.5px solid var(--line);border-radius:10px;
-  width:42px;height:42px;cursor:pointer;flex-direction:column;gap:4px;align-items:center;justify-content:center}
-.burger span{display:block;width:18px;height:2px;background:var(--ink);border-radius:2px;transition:.2s}
+/* Ingen ramme om menuknappen. Logo, knap-i-kasse og en blaa pilleknap ved
+   siden af hinanden var tre tunge elementer paa en telefonbredde. */
+.burger{display:none;background:none;border:0;padding:0;
+  width:38px;height:38px;cursor:pointer;flex-direction:column;gap:5px;align-items:center;justify-content:center}
+.burger span{display:block;width:21px;height:2px;background:var(--ink);border-radius:2px;transition:.2s}
 .burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
 .burger[aria-expanded="true"] span:nth-child(2){opacity:0}
 .burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
 @media(max-width:900px){
+  .nav{gap:14px;padding:12px 0}
+  .nav-right{gap:10px}
+  .nav-right .btn{padding:.7em 1.15em;font-size:.88rem}
   .menu{position:fixed;inset:64px 0 auto;background:var(--bg);border-bottom:1px solid var(--line);
     flex-direction:column;gap:0;padding:8px 24px 20px;display:none}
   .menu.open{display:flex}
@@ -124,6 +145,10 @@ body.has-hero header.solid .burger span{background:var(--ink)}
    En transform loefter billedet op i sit eget lag, og naar et saadant lag
    klippes af en afrundet kant, bliver buen forneden takket. */
 .hero-bg{position:absolute;inset:-5%;z-index:-2}
+/* Maalepunkt for, hvornaar menuen skal have sin egen flade. Heroen er hoej
+   paa en telefon, saa hvis vi venter paa hele heroen, scroller indholdet
+   laenge under en gennemsigtig menu. */
+.heroguard{position:absolute;top:42%;left:0;width:1px;height:1px}
 .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:72% 42%}
 /* To lag: en vandret gradient der goer venstre side laeselig, og en dyb
    blaa tone der binder billedet sammen med logoets farve. */
@@ -261,6 +286,25 @@ tbody tr:nth-child(even){background:#f4f8fc}
 th.num,td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 tr:last-child td{border-bottom:0}
 .tablewrap{overflow-x:auto}
+/* Paa en telefon kan fire priskolonner ikke staa ved siden af hinanden.
+   I stedet bliver hver raekke til et lille kort, hvor kolonnenavnet staar
+   foran tallet. Saa kan alle fire tal laeses uden at trække i noget. */
+@media(max-width:620px){
+  table,tbody,tr,td{display:block;width:100%}
+  table{border:0;background:none;box-shadow:none;font-size:.9rem}
+  thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  tbody tr{background:var(--card);border:1px solid var(--line);border-radius:var(--card-radius);
+    box-shadow:var(--shadow);padding:16px 18px;margin-bottom:12px}
+  tbody tr:nth-child(even){background:var(--card)}
+  td{border:0;padding:0}
+  td:first-child{font-weight:700;font-size:.98rem;margin-bottom:10px}
+  td[data-k]{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+    padding:7px 0;border-top:1px solid var(--line);text-align:right}
+  td[data-k]::before{content:attr(data-k);color:var(--mid);font-weight:600;font-size:.82rem;
+    text-align:left;flex:0 0 auto}
+  td.num{white-space:normal}
+  td small{display:block;color:var(--mid)}
+}
 .note{font-size:.85rem;color:var(--mid);margin-top:14px}
 
 /* nummererede trin — samme markoer som eyebrow'en, bare som tal */
@@ -369,7 +413,12 @@ footer a:hover{color:#fff}
 .dock >*:last-child{border-right:0}
 .dock svg{width:17px;height:17px}
 .dock a:hover,.dock button:hover{background:rgba(255,255,255,.12)}
-@media(max-width:600px){.dock{left:12px;right:12px;bottom:12px;border-radius:10px}.dock a,.dock button{flex:1}}
+@media(max-width:600px){
+  .dock{left:12px;right:12px;bottom:12px;border-radius:10px}
+  .dock a,.dock button{flex:1}
+  /* Bjaelken svaever over indholdet — giv sidste afsnit plads under sig */
+  footer .disclaimer{padding-bottom:96px}
+}
 
 /* booking */
 .modal{position:fixed;inset:0;z-index:100;background:rgba(10,59,94,.58);display:none;
