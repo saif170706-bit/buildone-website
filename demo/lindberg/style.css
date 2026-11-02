@@ -445,37 +445,88 @@ footer a:hover{color:#fff}
   footer .disclaimer{padding-bottom:96px}
 }
 
-/* samtykke — boksen holder faktisk kortet tilbage, den er ikke pynt */
-.samtykke{position:fixed;z-index:80;left:16px;right:16px;bottom:16px;display:flex;justify-content:flex-start;
-  animation:samtykkeind .28s ease-out both}
-@keyframes samtykkeind{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.samtykke-kort{background:rgba(255,255,255,.97);backdrop-filter:blur(14px);
-  border:1px solid var(--line);border-radius:var(--card-radius);
-  box-shadow:0 20px 50px -20px rgba(10,59,94,.55),0 2px 6px rgba(10,59,94,.1);
-  padding:24px 26px;max-width:460px;width:100%}
-.samtykke-kort h2{font-size:1.1rem;margin-bottom:8px}
-.samtykke-kort>p{color:var(--mid);font-size:.9rem;line-height:1.6}
-.samtykke-valg{display:grid;gap:14px;margin:18px 0 4px;padding-top:16px;
-  border-top:1px solid var(--line)}
-/* display:grid ville ellers tilsidesaette hidden, saa panelet stod aabent */
-.samtykke-valg[hidden]{display:none}
-.samtykke-linje{display:grid;grid-template-columns:20px 1fr;gap:12px;align-items:start;
-  font-size:.85rem;color:var(--mid);line-height:1.5;cursor:pointer}
-.samtykke-linje.tom{opacity:.65;cursor:default}
-.samtykke-linje input{width:18px;height:18px;margin-top:2px;accent-color:var(--brand)}
-.samtykke-linje strong{color:var(--ink)}
-.samtykke-knapper{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px}
-.samtykke-knapper .btn{flex:1 1 auto;justify-content:center;font-size:.9rem;padding:.75em 1.1em}
-.samtykke-link{background:none;border:0;padding:.75em .4em;font-family:var(--sans);
-  font-size:.86rem;font-weight:600;color:var(--brand);cursor:pointer;text-decoration:underline}
-.samtykke-fod{font-size:.78rem;color:var(--mid);margin-top:12px}
-/* Bjaelken skal ikke ligge oven paa boksen */
-body.har-samtykke-banner .dock{bottom:calc(16px + 1px)}
-@media(max-width:600px){
-  .samtykke{left:10px;right:10px;bottom:10px}
-  .samtykke-kort{padding:20px}
-  .samtykke-knapper .btn{flex:1 1 100%}
-  body.har-samtykke-banner .dock{display:none}
+/* samtykke — samme opbygning som de kendte loesninger: faner, en kontakt
+   pr. kategori og tre knapper. Tallene er aegte: siden har ingen
+   statistik og ingen annoncesporing. */
+.ck{position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;
+  padding:20px;background:rgba(8,38,62,.5);backdrop-filter:blur(3px);
+  animation:ckind .25s ease-out both}
+@keyframes ckind{from{opacity:0}to{opacity:1}}
+body.ck-aaben{overflow:hidden}
+.ck-kort{background:var(--card);border-radius:var(--card-radius);width:100%;max-width:720px;
+  max-height:86vh;display:flex;flex-direction:column;overflow:hidden;
+  box-shadow:0 30px 70px -26px rgba(8,38,62,.7)}
+.ck-top{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:18px 26px;border-bottom:1px solid var(--line)}
+.ck-top img{height:34px;width:auto}
+.ck-maerke{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--mid)}
+.ck-faner{display:flex;border-bottom:1px solid var(--line)}
+.ck-faner button{flex:1;background:none;border:0;border-bottom:2px solid transparent;
+  padding:14px 8px;font-family:var(--sans);font-size:.92rem;font-weight:600;color:var(--mid);
+  cursor:pointer;margin-bottom:-1px}
+.ck-faner button:hover{color:var(--ink)}
+.ck-faner button.valgt{color:var(--brand);border-bottom-color:var(--brand)}
+.ck-krop{padding:24px 26px;overflow-y:auto}
+.ck-krop h2{font-size:1.12rem;margin-bottom:10px}
+.ck-krop p{color:var(--mid);font-size:.92rem;line-height:1.62}
+.ck-krop p+p{margin-top:10px}
+
+/* kategorier med kontakt */
+.kat-raekke{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:22px;
+  border:1px solid var(--line);border-radius:var(--card-radius);overflow:hidden}
+@media(max-width:620px){.kat-raekke{grid-template-columns:1fr 1fr}}
+.kat{display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px 10px;
+  cursor:pointer;border-right:1px solid var(--line);position:relative}
+.kat:last-child{border-right:0}
+@media(max-width:620px){
+  .kat:nth-child(2n){border-right:0}
+  .kat:nth-child(-n+2){border-bottom:1px solid var(--line)}
+}
+.kat.laast{cursor:default}
+.kat-navn{font-size:.86rem;font-weight:700;color:var(--ink);text-align:center}
+.kat-tal{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 6px;
+  border-radius:10px;background:var(--brand-soft);color:var(--brand);
+  font-size:.72rem;font-weight:700;vertical-align:middle}
+/* Selve kontakten: afkrydsningsfeltet er skjult, og .kat-skift tegner den */
+.kat-boks{position:absolute;opacity:0;width:0;height:0}
+.kat-skift{width:46px;height:26px;border-radius:13px;background:#c7d3dd;position:relative;
+  transition:background .18s}
+.kat-skift::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;
+  border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(8,38,62,.35);
+  transition:transform .18s}
+.kat-boks:checked+.kat-skift{background:var(--brand)}
+.kat-boks:checked+.kat-skift::after{transform:translateX(20px)}
+.kat-boks:disabled+.kat-skift{background:var(--brand);opacity:.45}
+.kat-boks:focus-visible+.kat-skift{outline:2px solid var(--brand);outline-offset:3px}
+
+/* detaljer */
+.detalje{border-bottom:1px solid var(--line)}
+.detalje:last-child{border-bottom:0}
+.detalje-top{width:100%;background:none;border:0;display:flex;align-items:center;gap:12px;
+  padding:16px 2px;font-family:var(--sans);font-size:.95rem;font-weight:700;color:var(--ink);
+  cursor:pointer;text-align:left}
+.detalje-pil{display:inline-block;transition:transform .18s;color:var(--mid);font-size:1.1rem}
+.detalje-top.aaben .detalje-pil{transform:rotate(90deg)}
+.detalje-krop{padding:0 2px 18px}
+.post{margin-top:12px;border-top:1px solid var(--line);padding-top:12px}
+.post dt{font-weight:700;font-size:.88rem;color:var(--ink);margin-top:10px}
+.post dt:first-child{margin-top:0}
+.post dd{margin:4px 0 0;color:var(--mid);font-size:.88rem;line-height:1.55}
+.post-tom{margin-top:10px;font-style:italic}
+
+.ck-id{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:.85rem}
+.ck-id code{background:var(--brand-soft);color:var(--brand-deep);padding:2px 7px;
+  border-radius:4px;font-size:.84rem}
+
+.ck-knapper{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:18px 26px;
+  border-top:1px solid var(--line);background:var(--bg)}
+.ck-knapper .btn{justify-content:center;font-size:.9rem;padding:.8em .6em}
+@media(max-width:560px){
+  .ck{padding:10px}
+  .ck-kort{max-height:92vh}
+  .ck-top,.ck-krop,.ck-knapper{padding-left:18px;padding-right:18px}
+  .ck-knapper{grid-template-columns:1fr}
 }
 
 /* kortet venter paa samtykke */
