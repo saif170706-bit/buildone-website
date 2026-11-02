@@ -252,3 +252,30 @@ document.getElementById("menu")?.addEventListener("click", e => {
   );
   io.observe(hero);
 })();
+
+/* ─────────── kortlinks ───────────
+   Alle "find vej"-links peger paa klinikkens egen markering i stedet for
+   bare gadenummeret, saa man lander paa forretningen og ikke paa en
+   adresse uden navn. Paa iPhone, iPad og Mac aabnes Apple Kort, ellers
+   Google Maps. Uden JavaScript virker linket stadig — HTML'en har
+   Google-adressen som udgangspunkt. */
+var KLINIK_NAVN = "TandlægeTeam Lindberg";
+var KLINIK_ADR  = "Lundtofteparken 83, 2800 Kgs. Lyngby";
+var KLINIK_POS  = "55.7959,12.5292";
+
+function mapsUrl() {
+  var q = encodeURIComponent(KLINIK_NAVN + ", " + KLINIK_ADR);
+  var ua = navigator.userAgent || "";
+  // iPadOS melder sig som Mac, derfor ogsaa tjekket paa touch
+  var apple = /iPhone|iPad|iPod|Macintosh/.test(ua) ||
+              (/Mac/.test(ua) && navigator.maxTouchPoints > 1);
+  return apple
+    ? "https://maps.apple.com/?q=" + q + "&ll=" + KLINIK_POS
+    : "https://www.google.com/maps/search/?api=1&query=" + q;
+}
+
+document.querySelectorAll("[data-maps]").forEach(function (el) {
+  el.href = mapsUrl();
+  el.target = "_blank";
+  el.rel = "noopener";
+});
