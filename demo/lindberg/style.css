@@ -230,7 +230,8 @@ th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line)}
 th{background:var(--brand-deep);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
   color:#cfe3f3;font-weight:700;border-bottom:0}
 tbody tr:nth-child(even){background:#f4f8fc}
-td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+/* Kolonneoverskriften skal staa over tallene, ikke over den tomme venstrekant */
+th.num,td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 tr:last-child td{border-bottom:0}
 .tablewrap{overflow-x:auto}
 .note{font-size:.85rem;color:var(--mid);margin-top:14px}
