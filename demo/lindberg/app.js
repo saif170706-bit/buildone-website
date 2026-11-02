@@ -4,13 +4,13 @@ const MODAL_HTML = `<div class="modal" id="modal" role="dialog" aria-modal="true
     <div class="klinik">TandlægeTeam Lindberg · Lyngby</div>
     <h2>Book tid</h2>
     <div class="pills">
-      <button class="pill" id="pillNy" aria-pressed="true" onclick="setPatient('ny')">Ny patient</button>
-      <button class="pill" id="pillEks" aria-pressed="false" onclick="setPatient('eks')">Eksisterende patient</button>
+      <button class="pill" id="pillEks" aria-pressed="true" onclick="setPatient('eks')">Eksisterende patient</button>
+      <button class="pill" id="pillNy" aria-pressed="false" onclick="setPatient('ny')">Ny patient</button>
     </div>
 
     <!-- 1: behandling -->
     <div class="step on" id="step1">
-      <h3>Vælg behandling</h3>
+      <h3 id="head1">Vælg behandling</h3>
       <p class="recap" id="recap1">Hvad skal vi se på?</p>
       <div class="choices" id="choices"></div>
     </div>
@@ -144,7 +144,7 @@ const TREATMENTS = {
     {n:"Tandblegning",           d:"Begge kæber",                             p:"3.640 kr."}
   ]
 };
-let state = { patient:"ny", treat:null, date:null, time:null };
+let state = { patient:"eks", treat:null, date:null, time:null };
 document.body.insertAdjacentHTML("beforeend", MODAL_HTML);
 const modal = document.getElementById("modal");
 
@@ -160,6 +160,22 @@ function setPatient(p){
   renderChoices(); goStep(1);
 }
 function renderChoices(){
+  const head = document.getElementById("head1"), recap = document.getElementById("recap1");
+  // Nye patienter kan ikke booke foer de er oprettet i journalsystemet.
+  // At vise dem en prisliste, de ikke kan handle paa, er at love noget
+  // vi ikke kan holde — de sendes videre til oprettelsen i stedet.
+  if (state.patient === "ny") {
+    head.textContent = "Opret dig som patient først";
+    recap.textContent = "Du skal være oprettet i klinikken, før du kan booke en tid. Det tager et par minutter, og derefter kan du vælge tid med det samme.";
+    document.getElementById("choices").innerHTML =
+      `<a class="btn btn-cta" style="justify-content:center" href="bliv-patient.html">Opret mig som patient</a>
+       <p style="color:var(--mid);font-size:.88rem;margin-top:14px;text-align:center">
+         Er du allerede patient hos os? <button type="button" class="linkknap" onclick="setPatient('eks')">Vælg &quot;Eksisterende patient&quot;</button>.<br>
+         Har du akut tandpine, så ring på <a href="tel:+4545879935" style="color:var(--brand);font-weight:600">45 87 99 35</a>.</p>`;
+    return;
+  }
+  head.textContent = "Vælg behandling";
+  recap.textContent = "Hvad skal vi se på?";
   document.getElementById("choices").innerHTML = TREATMENTS[state.patient].map((t,i)=>
     `<button class="choice" onclick="pickTreat(${i})">
        <span><b>${t.n[0].toUpperCase()+t.n.slice(1)}</b><small>${t.d}</small></span><span class="kr">${t.p}</span></button>`).join("");
