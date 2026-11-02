@@ -120,8 +120,11 @@ body.has-hero header.solid .burger span{background:var(--ink)}
    hoejt oppe i stedet for at svaeve midt i et tomt felt. */
 .hero{position:relative;isolation:isolate;min-height:clamp(580px,84vh,800px);display:flex;align-items:stretch;
   padding:clamp(88px,11vh,124px) 0 clamp(40px,6vh,70px);overflow:hidden;background:var(--brand-deep)}
-.hero-bg{position:absolute;inset:0;z-index:-2}
-.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:72% 42%;transform:scale(1.1)}
+/* Billedet er 10 % stoerre end feltet via inset frem for transform:scale.
+   En transform loefter billedet op i sit eget lag, og naar et saadant lag
+   klippes af en afrundet kant, bliver buen forneden takket. */
+.hero-bg{position:absolute;inset:-5%;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:72% 42%}
 /* To lag: en vandret gradient der goer venstre side laeselig, og en dyb
    blaa tone der binder billedet sammen med logoets farve. */
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;
