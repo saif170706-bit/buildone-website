@@ -37,7 +37,11 @@
 /* Farven bag siden. Den ses, naar man traekker siden ud over kanten paa en
    telefon, og den er det, browseren toner sin egen kant efter. Dyb blaa
    passer baade til heroen foroven og footeren forneden. */
-html{scroll-behavior:smooth;background:var(--brand-deep);color-scheme:light}
+html{scroll-behavior:smooth;color-scheme:light}
+/* Safari paa iOS farver statuslinjen efter <body>'s baggrundsfarve — ikke
+   efter theme-color, og ikke efter det der faktisk tegnes. Derfor ligger
+   sidens egen lyse flade i .flade, mens body selv baerer den farve, vi vil
+   se oeverst paa skaermen. Body ses ellers aldrig. */
 body{font-family:var(--sans);font-size:1rem;background:var(--bg);color:var(--ink);line-height:1.62;-webkit-font-smoothing:antialiased}
 /* height:auto er noedvendig: et height-attribut i HTML taeller som en
    hoejde og slaar ellers aspect-ratio ud, saa billederne blev staaende i
@@ -83,6 +87,9 @@ h3{font-size:1.08rem;font-weight:700;letter-spacing:-.01em;line-height:1.35}
   .btnrow>.btn,.hero-actions>.btn{flex:1 1 0;justify-content:center;
     padding:.85em .7em;font-size:.86rem;text-align:center}
 }
+
+.flade{background:var(--bg)}
+body.has-hero{background:var(--brand-deep)}
 
 /* header */
 header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.74);backdrop-filter:blur(16px);

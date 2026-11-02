@@ -269,6 +269,9 @@ document.getElementById("menu")?.addEventListener("click", e => {
     ny.setAttribute("name", "theme-color");
     ny.setAttribute("content", farve);
     document.head.appendChild(ny);
+    // Det er denne linje, iOS faktisk retter sig efter. Body ligger bag
+    // .flade og ses ikke, saa farven paavirker kun skaermens kanter.
+    document.body.style.backgroundColor = farve;
   };
 
   const io = new IntersectionObserver(
