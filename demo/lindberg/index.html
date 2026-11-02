@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Tandlæge i Lyngby | TandlægeTeam Lindberg</title>
 <meta name="description" content="Tandlægeklinik i Lyngby med mere end 20 års erfaring. Book tid online, også aften og weekend. Særlig erfaring med tandlægeskræk.">
-<link rel="stylesheet" href="style.css?v=29">
+<link rel="stylesheet" href="style.css?v=31">
 </head>
 <body class="has-hero">
 
@@ -234,26 +234,41 @@
         <a class="btn btn-ghost" style="margin-top:22px" data-maps target="_blank" rel="noopener"
            href="https://www.google.com/maps/search/?api=1&amp;query=Tandl%C3%A6geTeam%20Lindberg%2C%20Lundtofteparken%2083%2C%202800%20Kgs.%20Lyngby">Åbn i Maps</a>
       </div>
-      <a class="mapcard" data-maps target="_blank" rel="noopener"
-       href="https://www.google.com/maps/search/?api=1&amp;query=Tandl%C3%A6geTeam%20Lindberg%2C%20Lundtofteparken%2083%2C%202800%20Kgs.%20Lyngby"
-       aria-label="Åbn TandlægeTeam Lindberg i Maps">
-      <div class="maptiles">
-      <img src="img/map/35047-20472.jpg" alt="" width="256" height="256" loading="lazy">
-      <img src="img/map/35048-20472.jpg" alt="" width="256" height="256" loading="lazy">
-      <img src="img/map/35049-20472.jpg" alt="" width="256" height="256" loading="lazy">
-      <img src="img/map/35047-20473.jpg" alt="" width="256" height="256" loading="lazy">
-      <img src="img/map/35048-20473.jpg" alt="" width="256" height="256" loading="lazy">
-      <img src="img/map/35049-20473.jpg" alt="" width="256" height="256" loading="lazy">
-      <img src="img/map/35047-20474.jpg" alt="" width="256" height="256" loading="lazy">
-      <img src="img/map/35048-20474.jpg" alt="" width="256" height="256" loading="lazy">
-      <img src="img/map/35049-20474.jpg" alt="" width="256" height="256" loading="lazy">
+      <div class="mapcard">
+      <div class="maptiles" id="lagKort">
+        <img src="img/map/35047-20472.jpg" alt="" width="256" height="256" loading="lazy">
+        <img src="img/map/35048-20472.jpg" alt="" width="256" height="256" loading="lazy">
+        <img src="img/map/35049-20472.jpg" alt="" width="256" height="256" loading="lazy">
+        <img src="img/map/35047-20473.jpg" alt="" width="256" height="256" loading="lazy">
+        <img src="img/map/35048-20473.jpg" alt="" width="256" height="256" loading="lazy">
+        <img src="img/map/35049-20473.jpg" alt="" width="256" height="256" loading="lazy">
+        <img src="img/map/35047-20474.jpg" alt="" width="256" height="256" loading="lazy">
+        <img src="img/map/35048-20474.jpg" alt="" width="256" height="256" loading="lazy">
+        <img src="img/map/35049-20474.jpg" alt="" width="256" height="256" loading="lazy">
       </div>
+      <div class="maptiles" id="lagSat" hidden>
+        <img src="img/map/sat-35047-20472.jpg" alt="" width="256" height="256" loading="lazy">
+        <img src="img/map/sat-35048-20472.jpg" alt="" width="256" height="256" loading="lazy">
+        <img src="img/map/sat-35049-20472.jpg" alt="" width="256" height="256" loading="lazy">
+        <img src="img/map/sat-35047-20473.jpg" alt="" width="256" height="256" loading="lazy">
+        <img src="img/map/sat-35048-20473.jpg" alt="" width="256" height="256" loading="lazy">
+        <img src="img/map/sat-35049-20473.jpg" alt="" width="256" height="256" loading="lazy">
+        <img src="img/map/sat-35047-20474.jpg" alt="" width="256" height="256" loading="lazy">
+        <img src="img/map/sat-35048-20474.jpg" alt="" width="256" height="256" loading="lazy">
+        <img src="img/map/sat-35049-20474.jpg" alt="" width="256" height="256" loading="lazy">
+      </div>
+      <a class="maplink" data-maps target="_blank" rel="noopener"
+         href="https://www.google.com/maps/search/?api=1&amp;query=Tandl%C3%A6geTeam%20Lindberg%2C%20Lundtofteparken%2083%2C%202800%20Kgs.%20Lyngby" aria-label="Åbn TandlægeTeam Lindberg i Maps"></a>
       <span class="mappin"><svg viewBox="0 0 24 24" fill="#15699f" stroke="#fff" stroke-width="1.4">
         <path d="M12 22s7.5-7.1 7.5-12.6A7.5 7.5 0 0 0 4.5 9.4C4.5 14.9 12 22 12 22z"/>
         <circle cx="12" cy="9.4" r="2.9" fill="#fff" stroke="none"/></svg></span>
+      <div class="maptoggle">
+        <button type="button" class="on" id="knapKort" onclick="visKort('kort')" aria-pressed="true">Kort</button>
+        <button type="button" id="knapSat" onclick="visKort('sat')" aria-pressed="false">Satellit</button>
+      </div>
       <span class="mapcta">Åbn i Maps →</span>
-      <span class="mapcredit">Kort: Esri, HERE, Garmin, © OpenStreetMap</span>
-    </a>
+      <span class="mapcredit" id="mapkredit">Kort: Esri, HERE, Garmin, © OpenStreetMap</span>
+    </div>
     </div>
   </div>
 </section>
@@ -300,6 +315,6 @@
 </div>
 
 <!-- ─────────── booking ─────────── -->
-<script src="app.js?v=29"></script>
+<script src="app.js?v=31"></script>
 </body>
 </html>

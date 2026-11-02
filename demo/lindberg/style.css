@@ -319,23 +319,37 @@ footer a:hover{color:#fff}
    stedet telefonens eget kortprogram, som alligevel er det man vil bruge
    til at finde vej. Fliserne ligger lokalt, saa der ikke sendes
    IP-adresser til en kortudbyder, foer den besoegende selv klikker. */
-.mapcard{position:relative;display:block;height:340px;border-radius:var(--card-radius);
+.mapcard{position:relative;height:340px;border-radius:var(--card-radius);
   overflow:hidden;box-shadow:var(--shadow);background:#eceff1;border:1px solid var(--line)}
+/* Hele kortfladen er linket; knapperne ovenpaa ligger hoejere og faar
+   derfor klikket foerst, saa man kan skifte lag uden at forlade siden. */
+.maplink{position:absolute;inset:0;z-index:2}
+.maptoggle{position:absolute;z-index:4;left:12px;top:12px;display:flex;
+  background:rgba(255,255,255,.94);border-radius:var(--radius);overflow:hidden;
+  box-shadow:0 2px 8px rgba(10,59,94,.22)}
+.maptoggle button{border:0;background:none;cursor:pointer;font-family:var(--sans);
+  font-size:.8rem;font-weight:600;color:var(--mid);padding:.55em 1.1em}
+.maptoggle button+button{border-left:1px solid var(--line)}
+.maptoggle button.on{color:var(--ink);background:#fff}
+.maptoggle button:hover{color:var(--brand)}
 .maptiles{position:absolute;top:50%;left:50%;margin-left:-479px;margin-top:-446px;
   display:grid;grid-template-columns:repeat(3,256px);grid-template-rows:repeat(3,256px)}
-.maptiles img{width:256px;height:256px;max-width:none;filter:saturate(1.14) contrast(1.03)}
+/* display:grid ville ellers tilsidesaette hidden, og begge lag laa ovenpaa hinanden */
+.maptiles[hidden]{display:none}
+#lagKort img{filter:saturate(1.14) contrast(1.03)}
+.maptiles img{width:256px;height:256px;max-width:none}
 /* Kun et anstroeg blaat forneden, saa knappen har noget at staa paa.
    Kortet skal beholde sine egne farver. */
 .mapcard::after{content:"";position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(180deg,transparent 55%,rgba(10,59,94,.16))}
-.mappin{position:absolute;left:50%;top:50%;transform:translate(-50%,-100%);z-index:2;
+.mappin{position:absolute;left:50%;top:50%;transform:translate(-50%,-100%);z-index:3;pointer-events:none;
   filter:drop-shadow(0 6px 10px rgba(10,59,94,.45))}
 .mappin svg{width:38px;height:38px;display:block}
-.mapcta{position:absolute;z-index:3;right:14px;bottom:14px;background:var(--brand-deep);color:#fff;
+.mapcta{position:absolute;z-index:3;pointer-events:none;right:14px;bottom:14px;background:var(--brand-deep);color:#fff;
   font-size:.82rem;font-weight:600;padding:.6em 1.1em;border-radius:var(--radius);
   display:inline-flex;align-items:center;gap:.5em;transition:background .16s}
 .mapcard:hover .mapcta{background:var(--brand)}
-.mapcredit{position:absolute;z-index:3;left:12px;bottom:12px;font-size:.62rem;color:#5c7183;
+.mapcredit{position:absolute;z-index:3;pointer-events:none;left:12px;bottom:12px;font-size:.62rem;color:#5c7183;
   background:rgba(255,255,255,.78);padding:2px 7px;border-radius:4px;letter-spacing:.01em}
 
 /* flydende handlingsbjælke */
