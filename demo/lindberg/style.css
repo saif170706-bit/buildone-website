@@ -365,6 +365,9 @@ footer h4{color:#fff;font-size:.72rem;letter-spacing:.14em;text-transform:upperc
 footer a:hover{color:#fff}
 .disclaimer{margin-top:46px;border:0;padding:20px 0 26px;position:relative;
   font-size:.82rem;color:#8fb0c9;display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between}
+.fodlink{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;
+  text-decoration:underline}
+.fodlink:hover{color:#fff}
 .disclaimer::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
   background:linear-gradient(90deg,transparent,rgba(255,255,255,.22) 16%,rgba(255,255,255,.22) 84%,transparent)}
 
@@ -441,6 +444,50 @@ footer a:hover{color:#fff}
   /* Bjaelken svaever over indholdet — giv sidste afsnit plads under sig */
   footer .disclaimer{padding-bottom:96px}
 }
+
+/* samtykke — boksen holder faktisk kortet tilbage, den er ikke pynt */
+.samtykke{position:fixed;z-index:80;left:16px;right:16px;bottom:16px;display:flex;justify-content:flex-start;
+  animation:samtykkeind .28s ease-out both}
+@keyframes samtykkeind{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.samtykke-kort{background:rgba(255,255,255,.97);backdrop-filter:blur(14px);
+  border:1px solid var(--line);border-radius:var(--card-radius);
+  box-shadow:0 20px 50px -20px rgba(10,59,94,.55),0 2px 6px rgba(10,59,94,.1);
+  padding:24px 26px;max-width:460px;width:100%}
+.samtykke-kort h2{font-size:1.1rem;margin-bottom:8px}
+.samtykke-kort>p{color:var(--mid);font-size:.9rem;line-height:1.6}
+.samtykke-valg{display:grid;gap:14px;margin:18px 0 4px;padding-top:16px;
+  border-top:1px solid var(--line)}
+/* display:grid ville ellers tilsidesaette hidden, saa panelet stod aabent */
+.samtykke-valg[hidden]{display:none}
+.samtykke-linje{display:grid;grid-template-columns:20px 1fr;gap:12px;align-items:start;
+  font-size:.85rem;color:var(--mid);line-height:1.5;cursor:pointer}
+.samtykke-linje.tom{opacity:.65;cursor:default}
+.samtykke-linje input{width:18px;height:18px;margin-top:2px;accent-color:var(--brand)}
+.samtykke-linje strong{color:var(--ink)}
+.samtykke-knapper{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px}
+.samtykke-knapper .btn{flex:1 1 auto;justify-content:center;font-size:.9rem;padding:.75em 1.1em}
+.samtykke-link{background:none;border:0;padding:.75em .4em;font-family:var(--sans);
+  font-size:.86rem;font-weight:600;color:var(--brand);cursor:pointer;text-decoration:underline}
+.samtykke-fod{font-size:.78rem;color:var(--mid);margin-top:12px}
+/* Bjaelken skal ikke ligge oven paa boksen */
+body.har-samtykke-banner .dock{bottom:calc(16px + 1px)}
+@media(max-width:600px){
+  .samtykke{left:10px;right:10px;bottom:10px}
+  .samtykke-kort{padding:20px}
+  .samtykke-knapper .btn{flex:1 1 100%}
+  body.har-samtykke-banner .dock{display:none}
+}
+
+/* kortet venter paa samtykke */
+.kortspaerre{position:absolute;inset:0;z-index:5;background:var(--brand-deep);color:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  text-align:center;padding:28px}
+.kortspaerre p{margin:0;font-size:.9rem;color:#cfe3f3;max-width:30em;line-height:1.55}
+.kortspaerre p strong{color:#fff;font-size:1rem}
+.kortspaerre .btn{margin-top:6px;background:#fff;color:var(--brand-deep)}
+.kortspaerre .btn:hover{background:#dbeaf6}
+.kortspaerre-vej{font-size:.85rem;color:#cfe3f3;border-bottom:1px solid rgba(255,255,255,.4)}
+.kortspaerre-vej:hover{color:#fff;border-color:#fff}
 
 /* booking */
 .modal{position:fixed;inset:0;z-index:100;background:rgba(10,59,94,.58);display:none;
