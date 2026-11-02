@@ -6,13 +6,15 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Akut tandpine i Lyngby — ring 45 87 99 35 | TandlægeTeam Lindberg</title>
 <meta name="description" content="Har du akut tandpine, en knækket tand eller hævelse? Ring til os i Lyngby på 45 87 99 35 — vi finder som regel en tid samme dag.">
-<link rel="stylesheet" href="style.css?v=22">
+<link rel="stylesheet" href="style.css?v=24">
 <style>
-.akuthero{background:#fbf0ec;border-bottom:1px solid #eedbd4;padding:clamp(40px,6vw,72px) 0}
+/* Samme flade bue som resten af siden — kanten mod indholdet er ikke en streg */
+.akuthero{background:#fbf0ec;padding:clamp(40px,6vw,72px) 0 calc(clamp(40px,6vw,72px) + var(--arc))}
 .akuthero .crumb{font-size:.83rem;color:var(--mid);margin-bottom:14px}
 .akuthero h1{color:#7d3421}
 .akuthero p.lead{font-size:1.1rem;color:#75503f;max-width:34em;margin-top:16px}
-.callbox{background:var(--card);border:1px solid #f3cfc2;border-radius:18px;padding:26px 28px;margin-top:28px;
+.callbox{background:var(--card);border:1px solid #f3cfc2;border-radius:var(--card-radius);
+  box-shadow:var(--shadow);padding:26px 28px;margin-top:28px;
   display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between}
 .callnum{font-family:var(--serif);font-weight:800;font-size:clamp(1.9rem,4vw,2.7rem);color:var(--ink);line-height:1;letter-spacing:-.035em}
 .callnum small{display:block;font-family:var(--sans);font-size:.76rem;letter-spacing:.12em;
@@ -24,13 +26,15 @@
 .akuthero .btn-akut,.band .btn-akut{background:#b2402a;color:#fff}
 .akuthero .btn-akut:hover,.band .btn-akut:hover{background:#95331f}
 .cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
-.case{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+.case{background:var(--card);border:1px solid var(--line);border-radius:var(--card-radius);
+  padding:26px;box-shadow:var(--shadow)}
 .case h3{font-size:1.02rem;margin-bottom:10px;color:var(--ink)}
 .case p{color:var(--mid);font-size:.93rem}
 .case .do{display:block;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);
   font-size:.9rem;color:var(--ink)}
 .case .do b{color:#b2402a}
-.urgent{background:#fff;border:2px solid #b93e20;border-radius:16px;padding:26px 28px}
+.urgent{background:#fff;border:2px solid #b93e20;border-radius:var(--card-radius);
+  padding:26px 28px;box-shadow:var(--shadow)}
 .urgent h3{color:#b2402a;margin-bottom:10px}
 .urgent ul{margin:12px 0 0;padding-left:1.15em;color:var(--mid)}
 .urgent li{margin-bottom:7px}
@@ -57,7 +61,7 @@
   </div>
 </header>
 
-<div class="akuthero">
+<div class="akuthero arc-b">
   <div class="wrap">
     <div class="crumb"><a href="index.html">Forside</a> / Akut tandpine</div>
     <h1>Har du ondt lige nu?</h1>
@@ -142,7 +146,7 @@
   </div>
 </section>
 
-<section style="background:#f6f2ec">
+<section class="arc-t arc-b" style="background:#eef5fb">
   <div class="wrap split">
     <div>
       <div class="eyebrow">Uden for vores åbningstid</div>
@@ -173,7 +177,7 @@
   </div>
 </section>
 
-<section class="band">
+<section class="band arc-t">
   <div class="wrap" style="text-align:center">
     <h2>Gør det ondt lige nu?</h2>
     <p style="max-width:32em;margin:14px auto 0">Vent ikke til i morgen. Tandpine bliver sjældent
@@ -226,6 +230,6 @@
     Find vej</a>
 </div>
 
-<script src="app.js?v=22"></script>
+<script src="app.js?v=24"></script>
 </body>
 </html>

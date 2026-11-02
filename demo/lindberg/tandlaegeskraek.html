@@ -6,28 +6,35 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Tandlægeskræk i Lyngby — du bliver ikke dømt her | TandlægeTeam Lindberg</title>
 <meta name="description" content="Har du udsat tandlægen i årevis? Vi er vant til patienter med tandlægeskræk. Du bestemmer tempoet, og vi begynder med en snak — ikke med et bor.">
-<link rel="stylesheet" href="style.css?v=22">
+<link rel="stylesheet" href="style.css?v=24">
 <style>
-.pagehero{background:var(--brand);color:#fff;padding:clamp(48px,7vw,90px) 0}
-.pagehero .crumb{font-size:.83rem;color:#9fd4cb;margin-bottom:14px}
+.pagehero{background:var(--brand);color:#fff;
+  padding:clamp(48px,7vw,90px) 0 calc(clamp(48px,7vw,90px) + var(--arc))}
+.pagehero .crumb{font-size:.83rem;color:#9dcdee;margin-bottom:14px}
 .pagehero .crumb a:hover{color:#fff}
-.pagehero p{color:#cfe6e2;font-size:1.1rem;max-width:34em;margin-top:16px}
-.badge{display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);
-  border-radius:100px;padding:.5em 1.2em;font-size:.83rem;font-weight:600;margin-bottom:20px}
+.pagehero p{color:#cfe3f3;font-size:1.1rem;max-width:34em;margin-top:16px}
+/* Samme markoer som eyebrow'en paa forsiden, bare paa blaa bund */
+.badge{display:inline-flex;align-items:center;gap:11px;font-size:.78rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:#9dcdee;margin-bottom:18px}
+.badge::before{content:"";width:24px;height:2px;background:currentColor;opacity:.85}
 .reasons{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:8px}
-.reason{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+.reason{background:var(--card);border:1px solid var(--line);border-radius:var(--card-radius);
+  padding:26px;box-shadow:var(--shadow)}
 .reason h3{font-size:1.02rem;margin-bottom:8px}
 .reason p{color:var(--mid);font-size:.93rem}
-.steps{counter-reset:s;margin-top:10px}
-.stepitem{display:flex;gap:20px;padding:22px 0;border-bottom:1px solid var(--line)}
-.stepitem:last-child{border-bottom:0}
-.stepitem .n{counter-increment:s;flex:0 0 40px;height:40px;border-radius:50%;background:var(--brand-soft);
+/* Egen klasse — .steps er forsidens nummererede liste og har et andet layout */
+.flow{counter-reset:s;margin-top:10px}
+.flowitem{display:flex;gap:20px;padding:24px 0;position:relative}
+.flowitem+.flowitem::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,var(--line),var(--line) 72%,transparent)}
+.flowitem .n{counter-increment:s;flex:0 0 40px;height:40px;border-radius:50%;background:var(--brand-soft);
   color:var(--brand);display:grid;place-items:center;font-weight:800;font-family:var(--serif)}
-.stepitem .n::before{content:counter(s)}
-.stepitem h3{margin-bottom:5px}
-.stepitem p{color:var(--mid);font-size:.95rem}
-.quote{background:var(--card);border-left:3px solid var(--logo);border-radius:0 14px 14px 0;
-  padding:26px 30px;font-family:var(--serif);font-weight:500;font-size:1.18rem;line-height:1.55;max-width:44em;letter-spacing:-.012em}
+.flowitem .n::before{content:counter(s)}
+.flowitem h3{margin-bottom:5px}
+.flowitem p{color:var(--mid);font-size:.95rem}
+.quote{background:var(--card);border-left:3px solid var(--logo);
+  border-radius:0 var(--card-radius) var(--card-radius) 0;box-shadow:var(--shadow);
+  padding:28px 32px;font-family:var(--serif);font-weight:500;font-size:1.18rem;line-height:1.55;max-width:44em;letter-spacing:-.012em}
 .quote span{display:block;font-family:var(--sans);font-size:.85rem;color:var(--mid);margin-top:14px;font-style:normal}
 </style>
 </head>
@@ -52,7 +59,7 @@
   </div>
 </header>
 
-<div class="pagehero">
+<div class="pagehero arc-b">
   <div class="wrap">
     <div class="crumb"><a href="index.html">Forside</a> / Tandlægeskræk</div>
     <div class="badge">Du bliver ikke skældt ud her</div>
@@ -69,6 +76,7 @@
 <section>
   <div class="wrap">
     <div class="sec-head">
+      <div class="eyebrow">Du er ikke alene</div>
       <h2>Du er langt fra den eneste</h2>
       <p>Omkring hver tiende dansker har så stor angst for tandlægen, at de undgår at komme.
         Mange flere er utrygge uden at kalde det skræk. Det er en helt almindelig reaktion —
@@ -99,15 +107,15 @@
   </div>
 </section>
 
-<section style="background:#f6f2ec;padding-top:clamp(46px,6vw,80px)">
+<section class="arc-t arc-b" style="background:#eef5fb">
   <div class="wrap">
     <div class="sec-head">
       <div class="eyebrow">Sådan gør vi</div>
       <h2>Første gang rører vi ikke dine tænder</h2>
       <p>Medmindre du selv beder om det. Vi har fundet ud af, at det virker bedst sådan.</p>
     </div>
-    <div class="steps">
-      <div class="stepitem">
+    <div class="flow">
+      <div class="flowitem">
         <div class="n"></div>
         <div>
           <h3>Vi snakker først</h3>
@@ -115,7 +123,7 @@
             og hvor længe det er siden. Der er ingen rigtige eller forkerte svar.</p>
         </div>
       </div>
-      <div class="stepitem">
+      <div class="flowitem">
         <div class="n"></div>
         <div>
           <h3>Vi kigger, når du er klar</h3>
@@ -123,7 +131,7 @@
             stopper, og vi stopper med det samme du siger til.</p>
         </div>
       </div>
-      <div class="stepitem">
+      <div class="flowitem">
         <div class="n"></div>
         <div>
           <h3>Du får hele billedet — og prisen</h3>
@@ -131,7 +139,7 @@
             Du tager det med hjem og tænker over det.</p>
         </div>
       </div>
-      <div class="stepitem">
+      <div class="flowitem">
         <div class="n"></div>
         <div>
           <h3>Vi tager det i dit tempo</h3>
@@ -171,7 +179,7 @@
   </div>
 </section>
 
-<section class="band">
+<section class="band arc-t">
   <div class="wrap" style="text-align:center">
     <h2>Book en snak — ikke en behandling</h2>
     <p style="max-width:34em;margin:14px auto 0">Femten minutter, ingen instrumenter, ingen regning.
@@ -224,6 +232,6 @@
     Find vej</a>
 </div>
 
-<script src="app.js?v=22"></script>
+<script src="app.js?v=24"></script>
 </body>
 </html>
