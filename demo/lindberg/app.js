@@ -239,7 +239,6 @@ function toggleMenu(){
   // gennemsigtig med hvid tekst, og den ville staa hvid paa hvid. Derfor
   // faar headeren samme udseende som naar der er scrollet, mens den er aaben.
   document.querySelector("header")?.classList.toggle("menuopen", open);
-  if (window.saetTema) saetTema();
 }
 document.getElementById("menu")?.addEventListener("click", e => {
   if (e.target.tagName === "A") toggleMenu();
@@ -251,31 +250,8 @@ document.getElementById("menu")?.addEventListener("click", e => {
 (function(){
   const hero = document.querySelector(".hero"), head = document.querySelector("header");
   if (!hero || !head || !document.body.classList.contains("has-hero")) return;
-  // Telefonens statuslinje tager farve efter <meta name="theme-color">, og
-  // den kan skiftes undervejs. Saa foelger linjen over skaermen sidens top:
-  // moerkeblaa paa heroen, lys naar menuen har faaet sin flade.
-  const HERO_FARVE = "#0a3b5e", MENU_FARVE = "#eff3f7";
-  let sidsteFarve = null;
-  window.saetTema = () => {
-    const lys = head.classList.contains("solid") || head.classList.contains("menuopen");
-    const farve = lys ? MENU_FARVE : HERO_FARVE;
-    if (farve === sidsteFarve) return;
-    sidsteFarve = farve;
-    // Safari laeser kun farven igen, hvis selve elementet er nyt. Aendrer man
-    // bare content, virker det foerste gang og derefter ikke mere. Derfor
-    // smides det gamle ud, og et nyt saettes i stedet.
-    document.querySelectorAll('meta[name="theme-color"]').forEach((m) => m.remove());
-    const ny = document.createElement("meta");
-    ny.setAttribute("name", "theme-color");
-    ny.setAttribute("content", farve);
-    document.head.appendChild(ny);
-    // Det er denne linje, iOS faktisk retter sig efter. Body ligger bag
-    // .flade og ses ikke, saa farven paavirker kun skaermens kanter.
-    document.body.style.backgroundColor = farve;
-  };
-
   const io = new IntersectionObserver(
-    ([e]) => { head.classList.toggle("solid", !e.isIntersecting); saetTema(); },
+    ([e]) => head.classList.toggle("solid", !e.isIntersecting),
     { rootMargin: "-72px 0px 0px 0px", threshold: 0 }
   );
   io.observe(hero.querySelector(".heroguard") || hero);

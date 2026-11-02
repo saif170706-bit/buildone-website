@@ -41,7 +41,13 @@ html{scroll-behavior:smooth;color-scheme:light}
 /* Safari paa iOS farver statuslinjen efter <body>'s baggrundsfarve — ikke
    efter theme-color, og ikke efter det der faktisk tegnes. Derfor ligger
    sidens egen lyse flade i .flade, mens body selv baerer den farve, vi vil
-   se oeverst paa skaermen. Body ses ellers aldrig. */
+   se oeverst paa skaermen. Body ses ellers aldrig.
+
+   Farven staar fast. Safari laeser den ved indlaesning og reagerer ikke
+   paalideligt, hver gang den aendres undervejs — det giver et skift der
+   hakker og til sidst holder op med at virke. En fast farve, der passer
+   til sidens top, er derfor den rigtige loesning. Hver side faar den
+   farve, dens egen top har. */
 body{font-family:var(--sans);font-size:1rem;background:var(--bg);color:var(--ink);line-height:1.62;-webkit-font-smoothing:antialiased}
 /* height:auto er noedvendig: et height-attribut i HTML taeller som en
    hoejde og slaar ellers aspect-ratio ud, saa billederne blev staaende i
