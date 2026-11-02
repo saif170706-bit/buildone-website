@@ -8,16 +8,18 @@
 <meta name="theme-color" content="#cc0000">
 <title>Statuslinje-test</title>
 <style>
-  html,body{margin:0;height:200vh;background:#cc0000;color:#fff;
+  /* Siden er HVID. Kun <meta theme-color> er roed — saa viser statuslinjen
+     entydigt, om Safari laeser den farve eller ej. */
+  html,body{margin:0;height:200vh;background:#ffffff;color:#111;
     font:600 18px/1.5 -apple-system,Segoe UI,Arial,sans-serif}
   p{padding:24px}
 </style>
 </head>
 <body>
-  <p>Testside.<br><br>
-  Kig på statuslinjen øverst, hvor klokken står.<br><br>
-  <b>Er den rød?</b> → Safari læser farven fra siden.<br><br>
-  <b>Er den hvid?</b> → Safari ignorerer den på din telefon.<br><br>
-  Rul gerne lidt ned og se, om svaret ændrer sig.</p>
+  <p>Testside 1 af 2 — siden er helt hvid, men den <i>beder</i> om en rød statuslinje.<br><br>
+  Kig øverst, hvor klokken står.<br><br>
+  <b>Rød</b> → Safari læser farven, vi oplyser.<br>
+  <b>Hvid</b> → Safari ignorerer den.<br><br>
+  Åbn derefter <a href="test-status2.html">testside 2</a>.</p>
 </body>
 </html>
