@@ -462,8 +462,6 @@ footer a:hover{color:#fff}
 .step h3{text-align:center;color:var(--brand);font-size:1.5rem;margin-bottom:6px}
 .recap{text-align:center;color:var(--mid);font-size:.93rem;margin-bottom:22px}
 .choices{display:flex;flex-direction:column;gap:10px}
-.linkknap{background:none;border:0;padding:0;font:inherit;color:var(--brand);
-  font-weight:600;cursor:pointer;text-decoration:underline}
 .choice{background:var(--brand);color:#fff;border:0;border-radius:8px;padding:16px 20px;cursor:pointer;
   display:flex;justify-content:space-between;align-items:center;gap:14px;text-align:left;font-family:var(--sans)}
 .choice:hover{background:#0f5582}

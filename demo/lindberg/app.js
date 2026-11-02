@@ -168,10 +168,7 @@ function renderChoices(){
     head.textContent = "Opret dig som patient først";
     recap.textContent = "Du skal være oprettet i klinikken, før du kan booke en tid. Det tager et par minutter, og derefter kan du vælge tid med det samme.";
     document.getElementById("choices").innerHTML =
-      `<a class="btn btn-cta" style="justify-content:center" href="bliv-patient.html">Opret mig som patient</a>
-       <p style="color:var(--mid);font-size:.88rem;margin-top:14px;text-align:center">
-         Er du allerede patient hos os? <button type="button" class="linkknap" onclick="setPatient('eks')">Vælg &quot;Eksisterende patient&quot;</button>.<br>
-         Har du akut tandpine, så ring på <a href="tel:+4545879935" style="color:var(--brand);font-weight:600">45 87 99 35</a>.</p>`;
+      `<a class="btn btn-cta" style="justify-content:center" href="bliv-patient.html">Opret mig som patient</a>`;
     return;
   }
   head.textContent = "Vælg behandling";
