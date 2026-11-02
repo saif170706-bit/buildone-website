@@ -284,10 +284,11 @@ footer a:hover{color:#fff}
   overflow:hidden;box-shadow:var(--shadow);background:#eceff1;border:1px solid var(--line)}
 .maptiles{position:absolute;top:50%;left:50%;margin-left:-479px;margin-top:-446px;
   display:grid;grid-template-columns:repeat(3,256px);grid-template-rows:repeat(3,256px)}
-.maptiles img{width:256px;height:256px;max-width:none}
-/* Et svagt blaat slør binder kortet sammen med resten af farveholdningen */
+.maptiles img{width:256px;height:256px;max-width:none;filter:saturate(1.14) contrast(1.03)}
+/* Kun et anstroeg blaat forneden, saa knappen har noget at staa paa.
+   Kortet skal beholde sine egne farver. */
 .mapcard::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(21,105,159,.05),rgba(10,59,94,.12))}
+  background:linear-gradient(180deg,transparent 55%,rgba(10,59,94,.16))}
 .mappin{position:absolute;left:50%;top:50%;transform:translate(-50%,-100%);z-index:2;
   filter:drop-shadow(0 6px 10px rgba(10,59,94,.45))}
 .mappin svg{width:38px;height:38px;display:block}
