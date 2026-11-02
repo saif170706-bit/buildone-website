@@ -171,10 +171,6 @@ body.has-hero header.solid .burger span,body.has-hero header.menuopen .burger sp
    En transform loefter billedet op i sit eget lag, og naar et saadant lag
    klippes af en afrundet kant, bliver buen forneden takket. */
 .hero-bg{position:absolute;inset:-5%;z-index:-2}
-/* Maalepunkt for, hvornaar menuen skal have sin egen flade. Heroen er hoej
-   paa en telefon, saa hvis vi venter paa hele heroen, scroller indholdet
-   laenge under en gennemsigtig menu. */
-.heroguard{position:absolute;top:42%;left:0;width:1px;height:1px}
 .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:72% 42%}
 /* To lag: en vandret gradient der goer venstre side laeselig, og en dyb
    blaa tone der binder billedet sammen med logoets farve. */

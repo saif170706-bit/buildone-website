@@ -254,7 +254,7 @@ document.getElementById("menu")?.addEventListener("click", e => {
     ([e]) => head.classList.toggle("solid", !e.isIntersecting),
     { rootMargin: "-72px 0px 0px 0px", threshold: 0 }
   );
-  io.observe(hero.querySelector(".heroguard") || hero);
+  io.observe(hero);
 })();
 
 /* ─────────── kortlinks ───────────
