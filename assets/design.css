@@ -1,0 +1,273 @@
+/* ──────────────────────────────────────────────────────────────
+   BuildOne — designlag
+
+   Hver side har sit eget <style> i hovedet. Dette ark indlæses
+   EFTER det og retter det fælles udtryk ét sted: header, knapper,
+   kort og overgangene mellem sektionerne. Rækkefølgen er hele
+   pointen — samme specificitet, sidste regel vinder — så link
+   altid denne fil under sidens egen <style>.
+
+   Sektionerne skiller ikke med en streg og heller ikke med en bue —
+   buen er klinikdemoens signatur, ikke vores. Her toner farven selv
+   over (.baand), så der slet ingen kant er at få øje på, og hvor to
+   blokke støder hårdt sammen, ligger der en hårfin streg, der dør
+   ud i begge sider (.soem).
+   ────────────────────────────────────────────────────────────── */
+
+/* ---------- Skrift ----------
+   Plus Jakarta Sans, variabel 400–800, samme som klinikudkastet.
+   Selvhostet frem for hentet hos Google: det er hurtigere, og det
+   undgår at sende den besøgendes IP-adresse til en tredjepart. Det
+   er præcis den indvending, vi selv rejser over for kunder — så den
+   skal ikke stå på vores egen side. Skriften er under SIL Open Font
+   License 1.1 og fri at videredistribuere.
+   Stierne er relative til dette ark, altså /assets/fonts/. */
+@font-face{
+  font-family:"Plus Jakarta Sans";
+  font-style:normal;
+  font-weight:400 800;
+  font-display:swap;
+  src:url("fonts/plus-jakarta-sans-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:"Plus Jakarta Sans";
+  font-style:normal;
+  font-weight:400 800;
+  font-display:swap;
+  src:url("fonts/plus-jakarta-sans-latin-ext.woff2") format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
+:root{
+  --sans:"Plus Jakarta Sans",-apple-system,"Segoe UI",Arial,sans-serif;
+  --radius:10px;
+  --radius-lg:16px;
+  --fade:clamp(56px,7vw,104px);
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --shadow-sm:0 1px 2px rgba(0,49,53,.05),0 10px 26px -20px rgba(0,49,53,.5);
+  --shadow-md:0 1px 2px rgba(0,49,53,.06),0 24px 46px -26px rgba(0,49,53,.55);
+}
+
+/* Lenis kører kun på forsiden og vil selv styre scrollen — derfor
+   :not(.lenis), så de to ikke slås om den. */
+html:not(.lenis){scroll-behavior:smooth}
+
+/* ---------- Overgange ---------- */
+/* Et bånd er en lys sektion, der ikke har nogen kant: farven stiger
+   op fra hvid, holder sig selv i midten og falder tilbage til hvid.
+   Øjet registrerer et skift i tyngde frem for en linje. */
+.baand{
+  background:linear-gradient(
+    to bottom,
+    var(--white) 0,
+    var(--off-white) var(--fade),
+    var(--off-white) calc(100% - var(--fade)),
+    var(--white) 100%);
+  border:0;
+}
+/* Første og sidste bånd på en side har kun brug for den ene ende */
+.baand.baand-slut{
+  background:linear-gradient(to bottom,var(--white) 0,var(--off-white) var(--fade));
+}
+
+/* Sømmen: en hårstreg, der er stærkest på midten og forsvinder ud
+   mod kanterne. Den bruges, hvor to blokke støder hårdt sammen —
+   mørk mod lys — så kanten får en markering uden at blive en
+   streg tværs over skærmen. */
+.soem,.soem-b{position:relative}
+.soem::before{
+  content:"";position:absolute;left:0;top:0;width:100%;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,
+    transparent 0,
+    rgba(15,164,175,.25) 18%,
+    rgba(15,164,175,.85) 50%,
+    rgba(15,164,175,.25) 82%,
+    transparent 100%);
+}
+.soem-b::after{
+  content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,
+    transparent 0,
+    rgba(15,164,175,.25) 18%,
+    rgba(15,164,175,.85) 50%,
+    rgba(15,164,175,.25) 82%,
+    transparent 100%);
+}
+
+/* Faktabåndet er kun ~80px højt; en toning ville aldrig nå at vise
+   sin farve. Det står hvidt mellem to sømme i stedet. */
+.trust{background:transparent;border:0}
+.trust .wrap{padding-top:6px;padding-bottom:6px}
+
+/* ---------- Header ---------- */
+/* Gennemsigtig i toppen, så indholdet skinner igennem, og først
+   massiv når man har rullet. .solid sættes af design.js. */
+header.site{
+  background:rgba(255,255,255,.72);
+  -webkit-backdrop-filter:saturate(180%) blur(16px);
+  backdrop-filter:saturate(180%) blur(16px);
+  border-bottom:1px solid transparent;
+  transition:background .35s var(--ease),border-color .35s var(--ease),box-shadow .35s var(--ease);
+}
+header.site.solid{
+  background:rgba(255,255,255,.9);
+  border-bottom-color:var(--border);
+  box-shadow:0 12px 32px -26px rgba(0,49,53,.8);
+}
+header.site nav.wrap{transition:height .35s var(--ease)}
+header.site.solid nav.wrap{height:64px}
+.logo img{transition:transform .35s var(--ease)}
+.logo:hover img{transform:rotate(-6deg) scale(1.05)}
+
+/* Menupunkterne får en streg, der vokser ud fra venstre */
+.navlinks a:not(.nav-cta){position:relative;padding:5px 1px}
+.navlinks a:not(.nav-cta)::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;
+  background:var(--accent);border-radius:2px;
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .32s var(--ease);
+}
+.navlinks a:not(.nav-cta):hover::after,
+.navlinks a.active::after{transform:scaleX(1)}
+.nav-cta{
+  border-radius:999px;padding:11px 22px;
+  transition:background .25s var(--ease),transform .25s var(--ease),box-shadow .25s var(--ease);
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 14px 26px -16px rgba(0,49,53,.85)}
+
+@media (max-width:860px){
+  /* Panelet hænger på headeren (top:100%) frem for på et fast
+     pixeltal, så det følger med, når headeren klapper sammen ved
+     scroll. Og det er helt uigennemsigtigt: en sløret menu oven på
+     en hero bliver noget rod at læse. */
+  .navlinks{
+    position:absolute;top:100%;left:0;right:0;
+    background:var(--white);
+    -webkit-backdrop-filter:none;backdrop-filter:none;
+    border-bottom:1px solid var(--border);
+    border-bottom-left-radius:18px;border-bottom-right-radius:18px;
+    box-shadow:0 26px 44px -28px rgba(0,49,53,.55);
+  }
+  .nav-cta{align-self:stretch;text-align:center;justify-content:center}
+}
+
+/* ---------- Knapper ---------- */
+.btn,.submit-btn{
+  border-radius:999px;
+  transition:background .25s var(--ease),color .25s var(--ease),
+             border-color .25s var(--ease),transform .25s var(--ease),
+             box-shadow .25s var(--ease);
+}
+.btn:hover,.submit-btn:hover{transform:translateY(-2px)}
+.btn:active,.submit-btn:active{transform:translateY(0)}
+.btn-primary:hover,.submit-btn:hover{box-shadow:0 18px 32px -18px rgba(0,49,53,.9)}
+.dark-section .btn-primary:hover{box-shadow:0 18px 32px -16px rgba(15,164,175,.8)}
+
+/* ---------- Hero ---------- */
+/* Den lige streg under heroen er væk — buen på båndet nedenunder
+   overtager overgangen. */
+.hero{border-bottom:0}
+
+/* ---------- Kort ---------- */
+/* Gitrene stod som hårfine celler klistret sammen (gap:1px på en
+   farvet baggrund). De bliver til rigtige kort med luft imellem. */
+.steps,.features-grid,.values-grid,.plans{background:transparent;border:0;gap:18px}
+.plan{border:1px solid var(--border)}
+.plan.featured{border-color:var(--accent)}
+.step,.feat,.value-cell,.info-card,.hs-card,.plan,.form-card,.price-card{
+  border-radius:var(--radius-lg);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),
+             border-color .35s var(--ease),background .35s var(--ease);
+}
+.step,.feat,.value-cell{
+  border:1px solid var(--border);
+  box-shadow:var(--shadow-sm);
+}
+.step:hover,.feat:hover,.value-cell:hover{
+  background:var(--white);
+  border-color:#a9d8dd;
+  box-shadow:var(--shadow-md);
+  transform:translateY(-4px);
+}
+.feat-icon{background:var(--off-white);border-color:transparent;border-radius:12px}
+
+.info-card{box-shadow:var(--shadow-sm);margin-bottom:14px}
+.info-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:#a9d8dd;background:var(--white)}
+
+.form-card{box-shadow:var(--shadow-sm)}
+.field input,.field textarea,.field select{
+  border-radius:12px;
+  transition:border-color .22s var(--ease),box-shadow .22s var(--ease),background .22s var(--ease);
+}
+.field input:focus,.field textarea:focus,.field select:focus{
+  box-shadow:0 0 0 3px rgba(15,164,175,.14);
+}
+
+/* Mørke kort */
+.hs-card{border-radius:var(--radius-lg)}
+.hs-card:hover{transform:translateY(-4px)}
+.price-card{background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.14)}
+
+/* Planer (priser.html) */
+.plan{box-shadow:var(--shadow-sm)}
+.plan:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:#a9d8dd}
+.plan.featured:hover{transform:translateY(-13px)}
+.plan.featured,.plan.custom{box-shadow:var(--shadow-md)}
+
+/* Faktaboks og tilkøbstabel */
+.info-note{border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
+.addons-table{border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+.free-note{border-radius:var(--radius-lg)}
+
+/* ---------- FAQ ---------- */
+/* Fra en liste med skillelinjer til små kort, der løfter sig når de
+   er åbne. Selve udfoldningen kan ikke animeres på <details>, så
+   svaret toner ind i stedet. */
+.faq{display:flex;flex-direction:column;gap:12px}
+.faq details{
+  border:1px solid var(--border);border-top:1px solid var(--border);
+  border-radius:var(--radius-lg);background:var(--white);
+  padding:18px 22px;
+  transition:box-shadow .3s var(--ease),border-color .3s var(--ease);
+}
+.faq details:hover{border-color:#a9d8dd}
+.faq details[open]{box-shadow:var(--shadow-sm);border-color:#a9d8dd}
+.faq details summary::after{transition:transform .28s var(--ease),color .28s var(--ease)}
+.faq details p{margin-top:12px}
+.faq details[open] p{animation:svar-ind .32s var(--ease)}
+@keyframes svar-ind{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+
+/* ---------- Billedbånd ---------- */
+.photo-strip,.hero-photo,.hero-video,.how-visual{border-radius:var(--radius-lg)}
+.photo-strip.arc-b{border-radius:0}
+.photo-strip.arc-b{border-bottom-left-radius:50% var(--arc);border-bottom-right-radius:50% var(--arc)}
+
+/* ---------- Scroll-ind ---------- */
+.reveal{transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+
+/* ---------- Mindre bevægelse ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  .btn:hover,.submit-btn:hover,.step:hover,.feat:hover,.value-cell:hover,
+  .info-card:hover,.plan:hover,.hs-card:hover,.nav-cta:hover{transform:none}
+}
+
+/* ---------- Trin-billedet ---------- */
+/* Billedet bliver stående; det er motivet, der skifter med trinnet.
+   Alle tre ligger oven på hinanden, og kun ét er tonet frem. */
+.how-shot{opacity:0;transition:opacity .55s var(--ease)}
+.how-shot.er-paa{opacity:1}
+@media (max-width:860px){
+  /* Uden scriptet (mobil) står trin og billede stille — vis det første. */
+  .how-shot{opacity:0}
+  .how-shot.er-paa{opacity:1}
+}
+
+/* Plus Jakarta Sans sætter bogstaverne tættere end Space Grotesk, og
+   den negative knibning, der var tunet til den gamle skrift, blev
+   for stram — mest tydeligt i knapper med flere ord. */
+h1,h2,h3{letter-spacing:-.018em}
+.btn,.nav-cta,.submit-btn,.navlinks a{letter-spacing:0;word-spacing:.06em}
+.logo,.footer-logo{letter-spacing:-.008em}

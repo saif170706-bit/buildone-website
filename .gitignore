@@ -1,1 +1,4 @@
 .claude/
+
+# Interne mailudkast — maa ikke udgives paa sitet
+mail-til-*.html

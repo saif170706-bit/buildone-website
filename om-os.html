@@ -19,9 +19,6 @@
 <meta property="og:description" content="Vi vendte modellen om: hjemmesiden bygges færdig, før du betaler. Mød holdet bag BuildOne og de principper vi arbejder efter.">
 <meta property="og:image" content="https://www.buildone.dk/assets/images/how.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --black:#003135;
@@ -36,7 +33,7 @@
   --rust:#964734;
   --radius:2px;
   --maxw:1160px;
-  --sans:"Space Grotesk","Segoe UI",Arial,Helvetica,sans-serif;
+  --sans:"Plus Jakarta Sans",-apple-system,"Segoe UI",Arial,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -151,6 +148,9 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
 .footer-desc{color:var(--mid);font-size:.87rem;line-height:1.6;max-width:260px}
 .footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;color:var(--mid);font-size:.78rem;flex-wrap:wrap;gap:10px}
 </style>
+<link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/design.css?v=7">
+<script defer src="/assets/design.js?v=7"></script>
 </head>
 <body>
 
@@ -175,7 +175,7 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
         <div class="page-hero-label"><span class="dot"></span>Vores historie</div>
         <h1>Vi blev trætte af hjemmesider, ingen turde bestille</h1>
         <p>BuildOne blev grundlagt af udviklere og designere, der stødte på det samme mønster igen og igen. Virksomhedsejere ville gerne have en ordentlig hjemmeside, men skulle lægge mange tusinde kroner på bordet for noget, de endnu ikke havde set. Så blev det ved snakken.</p>
-        <p>Derfor vendte vi modellen om. Vi bygger siden færdig, du ser og tester den i ro og mag, og du betaler først, når den skal online. Planer starter ved 349 kr om måneden.</p>
+        <p>Derfor vendte vi modellen om. Vi bygger siden færdig, du ser og tester den i ro og mag, og du betaler først, når den skal online. Planer starter ved 479 kr om måneden.</p>
       </div>
       <div class="about-img-block">
         <img src="/office.jpg" alt="BuildOne kontor" />
@@ -185,7 +185,7 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
   </div>
 </section>
 
-<section style="background:var(--off-white);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+<section class="baand">
   <div class="wrap">
     <div class="section-head center">
       <span class="section-label">Vores værdier</span>
@@ -226,7 +226,7 @@ footer.site{border-top:1px solid var(--border);padding:56px 0 28px;background:va
   </div>
 </section>
 
-<div class="dark-section">
+<div class="dark-section soem soem-b">
   <div class="wrap">
     <h2>Skal vi bygge din?</h2>
     <p>Fortæl os om din virksomhed, så går vi i gang. Du betaler ingenting, før du har set resultatet.</p>
