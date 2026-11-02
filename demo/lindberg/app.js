@@ -235,6 +235,10 @@ function toggleMenu(){
   const m = document.getElementById("menu"), b = document.getElementById("burger");
   const open = m.classList.toggle("open");
   b.setAttribute("aria-expanded", open);
+  // Menuen folder sig ud paa en lys flade. Oeverst paa forsiden er headeren
+  // gennemsigtig med hvid tekst, og den ville staa hvid paa hvid. Derfor
+  // faar headeren samme udseende som naar der er scrollet, mens den er aaben.
+  document.querySelector("header")?.classList.toggle("menuopen", open);
 }
 document.getElementById("menu")?.addEventListener("click", e => {
   if (e.target.tagName === "A") toggleMenu();

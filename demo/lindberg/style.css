@@ -92,11 +92,12 @@ body.has-hero header .menu a,body.has-hero header .tel{color:#fff}
 body.has-hero header .menu a:hover{color:#bfe0f6}
 body.has-hero header .logo img{filter:brightness(0) invert(1)}
 body.has-hero header .burger span{background:#fff}
-body.has-hero header.solid{position:fixed;background:rgba(255,255,255,.74);backdrop-filter:blur(16px);border-color:var(--line)}
-body.has-hero header.solid .menu a,body.has-hero header.solid .tel{color:var(--ink)}
-body.has-hero header.solid .menu a:hover{color:var(--brand)}
-body.has-hero header.solid .logo img{filter:none}
-body.has-hero header.solid .burger span{background:var(--ink)}
+body.has-hero header.solid,body.has-hero header.menuopen{position:fixed;background:rgba(255,255,255,.74);backdrop-filter:blur(16px);border-color:var(--line)}
+body.has-hero header.solid .menu a,body.has-hero header.solid .tel,
+body.has-hero header.menuopen .menu a,body.has-hero header.menuopen .tel{color:var(--ink)}
+body.has-hero header.solid .menu a:hover,body.has-hero header.menuopen .menu a:hover{color:var(--brand)}
+body.has-hero header.solid .logo img,body.has-hero header.menuopen .logo img{filter:none}
+body.has-hero header.solid .burger span,body.has-hero header.menuopen .burger span{background:var(--ink)}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 0}
 .logo{display:block;flex:0 0 auto}
 .logo img{width:auto;height:38px}
