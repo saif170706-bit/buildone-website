@@ -64,7 +64,7 @@ h3{font-size:1.08rem;font-weight:700;letter-spacing:-.01em;line-height:1.35}
 .hero .btn-cta:hover,.band .btn-cta:hover,.pagehero .btn-cta:hover,.akuthero .btn-cta:hover{background:#dbeaf6}
 
 /* header */
-header{position:sticky;top:0;z-index:50;background:rgba(249,251,253,.92);backdrop-filter:blur(10px);
+header{position:sticky;top:0;z-index:50;background:rgba(234,242,250,.92);backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);transition:background .25s,border-color .25s}
 /* Paa forsiden ligger headeren oven paa hero-billedet uden sin egen flade,
    saa der ikke er en vandret streg mellem menu og forside. Foerst naar man
@@ -75,7 +75,7 @@ body.has-hero header .menu a:hover{color:#bfe0f6}
 body.has-hero header .logo img{filter:brightness(0) invert(1)}
 body.has-hero header .burger{border-color:rgba(255,255,255,.45)}
 body.has-hero header .burger span{background:#fff}
-body.has-hero header.solid{position:fixed;background:rgba(249,251,253,.94);backdrop-filter:blur(12px);border-color:var(--line)}
+body.has-hero header.solid{position:fixed;background:rgba(234,242,250,.94);backdrop-filter:blur(12px);border-color:var(--line)}
 body.has-hero header.solid .menu a,body.has-hero header.solid .tel{color:var(--ink)}
 body.has-hero header.solid .menu a:hover{color:var(--brand)}
 body.has-hero header.solid .logo img{filter:none}
