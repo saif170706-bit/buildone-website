@@ -254,12 +254,21 @@ document.getElementById("menu")?.addEventListener("click", e => {
   // Telefonens statuslinje tager farve efter <meta name="theme-color">, og
   // den kan skiftes undervejs. Saa foelger linjen over skaermen sidens top:
   // moerkeblaa paa heroen, lys naar menuen har faaet sin flade.
-  const tema = document.querySelector('meta[name="theme-color"]');
   const HERO_FARVE = "#0a3b5e", MENU_FARVE = "#eff3f7";
-  window.saetTema = (fast) => {
-    if (!tema) return;
-    const lys = fast || head.classList.contains("solid") || head.classList.contains("menuopen");
-    tema.setAttribute("content", lys ? MENU_FARVE : HERO_FARVE);
+  let sidsteFarve = null;
+  window.saetTema = () => {
+    const lys = head.classList.contains("solid") || head.classList.contains("menuopen");
+    const farve = lys ? MENU_FARVE : HERO_FARVE;
+    if (farve === sidsteFarve) return;
+    sidsteFarve = farve;
+    // Safari laeser kun farven igen, hvis selve elementet er nyt. Aendrer man
+    // bare content, virker det foerste gang og derefter ikke mere. Derfor
+    // smides det gamle ud, og et nyt saettes i stedet.
+    document.querySelectorAll('meta[name="theme-color"]').forEach((m) => m.remove());
+    const ny = document.createElement("meta");
+    ny.setAttribute("name", "theme-color");
+    ny.setAttribute("content", farve);
+    document.head.appendChild(ny);
   };
 
   const io = new IntersectionObserver(

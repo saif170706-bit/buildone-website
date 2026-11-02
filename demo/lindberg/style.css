@@ -34,7 +34,10 @@
   --wrap:1180px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+/* Farven bag siden. Den ses, naar man traekker siden ud over kanten paa en
+   telefon, og den er det, browseren toner sin egen kant efter. Dyb blaa
+   passer baade til heroen foroven og footeren forneden. */
+html{scroll-behavior:smooth;background:var(--brand-deep);color-scheme:light}
 body{font-family:var(--sans);font-size:1rem;background:var(--bg);color:var(--ink);line-height:1.62;-webkit-font-smoothing:antialiased}
 /* height:auto er noedvendig: et height-attribut i HTML taeller som en
    hoejde og slaar ellers aspect-ratio ud, saa billederne blev staaende i
