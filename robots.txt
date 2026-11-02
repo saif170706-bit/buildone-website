@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+# Demoer er forslag til kunder, ikke vores egne sider
+Disallow: /demo/
 
 Sitemap: https://www.buildone.dk/sitemap.xml
