@@ -237,12 +237,16 @@ tr:last-child td{border-bottom:0}
 
 /* nummererede trin — samme markoer som eyebrow'en, bare som tal */
 .steps{list-style:none;counter-reset:trin;margin:24px 0 0;padding:0;display:grid;gap:18px}
-.steps li{counter-increment:trin;display:grid;grid-template-columns:32px 1fr;gap:14px;align-items:start;margin:0}
-.steps li::before{content:counter(trin);width:32px;height:32px;border-radius:50%;
+.steps li{counter-increment:trin;display:grid;grid-template-columns:32px 1fr;
+  column-gap:14px;row-gap:3px;align-items:start;margin:0}
+/* Tallet staar i foerste spalte; baade titel og tekst bliver i den anden,
+   ellers falder teksten ned i den 32 px smalle spalte og brydes ord for ord. */
+.steps li::before{content:counter(trin);grid-column:1;grid-row:1;
+  width:32px;height:32px;border-radius:50%;
   background:var(--brand-soft);color:var(--brand);font-weight:700;font-size:.86rem;
   display:grid;place-items:center}
-.steps strong{display:block;color:var(--ink);line-height:1.5}
-.steps span{color:var(--mid);font-size:.94rem}
+.steps strong{grid-column:2;color:var(--ink);line-height:1.5;align-self:center}
+.steps span{grid-column:2;color:var(--mid);font-size:.94rem}
 
 /* åbningstider */
 .hours{display:grid;grid-template-columns:1fr 1fr;gap:18px}
