@@ -239,6 +239,7 @@ function toggleMenu(){
   // gennemsigtig med hvid tekst, og den ville staa hvid paa hvid. Derfor
   // faar headeren samme udseende som naar der er scrollet, mens den er aaben.
   document.querySelector("header")?.classList.toggle("menuopen", open);
+  if (window.saetTema) saetTema();
 }
 document.getElementById("menu")?.addEventListener("click", e => {
   if (e.target.tagName === "A") toggleMenu();
@@ -250,8 +251,19 @@ document.getElementById("menu")?.addEventListener("click", e => {
 (function(){
   const hero = document.querySelector(".hero"), head = document.querySelector("header");
   if (!hero || !head || !document.body.classList.contains("has-hero")) return;
+  // Telefonens statuslinje tager farve efter <meta name="theme-color">, og
+  // den kan skiftes undervejs. Saa foelger linjen over skaermen sidens top:
+  // moerkeblaa paa heroen, lys naar menuen har faaet sin flade.
+  const tema = document.querySelector('meta[name="theme-color"]');
+  const HERO_FARVE = "#0a3b5e", MENU_FARVE = "#eff3f7";
+  window.saetTema = (fast) => {
+    if (!tema) return;
+    const lys = fast || head.classList.contains("solid") || head.classList.contains("menuopen");
+    tema.setAttribute("content", lys ? MENU_FARVE : HERO_FARVE);
+  };
+
   const io = new IntersectionObserver(
-    ([e]) => head.classList.toggle("solid", !e.isIntersecting),
+    ([e]) => { head.classList.toggle("solid", !e.isIntersecting); saetTema(); },
     { rootMargin: "-72px 0px 0px 0px", threshold: 0 }
   );
   io.observe(hero.querySelector(".heroguard") || hero);

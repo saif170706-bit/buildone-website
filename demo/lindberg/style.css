@@ -98,7 +98,9 @@ body.has-hero header.menuopen .menu a,body.has-hero header.menuopen .tel{color:v
 body.has-hero header.solid .menu a:hover,body.has-hero header.menuopen .menu a:hover{color:var(--brand)}
 body.has-hero header.solid .logo img,body.has-hero header.menuopen .logo img{filter:none}
 body.has-hero header.solid .burger span,body.has-hero header.menuopen .burger span{background:var(--ink)}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 0}
+/* .nav overskrev .wrap's sidepolstring, saa logo og menuknap laa helt ude
+   ved kanten og flugtede ikke med indholdet nedenunder. */
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 24px}
 .logo{display:block;flex:0 0 auto}
 .logo img{width:auto;height:38px}
 @media(max-width:520px){.logo img{height:30px}}
@@ -120,7 +122,7 @@ body.has-hero header.solid .burger span,body.has-hero header.menuopen .burger sp
 @media(max-width:900px){
   /* Menuknappen hoerer yderst til hoejre. Det er der, tommelfingeren leder
      efter den, og den stod foer midt imellem logo og bookknap. */
-  .nav{gap:12px;padding:12px 0}
+  .nav{gap:12px;padding:12px 20px}
   /* Logoet skubber resten til hoejre, saa bookknap og menuknap staar
      samlet i hoejre side i stedet for at svaeve hver for sig. */
   .logo{margin-right:auto}
